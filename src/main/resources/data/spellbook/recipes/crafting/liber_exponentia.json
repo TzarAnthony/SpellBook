@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "XY",
+    "Z#"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:book"
+    },
+    "X": {
+      "item": "minecraft:glow_ink_sac"
+    },
+    "Y": {
+      "item": "minecraft:feather"
+    },
+    "Z": {
+      "item": "minecraft:raw_gold"
+    }
+  },
+  "result": {
+    "item": "spellbook:liber_exponentia"
+  }
+}

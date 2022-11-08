@@ -1,0 +1,17 @@
+{
+  "type": "spellbook:alchemical_furnace",
+  "fluid": {
+    "FluidName": "minecraft:lava",
+    "Amount": 500
+  },
+  "ingredients": [
+    {
+      "item": "minecraft:amethyst_shard"
+    }
+  ],
+  "result": {
+    "item": "spellbook:amethyst_dust"
+  },
+  "experience": 4.0,
+  "cookingtime": 200
+}

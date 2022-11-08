@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "phoenix_metal_ingot",
+  "pattern": [
+    "###",
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "spellbook:phoenix_metal_nugget"
+    }
+  },
+  "result": {
+    "item": "spellbook:phoenix_metal_ingot"
+  }
+}

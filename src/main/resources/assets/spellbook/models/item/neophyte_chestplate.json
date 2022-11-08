@@ -1,0 +1,7 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "spellbook:item/neophyte_chestplate",
+    "layer1": "spellbook:item/neophyte_chestplate_overlay"
+  }
+}

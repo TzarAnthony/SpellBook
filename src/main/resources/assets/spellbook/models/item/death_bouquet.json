@@ -1,0 +1,9 @@
+{
+  "parent": "item/handheld",
+  "textures": {
+    "layer0": "spellbook:item/death_bouquet"
+  },
+  "overrides": [
+    { "predicate": { "activatedbouquet": 1 }, "model": "spellbook:item/death_bouquet_active" }
+  ]
+}

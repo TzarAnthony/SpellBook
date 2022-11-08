@@ -1,0 +1,18 @@
+{
+  "type": "spellbook:alchemical_furnace",
+  "fluid": {
+    "FluidName": "spellbook:fire_resistance_potion",
+    "Amount": 500
+  },
+  "ingredients": [
+    {
+      "tag": "minecraft:diamond_ores"
+    }
+  ],
+  "result": {
+    "item": "minecraft:diamond",
+    "count": 3
+  },
+  "experience": 4.0,
+  "cookingtime": 200
+}

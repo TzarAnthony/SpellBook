@@ -1,0 +1,18 @@
+{
+  "type": "spellbook:alchemical_furnace",
+  "fluid": {
+    "FluidName": "spellbook:strength_potion",
+    "Amount": 1000
+  },
+  "ingredients": [
+    {
+      "item": "spellbook:netherite_ore"
+    }
+  ],
+  "result": {
+    "item": "spellbook:raw_netherite",
+    "count": 2
+  },
+  "experience": 4.0,
+  "cookingtime": 200
+}

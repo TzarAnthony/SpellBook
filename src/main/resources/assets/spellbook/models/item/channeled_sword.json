@@ -1,0 +1,13 @@
+{
+    "parent": "item/handheld",
+    "textures": {
+        "layer0": "spellbook:item/channeled_sword_hilt"
+    },
+    "overrides": [
+        { "predicate": { "magicelement": 0 }, "model": "spellbook:item/channeled_sword_hilt" },
+        { "predicate": { "magicelement": 1 }, "model": "spellbook:item/channeled_sword_fire" },
+        { "predicate": { "magicelement": 2 }, "model": "spellbook:item/channeled_sword_water" },
+        { "predicate": { "magicelement": 3 }, "model": "spellbook:item/channeled_sword_air" },
+        { "predicate": { "magicelement": 4 }, "model": "spellbook:item/channeled_sword_earth" }
+    ]
+}

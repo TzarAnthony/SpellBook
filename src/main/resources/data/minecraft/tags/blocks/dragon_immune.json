@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "spellbook:infused_end_stone",
+    "spellbook:end_campfire",
+    "spellbook:end_lantern",
+    "spellbook:end_torch",
+    "spellbook:end_wall_torch"
+  ]
+}

@@ -1,0 +1,8 @@
+{
+	"parent": "spellbook:block/pedestal_template",
+	"textures": {
+		"bottom": "spellbook:block/blackstone_pedestal",
+		"body": "spellbook:block/blackstone_pedestal_body",
+		"particle": "spellbook:block/blackstone_pedestal_body"
+	}
+}

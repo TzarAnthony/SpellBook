@@ -1,0 +1,32 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "type": "forge:nbt",
+      "item": "minecraft:potion",
+      "nbt": "{Potion:\"minecraft:thick\"}"
+    },
+    {
+      "type": "forge:nbt",
+      "item": "minecraft:potion",
+      "nbt": "{Potion:\"minecraft:harming\"}"
+    },
+    {
+      "type": "forge:nbt",
+      "item": "minecraft:potion",
+      "nbt": "{Potion:\"minecraft:harming\"}"
+    },
+    {
+      "type": "forge:nbt",
+      "item": "minecraft:potion",
+      "nbt": "{Potion:\"minecraft:harming\"}"
+    },
+    {
+      "item": "minecraft:bucket"
+    }
+  ],
+  "result": {
+    "item": "spellbook:harming_potion_bucket",
+    "count": 1
+  }
+}

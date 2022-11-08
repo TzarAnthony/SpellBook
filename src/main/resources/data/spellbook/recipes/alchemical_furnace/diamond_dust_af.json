@@ -1,0 +1,17 @@
+{
+  "type": "spellbook:alchemical_furnace",
+  "fluid": {
+    "FluidName": "spellbook:harming_potion",
+    "Amount": 500
+  },
+  "ingredients": [
+    {
+      "item": "minecraft:diamond"
+    }
+  ],
+  "result": {
+    "item": "spellbook:diamond_dust"
+  },
+  "experience": 4.0,
+  "cookingtime": 200
+}

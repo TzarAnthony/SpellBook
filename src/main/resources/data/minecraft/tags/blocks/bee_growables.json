@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "spellbook:nymph_bush",
+    "spellbook:nether_bush",
+    "spellbook:terran_bush",
+    "spellbook:nubibus_bush"
+  ]
+}

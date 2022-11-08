@@ -1,0 +1,6 @@
+{
+  "parent": "block/cross",
+  "textures": {
+    "cross": "spellbook:block/nymph_bush_stage3"
+  }
+}

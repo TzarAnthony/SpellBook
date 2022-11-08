@@ -1,0 +1,17 @@
+{
+  "type": "spellbook:alchemical_furnace",
+  "fluid": {
+    "FluidName": "spellbook:strength_potion",
+    "Amount": 500
+  },
+  "ingredients": [
+    {
+      "item": "minecraft:quartz"
+    }
+  ],
+  "result": {
+    "item": "spellbook:quartz_dust"
+  },
+  "experience": 4.0,
+  "cookingtime": 200
+}

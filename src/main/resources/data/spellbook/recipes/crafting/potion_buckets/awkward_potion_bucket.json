@@ -1,0 +1,32 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "type": "forge:nbt",
+      "item": "minecraft:potion",
+      "nbt": "{Potion:\"minecraft:thick\"}"
+    },
+    {
+      "type": "forge:nbt",
+      "item": "minecraft:potion",
+      "nbt": "{Potion:\"minecraft:awkward\"}"
+    },
+    {
+      "type": "forge:nbt",
+      "item": "minecraft:potion",
+      "nbt": "{Potion:\"minecraft:awkward\"}"
+    },
+    {
+      "type": "forge:nbt",
+      "item": "minecraft:potion",
+      "nbt": "{Potion:\"minecraft:awkward\"}"
+    },
+    {
+      "item": "minecraft:bucket"
+    }
+  ],
+  "result": {
+    "item": "spellbook:awkward_potion_bucket",
+    "count": 1
+  }
+}

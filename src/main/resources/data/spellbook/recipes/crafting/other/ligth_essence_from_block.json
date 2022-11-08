@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "light_essence",
+  "ingredients": [
+    {
+      "tag": "spellbook:light_essence_blocks"
+    }
+  ],
+  "result": {
+    "item": "spellbook:essence_of_light",
+    "count": 9
+  }
+}

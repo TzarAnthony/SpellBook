@@ -1,0 +1,22 @@
+{
+  "type": "spellbook:ritual",
+  "tier": 0,
+  "mobs": 3,
+  "mp": 0,
+  "ingredients": [
+    {
+      "item": "minecraft:iron_ingot",
+      "count": 6
+    },
+    {
+      "tag": "forge:rods/wooden",
+      "count": 3
+    },
+    {
+      "item": "minecraft:totem_of_undying"
+    }
+  ],
+  "result": {
+    "item": "spellbook:totem_of_avenging"
+  }
+}

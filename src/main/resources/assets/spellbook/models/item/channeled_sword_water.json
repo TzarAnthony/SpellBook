@@ -1,0 +1,7 @@
+{
+    "parent": "item/handheld",
+    "textures": {
+        "layer0": "spellbook:item/channeled_sword_water",
+        "layer1": "spellbook:item/channeled_sword_hilt"
+    }
+}

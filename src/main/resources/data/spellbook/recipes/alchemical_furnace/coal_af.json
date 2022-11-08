@@ -1,0 +1,18 @@
+{
+  "type": "spellbook:alchemical_furnace",
+  "fluid": {
+    "FluidName": "spellbook:weakness_potion",
+    "Amount": 500
+  },
+  "ingredients": [
+    {
+      "tag": "minecraft:coal_ores"
+    }
+  ],
+  "result": {
+    "item": "minecraft:coal",
+    "count": 4
+  },
+  "experience": 4.0,
+  "cookingtime": 200
+}

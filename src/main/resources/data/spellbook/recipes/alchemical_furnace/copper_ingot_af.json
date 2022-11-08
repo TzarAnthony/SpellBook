@@ -1,0 +1,18 @@
+{
+  "type": "spellbook:alchemical_furnace",
+  "fluid": {
+    "FluidName": "spellbook:swiftness_potion",
+    "Amount": 500
+  },
+  "ingredients": [
+    {
+      "tag": "minecraft:copper_ores"
+    }
+  ],
+  "result": {
+    "item": "minecraft:copper_ingot",
+    "count": 10
+  },
+  "experience": 4.0,
+  "cookingtime": 200
+}

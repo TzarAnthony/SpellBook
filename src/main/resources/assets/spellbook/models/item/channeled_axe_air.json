@@ -1,0 +1,7 @@
+{
+    "parent": "item/handheld",
+    "textures": {
+        "layer0": "spellbook:item/channeled_axe_air",
+        "layer1": "spellbook:item/channeled_axe_hilt"
+    }
+}

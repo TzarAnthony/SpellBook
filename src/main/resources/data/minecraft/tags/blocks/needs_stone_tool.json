@@ -1,0 +1,19 @@
+{
+  "replace": false,
+  "values": [
+    "spellbook:silver_ore",
+    "spellbook:deepslate_silver_ore",
+    "spellbook:silver_block",
+    "spellbook:raw_silver_block",
+    "spellbook:infused_end_stone",
+    "spellbook:alter_1",
+    "spellbook:alter_2",
+    "spellbook:alter_3",
+    "spellbook:alchemical_furnace",
+    "spellbook:alchemical_forge",
+    "spellbook:potion_manufactorium",
+    "spellbook:alter_3",
+    "spellbook:alter_3",
+    "spellbook:alter_3"
+  ]
+}

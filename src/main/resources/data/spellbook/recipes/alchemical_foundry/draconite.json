@@ -1,0 +1,33 @@
+{
+  "type": "spellbook:alchemical_foundry",
+  "fluids": {
+    "fluid1": {
+      "FluidName": "spellbook:invisibility_potion",
+      "Amount": 1000
+    },
+    "fluid2": {
+      "FluidName": "spellbook:slow_falling_potion",
+      "Amount": 1000
+    }
+  },
+  "pattern": [
+    "#X#",
+    "X#X"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:dragon_head"
+    },
+    "X": {
+      "item": "minecraft:dragon_breath"
+    }
+  },
+  "catalyst": {
+    "item": "spellbook:bottle_of_mercury",
+    "count": 4
+  },
+  "processingTime": 150,
+  "result": {
+    "item": "spellbook:draconite"
+  }
+}

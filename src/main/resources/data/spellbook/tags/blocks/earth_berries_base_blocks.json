@@ -1,0 +1,22 @@
+{
+  "replace": false,
+  "values": [
+    "#minecraft:base_stone_overworld",
+    "#minecraft:base_stone_nether",
+    "#minecraft:terracotta",
+    "minecraft:dripstone_block",
+    "minecraft:polished_basalt",
+    "minecraft:smooth_basalt",
+    "minecraft:red_sandstone",
+    "minecraft:sandstone",
+    "minecraft:cracked_deepslate_bricks",
+    "minecraft:cracked_deepslate_tiles",
+    "minecraft:cracked_nether_bricks",
+    "minecraft:cracked_stone_bricks",
+    "minecraft:cracked_polished_blackstone_bricks",
+    "minecraft:cobbled_deepslate",
+    "minecraft:cobblestone",
+    "minecraft:gravel",
+    "minecraft:clay"
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "replace": false,
+  "values": [
+    "spellbook:silver_ore",
+    "spellbook:cinnabar_ore",
+    "spellbook:deepslate_silver_ore",
+    "spellbook:deepslate_cinnabar_ore",
+    "spellbook:silver_block",
+    "spellbook:silver_steel_block",
+    "spellbook:crystalan_bud_small",
+    "spellbook:crystalan_bud_medium",
+    "spellbook:crystalan_bud_large",
+    "spellbook:crystalan_cluster",
+    "spellbook:phoenix_metal_block",
+    "spellbook:light_essence_block",
+    "spellbook:cursed_silver_block",
+    "spellbook:enchanted_steel_block",
+    "spellbook:netherite_ore",
+    "spellbook:infused_glass",
+    "spellbook:infused_end_stone",
+    "spellbook:crystallized_ender_cluster",
+    "spellbook:alter_1",
+    "spellbook:alter_2",
+    "spellbook:alter_3",
+    "spellbook:alchemical_furnace",
+    "spellbook:alchemical_forge",
+    "spellbook:potion_manufactorium",
+    "spellbook:end_lantern"
+  ]
+}

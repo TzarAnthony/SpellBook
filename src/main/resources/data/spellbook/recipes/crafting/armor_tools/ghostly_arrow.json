@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "#": {
+      "item": "minecraft:spectral_arrow"
+    },
+    "X": {
+      "item": "spellbook:ectoplasm_vial"
+    }
+  },
+  "pattern": [
+    " # ",
+    "#X#",
+    " # "
+  ],
+  "result": {
+    "count": 4,
+    "item": "spellbook:ghostly_arrow"
+  }
+}

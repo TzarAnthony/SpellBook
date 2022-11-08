@@ -1,0 +1,39 @@
+{
+  "type": "spellbook:alchemical_foundry",
+  "fluids": {
+    "fluid1": {
+      "FluidName": "spellbook:fire_resistance_potion",
+      "Amount": 1000
+    },
+    "fluid2": {
+      "FluidName": "minecraft:lava",
+      "Amount": 1000
+    }
+  },
+  "pattern": [
+    "ZXZ",
+    "Y#Y"
+  ],
+  "key": {
+    "#": {
+      "tag": "forge:ingots/netherite"
+    },
+    "X": {
+      "tag": "forge:ingots/copper"
+    },
+    "Y": {
+      "item": "minecraft:coal"
+    },
+    "Z": {
+      "item": "minecraft:blaze_rod"
+    }
+  },
+  "catalyst": {
+    "item": "spellbook:bottle_of_mercury",
+    "count": 6
+  },
+  "processingTime": 150,
+  "result": {
+    "item": "spellbook:phoenix_metal_ingot"
+  }
+}

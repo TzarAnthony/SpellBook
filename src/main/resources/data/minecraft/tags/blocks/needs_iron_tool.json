@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "spellbook:cinnabar_ore",
+    "spellbook:deepslate_cinnabar_ore",
+    "spellbook:cinnabar_block",
+    "spellbook:silver_steel_block",
+    "spellbook:cinnabar_block"
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "XXX",
+    " # ",
+    "XXX"
+  ],
+  "key": {
+    "#": {
+      "tag": "forge:dyes"
+    },
+    "X": {
+      "item": "minecraft:clay_ball"
+    }
+  },
+  "result": {
+    "item": "spellbook:dye_base",
+    "count": 6
+  }
+}

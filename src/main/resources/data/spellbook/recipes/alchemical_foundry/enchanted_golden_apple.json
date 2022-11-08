@@ -1,0 +1,46 @@
+{
+  "type": "spellbook:alchemical_foundry",
+  "fluids": {
+    "fluid1": {
+      "FluidName": "spellbook:strong_regeneration_potion",
+      "Amount": 1000
+    },
+    "fluid2": {
+      "FluidName": "spellbook:strong_swiftness_potion",
+      "Amount": 1000
+    }
+  },
+  "pattern": [
+    "XWZ",
+    "#Y#"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:golden_apple"
+    },
+    "W": {
+      "item": "minecraft:honey_bottle"
+    },
+    "X": {
+      "type": "forge:nbt",
+      "item": "minecraft:potion",
+      "nbt": "{Potion:\"minecraft:turtle_master\"}"
+    },
+    "Y": {
+      "item": "minecraft:experience_bottle"
+    },
+    "Z": {
+      "type": "forge:nbt",
+      "item": "minecraft:potion",
+      "nbt": "{Potion:\"minecraft:long_fire_resistance\"}"
+    }
+  },
+  "catalyst": {
+    "item": "minecraft:glistering_melon_slice",
+    "count": 4
+  },
+  "processingTime": 150,
+  "result": {
+    "item": "minecraft:enchanted_golden_apple"
+  }
+}

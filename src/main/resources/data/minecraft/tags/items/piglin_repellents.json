@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values": [
+    "spellbook:cursed_silver_block",
+    "spellbook:cursed_silver_ingot",
+    "spellbook:cursed_silver_nugget"
+  ]
+}

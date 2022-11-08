@@ -1,0 +1,38 @@
+{
+  "type": "minecraft:smelting",
+  "ingredient": [
+    {
+      "item": "spellbook:silver_pickaxe"
+    },
+    {
+      "item": "spellbook:silver_shovel"
+    },
+    {
+      "item": "spellbook:silver_axe"
+    },
+    {
+      "item": "spellbook:silver_hoe"
+    },
+    {
+      "item": "spellbook:silver_sword"
+    },
+    {
+      "item": "spellbook:silver_helmet"
+    },
+    {
+      "item": "spellbook:silver_chestplate"
+    },
+    {
+      "item": "spellbook:silver_leggings"
+    },
+    {
+      "item": "spellbook:silver_boots"
+    },
+    {
+      "item": "spellbook:silver_arrow"
+    }
+  ],
+  "result": "spellbook:silver_nugget",
+  "experience": 0.1,
+  "cookingtime": 200
+}

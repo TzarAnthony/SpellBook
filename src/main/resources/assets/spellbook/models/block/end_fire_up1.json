@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/template_fire_up",
+  "textures": {
+    "fire": "spellbook:block/end_fire_1"
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "XXX",
+    "X#X",
+    "XXX"
+  ],
+  "key": {
+    "#": {
+      "tag": "forge:dyes/blue"
+    },
+    "X": {
+      "item": "spellbook:dye_base"
+    }
+  },
+  "result": {
+    "item": "minecraft:blue_dye",
+    "count": 9
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "type": "spellbook:alchemical_furnace",
+  "fluid": {
+    "FluidName": "spellbook:weakness_potion",
+    "Amount": 500
+  },
+  "ingredients": [
+    {
+      "item": "minecraft:emerald"
+    }
+  ],
+  "result": {
+    "item": "spellbook:emerald_dust"
+  },
+  "experience": 4.0,
+  "cookingtime": 200
+}

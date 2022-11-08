@@ -1,0 +1,32 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "type": "forge:nbt",
+      "item": "minecraft:potion",
+      "nbt": "{Potion:\"minecraft:thick\"}"
+    },
+    {
+      "type": "forge:nbt",
+      "item": "minecraft:potion",
+      "nbt": "{Potion:\"minecraft:night_vision\"}"
+    },
+    {
+      "type": "forge:nbt",
+      "item": "minecraft:potion",
+      "nbt": "{Potion:\"minecraft:night_vision\"}"
+    },
+    {
+      "type": "forge:nbt",
+      "item": "minecraft:potion",
+      "nbt": "{Potion:\"minecraft:night_vision\"}"
+    },
+    {
+      "item": "minecraft:bucket"
+    }
+  ],
+  "result": {
+    "item": "spellbook:night_vision_potion_bucket",
+    "count": 1
+  }
+}

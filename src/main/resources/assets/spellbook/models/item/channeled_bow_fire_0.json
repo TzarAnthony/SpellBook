@@ -1,0 +1,6 @@
+{
+  "parent": "item/bow",
+  "textures": {
+    "layer0": "spellbook:item/channeled_bow_fire_0"
+  }
+}

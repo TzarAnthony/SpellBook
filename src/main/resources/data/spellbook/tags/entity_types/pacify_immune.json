@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "#forge:bosses",
+    "minecraft:elder_guardian",
+    "spellbook:shade",
+    "spellbook:yurei"
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "spellbook:item/liber_exponentia"
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "bookmark": 1
+      },
+      "model": "spellbook:item/liber_exponentia_bookmark"
+    }
+  ]
+}

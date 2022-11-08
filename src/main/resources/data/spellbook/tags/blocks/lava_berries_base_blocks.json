@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "#minecraft:base_stone_overworld",
+    "#minecraft:base_stone_nether",
+    "minecraft:polished_basalt",
+    "minecraft:smooth_basalt",
+    "minecraft:magma_block"
+  ]
+}

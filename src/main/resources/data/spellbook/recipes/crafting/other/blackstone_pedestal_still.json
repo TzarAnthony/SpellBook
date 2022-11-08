@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#",
+    "X"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:item_frame"
+    },
+    "X": {
+      "item": "minecraft:polished_blackstone"
+    }
+  },
+  "result": {
+    "item": "spellbook:black_pedestal_still"
+  }
+}

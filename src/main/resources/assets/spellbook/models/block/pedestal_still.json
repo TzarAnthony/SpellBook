@@ -1,0 +1,6 @@
+{
+	"parent": "spellbook:block/pedestal_template",
+	"textures": {
+		"top": "spellbook:block/quartz_pedestal"
+	}
+  }

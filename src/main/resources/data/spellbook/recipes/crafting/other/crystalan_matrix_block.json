@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "spellbook:crystalan_matrix"
+    }
+  },
+  "result": {
+    "item": "spellbook:crystalan_matrix_block"
+  }
+}

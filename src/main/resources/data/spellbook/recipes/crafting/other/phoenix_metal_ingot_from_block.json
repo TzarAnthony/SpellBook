@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "phoenix_metal_ingot",
+  "ingredients": [
+    {
+      "item": "spellbook:phoenix_metal_block"
+    }
+  ],
+  "result": {
+    "item": "spellbook:phoenix_metal_ingot",
+    "count": 9
+  }
+}

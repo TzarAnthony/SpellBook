@@ -1,0 +1,27 @@
+{
+  "type": "spellbook:alchemical_foundry",
+  "fluids": {
+    "fluid1": {
+      "FluidName": "minecraft:lava",
+      "Amount": 500
+    }
+  },
+  "pattern": [
+    "X#X"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:ender_eye"
+    },
+    "X": {
+      "item": "minecraft:blaze_rod"
+    }
+  },
+  "catalyst": {
+    "item": "minecraft:ghast_tear"
+  },
+  "processingTime": 150,
+  "result": {
+    "item": "spellbook:flaming_pearl"
+  }
+}

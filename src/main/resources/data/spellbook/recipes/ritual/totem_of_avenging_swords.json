@@ -1,0 +1,23 @@
+{
+  "type": "spellbook:ritual",
+  "tier": 0,
+  "mobs": 3,
+  "mp": 0,
+  "ingredients": [
+    {
+      "item": "minecraft:iron_sword"
+    },
+    {
+      "item": "minecraft:iron_sword"
+    },
+    {
+      "item": "minecraft:iron_sword"
+    },
+    {
+      "item": "minecraft:totem_of_undying"
+    }
+  ],
+  "result": {
+    "item": "spellbook:totem_of_avenging"
+  }
+}

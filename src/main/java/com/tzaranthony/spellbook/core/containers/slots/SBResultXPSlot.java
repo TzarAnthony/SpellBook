@@ -1,0 +1,44 @@
+package com.tzaranthony.spellbook.core.containers.slots;
+
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraftforge.items.IItemHandler;
+import net.minecraftforge.items.SlotItemHandler;
+
+public class SBResultXPSlot extends SlotItemHandler {
+    private final Player player;
+    private int removeCount;
+
+    public SBResultXPSlot(Player player, IItemHandler itemHandler, int id, int x, int y) {
+        super(itemHandler, id, x, y);
+        this.player = player;
+    }
+
+    public boolean mayPlace(ItemStack p_39553_) {
+        return false;
+    }
+
+    public ItemStack remove(int amt) {
+        if (this.hasItem()) {
+            this.removeCount += Math.min(amt, this.getItem().getCount());
+        }
+
+        return super.remove(amt);
+    }
+
+    public void onTake(Player player, ItemStack stack) {
+        this.checkTakeAchievements(stack);
+        super.onTake(player, stack);
+    }
+
+    protected void onQuickCraft(ItemStack stack, int amt) {
+        this.removeCount += amt;
+        this.checkTakeAchievements(stack);
+    }
+
+    protected void checkTakeAchievements(ItemStack p_39558_) {
+        p_39558_.onCraftedBy(this.player.level, this.player, this.removeCount);
+        this.removeCount = 0;
+        net.minecraftforge.event.ForgeEventFactory.firePlayerSmeltedEvent(this.player, p_39558_);
+    }
+}

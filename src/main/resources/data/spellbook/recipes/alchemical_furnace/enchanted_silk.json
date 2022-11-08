@@ -1,0 +1,17 @@
+{
+  "type": "spellbook:alchemical_furnace",
+  "fluid": {
+    "FluidName": "spellbook:healing_potion",
+    "Amount": 250
+  },
+  "ingredients": [
+    {
+      "item": "spellbook:cursed_silk"
+    }
+  ],
+  "result": {
+    "item": "spellbook:enchanted_silk"
+  },
+  "experience": 4.0,
+  "cookingtime": 75
+}

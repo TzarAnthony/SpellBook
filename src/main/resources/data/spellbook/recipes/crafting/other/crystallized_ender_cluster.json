@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "##"
+  ],
+  "key": {
+    "#": {
+      "item": "spellbook:crystallized_ender"
+    }
+  },
+  "result": {
+    "item": "spellbook:crystallized_ender_cluster"
+  }
+}

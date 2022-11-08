@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#",
+    "X",
+    "Y"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:item_frame"
+    },
+    "X": {
+      "item": "minecraft:quartz_pillar"
+    },
+    "Y": {
+      "item": "minecraft:redstone"
+    }
+  },
+  "result": {
+    "item": "spellbook:pedestal_spin"
+  }
+}

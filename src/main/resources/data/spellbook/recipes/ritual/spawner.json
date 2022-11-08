@@ -1,0 +1,27 @@
+{
+  "type": "spellbook:ritual",
+  "tier": 1,
+  "mobs": 2,
+  "mp": 0,
+  "ingredients": [
+    {
+      "item": "minecraft:chain",
+      "count": 18
+    },
+    {
+      "item": "minecraft:experience_bottle",
+      "count": 64
+    },
+    {
+      "item": "minecraft:experience_bottle",
+      "count": 64
+    },
+    {
+      "item": "minecraft:experience_bottle",
+      "count": 64
+    }
+  ],
+  "result": {
+    "item": "minecraft:spawner"
+  }
+}

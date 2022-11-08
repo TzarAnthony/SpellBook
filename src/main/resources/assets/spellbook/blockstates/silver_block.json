@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "spellbook:block/silver_block"
+    }
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "type": "spellbook:alchemical_furnace",
+  "fluid": {
+    "FluidName": "spellbook:water_breathing_potion",
+    "Amount": 500
+  },
+  "ingredients": [
+    {
+      "tag": "minecraft:gold_ores"
+    }
+  ],
+  "result": {
+    "item": "minecraft:gold_ingot",
+    "count": 3
+  },
+  "experience": 4.0,
+  "cookingtime": 200
+}

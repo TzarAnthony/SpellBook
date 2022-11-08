@@ -1,0 +1,24 @@
+{
+  "type": "spellbook:ritual",
+  "tier": 1,
+  "mobs": 0,
+  "mp": 0,
+  "ingredients": [
+    {
+      "item": "minecraft:paper",
+      "count": 2
+    },
+    {
+      "tag": "forge:dyes"
+    },
+    {
+      "item": "spellbook:enchanted_silk"
+    },
+    {
+      "item": "minecraft:feather"
+    }
+  ],
+  "result": {
+    "item": "spellbook:spell_paper"
+  }
+}

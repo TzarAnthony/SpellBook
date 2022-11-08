@@ -1,0 +1,23 @@
+{
+  "replace": false,
+  "values": [
+    "#minecraft:bee_growables",
+    "#minecraft:saplings",
+    "#minecraft:tall_flowers",
+    "#minecraft:underwater_bonemeals",
+    "#minecraft:nylium",
+    "minecraft:netherrack",
+    "minecraft:grass_block",
+    "minecraft:moss_block",
+    "minecraft:small_dripleaf",
+    "minecraft:big_dripleaf",
+    "minecraft:brown_mushroom",
+    "minecraft:red_mushroom",
+    "minecraft:nether_wart",
+    "minecraft:warped_fungus",
+    "minecraft:crimson_fungus",
+    "minecraft:chorus_flower",
+    "minecraft:cactus",
+    "minecraft:sugar_cane"
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "replace": false,
+  "values": [
+    "#minecraft:skeletons",
+    "minecraft:zombie",
+    "minecraft:zombie_villager",
+    "minecraft:drowned",
+    "minecraft:husk",
+    "minecraft:guardian",
+    "minecraft:elder_guardian",
+    "minecraft:iron_golem",
+    "minecraft:snow_golem",
+    "minecraft:blaze",
+    "minecraft:wither",
+    "minecraft:slime",
+    "minecraft:magma_cube",
+    "minecraft:skeleton_horse",
+    "minecraft:creeper",
+    "minecraft:zoglin",
+    "minecraft:zombified_piglin",
+    "minecraft:vex",
+    "spellbook:lesser_vampire",
+    "spellbook:summoned_vex",
+    "spellbook:summoned_zombie",
+    "spellbook:summoned_skelly",
+    "spellbook:shade",
+    "spellbook:poltergeist",
+    "spellbook:wraith",
+    "spellbook:banshee",
+    "spellbook:necrotic_spider"
+  ]
+}

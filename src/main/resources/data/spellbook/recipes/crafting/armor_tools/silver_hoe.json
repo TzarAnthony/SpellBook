@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "XX",
+    " #",
+    " #"
+  ],
+  "key": {
+    "#": {
+      "tag": "forge:rod/wooden"
+    },
+    "X": {
+      "tag": "forge:ingots/silver"
+    }
+  },
+  "result": {
+    "item": "spellbook:silver_hoe"
+  }
+}

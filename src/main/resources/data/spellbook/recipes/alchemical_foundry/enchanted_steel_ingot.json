@@ -1,0 +1,39 @@
+{
+  "type": "spellbook:alchemical_foundry",
+  "fluids": {
+    "fluid1": {
+      "FluidName": "spellbook:slow_falling_potion",
+      "Amount": 1000
+    },
+    "fluid2": {
+      "FluidName": "spellbook:fire_resistance_potion",
+      "Amount": 1000
+    }
+  },
+  "pattern": [
+    "ZXZ",
+    "Y#Y"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:netherite_ingot"
+    },
+    "X": {
+      "item": "minecraft:amethyst_shard"
+    },
+    "Y": {
+      "item": "spellbook:enchanted_silk"
+    },
+    "Z": {
+      "item": "spellbook:silver_steel_ingot"
+    }
+  },
+  "catalyst": {
+    "item": "spellbook:bottle_of_mercury",
+    "count": 6
+  },
+  "processingTime": 150,
+  "result": {
+    "item": "spellbook:enchanted_steel_ingot"
+  }
+}

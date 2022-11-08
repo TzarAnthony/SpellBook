@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:smelting",
+  "ingredient": {
+    "tag": "forge:ores/cinnabar"
+  },
+  "result": "spellbook:cinnabar_fragment",
+  "count": 2,
+  "experience": 1.0,
+  "cookingtime": 200
+}

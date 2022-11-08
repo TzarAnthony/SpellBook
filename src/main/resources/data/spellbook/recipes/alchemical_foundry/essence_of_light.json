@@ -1,0 +1,39 @@
+{
+  "type": "spellbook:alchemical_foundry",
+  "fluids": {
+    "fluid1": {
+      "FluidName": "spellbook:fire_resistance_potion",
+      "Amount": 1000
+    },
+    "fluid2": {
+      "FluidName": "spellbook:night_vision_potion",
+      "Amount": 1000
+    }
+  },
+  "pattern": [
+    "ZXZ",
+    "Y#Y"
+  ],
+  "key": {
+    "#": {
+      "tag": "forge:ingots/netherite"
+    },
+    "X": {
+      "item": "spellbook:infused_glass"
+    },
+    "Y": {
+      "item": "spellbook:ectoplasm_vial"
+    },
+    "Z": {
+      "item": "minecraft:glowstone"
+    }
+  },
+  "catalyst": {
+    "item": "spellbook:bottle_of_mercury",
+    "count": 6
+  },
+  "processingTime": 150,
+  "result": {
+    "item": "spellbook:essence_of_light"
+  }
+}

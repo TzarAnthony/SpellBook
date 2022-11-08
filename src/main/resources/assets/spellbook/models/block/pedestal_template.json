@@ -1,0 +1,46 @@
+{
+	"parent": "block/block",
+	"textures": {
+		"bottom": "spellbook:block/quartz_pedestal",
+		"body": "spellbook:block/quartz_pedestal_body",
+		"particle": "spellbook:block/quartz_pedestal_body"
+	},
+	"elements": [
+		{
+			"from": [3, 15, 3],
+			"to": [13, 16, 13],
+			"faces": {
+				"north": {"uv": [3, 12, 13, 13], "texture": "#top"},
+				"east": {"uv": [3, 12, 13, 13], "texture": "#top"},
+				"south": {"uv": [3, 12, 13, 13], "texture": "#top"},
+				"west": {"uv": [3, 12, 13, 13], "texture": "#top"},
+				"up": {"uv": [3, 2, 13, 12], "texture": "#top"},
+				"down": {"uv": [3, 2, 13, 12], "texture": "#top"}
+			}
+		},
+		{
+			"from": [4, 1, 4],
+			"to": [12, 15, 12],
+			"faces": {
+				"north": {"uv": [0, 1, 8, 15], "texture": "#body"},
+				"east": {"uv": [0, 1, 8, 15], "texture": "#body"},
+				"south": {"uv": [0, 1, 8, 15], "texture": "#body"},
+				"west": {"uv": [0, 1, 8, 15], "texture": "#body"},
+				"up": {"uv": [8, 1, 16, 9], "texture": "#body"},
+				"down": {"uv": [8, 1, 16, 9], "texture": "#body"}
+			}
+		},
+		{
+			"from": [3, 0, 3],
+			"to": [13, 1, 13],
+			"faces": {
+				"north": {"uv": [3, 12, 13, 13], "texture": "#bottom"},
+				"east": {"uv": [3, 12, 13, 13], "texture": "#bottom"},
+				"south": {"uv": [3, 12, 13, 13], "texture": "#bottom"},
+				"west": {"uv": [3, 12, 13, 13], "texture": "#bottom"},
+				"up": {"uv": [3, 2, 13, 12], "texture": "#bottom"},
+				"down": {"uv": [3, 2, 13, 12], "texture": "#bottom"}
+			}
+		}
+	]
+}

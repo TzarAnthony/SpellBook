@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "##",
+    "##"
+  ],
+  "key": {
+    "#": {
+      "item": "spellbook:crystalan_shard"
+    }
+  },
+  "result": {
+    "item": "spellbook:crystalan_cluster"
+  }
+}

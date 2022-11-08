@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values": [
+    "spellbook:cursed_silver_block",
+    "spellbook:enchanted_steel_block",
+    "spellbook:netherite_ore"
+  ]
+}

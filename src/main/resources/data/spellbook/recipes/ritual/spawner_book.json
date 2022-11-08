@@ -1,0 +1,20 @@
+{
+  "type": "spellbook:ritual",
+  "tier": 1,
+  "mobs": 2,
+  "mp": 0,
+  "ingredients": [
+    {
+      "item": "minecraft:chain",
+      "count": 18
+    },
+    {
+      "type": "forge:nbt",
+      "item": "spellbook:xp_book",
+      "nbt": "{XPStored:1395}"
+    }
+  ],
+  "result": {
+    "item": "minecraft:spawner"
+  }
+}

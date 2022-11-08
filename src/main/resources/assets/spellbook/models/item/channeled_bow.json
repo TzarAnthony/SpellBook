@@ -1,0 +1,27 @@
+{
+    "parent": "item/bow",
+    "textures": {
+        "layer0": "spellbook:item/channeled_bow"
+    },
+    "overrides": [
+        { "predicate": { "magicelement": 1 }, "model": "spellbook:item/channeled_bow_fire" },
+        { "predicate": { "magicelement": 1, "pulling": 1 }, "model": "spellbook:item/channeled_bow_fire_0" },
+        { "predicate": { "magicelement": 1, "pulling": 1, "pull": 0.65 }, "model": "spellbook:item/channeled_bow_fire_1" },
+        { "predicate": { "magicelement": 1, "pulling": 1, "pull": 0.9 }, "model": "spellbook:item/channeled_bow_fire_2" },
+
+        { "predicate": { "magicelement": 2 }, "model": "spellbook:item/channeled_bow_water" },
+        { "predicate": { "magicelement": 2, "pulling": 1}, "model": "spellbook:item/channeled_bow_water_0" },
+        { "predicate": { "magicelement": 2, "pulling": 1, "pull": 0.65 }, "model": "spellbook:item/channeled_bow_water_1" },
+        { "predicate": { "magicelement": 2, "pulling": 1, "pull": 0.9 }, "model": "spellbook:item/channeled_bow_water_2" },
+
+        { "predicate": { "magicelement": 3 }, "model": "spellbook:item/channeled_bow_air" },
+        { "predicate": { "magicelement": 3, "pulling": 1 }, "model": "spellbook:item/channeled_bow_air_0" },
+        { "predicate": { "magicelement": 3, "pulling": 1, "pull": 0.65 }, "model": "spellbook:item/channeled_bow_air_1" },
+        { "predicate": { "magicelement": 3, "pulling": 1, "pull": 0.9 }, "model": "spellbook:item/channeled_bow_air_2" },
+
+        { "predicate": { "magicelement": 4 }, "model": "spellbook:item/channeled_bow_earth" },
+        { "predicate": { "magicelement": 4, "pulling": 1 }, "model": "spellbook:item/channeled_bow_earth_0" },
+        { "predicate": { "magicelement": 4, "pulling": 1, "pull": 0.65 }, "model": "spellbook:item/channeled_bow_earth_1" },
+        { "predicate": { "magicelement": 4, "pulling": 1, "pull": 0.9 }, "model": "spellbook:item/channeled_bow_earth_2" }
+    ]
+}

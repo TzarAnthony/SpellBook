@@ -1,0 +1,39 @@
+{
+  "type": "spellbook:alchemical_foundry",
+  "fluids": {
+    "fluid1": {
+      "FluidName": "spellbook:water_breathing_potion",
+      "Amount": 1000
+    },
+    "fluid2": {
+      "FluidName": "spellbook:strong_swiftness_potion",
+      "Amount": 1000
+    }
+  },
+  "pattern": [
+    "ZXZ",
+    "Y#Y"
+  ],
+  "key": {
+    "#": {
+      "tag": "forge:ingots/netherite"
+    },
+    "X": {
+      "item": "spellbook:infused_end_stone"
+    },
+    "Y": {
+      "item": "minecraft:chorus_flower"
+    },
+    "Z": {
+      "item": "spellbook:imbued_cloth"
+    }
+  },
+  "catalyst": {
+    "item": "spellbook:bottle_of_mercury",
+    "count": 6
+  },
+  "processingTime": 150,
+  "result": {
+    "item": "spellbook:ender_infused_cloth"
+  }
+}

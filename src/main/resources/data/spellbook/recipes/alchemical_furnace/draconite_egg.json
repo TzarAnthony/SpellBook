@@ -1,0 +1,18 @@
+{
+  "type": "spellbook:alchemical_furnace",
+  "fluid": {
+    "FluidName": "spellbook:slow_falling_potion",
+    "Amount": 1000
+  },
+  "ingredients": [
+    {
+      "item": "minecraft:dragon_egg"
+    }
+  ],
+  "result": {
+    "item": "spellbook:draconite",
+    "count": 2
+  },
+  "experience": 4.0,
+  "cookingtime": 200
+}

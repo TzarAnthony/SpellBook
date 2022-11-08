@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "spellbook:block/cursed_silver_block"
+    }
+  }
+}

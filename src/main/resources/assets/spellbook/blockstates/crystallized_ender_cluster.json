@@ -1,0 +1,30 @@
+{
+  "variants": {
+    "facing=down": {
+      "model": "spellbook:block/crystallized_ender_cluster",
+      "x": 180
+    },
+    "facing=east": {
+      "model": "spellbook:block/crystallized_ender_cluster",
+      "x": 90,
+      "y": 90
+    },
+    "facing=north": {
+      "model": "spellbook:block/crystallized_ender_cluster",
+      "x": 90
+    },
+    "facing=south": {
+      "model": "spellbook:block/crystallized_ender_cluster",
+      "x": 90,
+      "y": 180
+    },
+    "facing=up": {
+      "model": "spellbook:block/crystallized_ender_cluster"
+    },
+    "facing=west": {
+      "model": "spellbook:block/crystallized_ender_cluster",
+      "x": 90,
+      "y": 270
+    }
+  }
+}

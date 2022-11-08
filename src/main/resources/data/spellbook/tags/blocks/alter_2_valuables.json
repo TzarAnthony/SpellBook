@@ -1,0 +1,12 @@
+{
+  "replace": false,
+  "values": [
+    "#forge:storage_blocks",
+    "#spellbook:alter_3_valuables",
+    "spellbook:enchanted_steel_block",
+    "spellbook:cursed_silver_block",
+    "spellbook:imbued_cloth_block",
+    "spellbook:silver_steel_block",
+    "minecraft:amethyst_cluster"
+  ]
+}

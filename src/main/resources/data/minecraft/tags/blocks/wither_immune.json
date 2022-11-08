@@ -1,0 +1,11 @@
+{
+  "replace": false,
+  "values": [
+    "#spellbook:light_essence_blocks",
+    "spellbook:phoenix_metal_block",
+    "spellbook:infused_glass",
+    "spellbook:crystalan_matrix_block",
+    "spellbook:dimensional_alloy_block",
+    "spellbook:ender_infused_cloth_block"
+  ]
+}

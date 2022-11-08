@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#",
+    "X"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:item_frame"
+    },
+    "X": {
+      "item": "minecraft:quartz_pillar"
+    }
+  },
+  "result": {
+    "item": "spellbook:pedestal_still"
+  }
+}

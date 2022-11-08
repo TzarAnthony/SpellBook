@@ -1,0 +1,22 @@
+{
+  "replace": false,
+  "values": [
+    "spellbook:light_essence_block",
+    "spellbook:light_essence_block_black",
+    "spellbook:light_essence_block_blue", 
+    "spellbook:light_essence_block_brown",
+    "spellbook:light_essence_block_cyan", 
+    "spellbook:light_essence_block_gray", 
+    "spellbook:light_essence_block_green",
+    "spellbook:light_essence_block_light_blue",
+    "spellbook:light_essence_block_light_gray",
+    "spellbook:light_essence_block_lime", 
+    "spellbook:light_essence_block_magenta",
+    "spellbook:light_essence_block_orange",
+    "spellbook:light_essence_block_pink", 
+    "spellbook:light_essence_block_purple",
+    "spellbook:light_essence_block_red",
+    "spellbook:light_essence_block_white",
+    "spellbook:light_essence_block_yellow"
+  ]
+}

@@ -1,0 +1,7 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "spellbook:item/battlemaster_robe",
+    "layer1": "spellbook:item/battlemaster_robe_overlay"
+  }
+}

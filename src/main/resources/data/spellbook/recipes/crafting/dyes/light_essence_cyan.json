@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "XXX",
+    "X#X",
+    "XXX"
+  ],
+  "key": {
+    "#": {
+      "tag": "forge:dyes/cyan"
+    },
+    "X": {
+      "tag": "spellbook:light_essence_blocks"
+    }
+  },
+  "result": {
+    "item": "spellbook:light_essence_block_cyan",
+    "count": 8
+  }
+}

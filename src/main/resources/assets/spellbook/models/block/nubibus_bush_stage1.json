@@ -1,0 +1,6 @@
+{
+  "parent": "block/cross",
+  "textures": {
+    "cross": "spellbook:block/nubibus_bush_stage1"
+  }
+}

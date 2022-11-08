@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:blasting",
+  "ingredient": {
+    "item": "spellbook:raw_netherite"
+  },
+  "result": "minecraft:netherite_ingot",
+  "experience": 1.0,
+  "cookingtime": 200
+}

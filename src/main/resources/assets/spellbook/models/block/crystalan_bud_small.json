@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cross",
+  "textures": {
+    "cross": "spellbook:block/crystalan_bud_small"
+  }
+}
