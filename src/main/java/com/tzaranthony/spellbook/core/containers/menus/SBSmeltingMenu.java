@@ -1,6 +1,6 @@
 package com.tzaranthony.spellbook.core.containers.menus;
 
-import com.tzaranthony.spellbook.core.blockEntities.SBCraftingWScreenBE;
+import com.tzaranthony.spellbook.core.blockEntities.ScreenCraftingBE;
 import com.tzaranthony.spellbook.core.containers.slots.*;
 import com.tzaranthony.spellbook.core.util.tags.SBItemTags;
 import net.minecraft.core.BlockPos;
@@ -21,7 +21,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public class SBSmeltingMenu extends AbstractContainerMenu {
-    protected final SBCraftingWScreenBE blockEntity;
+    protected final ScreenCraftingBE blockEntity;
     protected final ItemStackHandler container;
     protected final ContainerData data;
     protected final Level level;
@@ -37,7 +37,7 @@ public class SBSmeltingMenu extends AbstractContainerMenu {
 
     protected SBSmeltingMenu(@Nullable MenuType<?> type, int id, Inventory inventory, BlockPos pos, ContainerData data) {
         super(type, id);
-        this.blockEntity = (SBCraftingWScreenBE) inventory.player.level.getBlockEntity(pos);
+        this.blockEntity = (ScreenCraftingBE) inventory.player.level.getBlockEntity(pos);
         this.container = blockEntity.getItemHandler();
         this.data = data;
         this.inventory = inventory;
@@ -185,7 +185,7 @@ public class SBSmeltingMenu extends AbstractContainerMenu {
     }
 
     // misc
-    public SBCraftingWScreenBE getBE() {
+    public ScreenCraftingBE getBE() {
         return this.blockEntity;
     }
 

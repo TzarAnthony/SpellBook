@@ -18,13 +18,13 @@ public class RitualRecipe implements Recipe<Container> {
     public static final RecipeType<RitualRecipe> TYPE = RecipeType.register(TYPE_ID.toString());
 
     private final ResourceLocation id;
-    private final NonNullList<Ingredient> itemInput;
+    private final NonNullList<ItemStack> itemInput;
     private final ItemStack output;
     private final int alterTier;
     private final int mobCount;
     private final int mp;
 
-    public RitualRecipe(ResourceLocation id, NonNullList<Ingredient> itemInput, ItemStack output, int alterTier, int mobCount, int mp) {
+    public RitualRecipe(ResourceLocation id, NonNullList<ItemStack> itemInput, ItemStack output, int alterTier, int mobCount, int mp) {
         this.id = id;
         this.itemInput = itemInput;
         this.output = output;
@@ -44,8 +44,7 @@ public class RitualRecipe implements Recipe<Container> {
                 inputs.add(itemstack);
             }
         }
-        return i == this.itemInput.size()
-                && net.minecraftforge.common.util.RecipeMatcher.findMatches(inputs,  this.itemInput) != null;
+        return i == this.itemInput.size() && SBCraftingHelper.findMatches(inputs, this.itemInput);
     }
 
     @Override
@@ -80,6 +79,10 @@ public class RitualRecipe implements Recipe<Container> {
 
     @Override
     public NonNullList<Ingredient> getIngredients() {
+        return NonNullList.create();
+    }
+
+    public NonNullList<ItemStack> getInputs() {
         return this.itemInput;
     }
 
@@ -101,7 +104,7 @@ public class RitualRecipe implements Recipe<Container> {
         @Override
         public RitualRecipe fromJson(ResourceLocation id, JsonObject json) {
             ItemStack output = ShapedRecipe.itemStackFromJson(GsonHelper.getAsJsonObject(json, "result"));
-            NonNullList<Ingredient> iInputs = SBCraftingHelper.itemsFromJson(GsonHelper.getAsJsonArray(json, "ingredients"));
+            NonNullList<ItemStack> iInputs = SBCraftingHelper.itemsFromJson(GsonHelper.getAsJsonArray(json, "ingredients"));
             if (iInputs.isEmpty()) {
                 throw new JsonParseException("No ingredients for ritual.");
             }
@@ -113,9 +116,9 @@ public class RitualRecipe implements Recipe<Container> {
         }
 
         public RitualRecipe fromNetwork(ResourceLocation id, FriendlyByteBuf buffer) {
-            NonNullList<Ingredient> iInputs = NonNullList.create();
+            NonNullList<ItemStack> iInputs = NonNullList.create();
             for(int k = 0; k < iInputs.size(); ++k) {
-                iInputs.add(Ingredient.fromNetwork(buffer));
+                iInputs.add(buffer.readItem());
             }
             ItemStack output = buffer.readItem();
             int alterTier = buffer.readVarInt();
@@ -126,8 +129,8 @@ public class RitualRecipe implements Recipe<Container> {
 
         @Override
         public void toNetwork(FriendlyByteBuf buffer, RitualRecipe recipe) {
-            for(Ingredient ingredient : recipe.getIngredients()) {
-                ingredient.toNetwork(buffer);
+            for(ItemStack ingredient : recipe.getInputs()) {
+                buffer.writeItem(ingredient);
             }
             buffer.writeItem(recipe.getResultItem());
             buffer.writeVarInt(recipe.getAlterTier());

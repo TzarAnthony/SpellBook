@@ -32,17 +32,10 @@ public abstract class PedestalBE extends BlockEntity {
         ContainerHelper.saveAllItems(tag, this.item);
     }
 
-    public ClientboundBlockEntityDataPacket getUpdatePacket() {
-        return ClientboundBlockEntityDataPacket.create(this);
-    }
-
     public boolean changeItem(Player player, ItemStack stack) {
-
-
         if (stack.isEmpty() || stack.is(this.getItem().getItem())) {
             if (!this.getItem().isEmpty()) {
                 addOrPopItem(player);
-                player.level.playSound((Player) null, this.getBlockPos().getX(), this.getBlockPos().getY(), this.getBlockPos().getZ(), SoundEvents.ITEM_FRAME_REMOVE_ITEM, SoundSource.BLOCKS, 1.0F, 1.0F);
                 update();
                 return true;
             } else {
@@ -56,7 +49,7 @@ public abstract class PedestalBE extends BlockEntity {
         if (!this.getItem().isEmpty()) {
             addOrPopItem(player);
         }
-        player.level.playSound((Player) null, this.getBlockPos().getX(), this.getBlockPos().getY(), this.getBlockPos().getZ(), SoundEvents.ITEM_FRAME_ADD_ITEM, SoundSource.BLOCKS, 1.0F, 1.0F);
+        this.level.playSound((Player) null, this.getBlockPos().getX(), this.getBlockPos().getY(), this.getBlockPos().getZ(), SoundEvents.ITEM_FRAME_ADD_ITEM, SoundSource.BLOCKS, 1.0F, 1.0F);
         this.item.set(0, stackA);
         stack.shrink(1);
         update();
@@ -64,12 +57,18 @@ public abstract class PedestalBE extends BlockEntity {
     }
 
     protected void addOrPopItem(Player player) {
-        if ((player.getInventory().getFreeSlot() == -1) && (player.getInventory().getSlotWithRemainingSpace(this.getItem()) == -1)) {
-            this.level.addFreshEntity(new ItemEntity(this.level, this.getBlockPos().getX(), this.getBlockPos().above().getY(), this.getBlockPos().getZ(), this.getItem()));
-        } else {
-            player.getInventory().add(this.getItem());
+        ItemStack stack = this.getItem();
+        player.getInventory().add(stack);
+        if (!stack.isEmpty()) {
+            this.level.addFreshEntity(new ItemEntity(this.level, this.getBlockPos().getX(), this.getBlockPos().above().getY(), this.getBlockPos().getZ(), stack));
         }
+        this.level.playSound((Player) null, this.getBlockPos().getX(), this.getBlockPos().getY(), this.getBlockPos().getZ(), SoundEvents.ITEM_FRAME_REMOVE_ITEM, SoundSource.BLOCKS, 1.0F, 1.0F);
     }
+
+    public ClientboundBlockEntityDataPacket getUpdatePacket() {
+        return ClientboundBlockEntityDataPacket.create(this);
+    }
+
 
     protected void update() {
         setChanged();

@@ -68,7 +68,7 @@ public class SBBlocks {
     public static final RegistryObject<Block> LIGHT_ESSENCE_BLOCK_RED = registerBlockAndRareUnburnableItem("light_essence_block_red", () -> new LightEssenceBlock(1200.0F, 15), Rarity.RARE);
     public static final RegistryObject<Block> LIGHT_ESSENCE_BLOCK_WHITE = registerBlockAndRareUnburnableItem("light_essence_block_white", () -> new LightEssenceBlock(1200.0F, 15), Rarity.RARE);
     public static final RegistryObject<Block> LIGHT_ESSENCE_BLOCK_YELLOW = registerBlockAndRareUnburnableItem("light_essence_block_yellow", () -> new LightEssenceBlock(1200.0F, 15), Rarity.RARE);
-
+    public static final RegistryObject<Block> CRYSTALAN_BLOCK = registerBlockAndRareUnburnableItem("crystalan_matrix_block", () -> new Block(SBBlockProperties.LightyNetheriteBasedBlock(30.0F, 3)), Rarity.RARE);
     public static final RegistryObject<Block> DIMENSIONAL_ALLOY_BLOCK = registerBlockAndRareUnburnableItem("dimensional_alloy_block", () -> new DimensionalBlock(SBBlockProperties.NetheriteBasedBlock(30.0F, 20)), Rarity.EPIC);
     public static final RegistryObject<Block> ENDER_INFUSED_CLOTH_BLOCK = registerBlockAndRareUnburnableItem("ender_infused_cloth_block", () -> new Block(SBBlockProperties.ClothBlock(MaterialColor.COLOR_GREEN)), Rarity.EPIC);
 

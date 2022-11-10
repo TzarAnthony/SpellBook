@@ -1,6 +1,6 @@
 package com.tzaranthony.spellbook.core.network;
 
-import com.tzaranthony.spellbook.core.blockEntities.SBCraftingWScreenBE;
+import com.tzaranthony.spellbook.core.blockEntities.ScreenCraftingBE;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;
@@ -49,7 +49,7 @@ public class ItemS2CPacket {
     public boolean handle(Supplier<NetworkEvent.Context> supplier) {
         NetworkEvent.Context context = supplier.get();
         context.enqueueWork(() -> {
-            if(Minecraft.getInstance().level.getBlockEntity(pos) instanceof SBCraftingWScreenBE blockEntity) {
+            if(Minecraft.getInstance().level.getBlockEntity(pos) instanceof ScreenCraftingBE blockEntity) {
                 blockEntity.setItemHandler(this.items);
             }
         });

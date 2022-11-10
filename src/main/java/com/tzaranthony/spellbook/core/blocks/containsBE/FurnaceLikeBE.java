@@ -1,6 +1,7 @@
 package com.tzaranthony.spellbook.core.blocks.containsBE;
 
-import com.tzaranthony.spellbook.core.blockEntities.SBCraftingWScreenBE;
+import com.tzaranthony.spellbook.core.blockEntities.CraftingBE;
+import com.tzaranthony.spellbook.core.blockEntities.ScreenCraftingBE;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
@@ -47,11 +48,11 @@ public abstract class FurnaceLikeBE extends BaseEntityBlock {
     public void onRemove(BlockState state, Level level, BlockPos pos, BlockState state1, boolean huh) {
         if (!state.is(state1.getBlock())) {
             BlockEntity blockentity = level.getBlockEntity(pos);
-            if (blockentity instanceof SBCraftingWScreenBE) {
-                SBCraftingWScreenBE screenBE = (SBCraftingWScreenBE) blockentity;
+            if (blockentity instanceof CraftingBE) {
+                CraftingBE craftingBE = (CraftingBE) blockentity;
                 if (level instanceof ServerLevel) {
-                    screenBE.dropInventory();
-                    screenBE.dropFluid();
+                    craftingBE.dropInventory();
+                    craftingBE.dropFluid();
                 }
                 level.updateNeighbourForOutputSignal(pos, this);
             }
@@ -63,8 +64,8 @@ public abstract class FurnaceLikeBE extends BaseEntityBlock {
     public void setPlacedBy(Level level, BlockPos pos, BlockState state, LivingEntity placer, ItemStack stack) {
         if (stack.hasCustomHoverName()) {
             BlockEntity blockentity = level.getBlockEntity(pos);
-            if (blockentity instanceof SBCraftingWScreenBE) {
-                ((SBCraftingWScreenBE) blockentity).setCustomName(stack.getHoverName());
+            if (blockentity instanceof ScreenCraftingBE) {
+                ((ScreenCraftingBE) blockentity).setCustomName(stack.getHoverName());
             }
         }
     }

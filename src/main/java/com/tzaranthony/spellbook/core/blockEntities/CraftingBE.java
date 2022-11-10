@@ -22,7 +22,7 @@ import net.minecraftforge.items.ItemStackHandler;
 
 import javax.annotation.Nullable;
 
-public abstract class SBCraftingBE extends BlockEntity {
+public abstract class CraftingBE extends BlockEntity {
     protected int progress;
     protected String PROG = "Progress";
     protected int maxTime;
@@ -35,7 +35,7 @@ public abstract class SBCraftingBE extends BlockEntity {
     protected LazyOptional<?> itemCap = LazyOptional.empty();
     protected LazyOptional<?> fluidCap = LazyOptional.empty();
 
-    public SBCraftingBE(BlockEntityType<?> type, BlockPos pos, BlockState state, RecipeType recipeType) {
+    public CraftingBE(BlockEntityType<?> type, BlockPos pos, BlockState state, RecipeType recipeType) {
         super(type, pos, state);
         this.recipeType = recipeType;
     }
@@ -45,22 +45,23 @@ public abstract class SBCraftingBE extends BlockEntity {
         this.progress = tag.getInt(PROG);
         this.maxTime = tag.getInt(MAXTM);
         this.itemHandler.deserializeNBT(tag);
-        if (itemHandler.getSlots() > 0) {
+        if (itemHandler != null) {
             itemHandler.deserializeNBT(tag.getCompound(ITEMINV));
         }
-        if (fluidHandler.getTanks() > 0) {
+        if (fluidHandler != null) {
             fluidHandler.deserializeNBT(tag.getCompound(FLUIDINV));
         }
+
     }
 
     protected void saveAdditional(CompoundTag tag) {
         super.saveAdditional(tag);
         tag.putInt(PROG, this.progress);
         tag.putInt(MAXTM, this.maxTime);
-        if (itemHandler.getSlots() > 0) {
+        if (itemHandler != null) {
             tag.put(ITEMINV, itemHandler.serializeNBT());
         }
-        if (fluidHandler.getTanks() > 0) {
+        if (fluidHandler != null) {
             tag.put(FLUIDINV, fluidHandler.serializeNBT());
         }
     }
@@ -69,9 +70,20 @@ public abstract class SBCraftingBE extends BlockEntity {
         return ClientboundBlockEntityDataPacket.create(this);
     }
 
+    protected void update() {
+        setChanged();
+        getLevel().sendBlockUpdated(this.getBlockPos(), this.getBlockState(), this.getBlockState(), 3);
+    }
+
     public CompoundTag getUpdateTag() {
-        CompoundTag compoundtag = new CompoundTag();
-        return compoundtag;
+        CompoundTag tag = new CompoundTag();
+        if (itemHandler != null) {
+            tag.put(ITEMINV, itemHandler.serializeNBT());
+        }
+        if (fluidHandler != null) {
+            tag.put(FLUIDINV, fluidHandler.serializeNBT());
+        }
+        return tag;
     }
 
     protected static boolean checkResult(ItemStack outputStack, ItemStack resultSlotStack, int resultSlotLimit) {
@@ -82,8 +94,7 @@ public abstract class SBCraftingBE extends BlockEntity {
                 return true;
             } else if (!resultSlotStack.sameItem(outputStack)) {
                 return false;
-            } else if (resultSlotStack.getCount() + outputStack.getCount() <= resultSlotLimit
-                    && resultSlotStack.getCount() + outputStack.getCount() <= resultSlotStack.getMaxStackSize()) {
+            } else if (resultSlotStack.getCount() + outputStack.getCount() <= Math.min(resultSlotLimit, resultSlotStack.getMaxStackSize())) {
                 return true;
             } else {
                 return resultSlotStack.getCount() + outputStack.getCount() <= outputStack.getMaxStackSize();

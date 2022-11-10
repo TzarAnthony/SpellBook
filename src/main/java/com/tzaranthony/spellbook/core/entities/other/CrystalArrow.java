@@ -2,7 +2,6 @@ package com.tzaranthony.spellbook.core.entities.other;
 
 import com.tzaranthony.spellbook.registries.SBItems;
 import net.minecraft.core.BlockPos;
-import net.minecraft.util.Mth;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.projectile.AbstractArrow;
@@ -37,13 +36,14 @@ public class CrystalArrow extends AbstractArrow {
 
     protected void createShards(double x, double y, double z) {
         if (this.getOwner() instanceof LivingEntity) {
-            for(int l = 0; l < 9; ++l) {
-                for (int i = 0; i < 9; ++i) {
-                    double d2 = 1.25D * (double)(l + 1);
-                    int j = 1 * l;
-                    float k = i * 60;
-                    //TODO: create custom crystal entity that damages then explodes into shards when disappearing
-                    level.addFreshEntity(new EvokerFangs(this.level, x + (double) Mth.cos(k) * d2, y, z + (double)Mth.sin(k) * d2, k, j, (LivingEntity) this.getOwner()));
+            //TODO: create custom crystal entity that damages then explodes into shards when disappearing
+            for(int i = 0; i < 9; ++i) {
+                for (int j = 0; j < 9; ++j) {
+                    double d2 = 1.25D * (double) (i + 1);
+//                    float k = 60.0F * j;
+                    double k = (Math.PI * (j * 45.0D)) / 180.0D;
+//                    float k = 45.0F * j;
+                    level.addFreshEntity(new EvokerFangs(this.level, x + Math.cos(k) * d2, y, z + Math.sin(k) * d2, (float) k, i, (LivingEntity) this.getOwner()));
                 }
             }
         }

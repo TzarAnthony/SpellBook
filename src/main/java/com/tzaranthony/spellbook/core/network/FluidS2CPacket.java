@@ -1,6 +1,6 @@
 package com.tzaranthony.spellbook.core.network;
 
-import com.tzaranthony.spellbook.core.blockEntities.SBCraftingWScreenBE;
+import com.tzaranthony.spellbook.core.blockEntities.ScreenCraftingBE;
 import com.tzaranthony.spellbook.core.containers.handlers.FluidTankHandler;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
@@ -61,7 +61,7 @@ public class FluidS2CPacket {
     public boolean handle(Supplier<NetworkEvent.Context> supplier) {
         NetworkEvent.Context context = supplier.get();
         context.enqueueWork(() -> {
-            if(Minecraft.getInstance().level.getBlockEntity(pos) instanceof SBCraftingWScreenBE blockEntity) {
+            if(Minecraft.getInstance().level.getBlockEntity(pos) instanceof ScreenCraftingBE blockEntity) {
                 blockEntity.setFluidHandler(this.fluidTanks);
             }
         });

@@ -25,7 +25,7 @@ import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.items.ItemStackHandler;
 
-public class AlchemicalFurnaceBE extends SBCraftingWScreenBE {
+public class AlchemicalFurnaceBE extends ScreenCraftingBE {
     protected int litTime;
     protected int litDuration;
     private final ContainerData dataAccess = new ContainerData() {

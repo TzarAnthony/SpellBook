@@ -26,11 +26,11 @@ import net.minecraftforge.items.ItemStackHandler;
 
 import javax.annotation.Nullable;
 
-public abstract class SBCraftingWScreenBE extends SBCraftingBE implements MenuProvider, Nameable {
+public abstract class ScreenCraftingBE extends CraftingBE implements MenuProvider, Nameable {
     private LockCode lockKey = LockCode.NO_LOCK;
     private Component name;
 
-    public SBCraftingWScreenBE(BlockEntityType<?> type, BlockPos pos, BlockState state, RecipeType recipeType) {
+    public ScreenCraftingBE(BlockEntityType<?> type, BlockPos pos, BlockState state, RecipeType recipeType) {
         super(type, pos, state, recipeType);
     }
 
@@ -51,7 +51,7 @@ public abstract class SBCraftingWScreenBE extends SBCraftingBE implements MenuPr
     }
 
     // processing generic
-    protected static void transferToTank(SBCraftingWScreenBE SBBE, int idI, int idF) {
+    protected static void transferToTank(ScreenCraftingBE SBBE, int idI, int idF) {
         ItemStack stack = SBBE.itemHandler.getStackInSlot(idI);
         if (!stack.isEmpty() && stack.getItem() instanceof BucketItem) {
             FluidStack fluid = new FluidStack(((BucketItem) stack.getItem()).getFluid(), 1000);

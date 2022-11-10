@@ -9,25 +9,48 @@ import com.google.gson.JsonSyntaxException;
 import com.mojang.serialization.JsonOps;
 import net.minecraft.core.NonNullList;
 import net.minecraft.util.GsonHelper;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.crafting.ShapedRecipe;
 import net.minecraftforge.fluids.FluidStack;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
 public class SBCraftingHelper {
-    public static NonNullList<Ingredient> itemsFromJson(JsonArray p_44276_) {
-        NonNullList<Ingredient> nonnulllist = NonNullList.create();
+    public static NonNullList<ItemStack> itemsFromJson(JsonArray array) {
+        NonNullList<ItemStack> nonnulllist = NonNullList.create();
 
-        for(int i = 0; i < p_44276_.size(); ++i) {
-            Ingredient ingredient = Ingredient.fromJson(p_44276_.get(i));
+        for(int i = 0; i < array.size(); ++i) {
+            ItemStack ingredient =  ShapedRecipe.itemStackFromJson(array.get(i).getAsJsonObject());
+//            Ingredient ingredient = Ingredient.fromJson(array.get(i));
             if (net.minecraftforge.common.ForgeConfig.SERVER.skipEmptyShapelessCheck.get() || !ingredient.isEmpty()) {
                 nonnulllist.add(ingredient);
             }
         }
-
         return nonnulllist;
     }
+
+    public static Boolean findMatches(List<ItemStack> inputs, List<ItemStack> tests) {
+        int elements = inputs.size();
+        if (elements < tests.size()) {
+            return false;
+        }
+        int matches = 0;
+        NonNullList<Integer> used = NonNullList.create();
+        for (ItemStack ingTest : tests) {
+            for (int i = 0; i < inputs.size(); ++i) {
+                ItemStack inStack = inputs.get(i);
+                if (!used.contains(i) && ingTest.is(inStack.getItem()) && inStack.getCount() >= ingTest.getCount()) {
+                    ++matches;
+                    used.add(i);
+                }
+            }
+        }
+        return matches == elements;
+    }
+
 
     public static String[] patternFromJson(JsonArray arry, int maxHeight, int maxWidth) {
         String[] astring = new String[arry.size()];

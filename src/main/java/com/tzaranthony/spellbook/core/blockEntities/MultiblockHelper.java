@@ -5,6 +5,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.state.BlockState;
 
 import java.util.Map;
 import java.util.Set;
@@ -31,14 +32,10 @@ public class MultiblockHelper {
                         continue;
                     } else if (s.equals("Z")) {
                         set.remove(s);
-                        if (!(level.getBlockState(pos.above(i).south(j).west(k)).isCollisionShapeFullBlock(level, pos) ||
-                                level.getBlockState(pos.above(i).south(j).west(k)).getBlock() instanceof SlabBlock ||
-                                level.getBlockState(pos.above(i).south(j).west(k)).getBlock() instanceof StairBlock ||
-                                level.getBlockState(pos.above(i).south(j).west(k)).getBlock() instanceof WallBlock ||
-                                level.getBlockState(pos.above(i).south(j).west(k)).getBlock() instanceof FenceBlock)) {
-                            System.out.print("Block '" +
-                                    level.getBlockState(pos.above(i).south(j).west(k)).getBlock().getRegistryName().toString()
-                                    + "' is not a full block, slab, stair, wall, or fence.\n"
+                        BlockState state = level.getBlockState(pos.above(i).south(j).west(k));
+                        if (!(state.isCollisionShapeFullBlock(level, pos) || state.getBlock() instanceof SlabBlock || state.getBlock() instanceof StairBlock
+                                || state.getBlock() instanceof WallBlock || state.getBlock() instanceof FenceBlock)) {
+                            System.out.print("Block '" + state.getBlock().getRegistryName().toString() + "' is not a full block, slab, stair, wall, or fence. " + pos.above(i).south(j).west(k) + "\n"
                             );
                             return false;
                         }
