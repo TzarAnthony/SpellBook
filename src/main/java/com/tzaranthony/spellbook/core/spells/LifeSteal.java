@@ -2,7 +2,6 @@ package com.tzaranthony.spellbook.core.spells;
 
 import com.tzaranthony.spellbook.core.entities.other.MagicProjectile;
 import com.tzaranthony.spellbook.core.util.damage.SBDamageSource;
-import com.tzaranthony.spellbook.registries.SBSpellRegistry;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -18,7 +17,7 @@ public class LifeSteal extends ProjectileSpell {
 
     @Override
     public void addSpellDataToProjectile(MagicProjectile magic) {
-        magic.setSpell(SBSpellRegistry.LIFE_STEAL.getId());
+        magic.setSpell(this.getId());
         magic.setParticle(ParticleTypes.SOUL);
     }
 
@@ -50,8 +49,6 @@ public class LifeSteal extends ProjectileSpell {
 
     @Override
     public void playCustomSound(Level level, double x, double y, double z) {
-//        float v = level.random.nextFloat() * 0.4F + level.random.nextFloat() > 0.9F ? 0.6F : 0.0F;
-//        float p = 0.6F + (level.random.nextFloat() * 0.4F);
         level.playSound((Player) null, x, y, z, SoundEvents.AMBIENT_SOUL_SAND_VALLEY_MOOD, SoundSource.PLAYERS, 1.0F, 1.0F);
     }
 }

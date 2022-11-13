@@ -7,7 +7,6 @@ import com.tzaranthony.spellbook.core.util.damage.SBDamageSource;
 import com.tzaranthony.spellbook.registries.SBEffects;
 import com.tzaranthony.spellbook.registries.SBEntities;
 import com.tzaranthony.spellbook.registries.SBParticleTypes;
-import com.tzaranthony.spellbook.registries.SBSpellRegistry;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -44,7 +43,7 @@ public class Scream extends ProjectileSpell {
 
     @Override
     public void addSpellDataToProjectile(MagicProjectile magic) {
-        magic.setSpell(SBSpellRegistry.SCREAM.getId());
+        magic.setSpell(this.getId());
         magic.setParticle(SBParticleTypes.SCREAM.get());
     }
 

@@ -11,17 +11,17 @@ public enum SBToolMaterial implements Tier {
     SILVER(2, 195, 9.5F, 0.0F, 20, () -> {
         return Ingredient.of(SBItems.SILVER_INGOT.get());
             }),
-    SILVER_STEEL(2, 195, 9.5F, 1.0F, 20, () -> {
+    SILVER_STEEL(2, 195, 9.5F, 3.0F, 20, () -> {
         return Ingredient.of(SBItems.SILVER_INGOT.get());
     }),
 
     // Intermediate
     // Necromancer Robes
-    CURSED(6, 5863, 14.0F, 9.5F, 35, () -> {
+    CURSED(6, 5863, 14.0F, 7.0F, 35, () -> {
         return Ingredient.of(SBItems.CURSED_SILVER_STEEL_INGOT.get());
     }),
     // Witch Robes
-    ENCHANTED(6, 5863, 14.0F, 9.5F, 35, () -> {
+    ENCHANTED(6, 5863, 14.0F, 7.0F, 35, () -> {
         return Ingredient.of(SBItems.ENCHANTED_SILVER_STEEL_INGOT.get());
     }),
 
@@ -31,11 +31,11 @@ public enum SBToolMaterial implements Tier {
         return Ingredient.of(SBItems.PHOENIX_METAL_INGOT.get());
     }),
     // Robes of Light
-    LIGHT(8, 356, 25.0F, 6.0F, 40, () -> {
+    LIGHT(8, 356, 25.0F, 9.5F, 40, () -> {
         return Ingredient.of(SBItems.ESSENCE_OF_LIGHT.get());
     }),
     // Crystal Sorcerer Robes
-    CRYSTALAN(6, 5863, 17.0F, 9.5F, 35, () -> {
+    CRYSTALAN(6, 5863, 17.0F, 12.0F, 35, () -> {
         return Ingredient.of(SBItems.CRYSTALAN_MATRIX.get());
     }),
 

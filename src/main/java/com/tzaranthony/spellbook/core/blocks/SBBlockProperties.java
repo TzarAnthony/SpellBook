@@ -171,6 +171,14 @@ public class SBBlockProperties {
         return BlockBehaviour.Properties.of(Material.DECORATION).instabreak().noOcclusion();
     }
 
+    public static BlockBehaviour.Properties MagicBlock() {
+        return BlockBehaviour.Properties.of(Material.EXPLOSIVE)
+                .strength(-1.0F, 3600000.0F)
+                .noDrops()
+                .isValidSpawn(SBBlockProperties::never)
+                .randomTicks();
+    }
+
     private static Boolean never(BlockState p_235427_0_, BlockGetter p_235427_1_, BlockPos p_235427_2_, EntityType<?> p_235427_3_) {
         return (boolean) false;
     }

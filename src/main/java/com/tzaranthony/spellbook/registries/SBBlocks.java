@@ -9,6 +9,8 @@ import com.tzaranthony.spellbook.core.blocks.containsBE.SBCampfire;
 import com.tzaranthony.spellbook.core.blocks.fire.SBTorch;
 import com.tzaranthony.spellbook.core.blocks.fire.SBWallTorch;
 import com.tzaranthony.spellbook.core.blocks.plant.*;
+import com.tzaranthony.spellbook.core.blocks.spellBlocks.BlackHole;
+import com.tzaranthony.spellbook.core.blocks.spellBlocks.Snare;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
@@ -43,7 +45,7 @@ public class SBBlocks {
     public static final RegistryObject<Block> CINNABAR_BLOCK = registerBlockAndItem("cinnabar_block", () -> new Block(SBBlockProperties.StandardRock()));
     public static final RegistryObject<Block> RAW_SILVER_BLOCK = registerBlockAndItem("raw_silver_block", () -> new Block(SBBlockProperties.StandardMetal()));
     public static final RegistryObject<Block> SILVER_STEEL_BLOCK = registerBlockAndItem("silver_steel_block", () -> new Block(SBBlockProperties.StandardMetal()));
-    public static final RegistryObject<Block> IMBUED_CLOTH_BLOCK = registerBlockAndItem("imbued_cloth_block", () -> new Block(SBBlockProperties.ClothBlock(MaterialColor.COLOR_BROWN)));
+    public static final RegistryObject<Block> IMBUED_CLOTH_BLOCK = registerBlockAndItem("imbued_cloth_block", () -> new Block(SBBlockProperties.ClothBlock(MaterialColor.COLOR_PURPLE)));
     public static final RegistryObject<Block> CURSED_SILVER_BLOCK = registerBlockAndRareUnburnableItem("cursed_silver_block", () -> new CursedBlock(30.0F), Rarity.UNCOMMON);
     public static final RegistryObject<Block> ENCHANTED_STEEL_BLOCK = registerBlockAndRareUnburnableItem("enchanted_steel_block", () -> new EnderBlock(30.0F), Rarity.UNCOMMON);
     public static final RegistryObject<Block> CRYSTALAN_BUD_SMALL = reg.register("crystalan_bud_small", () -> new GrowableCrystal(3, 4, SoundType.SMALL_AMETHYST_BUD, 2));
@@ -79,7 +81,6 @@ public class SBBlocks {
     public static final RegistryObject<Block> INFUSED_GLASS = registerBlockAndUnburnableItem("infused_glass", () -> new SBGlassBlock(SBBlockProperties.StandardGlass(0.3F, 1200.0F)));
     public static final RegistryObject<Block> INFUSED_END_STONE = registerBlockAndUnburnableItem("infused_end_stone", () -> new Block(SBBlockProperties.StandardRock(5.0F, 12.0F)));
     public static final RegistryObject<Block> CRYSTALLIZED_ENDER_CLUSTER = registerBlockAndRareUnburnableItem("crystallized_ender_cluster", () -> new EnderCrystal(8, 2, SoundType.AMETHYST_CLUSTER, 10), Rarity.RARE); //TODO: create transparent and cutout render
-    public static final RegistryObject<Block> ENDER_RIFT = reg.register("ender_rift", () -> new Block(SBBlockProperties.StandardRock()));
 
     // "machines"
     public static final RegistryObject<Block> ALTER_1 = registerBlockAndItem("alter_1", () -> new Alter(SBBlockProperties.StandardRock()));
@@ -110,6 +111,12 @@ public class SBBlocks {
     public static final RegistryObject<Block> GRAY_PEDESTAL_STILL = registerBlockAndItem("gray_pedestal_still", () -> new Pedestal(false, false, SBBlockProperties.StandardRock().noOcclusion()));
     public static final RegistryObject<Block> GRAY_PEDESTAL_GLOW_SPIN = registerBlockAndItem("gray_pedestal_glow_spin", () -> new Pedestal(true, true, SBBlockProperties.StandardRock().noOcclusion()));
     public static final RegistryObject<Block> GRAY_PEDESTAL_GLOW_STILL = registerBlockAndItem("gray_pedestal_glow_still", () -> new Pedestal(false, true, SBBlockProperties.StandardRock().noOcclusion()));
+
+    // spell blocks
+    public static final RegistryObject<Block> SNARE = reg.register("snare", () -> new Snare());
+    public static final RegistryObject<Block> DARK_RIFT = reg.register("dark_rift", () -> new BlackHole());
+    public static final RegistryObject<Block> ENDER_RIFT = reg.register("ender_rift", () -> new Block(SBBlockProperties.StandardRock()));
+    public static final RegistryObject<Block> TIMER = reg.register("timer", () -> new Block(SBBlockProperties.StandardRock()));
 
     // end fire stuff
     public static final RegistryObject<Block> END_CAMPFIRE = registerBlockAndItem("end_campfire", () -> new SBCampfire(3, SBBlockProperties.Campfire(10)));

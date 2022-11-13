@@ -64,6 +64,10 @@ public class SBItemProperties {
         return Berries(primaryEffect, 0, secondaryEffect, 0);
     }
 
+    public static Item.Properties UnburnableBerries(MobEffect primaryEffect, MobEffect secondaryEffect) {
+        return Berries(primaryEffect, secondaryEffect).fireResistant();
+    }
+
     public static Item.Properties VampireBlood(Rarity rare, int hunger, int potency, float probability, int negPotency, float negProbability) {
         return new Item.Properties().tab(SpellBook.TAB).rarity(rare).craftRemainder(Items.GLASS_BOTTLE).stacksTo(16).food(
                 (new FoodProperties.Builder())
@@ -95,18 +99,6 @@ public class SBItemProperties {
                         .effect(new MobEffectInstance(MobEffects.REGENERATION, 600, 1), 0.5F)
                         .effect(new MobEffectInstance(MobEffects.ABSORPTION, 1200, 0), 0.5F)
                         .effect(() -> new MobEffectInstance(SBEffects.FREEZING_ANIMATION.get(), 600, 1), 0.10F)
-                        .alwaysEat()
-                        .build()
-        );
-    }
-
-    public static Item.Properties UnburnableBerries(MobEffect primaryEffect, MobEffect secondaryEffect) {
-        return new Item.Properties().tab(SpellBook.TAB).rarity(Rarity.RARE).fireResistant().food(
-                (new FoodProperties.Builder())
-                        .nutrition(2)
-                        .saturationMod(1.2f)
-                        .effect(new MobEffectInstance(secondaryEffect, 400, 1), 1.0F)
-                        .effect(new MobEffectInstance(primaryEffect, 600, 0), 1.0F)
                         .alwaysEat()
                         .build()
         );

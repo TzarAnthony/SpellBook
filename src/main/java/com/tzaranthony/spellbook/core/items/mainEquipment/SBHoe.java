@@ -5,6 +5,6 @@ import net.minecraft.world.item.HoeItem;
 
 public class SBHoe extends HoeItem {
     public SBHoe(SBToolMaterial tier, Properties properties) {
-        super(tier, (int) (0 - tier.getAttackDamageBonus() * 0.5), 0.0F, properties);
+        super(tier, 10, -3.5F, properties);
     }
 }

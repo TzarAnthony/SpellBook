@@ -206,7 +206,7 @@ public class SBItems {
     public static final RegistryObject<Item> SOULBIND_DEBUG = reg.register("soulbind_debug", () -> new SpellDebug(SBSpellRegistry.SOULBIND));
     public static final RegistryObject<Item> ENDER_RIFT_DEBUG = reg.register("ender_rift_debug", () -> new SpellDebug(SBSpellRegistry.ENDER_RIFT));
     public static final RegistryObject<Item> RIFT_OF_DARKNESS_DEBUG = reg.register("dark_rift_debug", () -> new SpellDebug(SBSpellRegistry.RIFT_OF_DARKNESS));
-
+    public static final RegistryObject<Item> TIME_DEBUG = reg.register("time_debug", () -> new SpellDebug(SBSpellRegistry.TIME_SPELL));
     public static final RegistryObject<Item> MACHINE_ENCHANTMENT_DEBUG = reg.register("machine_enchantment_debug", () -> new SpellDebug(SBSpellRegistry.OBJECT_ENCHANTMENT));
     public static final RegistryObject<Item> ACTION_DEBUG = reg.register("action_spell_debug", () -> new SpellDebug(SBSpellRegistry.ACTION_SPELL));
     public static final RegistryObject<Item> DETECTOR_DEBUG = reg.register("detector_spell_debug", () -> new SpellDebug(SBSpellRegistry.DETECTOR_SPELL));

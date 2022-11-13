@@ -2,7 +2,6 @@ package com.tzaranthony.spellbook.core.spells;
 
 import com.tzaranthony.spellbook.core.entities.other.MagicProjectile;
 import com.tzaranthony.spellbook.core.util.damage.MagicExplosion;
-import com.tzaranthony.spellbook.registries.SBSpellRegistry;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.sounds.SoundEvents;
@@ -19,7 +18,7 @@ public class Explosion extends ProjectileSpell {
 
     @Override
     public void addSpellDataToProjectile(MagicProjectile magic) {
-        magic.setSpell(SBSpellRegistry.EXPLOSION.getId());
+        magic.setSpell(this.getId());
         magic.setParticle(ParticleTypes.FIREWORK);
     }
 

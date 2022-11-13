@@ -48,7 +48,6 @@ public class BloodRose extends FlowerBlock {
             double d3 = (double) pos.getZ() + 0.5D + vec3.z + ((offset.nextDouble() - 0.5) / 10.0D);
             level.addParticle(SBParticleTypes.BLOOD_DRIP.get(), d1, d2, d3, 0.0D, 0.0D, 0.0D);
         }
-
     }
 
     public void entityInside(BlockState state, Level level, BlockPos pos, Entity entity) {
