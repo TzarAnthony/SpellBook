@@ -25,18 +25,26 @@ import java.util.List;
 public class XPBook extends Item {
     public static final String MODE = "XPTransferMode";
     public static final String STORAGE = "XPStored";
+    public static final int maxXP = 10284;
 
     public XPBook() {
         super(SBItemProperties.Standard(Rarity.RARE, 1));
-//        1280
     }
 
     @Override
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
         ItemStack stack = player.getItemInHand(hand);
         if (!level.isClientSide()) {
-            changeMode(stack);
-            level.playSound(player, player.blockPosition(), SoundEvents.ENCHANTMENT_TABLE_USE, SoundSource.PLAYERS, 1.0F, level.random.nextFloat() * 0.1F + 0.9F);
+            if (player.isCrouching() && stack.hasTag()) {
+                int currentXp = stack.getTag().getInt(STORAGE);
+                if (currentXp >= 1395) {
+                    stack.getTag().putInt(STORAGE, currentXp - 1395);
+                    player.giveExperiencePoints(1395);
+                }
+            } else {
+                changeMode(stack);
+                level.playSound(player, player.blockPosition(), SoundEvents.ENCHANTMENT_TABLE_USE, SoundSource.PLAYERS, 1.0F, level.random.nextFloat() * 0.1F + 0.9F);
+            }
             return InteractionResultHolder.consume(stack);
         } else {
             return InteractionResultHolder.fail(stack);
@@ -48,8 +56,8 @@ public class XPBook extends Item {
             Player player = (Player) entity;
             int mode = stack.getTag().getInt(MODE);
             int currentXp = stack.getTag().getInt(STORAGE);
-            if (mode == 1 && player.experienceLevel > 0 && currentXp < 8670) {
-                int xpToTransfer = Math.min(8670 - currentXp, getXpNeededForNextLevel(player.experienceLevel - 1));
+            if (mode == 1 && player.experienceLevel > 0 && currentXp < maxXP) {
+                int xpToTransfer = Math.min(maxXP - currentXp, getXpNeededForNextLevel(player.experienceLevel - 1));
                 stack.getTag().putInt(STORAGE, currentXp + xpToTransfer);
                 player.giveExperiencePoints(-xpToTransfer);
             } else if (mode == 3 && currentXp > 0) {

@@ -37,4 +37,7 @@ public class SBBlockEntities {
 
     public static final RegistryObject<BlockEntityType<DimensionalBE>> DIMENSIONAL_BE = reg.register("dimensional_be",
             () -> BlockEntityType.Builder.of(DimensionalBE::new, SBBlocks.DIMENSIONAL_ALLOY_BLOCK.get()).build(null));
+
+    public static final RegistryObject<BlockEntityType<BlackHoleBE>> BLACK_HOLE = reg.register("blackhole",
+            () -> BlockEntityType.Builder.of(BlackHoleBE::new, SBBlocks.BLACK_HOLE.get()).build(null));
 }

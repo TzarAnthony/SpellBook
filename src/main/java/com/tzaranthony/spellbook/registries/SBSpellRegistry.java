@@ -32,7 +32,7 @@ public class SBSpellRegistry {
     public static final Spell LIFE_STEAL = new LifeSteal(25, "life_steal", SpellTier.MASTERY);
     public static final Spell SOULBIND = new Binding(26, "soulbind", SpellTier.MASTERY); //TODO: binds and entity with a magical lead. can be attached to a fence, wall or alter (for ritual purposes)
     public static final Spell ENDER_RIFT = new EnderRift(27, "ender_rift", SpellTier.MASTERY, SBBlocks.ENDER_RIFT); //TODO: creates linked portals (portal gun), maybe can make more than one pair??
-    public static final Spell RIFT_OF_DARKNESS = new DarkRift(28, "rift_of_darkness", SpellTier.MASTERY, SBBlocks.DARK_RIFT); //TODO: sucks entities into a specific spot
+    public static final Spell RIFT_OF_DARKNESS = new DarkRift(28, "rift_of_darkness", SpellTier.MASTERY, SBBlocks.BLACK_HOLE); //TODO: sucks entities into a specific spot
     public static final Spell TIME_SPELL = new Time(29, "time_spell", SpellTier.MASTERY, SBBlocks.TIMER); //TODO: creates Netherite Ore from Ancient Debris, ages copper faster, can permanently de-age mobs
     public static final Spell OBJECT_ENCHANTMENT = new Spell(30, "object_enchantment", SpellTier.PRACTITIONER); //TODO: enchants crafting table for auto-crafting, enchants hoppers to make super fast hoppers, enchants enchanting table for auto-enchanting
     //TODO: shapeshifting?

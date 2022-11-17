@@ -182,7 +182,6 @@ public class SBItems {
     public static final RegistryObject<Item> SUMMONING_1_DEBUG = reg.register("zombie_summoning_debug", () -> new SpellDebug(SBSpellRegistry.NECROMANCY_1));
     public static final RegistryObject<Item> SUMMONING_2_DEBUG = reg.register("skeleton_summoning_debug", () -> new SpellDebug(SBSpellRegistry.NECROMANCY_2));
     public static final RegistryObject<Item> SUMMONING_3_DEBUG = reg.register("wither_skeleton_summoning_debug", () -> new SpellDebug(SBSpellRegistry.NECROMANCY_3));
-    public static final RegistryObject<Item> ALCHEMICAL_SUMMONING_DEBUG = reg.register("alchemical_summoning_debug", () -> new SpellDebug(SBSpellRegistry.ALCHEMICAL_SUMMONING));
     public static final RegistryObject<Item> SWINEONING_DEBUG = reg.register("swineoning_debug", () -> new SpellDebug(SBSpellRegistry.SWINEONING));
     public static final RegistryObject<Item> NEKOMANCY_DEBUG = reg.register("nekomancy_debug", () -> new SpellDebug(SBSpellRegistry.NEKOMANCY));
 
@@ -191,7 +190,6 @@ public class SBItems {
     public static final RegistryObject<Item> STONE_ARMOR_DEBUG = reg.register("stone_armor_debug", () -> new SpellDebug(SBSpellRegistry.STONE_REINFORCEMENT));
     public static final RegistryObject<Item> WIND_DEBUG = reg.register("wind_debug", () -> new SpellDebug(SBSpellRegistry.OUTWARD_WINDS));
     public static final RegistryObject<Item> JUMP_DEBUG = reg.register("jump_debug", () -> new SpellDebug(SBSpellRegistry.LONG_JUMP));
-    public static final RegistryObject<Item> LEVITATE_DEBUG = reg.register("levitation_debug", () -> new SpellDebug(SBSpellRegistry.LEVITATE));
     public static final RegistryObject<Item> EXPLOSION_DEBUG = reg.register("explosion_debug", () -> new SpellDebug(SBSpellRegistry.EXPLOSION));
     public static final RegistryObject<Item> CHAIN_LIGHTNING_DEBUG = reg.register("chain_lightning_debug", () -> new SpellDebug(SBSpellRegistry.CHAIN_LIGHTNING));
     public static final RegistryObject<Item> BARRIER_DEBUG = reg.register("psychic_barrier_debug", () -> new SpellDebug(SBSpellRegistry.PSYCHIC_BARRIER));

@@ -114,7 +114,7 @@ public class SBBlocks {
 
     // spell blocks
     public static final RegistryObject<Block> SNARE = reg.register("snare", () -> new Snare());
-    public static final RegistryObject<Block> DARK_RIFT = reg.register("dark_rift", () -> new BlackHole());
+    public static final RegistryObject<Block> BLACK_HOLE = reg.register("dark_rift", () -> new BlackHole());
     public static final RegistryObject<Block> ENDER_RIFT = reg.register("ender_rift", () -> new Block(SBBlockProperties.StandardRock()));
     public static final RegistryObject<Block> TIMER = reg.register("timer", () -> new Block(SBBlockProperties.StandardRock()));
 

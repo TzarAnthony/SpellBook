@@ -14,6 +14,7 @@ public class Binding extends ProjectileSpell{
     public Binding(int id, String name, SpellTier tier) {
         super(id, name, tier);
     }
+    //TODO: create magic version of lead rendering: LeashFenceKnotEntity, LeashKnotRenderer, LeashKnotModel, MobRenderer, Mob
 
     @Override
     public void addSpellDataToProjectile(MagicProjectile magic) {
