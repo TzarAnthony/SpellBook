@@ -104,10 +104,10 @@ public class Pedestal extends TickingBEBlock {
     }
 
     @Nullable
-    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> blockEntityType) {
+    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> type) {
         if (this.glows) {
-            return createTickerHelper(blockEntityType, SBBlockEntities.PEDESTAL_SPIN_GLOW.get(), level.isClientSide ? PedestalSpinGlowBE::clientTick : null);
+            return createTickerHelper(type, SBBlockEntities.PEDESTAL_SPIN_GLOW.get(), level.isClientSide ? PedestalSpinGlowBE::clientTick : null);
         }
-        return createTickerHelper(blockEntityType, SBBlockEntities.PEDESTAL_SPIN.get(), level.isClientSide ? PedestalSpinBE::clientTick : null);
+        return createTickerHelper(type, SBBlockEntities.PEDESTAL_SPIN.get(), level.isClientSide ? PedestalSpinBE::clientTick : null);
     }
 }

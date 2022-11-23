@@ -40,4 +40,7 @@ public class SBBlockEntities {
 
     public static final RegistryObject<BlockEntityType<BlackHoleBE>> BLACK_HOLE = reg.register("blackhole",
             () -> BlockEntityType.Builder.of(BlackHoleBE::new, SBBlocks.BLACK_HOLE.get()).build(null));
+
+    public static final RegistryObject<BlockEntityType<TimerBE>> TIMER = reg.register("timer",
+            () -> BlockEntityType.Builder.of(TimerBE::new, SBBlocks.TIMER.get()).build(null));
 }

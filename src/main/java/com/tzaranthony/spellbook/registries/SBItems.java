@@ -39,7 +39,7 @@ public class SBItems {
     // Materials
     public static final RegistryObject<Item> CINNABAR_FRAGMENT = reg.register("cinnabar_fragment", () -> new Item(SBItemProperties.Standard()));
     public static final RegistryObject<Item> RAW_SILVER = reg.register("raw_silver", () -> new Item(SBItemProperties.Standard()));
-    public static final RegistryObject<Item> RAW_NETHERITE = reg.register("raw_netherite", () -> new Item(SBItemProperties.Standard()));
+    public static final RegistryObject<Item> RAW_NETHERITE = reg.register("raw_netherite", () -> new Item(SBItemProperties.Unburnable()));
     public static final RegistryObject<Item> DRACONITE = reg.register("draconite", () -> new Item(SBItemProperties.Unburnable(Rarity.UNCOMMON)));
     public static final RegistryObject<Item> PHOENIX_FEATHER = reg.register("phoenix_feather", () -> new Item(SBItemProperties.Unburnable(Rarity.RARE)));
     public static final RegistryObject<Item> PHOENIX_ASHES = reg.register("phoenix_ashes", () -> new PhoenixAshes(SBItemProperties.Unburnable(Rarity.EPIC, 1)));

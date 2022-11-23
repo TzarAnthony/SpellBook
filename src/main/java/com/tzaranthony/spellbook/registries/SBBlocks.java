@@ -5,12 +5,12 @@ import com.tzaranthony.spellbook.core.blocks.SBBlockProperties;
 import com.tzaranthony.spellbook.core.blocks.block.*;
 import com.tzaranthony.spellbook.core.blocks.containsBE.*;
 import com.tzaranthony.spellbook.core.blocks.fire.EndFire;
-import com.tzaranthony.spellbook.core.blocks.containsBE.SBCampfire;
 import com.tzaranthony.spellbook.core.blocks.fire.SBTorch;
 import com.tzaranthony.spellbook.core.blocks.fire.SBWallTorch;
 import com.tzaranthony.spellbook.core.blocks.plant.*;
 import com.tzaranthony.spellbook.core.blocks.spellBlocks.BlackHole;
 import com.tzaranthony.spellbook.core.blocks.spellBlocks.Snare;
+import com.tzaranthony.spellbook.core.blocks.spellBlocks.Timer;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
@@ -116,7 +116,7 @@ public class SBBlocks {
     public static final RegistryObject<Block> SNARE = reg.register("snare", () -> new Snare());
     public static final RegistryObject<Block> BLACK_HOLE = reg.register("dark_rift", () -> new BlackHole());
     public static final RegistryObject<Block> ENDER_RIFT = reg.register("ender_rift", () -> new Block(SBBlockProperties.StandardRock()));
-    public static final RegistryObject<Block> TIMER = reg.register("timer", () -> new Block(SBBlockProperties.StandardRock()));
+    public static final RegistryObject<Block> TIMER = reg.register("timer", () -> new Timer());
 
     // end fire stuff
     public static final RegistryObject<Block> END_CAMPFIRE = registerBlockAndItem("end_campfire", () -> new SBCampfire(3, SBBlockProperties.Campfire(10)));

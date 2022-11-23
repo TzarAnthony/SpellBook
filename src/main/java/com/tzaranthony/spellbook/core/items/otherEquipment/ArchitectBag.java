@@ -7,5 +7,6 @@ import net.minecraft.world.item.Rarity;
 public class ArchitectBag extends Item {
     public ArchitectBag() {
         super(SBItemProperties.Standard(Rarity.RARE, 1));
+        // can set state too like in a DebugStickItem
     }
 }
