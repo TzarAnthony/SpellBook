@@ -1,15 +1,15 @@
 package com.tzaranthony.spellbook.core.containers.slots;
 
-import com.tzaranthony.spellbook.core.containers.menus.SBSmeltingMenu;
+import com.tzaranthony.spellbook.core.containers.menus.SBFurnaceMenu;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.SlotItemHandler;
 
 public class SBFluidSlot extends SlotItemHandler {
-    private final SBSmeltingMenu menu;
+    private final SBFurnaceMenu menu;
 
-    public SBFluidSlot(SBSmeltingMenu menu, IItemHandler itemHandler, int idI, int x, int y) {
+    public SBFluidSlot(SBFurnaceMenu menu, IItemHandler itemHandler, int idI, int x, int y) {
         super(itemHandler, idI, x, y);
         this.menu = menu;
     }

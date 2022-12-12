@@ -20,7 +20,7 @@ import net.minecraftforge.items.SlotItemHandler;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public class SBSmeltingMenu extends AbstractContainerMenu {
+public class SBFurnaceMenu extends AbstractContainerMenu {
     protected final ScreenCraftingBE blockEntity;
     protected final ItemStackHandler container;
     protected final ContainerData data;
@@ -35,7 +35,7 @@ public class SBSmeltingMenu extends AbstractContainerMenu {
     protected int resultXpId;
     protected int resultId;
 
-    protected SBSmeltingMenu(@Nullable MenuType<?> type, int id, Inventory inventory, BlockPos pos, ContainerData data) {
+    protected SBFurnaceMenu(@Nullable MenuType<?> type, int id, Inventory inventory, BlockPos pos, ContainerData data) {
         super(type, id);
         this.blockEntity = (ScreenCraftingBE) inventory.player.level.getBlockEntity(pos);
         this.container = blockEntity.getItemHandler();
@@ -48,8 +48,8 @@ public class SBSmeltingMenu extends AbstractContainerMenu {
         if (this.minInputId == -1) {
             this.minInputId = startId;
         }
-        for (int i = 0; i <= rows; ++i) {
-            for (int j = 0; j <= cols; ++j) {
+        for (int i = 0; i < rows; ++i) {
+            for (int j = 0; j < cols; ++j) {
                 addInputSlot(startId, startX + (18 * j), startY + (18 * i));
                 ++startId;
             }

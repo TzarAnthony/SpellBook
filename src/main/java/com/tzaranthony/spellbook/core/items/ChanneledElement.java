@@ -1,27 +1,29 @@
 package com.tzaranthony.spellbook.core.items;
 
 import com.tzaranthony.spellbook.registries.SBEffects;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 
 public enum ChanneledElement implements Elements{
-    NOTHING("Nothing", 0, 0, null),
+    NOTHING(new TranslatableComponent("tooltip.spellbook.no_element"), 0, 0, null),
 
-    FIRE("Fire", 1, 3, SBEffects.INCINERATION.get()),
+    FIRE(new TranslatableComponent("tooltip.spellbook.fire"), 1, 3, SBEffects.INCINERATION.get()),
 
-    WATER("Water", 2, 1, SBEffects.FREEZING.get()),
+    WATER(new TranslatableComponent("tooltip.spellbook.water"), 2, 1, SBEffects.FREEZING.get()),
 
-    AIR("Air", 3, 3, MobEffects.LEVITATION),
+    AIR(new TranslatableComponent("tooltip.spellbook.air"), 3, 3, MobEffects.LEVITATION),
 
-    EARTH("Earth", 4, 2, SBEffects.FRACTURED.get());
+    EARTH(new TranslatableComponent("tooltip.spellbook.earth"), 4, 2, SBEffects.FRACTURED.get());
 
-    private final String name;
+    private final TranslatableComponent name;
     private final int id;
     private final int MPUseValue;
     private final MobEffect effect;
 
-    private ChanneledElement(String name, int id, int MPUseValue, MobEffect effect) {
+    private ChanneledElement(TranslatableComponent name, int id, int MPUseValue, MobEffect effect) {
         this.name = name;
         this.id = id;
         this.MPUseValue = MPUseValue;
@@ -44,7 +46,7 @@ public enum ChanneledElement implements Elements{
     }
 
     @Override
-    public String getName() {
+    public Component getName() {
         return name;
     }
 }

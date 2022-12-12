@@ -57,7 +57,7 @@ public class HigherVampirePerson extends HigherVampirePhase1 {
                 .add(Attributes.ARMOR, 8.0D)
                 .add(Attributes.ARMOR_TOUGHNESS, 2.0D)
                 .add(Attributes.JUMP_STRENGTH, 4.0D)
-                .add(Attributes.ATTACK_DAMAGE, 6.0F)
+                .add(Attributes.ATTACK_DAMAGE, 7.0D)
                 .add(Attributes.ATTACK_KNOCKBACK, 1.0D)
                 .add(Attributes.MOVEMENT_SPEED, 0.4D)
                 .add(Attributes.FOLLOW_RANGE, 90.0D)
@@ -135,6 +135,5 @@ public class HigherVampirePerson extends HigherVampirePhase1 {
         }
         vampire.setVariant(this.getVariant());
         vampire.setTarget(this.getTarget());
-//        this.alertMinions(this.getTarget());
     }
 }

@@ -1,5 +1,6 @@
 package com.tzaranthony.spellbook.core.items;
 
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.effect.MobEffectInstance;
 
 public interface Elements {
@@ -9,5 +10,5 @@ public interface Elements {
 
     int getId();
 
-    String getName();
+    Component getName();
 }

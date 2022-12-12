@@ -6,7 +6,7 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.inventory.SimpleContainerData;
 
-public class AlchemicalFoundryMenu extends SBSmeltingMenu {
+public class AlchemicalFoundryMenu extends SBFurnaceMenu {
     public static int CatalystSlotId = 6;
     public static int FuelSlotId = 7;
     public static int XPResultSlotId = 8;
@@ -24,7 +24,7 @@ public class AlchemicalFoundryMenu extends SBSmeltingMenu {
         checkContainerSize(inventory, 12);
         checkContainerDataCount(data, 4);
 
-        this.addInputSlotArray(0, 71, 24, 2, 1);
+        this.addInputSlotArray(0, 71, 24, 3, 2);
         this.addCatalystSlot(CatalystSlotId, 76, 78);
         this.addFuelSlot(FuelSlotId, 102, 78);
         this.addXPResultSlot(XPResultSlotId, 158, 41);

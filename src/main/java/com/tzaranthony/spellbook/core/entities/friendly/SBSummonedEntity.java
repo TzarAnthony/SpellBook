@@ -98,9 +98,9 @@ public class SBSummonedEntity extends TamableAnimal {
         return super.hurt(source, amount);
     }
 
-    public void setLimitedLife(int p_190653_1_) {
+    public void setLimitedLife(int ticks) {
         this.hasLimitedLife = true;
-        this.limitedLifeTicks = p_190653_1_;
+        this.limitedLifeTicks = ticks;
     }
 
     @Nullable

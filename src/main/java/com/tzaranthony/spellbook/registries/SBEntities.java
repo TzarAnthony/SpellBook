@@ -9,10 +9,10 @@ import com.tzaranthony.spellbook.core.entities.hostile.alchemical.NecroticSpider
 import com.tzaranthony.spellbook.core.entities.hostile.alchemical.SkeletonIllusion;
 import com.tzaranthony.spellbook.core.entities.hostile.alchemical.ZombieIllusion;
 import com.tzaranthony.spellbook.core.entities.hostile.ghosts.*;
-import com.tzaranthony.spellbook.core.entities.hostile.vampires.HigherVampire0;
-import com.tzaranthony.spellbook.core.entities.hostile.vampires.HigherVampirePerson;
 import com.tzaranthony.spellbook.core.entities.hostile.vampires.HigherVampireBat;
+import com.tzaranthony.spellbook.core.entities.hostile.vampires.HigherVampirePerson;
 import com.tzaranthony.spellbook.core.entities.hostile.vampires.LesserVampire;
+import com.tzaranthony.spellbook.core.entities.neutral.GhostHorse;
 import com.tzaranthony.spellbook.core.entities.other.*;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
@@ -58,10 +58,12 @@ public class SBEntities {
     public static final RegistryObject<EntityType<Yurei>> YUREI = reg.register("yurei", () ->
             EntityType.Builder.of(Yurei::new, MobCategory.MONSTER).sized(0.6F, 1.95F).clientTrackingRange(8).build("yurei")
     );
-
-    public static final RegistryObject<EntityType<HigherVampire0>> HIGHVAMP0 = reg.register("higher_vampire_hidden", () ->
-            EntityType.Builder.of(HigherVampire0::new, MobCategory.MONSTER).immuneTo(Blocks.POWDER_SNOW).sized(0.6F, 1.95F).clientTrackingRange(8).build("higher_vampire_hidden")
+    public static final RegistryObject<EntityType<GhostHorse>> GHOST_HORSE = reg.register("ghost_horse", () ->
+            EntityType.Builder.of(GhostHorse::new, MobCategory.CREATURE).fireImmune().sized(1.3964844F, 1.6F).clientTrackingRange(10).build("ghost_horse")
     );
+    //TODO: ghost knights
+    //TODO: ghost trader????
+
     public static final RegistryObject<EntityType<HigherVampirePerson>> HIGHVAMP1 = reg.register("higher_vampire_human", () ->
             EntityType.Builder.of(HigherVampirePerson::new, MobCategory.MONSTER).immuneTo(Blocks.POWDER_SNOW).sized(0.6F, 1.95F).clientTrackingRange(8).build("higher_vampire_human")
     );
@@ -95,6 +97,12 @@ public class SBEntities {
     public static final RegistryObject<EntityType<CrystalArrow>> CRYSTAL_ARROW = reg.register("crystal_arrow", () ->
             EntityType.Builder.of(CrystalArrow::new, MobCategory.MISC).sized(0.5F, 0.5F).clientTrackingRange(4).updateInterval(20).build("crystal_arrow")
     );
+    public static final RegistryObject<EntityType<ShatteringCrystal>> SHATTER_CRYSTAL = reg.register("crystal_shatter", () ->
+            EntityType.Builder.of(ShatteringCrystal::new, MobCategory.MISC).sized(0.8F, 1.6F).clientTrackingRange(6).updateInterval(2).build("crystal_shatter")
+    );
+    public static final RegistryObject<EntityType<CrystalShard>> CRYSTAL_SHARD = reg.register("crystal_shard", () ->
+            EntityType.Builder.of(CrystalShard::new, MobCategory.MISC).sized(0.5F, 0.5F).clientTrackingRange(4).updateInterval(20).build("crystal_shard")
+    );
     public static final RegistryObject<EntityType<EffectCarryingArrow>> FIRE_ARROW = reg.register("fire_arrow", () ->
             EntityType.Builder.of(EffectCarryingArrow::new, MobCategory.MISC).sized(0.5F, 0.5F).clientTrackingRange(4).updateInterval(20).build("fire_arrow")
     );
@@ -118,7 +126,6 @@ public class SBEntities {
     );
 
 
-
     @SubscribeEvent
     public static void bakeAttributes(EntityAttributeCreationEvent creationEvent) {
         creationEvent.put(SUMMONED_VEX.get(), SummonedVex.createAttributes().build());
@@ -130,7 +137,7 @@ public class SBEntities {
         creationEvent.put(WRAITH.get(), Wraith.createAttributes().build());
         creationEvent.put(BANSHEE.get(), Banshee.createAttributes().build());
         creationEvent.put(YUREI.get(), Yurei.createAttributes().build());
-        creationEvent.put(HIGHVAMP0.get(), HigherVampire0.createAttributes().build());
+        creationEvent.put(GHOST_HORSE.get(), GhostHorse.createAttributes().build());
         creationEvent.put(HIGHVAMP1.get(), HigherVampirePerson.createAttributes().build());
         creationEvent.put(HIGHVAMP1BAT.get(), HigherVampirePerson.createAttributes().build());
         creationEvent.put(LOWVAMP.get(), LesserVampire.createAttributes().build());

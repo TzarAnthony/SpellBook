@@ -17,11 +17,11 @@ public enum SBToolMaterial implements Tier {
 
     // Intermediate
     // Necromancer Robes
-    CURSED(6, 5863, 14.0F, 7.0F, 35, () -> {
+    CURSED(5, 3524, 12.0F, 8.0F, 35, () -> {
         return Ingredient.of(SBItems.CURSED_SILVER_STEEL_INGOT.get());
     }),
     // Witch Robes
-    ENCHANTED(6, 5863, 14.0F, 7.0F, 35, () -> {
+    ENCHANTED(5, 3524, 14.0F, 6.0F, 35, () -> {
         return Ingredient.of(SBItems.ENCHANTED_SILVER_STEEL_INGOT.get());
     }),
 

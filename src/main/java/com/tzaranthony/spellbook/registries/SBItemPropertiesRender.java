@@ -33,6 +33,10 @@ public class SBItemPropertiesRender extends ItemProperties {
         registerGeneric(new ResourceLocation("activatedbouquet"), (p_174625_, p_174626_, p_174627_, p_174628_) -> {
             return getBooleanTag(p_174625_, "UltraDeathActive");
         });
+
+//        register(Items.BUNDLE, new ResourceLocation("filled"), (p_174625_, p_174626_, p_174627_, p_174628_) -> {
+//            return BundleItem.getFullnessDisplay(p_174625_);
+//        });
     }
 
     public static int getBooleanTag(ItemStack stack, String tagName) {

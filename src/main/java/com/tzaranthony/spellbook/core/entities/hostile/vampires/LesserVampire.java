@@ -43,14 +43,14 @@ public class LesserVampire extends SBVampireEntity {
 
     public static AttributeSupplier.Builder createAttributes() {
         return Monster.createMonsterAttributes()
-                .add(Attributes.MAX_HEALTH, 40.0D)
+                .add(Attributes.MAX_HEALTH, 80.0D)
                 .add(Attributes.ARMOR, 2.0D)
                 .add(Attributes.JUMP_STRENGTH, 2.0D)
                 .add(Attributes.ATTACK_DAMAGE, 6.0D)
                 .add(Attributes.ATTACK_KNOCKBACK, 0.5D)
-                .add(Attributes.MOVEMENT_SPEED, 0.2D)
-                .add(Attributes.FOLLOW_RANGE, 48.0D)
-                .add(Attributes.KNOCKBACK_RESISTANCE, 0.15D);
+                .add(Attributes.MOVEMENT_SPEED, 0.35D)
+                .add(Attributes.FOLLOW_RANGE, 50.0D)
+                .add(Attributes.KNOCKBACK_RESISTANCE, 0.2D);
     }
 
     public boolean vulnerableToItems(Item checkedItem) {

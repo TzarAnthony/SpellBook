@@ -2,11 +2,13 @@ package com.tzaranthony.spellbook.core.items.mainEquipment;
 
 import com.tzaranthony.spellbook.core.items.ChanneledElement;
 import com.tzaranthony.spellbook.core.items.SBToolMaterial;
+import com.tzaranthony.spellbook.core.util.events.SBToolUtils;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -66,6 +68,11 @@ public class ChanneledAxe extends AxeItem {
         } else {
             setElement(stack, ChanneledElement.NOTHING);
             playChangeSound(user.level, user);
+        }
+        if (user instanceof ServerPlayer && isCorrectToolForDrops(stack, state)) {
+//            SBToolUtils.areaMine((ServerLevel) level, (ServerPlayer) user, pos, stack, 1, 1);
+//            SBToolUtils.areaMine((ServerLevel) level, (ServerPlayer) user, pos, 2, 2);
+                SBToolUtils.veinMine((ServerLevel) level, (ServerPlayer) user, pos, level.getBlockState(pos).getBlock(), 49);
         }
         return true;
     }
@@ -145,6 +152,7 @@ public class ChanneledAxe extends AxeItem {
     public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
         ChanneledElement element = getElement(stack);
         tooltip.add((new TranslatableComponent("tooltip.spellbook.channeled_tool")).append(getElement(stack).getName()));
+        tooltip.add((new TranslatableComponent("tooltip.spellbook.vein_mode")));
         super.appendHoverText(stack, level, tooltip, flag);
     }
 

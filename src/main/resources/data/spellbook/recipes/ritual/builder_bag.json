@@ -1,0 +1,27 @@
+{
+  "type": "spellbook:ritual",
+  "tier": 1,
+  "mobs": 0,
+  "mp": 0,
+  "ingredients": [
+    {
+      "item": "spellbook:imbued_cloth",
+      "count": 3
+    },
+    {
+      "item": "spellbook:cursed_silk",
+      "count": 4
+    },
+    {
+      "item": "minecraft:piston",
+      "count": 1
+    },
+    {
+      "item": "minecraft:ender_eye",
+      "count": 1
+    }
+  ],
+  "result": {
+    "item": "spellbook:builder_bag"
+  }
+}

@@ -41,7 +41,7 @@ public class Timer extends TickingBEBlock {
         for(int i = 0; i < 8; ++i) {
             level.addParticle(
 //                    new ItemParticleOption(ParticleTypes.ITEM, Items.SAND).setPos(pos)
-                    new BlockParticleOption(ParticleTypes.BLOCK, Blocks.SAND.defaultBlockState())
+                    new BlockParticleOption(ParticleTypes.FALLING_DUST, Blocks.SAND.defaultBlockState())
                     ,(double) pos.getX() + rand.nextDouble()
                     ,(double) pos.getY() + rand.nextDouble()
                     ,(double) pos.getZ() + rand.nextDouble()

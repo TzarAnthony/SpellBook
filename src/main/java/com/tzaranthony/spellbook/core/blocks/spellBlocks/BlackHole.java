@@ -8,11 +8,15 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import org.jetbrains.annotations.Nullable;
@@ -20,6 +24,8 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Random;
 
 public class BlackHole extends TickingBEBlock {
+    protected static final VoxelShape SHAPE = Block.box(5.0D, 5.0D, 5.0D, 11.0D, 11.0D, 11.0D);
+
     public BlackHole() {
         super(SBBlockProperties.MagicBlock().noCollission());
     }
@@ -53,5 +59,9 @@ public class BlackHole extends TickingBEBlock {
                     , SoundEvents.BEACON_AMBIENT, SoundSource.BLOCKS, 1.0F, rand.nextFloat() * 0.4F + 0.5F, false
             );
         }
+    }
+
+    public VoxelShape getShape(BlockState p_52122_, BlockGetter p_52123_, BlockPos p_52124_, CollisionContext p_52125_) {
+        return SHAPE;
     }
 }

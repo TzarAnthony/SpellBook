@@ -20,7 +20,7 @@ public class SBEntityRender {
         EntityRenderers.register(SBEntities.BANSHEE.get(), BansheeRender::new);
         EntityRenderers.register(SBEntities.WRAITH.get(), WraithRender::new);
         EntityRenderers.register(SBEntities.YUREI.get(), YureiRender::new);
-        EntityRenderers.register(SBEntities.HIGHVAMP0.get(), HigherVampirePersonRender::new);
+        EntityRenderers.register(SBEntities.GHOST_HORSE.get(), GhostHorseRender::new);
         EntityRenderers.register(SBEntities.HIGHVAMP1.get(), HigherVampirePersonRender::new);
         EntityRenderers.register(SBEntities.HIGHVAMP1BAT.get(), HigherVampireBatRender::new);
         EntityRenderers.register(SBEntities.LOWVAMP.get(), LesserVampireRender::new);
@@ -32,6 +32,8 @@ public class SBEntityRender {
         EntityRenderers.register(SBEntities.SILVER_ARROW.get(), SilverArrowRender::new);
         EntityRenderers.register(SBEntities.GHOSTLY_ARROW.get(), GhostlyArrowRender::new);
         EntityRenderers.register(SBEntities.CRYSTAL_ARROW.get(), CrystalArrowRender::new);
+        EntityRenderers.register(SBEntities.SHATTER_CRYSTAL.get(), ShatteringCrystalRender::new);
+        EntityRenderers.register(SBEntities.CRYSTAL_SHARD.get(), CrystalShardRender::new);
         EntityRenderers.register(SBEntities.FIRE_ARROW.get(), FireArrowRender::new);
         EntityRenderers.register(SBEntities.WATER_ARROW.get(), WaterArrowRender::new);
         EntityRenderers.register(SBEntities.AIR_ARROW.get(), AirArrowRender::new);

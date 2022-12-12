@@ -6,7 +6,7 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.inventory.SimpleContainerData;
 
-public class AlchemicalFurnaceMenu extends SBSmeltingMenu {
+public class AlchemicalFurnaceMenu extends SBFurnaceMenu {
     public static int FuelSlotId = 1;
     public static int XPResultSlotId = 2;
     public static int ResultSlotId = 3;

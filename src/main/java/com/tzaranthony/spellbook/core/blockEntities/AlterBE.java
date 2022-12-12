@@ -25,7 +25,7 @@ import java.util.List;
 public class AlterBE extends CraftingBE {
     protected String TIER = "AlterTier";
     public static int tier;
-    protected NonNullList<LivingEntity> boundEntitites;
+    protected NonNullList<LivingEntity> boundEntitites; //TODO: add entity support
     protected String CRAFTING = "CraftingStatus";
     protected boolean isCrafting;
     protected String TRANSFER = "TransferCooldown";

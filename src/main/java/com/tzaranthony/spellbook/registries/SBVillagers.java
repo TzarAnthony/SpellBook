@@ -5,6 +5,7 @@ import com.tzaranthony.spellbook.SpellBook;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.ai.village.poi.PoiType;
 import net.minecraft.world.entity.npc.VillagerProfession;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.util.ObfuscationReflectionHelper;
 import net.minecraftforge.registries.DeferredRegister;
@@ -21,6 +22,9 @@ public class SBVillagers {
             , () -> new PoiType("mage_poi", PoiType.getBlockStates(SBBlocks.ALTER_1.get()), 1, 1));
     public static final RegistryObject<VillagerProfession> MAGE = profession.register("mage"
             , () -> new VillagerProfession("mage", MAGE_POI.get(), ImmutableSet.of(), ImmutableSet.of(), SoundEvents.VILLAGER_WORK_CLERIC));
+
+    public static final RegistryObject<PoiType> BAG_POI = POI.register("bag_poi"
+            , () -> new PoiType("bag_poi", PoiType.getBlockStates(Blocks.CHEST), 0, 1));
 
     public static void registerPOIs() {
         try {

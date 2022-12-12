@@ -1,0 +1,27 @@
+{
+  "type": "spellbook:ritual",
+  "tier": 1,
+  "mobs": 0,
+  "mp": 0,
+  "ingredients": [
+    {
+      "item": "minecraft:paper",
+      "count": 4
+    },
+    {
+      "item": "minecraft:wither_rose",
+      "count": 8
+    },
+    {
+      "item": "spellbook:vampire_blood",
+      "count": 4
+    },
+    {
+      "item": "spellbook:cursed_silk",
+      "count": 2
+    }
+  ],
+  "result": {
+    "item": "spellbook:death_bouquet"
+  }
+}

@@ -10,7 +10,6 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
 public abstract class AbstractGhostModel<T extends SBGhostEntity> extends HumanoidModel<T> {
-
     protected AbstractGhostModel(ModelPart p_170337_) {
         super(p_170337_, RenderType::entityTranslucent);
     }
