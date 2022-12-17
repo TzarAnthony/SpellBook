@@ -22,6 +22,7 @@ public class SBGhostEntity extends SBMonsterEntity {
 
     public SBGhostEntity(EntityType<? extends SBGhostEntity> type, Level level) {
         super(type, level);
+        this.xpReward = 8;
         this.maxUpStep = 20.0F;
     }
 

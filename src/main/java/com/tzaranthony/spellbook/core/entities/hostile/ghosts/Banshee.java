@@ -1,6 +1,8 @@
 package com.tzaranthony.spellbook.core.entities.hostile.ghosts;
 
-import com.tzaranthony.spellbook.core.entities.ai.BansheeAttackGoal;
+import com.tzaranthony.spellbook.core.entities.ai.MagicAndMeleeAttackGoal;
+import com.tzaranthony.spellbook.core.spells.ProjectileSpell;
+import com.tzaranthony.spellbook.registries.SBSpellRegistry;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
@@ -29,7 +31,7 @@ public class Banshee extends SBGhostEntity {
     protected void registerGoals() {
         this.goalSelector.addGoal(2, new RestrictSunGoal(this));
         this.goalSelector.addGoal(3, new FleeSunGoal(this, 1.0D));
-        this.goalSelector.addGoal(4, new BansheeAttackGoal(this, 1.0D, true));
+        this.goalSelector.addGoal(4, new MagicAndMeleeAttackGoal(this, (ProjectileSpell) SBSpellRegistry.SCREAM, 1.0D, true));
         this.goalSelector.addGoal(4, new RandomStrollGoal(this, 1.0D));
         this.goalSelector.addGoal(7, new LookAtPlayerGoal(this, Player.class, 8.0F));
         this.goalSelector.addGoal(7, new RandomLookAroundGoal(this));

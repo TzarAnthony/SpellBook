@@ -71,6 +71,8 @@ public class AlterBE extends CraftingBE {
             this.tier = 1;
         } else if (this.level.getBlockState(this.getBlockPos()).is(SBBlocks.ALTER_3.get())) {
             this.tier = 2;
+        } else if (this.level.getBlockState(this.getBlockPos()).is(SBBlocks.ALTER_4.get())) {
+            this.tier = 3;
         }
     }
 

@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "XXX",
+    "X X",
+    "Y Y"
+  ],
+  "key": {
+    "X": {
+      "item": "spellbook:silver_steel_ingot"
+    },
+    "Y": {
+      "tag": "forge:leather"
+    }
+  },
+  "result": {
+    "item": "spellbook:watchman_leggings"
+  }
+}

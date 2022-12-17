@@ -84,10 +84,7 @@ public class SBEntities {
             EntityType.Builder.of(NecroticSpider::new, MobCategory.MONSTER).sized(2.0F, 1.3F).clientTrackingRange(8).build("necrotic_spider")
     );
 
-    // Other
-    public static final RegistryObject<EntityType<PhoenixAshesEntity>> PHOENIX_ASHES = reg.register("phoenix_ashes", () ->
-            EntityType.Builder.of(PhoenixAshesEntity::new, MobCategory.MISC).fireImmune().sized(0.25F, 0.25F).build("phoenix_ashes")
-    );
+    // Arrows
     public static final RegistryObject<EntityType<SilverArrow>> SILVER_ARROW = reg.register("silver_arrow", () ->
             EntityType.Builder.of(SilverArrow::new, MobCategory.MISC).sized(0.5F, 0.5F).clientTrackingRange(4).updateInterval(20).build("silver_arrow")
     );
@@ -115,6 +112,8 @@ public class SBEntities {
     public static final RegistryObject<EntityType<EffectCarryingArrow>> AIR_ARROW = reg.register("air_arrow", () ->
             EntityType.Builder.of(EffectCarryingArrow::new, MobCategory.MISC).sized(0.5F, 0.5F).clientTrackingRange(4).updateInterval(20).build("air_arrow")
     );
+
+    // Magic
     public static final RegistryObject<EntityType<MagicProjectile>> SMALL_MAGIC_PROJECTILE = reg.register("small_magic_projectile", () ->
             EntityType.Builder.of(MagicProjectile::new, MobCategory.MISC).fireImmune().sized(0.25F, 0.25F).build("small_magic_projectile")
     );
@@ -123,6 +122,14 @@ public class SBEntities {
     );
     public static final RegistryObject<EntityType<MagicProjectile>> LARGE_MAGIC_PROJECTILE = reg.register("large_magic_projectile", () ->
             EntityType.Builder.of(MagicProjectile::new, MobCategory.MISC).fireImmune().sized(1.5F, 1.5F).build("large_magic_projectile")
+    );
+    public static final RegistryObject<EntityType<MagicProjectile>> FROST_WAVE_PROJECTILE = reg.register("frost_wave_projectile", () ->
+            EntityType.Builder.of(MagicProjectile::new, MobCategory.MISC).fireImmune().sized(2.0F, 0.2F).build("frost_wave_projectile")
+    );
+
+    // Other
+    public static final RegistryObject<EntityType<PhoenixAshesEntity>> PHOENIX_ASHES = reg.register("phoenix_ashes", () ->
+            EntityType.Builder.of(PhoenixAshesEntity::new, MobCategory.MISC).fireImmune().sized(0.25F, 0.25F).build("phoenix_ashes")
     );
 
 

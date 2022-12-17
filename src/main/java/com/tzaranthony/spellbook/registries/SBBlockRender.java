@@ -48,5 +48,6 @@ public class SBBlockRender {
         ItemBlockRenderTypes.setRenderLayer(SBBlocks.LIGHT_ESSENCE_BLOCK_RED.get(), clear);
         ItemBlockRenderTypes.setRenderLayer(SBBlocks.LIGHT_ESSENCE_BLOCK_WHITE.get(), clear);
         ItemBlockRenderTypes.setRenderLayer(SBBlocks.LIGHT_ESSENCE_BLOCK_YELLOW.get(), clear);
+        ItemBlockRenderTypes.setRenderLayer(SBBlocks.SNARE.get(), clear);
     }
 }

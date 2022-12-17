@@ -1,5 +1,6 @@
 package com.tzaranthony.spellbook.core.entities.hostile.ghosts;
 
+import com.tzaranthony.spellbook.core.entities.ai.NecromancedEntity;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.InteractionHand;
@@ -51,7 +52,7 @@ public class Yurei extends SBGhostEntity {
 
     @Override
     public boolean isInvulnerableTo(DamageSource source) {
-        return !(source.getEntity() instanceof AbstractSkeleton || source.isCreativePlayer() || source == DamageSource.OUT_OF_WORLD || source == DamageSource.CRAMMING);
+        return !(source.getEntity() instanceof AbstractSkeleton || source.getEntity() instanceof NecromancedEntity || source.isCreativePlayer() || source == DamageSource.OUT_OF_WORLD || source == DamageSource.CRAMMING);
     }
 
     protected void defineSynchedData() {
@@ -73,7 +74,7 @@ public class Yurei extends SBGhostEntity {
         protected void checkAndPerformAttack(LivingEntity attacked, double distance) {
             double d0 = this.getAttackReachSqr(attacked);
             if (distance <= d0 && getTicksUntilNextAttack() <= 0) {
-                if (attacked instanceof AbstractSkeleton) {
+                if (attacked instanceof AbstractSkeleton || attacked instanceof NecromancedEntity) {
                     attacked.hurt(DamageSource.OUT_OF_WORLD, 1000.0F);
                     this.mob.hurt(DamageSource.OUT_OF_WORLD, 1000.0F);
                 } else {

@@ -1,7 +1,7 @@
 package com.tzaranthony.spellbook.core.entities.friendly;
 
 import com.tzaranthony.spellbook.core.entities.ai.FlyingGhostMoveRandomGoal;
-import com.tzaranthony.spellbook.core.entities.ai.FlyingGhostMovementHelper;
+import com.tzaranthony.spellbook.core.entities.ai.VexLikeMovementHelper;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
@@ -38,7 +38,7 @@ public class SummonedVex extends SBSummonedEntity {
     public SummonedVex(EntityType<? extends SummonedVex> vex, Level level) {
         super(vex, level);
         this.setTame(false);
-        this.moveControl = new FlyingGhostMovementHelper(this);
+        this.moveControl = new VexLikeMovementHelper(this);
         this.xpReward = 3;
     }
 

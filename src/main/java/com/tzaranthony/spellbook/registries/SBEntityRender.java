@@ -27,8 +27,7 @@ public class SBEntityRender {
         EntityRenderers.register(SBEntities.FAKE_ZOMBIE.get(), ZombieIllusionRender::new);
         EntityRenderers.register(SBEntities.FAKE_SKELLY.get(), SkeletonIllusionRender::new);
         EntityRenderers.register(SBEntities.NECROTIC_SPIDER.get(), NecroticSpiderRender::new);
-        // Other
-        EntityRenderers.register(SBEntities.PHOENIX_ASHES.get(), ItemEntityRenderer::new);
+        // Arrows
         EntityRenderers.register(SBEntities.SILVER_ARROW.get(), SilverArrowRender::new);
         EntityRenderers.register(SBEntities.GHOSTLY_ARROW.get(), GhostlyArrowRender::new);
         EntityRenderers.register(SBEntities.CRYSTAL_ARROW.get(), CrystalArrowRender::new);
@@ -38,8 +37,12 @@ public class SBEntityRender {
         EntityRenderers.register(SBEntities.WATER_ARROW.get(), WaterArrowRender::new);
         EntityRenderers.register(SBEntities.AIR_ARROW.get(), AirArrowRender::new);
         EntityRenderers.register(SBEntities.EARTH_ARROW.get(), EarthArrowRender::new);
+        // Magic
         EntityRenderers.register(SBEntities.SMALL_MAGIC_PROJECTILE.get(), MagicProjectileRender::new);
         EntityRenderers.register(SBEntities.MEDIUM_MAGIC_PROJECTILE.get(), MagicProjectileRender::new);
         EntityRenderers.register(SBEntities.LARGE_MAGIC_PROJECTILE.get(), MagicProjectileRender::new);
+        EntityRenderers.register(SBEntities.FROST_WAVE_PROJECTILE.get(), FrostWaveRender::new);
+        // Other
+        EntityRenderers.register(SBEntities.PHOENIX_ASHES.get(), ItemEntityRenderer::new);
     }
 }

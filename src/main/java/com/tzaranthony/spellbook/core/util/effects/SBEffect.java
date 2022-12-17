@@ -34,7 +34,7 @@ public class SBEffect extends MobEffect {
     @Override
     public boolean isDurationEffectTick(int duration, int amplifier) {
         if (this == SBEffects.INCINERATION.get()) {
-            int i = 60 >> amplifier;
+            int i = 80 >> amplifier;
             if (i > 0) {
                 return duration % i == 0;
             } else {

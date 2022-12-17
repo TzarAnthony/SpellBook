@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "spellbook:item/ice_spikes_debug"
+    "layer0": "spellbook:item/frost_wave_debug"
   }
 }

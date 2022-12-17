@@ -1,23 +1,19 @@
 package com.tzaranthony.spellbook.core.spells;
 
-import com.mojang.math.Quaternion;
-import com.mojang.math.Vector3f;
 import com.tzaranthony.spellbook.core.entities.other.MagicProjectile;
 import com.tzaranthony.spellbook.core.util.damage.SBDamageSource;
 import com.tzaranthony.spellbook.registries.SBEffects;
 import com.tzaranthony.spellbook.registries.SBEntities;
 import com.tzaranthony.spellbook.registries.SBParticleTypes;
-import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.world.InteractionHand;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.phys.Vec3;
 
 public class Scream extends ProjectileSpell {
     public Scream(int id, String name, SpellTier tier) {
@@ -25,20 +21,8 @@ public class Scream extends ProjectileSpell {
     }
 
     @Override
-    public boolean perform_spell(Level level, Player player, InteractionHand hand, BlockPos blockPos) {
-        MagicProjectile magic = new MagicProjectile(SBEntities.LARGE_MAGIC_PROJECTILE.get(), level);
-        magic.initializeProjectile(player, player.getX(), player.getEyeY() - (double)0.15F, player.getZ());
-        addSpellDataToProjectile(magic);
-
-        Vec3 vec31 = player.getUpVector(1.0F);
-        Quaternion quaternion = new Quaternion(new Vector3f(vec31), 0.0F, true);
-        Vec3 vec3 = player.getViewVector(1.0F);
-        Vector3f vector3f = new Vector3f(vec3);
-        vector3f.transform(quaternion);
-        magic.shoot((double) vector3f.x(), (double) vector3f.y(), (double) vector3f.z(), 1.6F, 1.0F);
-
-        level.addFreshEntity(magic);
-        return true;
+    public EntityType<MagicProjectile> getMagicProjectile() {
+        return SBEntities.LARGE_MAGIC_PROJECTILE.get();
     }
 
     @Override

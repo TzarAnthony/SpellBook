@@ -9,8 +9,8 @@ import com.tzaranthony.spellbook.core.blocks.fire.SBTorch;
 import com.tzaranthony.spellbook.core.blocks.fire.SBWallTorch;
 import com.tzaranthony.spellbook.core.blocks.plant.*;
 import com.tzaranthony.spellbook.core.blocks.spellBlocks.BlackHole;
-import com.tzaranthony.spellbook.core.blocks.spellBlocks.Snare;
-import com.tzaranthony.spellbook.core.blocks.spellBlocks.Timer;
+import com.tzaranthony.spellbook.core.blocks.spellBlocks.SnareBlock;
+import com.tzaranthony.spellbook.core.blocks.spellBlocks.TimerBlock;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
@@ -87,7 +87,8 @@ public class SBBlocks {
     // "machines"
     public static final RegistryObject<Block> ALTER_1 = registerBlockAndItem("alter_1", () -> new Alter(SBBlockProperties.StandardRock()));
     public static final RegistryObject<Block> ALTER_2 = registerBlockAndRareItem("alter_2", () -> new Alter(SBBlockProperties.StandardRock(SoundType.ANCIENT_DEBRIS)), Rarity.UNCOMMON);
-    public static final RegistryObject<Block> ALTER_3 = registerBlockAndRareItem("alter_3", () -> new Alter(SBBlockProperties.StandardRock(SoundType.LODESTONE)), Rarity.RARE);
+    public static final RegistryObject<Block> ALTER_3 = registerBlockAndRareItem("alter_3", () -> new Alter(SBBlockProperties.StandardRock(SoundType.SOUL_SAND)), Rarity.RARE);
+    public static final RegistryObject<Block> ALTER_4 = registerBlockAndRareItem("alter_4", () -> new Alter(SBBlockProperties.StandardRock(SoundType.HONEY_BLOCK)), Rarity.EPIC);
     public static final RegistryObject<Block> ALCHEMICAL_FURNACE = registerBlockAndItem("alchemical_furnace", () -> new AlchemicalFurnace(SBBlockProperties.StandardRock()));
     public static final RegistryObject<Block> ALCHEMICAL_FOUNDRY = registerBlockAndItem("alchemical_forge", () -> new AlchemicalFoundry(SBBlockProperties.StandardRock()));
     public static final RegistryObject<Block> POTION_MANUFACTORIUM = registerBlockAndItem("potion_manufactorium", () -> new Block(SBBlockProperties.StandardRock())); //TODO: cauldron that creates potions. needs a specific temperature for different tiers of potion
@@ -115,17 +116,18 @@ public class SBBlocks {
     public static final RegistryObject<Block> GRAY_PEDESTAL_GLOW_SPIN = registerBlockAndItem("gray_pedestal_glow_spin", () -> new Pedestal(true, true, SBBlockProperties.StandardRock().noOcclusion()));
     public static final RegistryObject<Block> GRAY_PEDESTAL_GLOW_STILL = registerBlockAndItem("gray_pedestal_glow_still", () -> new Pedestal(false, true, SBBlockProperties.StandardRock().noOcclusion()));
 
-    // magic blocks
+    // movement blocks
     //TODO: sling that accelerates the user rapidly in a direction
+    public static final RegistryObject<Block> RIFT_GENERATOR = registerBlockAndItem("rift_generator", () -> new Teleporter(SBBlockProperties.StandardRock().noOcclusion()));
     //TODO: buildable teleporters -- range increases with ender crystals around it?
     //TODO: buildable levatator elevator?? like in subnautica? -- keeps going until either the last powered or the end
     //TODO: cursed painting.... idk what it does yet
 
     // spell blocks
-    public static final RegistryObject<Block> SNARE = reg.register("snare", () -> new Snare());
+    public static final RegistryObject<Block> SNARE = reg.register("snare", () -> new SnareBlock());
     public static final RegistryObject<Block> BLACK_HOLE = reg.register("dark_rift", () -> new BlackHole());
     public static final RegistryObject<Block> ENDER_RIFT = reg.register("ender_rift", () -> new Block(SBBlockProperties.StandardRock()));
-    public static final RegistryObject<Block> TIMER = reg.register("timer", () -> new Timer());
+    public static final RegistryObject<Block> TIMER = reg.register("timer", () -> new TimerBlock());
 
     // end fire stuff
     public static final RegistryObject<Block> END_CAMPFIRE = registerBlockAndItem("end_campfire", () -> new SBCampfire(3, SBBlockProperties.Campfire(10)));

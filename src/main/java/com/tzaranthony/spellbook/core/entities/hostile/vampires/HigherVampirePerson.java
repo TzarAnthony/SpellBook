@@ -1,6 +1,7 @@
 package com.tzaranthony.spellbook.core.entities.hostile.vampires;
 
 import com.tzaranthony.spellbook.core.entities.ai.HigherVampirePersonAttackGoal;
+import com.tzaranthony.spellbook.core.entities.ai.VampireHumanToBatTransformGoal;
 import com.tzaranthony.spellbook.registries.SBEntities;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
@@ -43,7 +44,7 @@ public class HigherVampirePerson extends HigherVampirePhase1 {
 
     protected void registerGoals() {
         this.goalSelector.addGoal(0, new FloatGoal(this));
-//        this.goalSelector.addGoal(1, new VampireHumanToBatTransformGoal(this));
+        this.goalSelector.addGoal(1, new VampireHumanToBatTransformGoal(this));
         this.goalSelector.addGoal(2, new HigherVampirePersonAttackGoal(this, 1.2D, true));
         this.goalSelector.addGoal(7, new WaterAvoidingRandomStrollGoal(this, 1.0D));
         this.goalSelector.addGoal(8, new LookAtPlayerGoal(this, Player.class, 8.0F));

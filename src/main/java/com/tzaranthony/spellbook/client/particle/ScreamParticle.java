@@ -17,7 +17,6 @@ public class ScreamParticle extends TextureSheetParticle {
         this.gCol = f;
         this.bCol = f;
         this.sprites = p_234033_;
-
         this.lifetime = 16;
         this.quadSize = 1.5F;
         this.setSpriteFromAge(p_234033_);

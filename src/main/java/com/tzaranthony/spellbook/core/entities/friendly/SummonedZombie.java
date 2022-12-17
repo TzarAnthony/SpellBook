@@ -1,5 +1,6 @@
 package com.tzaranthony.spellbook.core.entities.friendly;
 
+import com.tzaranthony.spellbook.core.entities.ai.NecromancedEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
@@ -34,7 +35,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.UUID;
 
-public class SummonedZombie extends SBSummonedEntity{
+public class SummonedZombie extends SBSummonedEntity implements NecromancedEntity {
     private static final UUID SPEED_MODIFIER_BABY_UUID = UUID.fromString("B9766B59-9566-4402-BC1F-2EE2A276D836");
     private static final AttributeModifier SPEED_MODIFIER_BABY = new AttributeModifier(SPEED_MODIFIER_BABY_UUID, "Baby speed boost", 0.5D, AttributeModifier.Operation.MULTIPLY_BASE);
     private static final EntityDataAccessor<Boolean> DATA_BABY_ID = SynchedEntityData.defineId(Zombie.class, EntityDataSerializers.BOOLEAN);

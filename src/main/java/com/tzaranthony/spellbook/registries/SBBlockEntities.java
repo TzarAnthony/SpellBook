@@ -21,7 +21,7 @@ public class SBBlockEntities {
             () -> BlockEntityType.Builder.of(AlchemicalFoundryBE::new, SBBlocks.ALCHEMICAL_FOUNDRY.get()).build(null));
 
     public static final RegistryObject<BlockEntityType<AlterBE>> ALTER = reg.register("alter",
-            () -> BlockEntityType.Builder.of(AlterBE::new, SBBlocks.ALTER_1.get(), SBBlocks.ALTER_2.get(), SBBlocks.ALTER_3.get()).build(null));
+            () -> BlockEntityType.Builder.of(AlterBE::new, SBBlocks.ALTER_1.get(), SBBlocks.ALTER_2.get(), SBBlocks.ALTER_3.get(), SBBlocks.ALTER_4.get()).build(null));
 
     public static final RegistryObject<BlockEntityType<PedestalStillBE>> PEDESTAL_STILL = reg.register("pedestal_still",
             () -> BlockEntityType.Builder.of(PedestalStillBE::new, SBBlocks.PEDESTAL_STILL.get(), SBBlocks.BLACK_PEDESTAL_STILL.get(), SBBlocks.GRAY_PEDESTAL_STILL.get()).build(null));

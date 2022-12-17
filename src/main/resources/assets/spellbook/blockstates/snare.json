@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "powered=false": {
+      "model": "spellbook:block/snare_trap"
+    },
+    "powered=true": {
+      "model": "spellbook:block/snare_cage"
+    }
+  }
+}

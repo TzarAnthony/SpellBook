@@ -3,24 +3,31 @@ package com.tzaranthony.spellbook.core.blocks.spellBlocks;
 import com.tzaranthony.spellbook.core.blocks.SBBlockProperties;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.phys.Vec3;
 
 import java.util.Random;
 
-public class Snare extends Block {
+public class SnareBlock extends Block {
     public static final IntegerProperty AGE = BlockStateProperties.AGE_3;
+    public static final BooleanProperty POWERED = BlockStateProperties.POWERED;
 
-    public Snare() {
-        super(SBBlockProperties.MagicBlock().noCollission());
-        this.registerDefaultState(this.stateDefinition.any().setValue(AGE, Integer.valueOf(0)));
+    public SnareBlock() {
+        super(SBBlockProperties.MagicBlock().lightLevel((lightSupplier) -> {return 3;}).sound(SoundType.CHAIN).noCollission());
+        this.registerDefaultState(this.stateDefinition.any().setValue(AGE, Integer.valueOf(0)).setValue(POWERED, Boolean.valueOf(false)));
     }
 
     public boolean isRandomlyTicking(BlockState state) {
@@ -28,11 +35,18 @@ public class Snare extends Block {
     }
 
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> stateBuilder) {
-        stateBuilder.add(AGE);
+        stateBuilder.add(AGE, POWERED);
     }
 
     public void entityInside(BlockState state, Level level, BlockPos pos, Entity entity) {
-        entity.makeStuckInBlock(state, new Vec3((double) 0.01F, 0.01F, (double) 0.01F));
+        if (entity instanceof LivingEntity && !((entity instanceof Player && ((Player) entity).isCreative()))) {
+            entity.setPos(new Vec3(pos.getX() + 0.5D, pos.getY(), pos.getZ() + 0.5D));
+            entity.makeStuckInBlock(state, new Vec3((double) 0.005F, 0.005F, (double) 0.005F));
+            if (!level.isClientSide && !state.getValue(POWERED)) {
+                level.setBlock(pos, state.setValue(POWERED, Boolean.valueOf(true)), 3);
+                level.playSound((Player) null, pos, SoundEvents.CHAIN_PLACE, SoundSource.BLOCKS, 1.0F, 1.0F);
+            }
+        }
     }
 
     public void randomTick(BlockState state, ServerLevel level, BlockPos pos, Random rand) {

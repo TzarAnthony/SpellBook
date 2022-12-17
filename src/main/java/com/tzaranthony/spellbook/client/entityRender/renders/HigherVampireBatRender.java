@@ -30,12 +30,7 @@ public class HigherVampireBatRender extends MobRenderer<HigherVampireBat, Higher
     }
 
     protected void setupRotations(HigherVampireBat vamp_bat, PoseStack pose, float p_113884_, float p_113885_, float p_113886_) {
-        if (vamp_bat.isResting()) {
-            pose.translate(0.0D, (double)-0.1F, 0.0D);
-        } else {
-            pose.translate(0.0D, (double)(Mth.cos(p_113884_ * 0.3F) * 0.1F), 0.0D);
-        }
-
+        pose.translate(0.0D, (double)(Mth.cos(p_113884_ * 0.3F) * 0.1F), 0.0D);
         super.setupRotations(vamp_bat, pose, p_113884_, p_113885_, p_113886_);
     }
 }

@@ -18,7 +18,7 @@ public class FreezingEffect extends SBEffect{
     public void applyEffectTick(LivingEntity affected, int amplifier) {
         if (this == SBEffects.FREEZING.get()) {
             affected.hurt(DamageSource.FREEZE, 4.0F * (float) (amplifier + 1));
-            affected.addEffect(new MobEffectInstance(SBEffects.FREEZING_ANIMATION.get(), 70, 0, true, false));
+            affected.addEffect(new MobEffectInstance(SBEffects.FREEZING_ANIMATION.get(), 70, 0, false, false));
         } else if (this == SBEffects.FREEZING_ANIMATION.get()) {
             affected.setIsInPowderSnow(true);
             affected.setTicksFrozen(affected.getTicksFrozen() + 4);
@@ -28,21 +28,19 @@ public class FreezingEffect extends SBEffect{
     @Override
     public boolean isDurationEffectTick(int duration, int amplifier) {
         if (this == SBEffects.FREEZING.get()) {
-            int i = 60 >> amplifier;
-            if (i > 0) {
-                return duration % i == 0;
-            } else {
-                return true;
-            }
-        } else if (this == SBEffects.FREEZING_ANIMATION.get()) {
-            int i = 1 >> amplifier;
+            int i = 80 >> amplifier;
             if (i > 0) {
                 return duration % i == 0;
             } else {
                 return true;
             }
         } else {
-            return false;
+            int i = 1 >> amplifier;
+            if (i > 0) {
+                return duration % i == 0;
+            } else {
+                return true;
+            }
         }
     }
 }

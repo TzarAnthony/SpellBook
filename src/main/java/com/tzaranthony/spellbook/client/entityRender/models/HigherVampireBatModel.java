@@ -51,34 +51,17 @@ public class HigherVampireBatModel extends HierarchicalModel<HigherVampireBat> {
     }
 
     public void setupAnim(HigherVampireBat p_102200_, float p_102201_, float p_102202_, float p_102203_, float p_102204_, float p_102205_) {
-        if (p_102200_.isResting()) {
-            this.head.xRot = p_102205_ * ((float)Math.PI / 180F);
-            this.head.yRot = (float)Math.PI - p_102204_ * ((float)Math.PI / 180F);
-            this.head.zRot = (float)Math.PI;
-            this.head.setPos(0.0F, -2.0F, 0.0F);
-            this.rightWing.setPos(-3.0F, 0.0F, 3.0F);
-            this.leftWing.setPos(3.0F, 0.0F, 3.0F);
-            this.body.xRot = (float)Math.PI;
-            this.rightWing.xRot = -0.15707964F;
-            this.rightWing.yRot = -1.2566371F;
-            this.rightWingTip.yRot = -1.7278761F;
-            this.leftWing.xRot = this.rightWing.xRot;
-            this.leftWing.yRot = -this.rightWing.yRot;
-            this.leftWingTip.yRot = -this.rightWingTip.yRot;
-        } else {
-            this.head.xRot = p_102205_ * ((float)Math.PI / 180F);
-            this.head.yRot = p_102204_ * ((float)Math.PI / 180F);
-            this.head.zRot = 0.0F;
-            this.head.setPos(0.0F, 0.0F, 0.0F);
-            this.rightWing.setPos(0.0F, 0.0F, 0.0F);
-            this.leftWing.setPos(0.0F, 0.0F, 0.0F);
-            this.body.xRot = ((float)Math.PI / 4F) + Mth.cos(p_102203_ * 0.1F) * 0.15F;
-            this.body.yRot = 0.0F;
-            this.rightWing.yRot = Mth.cos(p_102203_ * 74.48451F * ((float)Math.PI / 180F)) * (float)Math.PI * 0.25F;
-            this.leftWing.yRot = -this.rightWing.yRot;
-            this.rightWingTip.yRot = this.rightWing.yRot * 0.5F;
-            this.leftWingTip.yRot = -this.rightWing.yRot * 0.5F;
-        }
-
+        this.head.xRot = p_102205_ * ((float)Math.PI / 180F);
+        this.head.yRot = p_102204_ * ((float)Math.PI / 180F);
+        this.head.zRot = 0.0F;
+        this.head.setPos(0.0F, 0.0F, 0.0F);
+        this.rightWing.setPos(0.0F, 0.0F, 0.0F);
+        this.leftWing.setPos(0.0F, 0.0F, 0.0F);
+        this.body.xRot = ((float)Math.PI / 4F) + Mth.cos(p_102203_ * 0.1F) * 0.15F;
+        this.body.yRot = 0.0F;
+        this.rightWing.yRot = Mth.cos(p_102203_ * 74.48451F * ((float)Math.PI / 180F)) * (float)Math.PI * 0.25F;
+        this.leftWing.yRot = -this.rightWing.yRot;
+        this.rightWingTip.yRot = this.rightWing.yRot * 0.5F;
+        this.leftWingTip.yRot = -this.rightWing.yRot * 0.5F;
     }
 }

@@ -1,19 +1,22 @@
 package com.tzaranthony.spellbook.registries;
 
 import com.tzaranthony.spellbook.SpellBook;
-import com.tzaranthony.spellbook.core.items.*;
-import com.tzaranthony.spellbook.core.items.creative.SpellBookCreative;
-import com.tzaranthony.spellbook.core.items.creative.SpellDebug;
-import com.tzaranthony.spellbook.core.items.food.*;
+import com.tzaranthony.spellbook.core.items.SBArmorMaterial;
+import com.tzaranthony.spellbook.core.items.SBItemProperties;
+import com.tzaranthony.spellbook.core.items.SBToolMaterial;
 import com.tzaranthony.spellbook.core.items.arrows.CrystalArrowItem;
 import com.tzaranthony.spellbook.core.items.arrows.GhostlyArrowItem;
 import com.tzaranthony.spellbook.core.items.arrows.SilverArrowItem;
+import com.tzaranthony.spellbook.core.items.creative.SpellBookCreative;
+import com.tzaranthony.spellbook.core.items.creative.SpellDebug;
+import com.tzaranthony.spellbook.core.items.food.*;
 import com.tzaranthony.spellbook.core.items.items.PhoenixAshes;
 import com.tzaranthony.spellbook.core.items.mainEquipment.*;
-import com.tzaranthony.spellbook.core.items.SBArmorMaterial;
-import com.tzaranthony.spellbook.core.items.SBToolMaterial;
 import com.tzaranthony.spellbook.core.items.otherEquipment.*;
-import com.tzaranthony.spellbook.core.items.spellBooks.*;
+import com.tzaranthony.spellbook.core.items.spellBooks.SpellBookAdv;
+import com.tzaranthony.spellbook.core.items.spellBooks.SpellBookExp;
+import com.tzaranthony.spellbook.core.items.spellBooks.SpellBookInter;
+import com.tzaranthony.spellbook.core.items.spellBooks.SpellBookNovice;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.*;
@@ -73,7 +76,7 @@ public class SBItems {
     // register utility books
     public static final RegistryObject<Item> TOME_OF_COORDINATION = reg.register("tome_of_coordination", () -> new Item(SBItemProperties.Standard(Rarity.RARE, 1))); //TODO: Used to coordinate teleporters?
     public static final RegistryObject<Item> DIMENSIONAL_CODEX = reg.register("dimensional_codex", () -> new Item(SBItemProperties.Standard(Rarity.UNCOMMON, 1))); //TODO: Used to store autocrafting recipies. Stores up to 16?
-    public static final RegistryObject<Item> RESEARCH_BOOK = reg.register("research_book", () -> new ResearchBook(SBItemProperties.Standard(Rarity.UNCOMMON, 1))); //TODO: Provides some research points
+    public static final RegistryObject<Item> RESEARCH_BOOK = reg.register("research_book", () -> new ResearchBook(SBItemProperties.Standard(Rarity.UNCOMMON, 1))); //TODO: Create research point system
 
     // spell books
     public static final RegistryObject<Item> LIBER_EXPONENTIA = reg.register("liber_exponentia", () -> new SpellBookNovice(Rarity.UNCOMMON));
@@ -179,6 +182,7 @@ public class SBItems {
     public static final RegistryObject<Item> GHOST_GLAIVE = reg.register("ghost_glaive", () -> new SBSilverSword(SBToolMaterial.ARCH, SBItemProperties.Unburnable(Rarity.UNCOMMON)));
     public static final RegistryObject<Item> GHOST_BOW = reg.register("ghost_bow", () -> new BowItem(SBItemProperties.Unburnable(Rarity.UNCOMMON).durability(SBToolMaterial.ARCH.getUses())));
     public static final RegistryObject<Item> GHOST_SCEPTER = reg.register("ghost_scepter", () -> new SBSilverAxe(SBToolMaterial.ARCH, SBItemProperties.Unburnable(Rarity.UNCOMMON)));
+    public static final RegistryObject<Item> VOID_SWORD = reg.register("void_sword", () -> new SBSilverSword(SBToolMaterial.ARCH, SBItemProperties.Unburnable(Rarity.RARE)));
 
     // BlockItems
     public static final RegistryObject<Item> END_TORCH = reg.register("end_torch", () -> new StandingAndWallBlockItem(SBBlocks.END_TORCH.get(), SBBlocks.END_WALL_TORCH.get(), SBItemProperties.Standard()));
@@ -193,7 +197,7 @@ public class SBItems {
     public static final RegistryObject<Item> NEKOMANCY_DEBUG = reg.register("nekomancy_debug", () -> new SpellDebug(SBSpellRegistry.NEKOMANCY));
 
     public static final RegistryObject<Item> FIREWALL_DEBUG = reg.register("firewall_debug", () -> new SpellDebug(SBSpellRegistry.FIREWALL));
-    public static final RegistryObject<Item> ICE_SPIKES_DEBUG = reg.register("ice_spikes_debug", () -> new SpellDebug(SBSpellRegistry.FROST_SPIKES));
+    public static final RegistryObject<Item> FROST_WAVE_DEBUG = reg.register("frost_wave_debug", () -> new SpellDebug(SBSpellRegistry.FROST_WAVE));
     public static final RegistryObject<Item> STONE_ARMOR_DEBUG = reg.register("stone_armor_debug", () -> new SpellDebug(SBSpellRegistry.STONE_REINFORCEMENT));
     public static final RegistryObject<Item> WIND_DEBUG = reg.register("wind_debug", () -> new SpellDebug(SBSpellRegistry.OUTWARD_WINDS));
     public static final RegistryObject<Item> JUMP_DEBUG = reg.register("jump_debug", () -> new SpellDebug(SBSpellRegistry.LONG_JUMP));
@@ -212,6 +216,7 @@ public class SBItems {
     public static final RegistryObject<Item> ENDER_RIFT_DEBUG = reg.register("ender_rift_debug", () -> new SpellDebug(SBSpellRegistry.ENDER_RIFT));
     public static final RegistryObject<Item> RIFT_OF_DARKNESS_DEBUG = reg.register("dark_rift_debug", () -> new SpellDebug(SBSpellRegistry.RIFT_OF_DARKNESS));
     public static final RegistryObject<Item> TIME_DEBUG = reg.register("time_debug", () -> new SpellDebug(SBSpellRegistry.TIME_SPELL));
+
     public static final RegistryObject<Item> MACHINE_ENCHANTMENT_DEBUG = reg.register("machine_enchantment_debug", () -> new SpellDebug(SBSpellRegistry.OBJECT_ENCHANTMENT));
     public static final RegistryObject<Item> ACTION_DEBUG = reg.register("action_spell_debug", () -> new SpellDebug(SBSpellRegistry.ACTION_SPELL));
     public static final RegistryObject<Item> DETECTOR_DEBUG = reg.register("detector_spell_debug", () -> new SpellDebug(SBSpellRegistry.DETECTOR_SPELL));

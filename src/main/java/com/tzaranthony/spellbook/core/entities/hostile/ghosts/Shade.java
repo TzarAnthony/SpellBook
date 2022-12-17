@@ -29,8 +29,8 @@ public class Shade extends SBGhostEntity {
     }
 
     protected void registerGoals() {
-        this.goalSelector.addGoal(2, new RestrictSunGoal(this));
-        this.goalSelector.addGoal(3, new FleeSunGoal(this, 1.0D));
+        this.goalSelector.addGoal(1, new RestrictSunGoal(this));
+        this.goalSelector.addGoal(2, new FleeSunGoal(this, 1.0D));
         this.goalSelector.addGoal(3, new PossesGoal(1.25D, false));
         this.goalSelector.addGoal(4, new RandomStrollGoal(this, 1.0D));
         this.goalSelector.addGoal(7, new LookAtPlayerGoal(this, Player.class, 8.0F));
@@ -41,7 +41,7 @@ public class Shade extends SBGhostEntity {
 
     public static AttributeSupplier.Builder createAttributes() {
         return Monster.createMonsterAttributes()
-                .add(Attributes.MAX_HEALTH, 5.0D)
+                .add(Attributes.MAX_HEALTH, 8.0D)
                 .add(Attributes.ATTACK_DAMAGE, 0.5D)
                 .add(Attributes.MOVEMENT_SPEED, 0.2D)
                 .add(Attributes.FOLLOW_RANGE, 48.0D)

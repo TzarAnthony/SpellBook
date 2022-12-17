@@ -1,7 +1,11 @@
 package com.tzaranthony.spellbook.core.entities.hostile.ghosts;
 
+import com.tzaranthony.spellbook.core.entities.ai.FlyingEntity;
 import com.tzaranthony.spellbook.core.entities.ai.FlyingGhostMoveRandomGoal;
-import com.tzaranthony.spellbook.core.entities.ai.FlyingGhostMovementHelper;
+import com.tzaranthony.spellbook.core.entities.ai.VexLikeMovementHelper;
+import com.tzaranthony.spellbook.core.entities.ai.FlyingMeleeAndMagicAttackGoal;
+import com.tzaranthony.spellbook.core.spells.ProjectileSpell;
+import com.tzaranthony.spellbook.registries.SBSpellRegistry;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
@@ -13,10 +17,11 @@ import net.minecraft.world.entity.MoverType;
 import net.minecraft.world.entity.SpawnGroupData;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.ai.goal.FloatGoal;
 import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal;
-import net.minecraft.world.entity.ai.goal.MeleeAttackGoal;
 import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal;
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
+import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
@@ -25,17 +30,16 @@ import net.minecraft.world.phys.Vec3;
 
 import javax.annotation.Nullable;
 
-public class Wraith extends SBGhostEntity {
+public class Wraith extends SBGhostEntity implements FlyingEntity {
     public Wraith(EntityType<? extends SBGhostEntity> shade, Level level) {
         super(shade, level);
-        this.xpReward = 8;
-        this.moveControl = new FlyingGhostMovementHelper(this);
+        this.moveControl = new VexLikeMovementHelper(this);
         this.maxUpStep = 15.0F;
     }
 
     @Override
-    public void move(MoverType p_213315_1_, Vec3 p_213315_2_) {
-        super.move(p_213315_1_, p_213315_2_);
+    public void move(MoverType moverType, Vec3 vec3) {
+        super.move(moverType, vec3);
         this.checkInsideBlocks();
     }
 
@@ -48,11 +52,13 @@ public class Wraith extends SBGhostEntity {
     }
 
     protected void registerGoals() {
-        this.goalSelector.addGoal(1, new MeleeAttackGoal(this, 1.0D, true));
+        this.goalSelector.addGoal(0, new FloatGoal(this));
+        this.goalSelector.addGoal(0, new FlyingMeleeAndMagicAttackGoal(this, (ProjectileSpell) SBSpellRegistry.IGNITE, 6));
         this.goalSelector.addGoal(4, new FlyingGhostMoveRandomGoal(this));
-        this.goalSelector.addGoal(7, new LookAtPlayerGoal(this, Player.class, 8.0F));
-        this.goalSelector.addGoal(7, new RandomLookAroundGoal(this));
+        this.goalSelector.addGoal(8, new LookAtPlayerGoal(this, Player.class, 8.0F));
+        this.goalSelector.addGoal(9, new RandomLookAroundGoal(this));
         this.targetSelector.addGoal(1, new HurtByTargetGoal(this));
+        this.targetSelector.addGoal(2, new NearestAttackableTargetGoal(this, Player.class, false));
     }
 
     public static AttributeSupplier.Builder createAttributes() {
@@ -62,6 +68,11 @@ public class Wraith extends SBGhostEntity {
                 .add(Attributes.MOVEMENT_SPEED, 0.2D)
                 .add(Attributes.FOLLOW_RANGE, 48.0D)
                 .add(Attributes.KNOCKBACK_RESISTANCE, 1.0D);
+    }
+
+    protected void defineSynchedData() {
+        super.defineSynchedData();
+        this.entityData.define(VARIANT, 0);
     }
 
     public SoundEvent getAmbientSound() {
@@ -76,17 +87,13 @@ public class Wraith extends SBGhostEntity {
         return SoundEvents.ZOMBIE_HORSE_DEATH;
     }
 
-    protected void defineSynchedData() {
-        super.defineSynchedData();
-        this.entityData.define(VARIANT, 0);
-    }
-
-    public boolean isInvulnerableTo(DamageSource source) {
-        return super.isInvulnerableTo(source) || source.isFire() || source.isProjectile();
-    }
-
     public SpawnGroupData finalizeSpawn(ServerLevelAccessor accessor, DifficultyInstance difficulty, MobSpawnType reason, @Nullable SpawnGroupData spawnData, @Nullable CompoundTag nbt) {
         this.setVariant(this.random.nextInt(4));
         return super.finalizeSpawn(accessor, difficulty, reason, spawnData, nbt);
+    }
+
+    @Override
+    public void playFlyingAttackSound() {
+        this.playSound(SoundEvents.BLAZE_BURN, 1.0F, 1.0F);
     }
 }

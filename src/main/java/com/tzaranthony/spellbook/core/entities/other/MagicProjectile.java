@@ -127,7 +127,7 @@ public class MagicProjectile extends Projectile {
         if (id == 11) {
             return (ProjectileSpell) SBSpellRegistry.FIREWALL;
         } else if (id == 10) {
-            return (ProjectileSpell) SBSpellRegistry.FROST_SPIKES;
+            return (ProjectileSpell) SBSpellRegistry.FROST_WAVE;
         } else if (id == 12) {
             return (ProjectileSpell) SBSpellRegistry.OUTWARD_WINDS;
         } else if (id == 15) {
@@ -146,6 +146,8 @@ public class MagicProjectile extends Projectile {
             return (ProjectileSpell) SBSpellRegistry.ENDER_RIFT;
         } else if (id == 28) {
             return (ProjectileSpell) SBSpellRegistry.RIFT_OF_DARKNESS;
+        } else if (id == 34) {
+            return (ProjectileSpell) SBSpellRegistry.IGNITE;
         } else {
             return (ProjectileSpell) SBSpellRegistry.TIME_SPELL;
         }

@@ -37,7 +37,7 @@ public enum ChanneledElement implements Elements{
 
     @Override
     public MobEffectInstance getMagicEffects() {
-        return  new MobEffectInstance(effect, 400, 0);
+        return  new MobEffectInstance(effect, 400, 1);
     }
 
     @Override

@@ -1,5 +1,6 @@
 package com.tzaranthony.spellbook.core.entities.friendly;
 
+import com.tzaranthony.spellbook.core.entities.ai.NecromancedEntity;
 import com.tzaranthony.spellbook.core.entities.ai.SummonedRangedBowAttackGoal;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
@@ -32,7 +33,7 @@ import javax.annotation.Nullable;
 import java.time.LocalDate;
 import java.time.temporal.ChronoField;
 
-public abstract class SBAbstractFriendlySkeleton extends SBSummonedEntity implements RangedAttackMob {
+public abstract class SBAbstractFriendlySkeleton extends SBSummonedEntity implements RangedAttackMob, NecromancedEntity {
     private final SummonedRangedBowAttackGoal<SBAbstractFriendlySkeleton> bowGoal = new SummonedRangedBowAttackGoal<>(this, 1.0D, 20, 15.0F);
     private final MeleeAttackGoal meleeGoal = new MeleeAttackGoal(this, 1.2D, false) {
         public void stop() {
