@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/cube_bottom_top",
+  "textures": {
+    "bottom": "spellbook:block/rift_generator_bottom",
+    "side": "spellbook:block/rift_generator_side_book",
+    "top": "spellbook:block/rift_generator_top_on"
+  }
+}

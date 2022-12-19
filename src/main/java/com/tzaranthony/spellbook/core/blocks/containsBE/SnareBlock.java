@@ -1,4 +1,4 @@
-package com.tzaranthony.spellbook.core.blocks.spellBlocks;
+package com.tzaranthony.spellbook.core.blocks.containsBE;
 
 import com.tzaranthony.spellbook.core.blocks.SBBlockProperties;
 import net.minecraft.core.BlockPos;
@@ -26,7 +26,7 @@ public class SnareBlock extends Block {
     public static final BooleanProperty POWERED = BlockStateProperties.POWERED;
 
     public SnareBlock() {
-        super(SBBlockProperties.MagicBlock().lightLevel((lightSupplier) -> {return 3;}).sound(SoundType.CHAIN).noCollission());
+        super(SBBlockProperties.MagicBlock().lightLevel((lightSupplier) -> {return 3;}).sound(SoundType.CHAIN).randomTicks());
         this.registerDefaultState(this.stateDefinition.any().setValue(AGE, Integer.valueOf(0)).setValue(POWERED, Boolean.valueOf(false)));
     }
 

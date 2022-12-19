@@ -10,6 +10,7 @@ import com.tzaranthony.spellbook.core.items.arrows.SilverArrowItem;
 import com.tzaranthony.spellbook.core.items.creative.SpellBookCreative;
 import com.tzaranthony.spellbook.core.items.creative.SpellDebug;
 import com.tzaranthony.spellbook.core.items.food.*;
+import com.tzaranthony.spellbook.core.items.items.CoordinationTome;
 import com.tzaranthony.spellbook.core.items.items.PhoenixAshes;
 import com.tzaranthony.spellbook.core.items.mainEquipment.*;
 import com.tzaranthony.spellbook.core.items.otherEquipment.*;
@@ -64,6 +65,7 @@ public class SBItems {
     // misc tools
     public static final RegistryObject<Item> SPELL_PAPER = reg.register("spell_paper", () -> new SpellPaper());
     public static final RegistryObject<Item> NETHERITE_HORSE_ARMOR =reg.register("netherite_horse_armor", () -> new SBHorseArmor(15, "netherite", SBItemProperties.Unburnable(1)));
+    //TODO: add modded mat horse armor
 //    public static final RegistryObject<Item> OLD_KEY = reg.register("old_key", () -> new Item(SBItemProperties.Standard(Rarity.RARE, 1))); //TODO: idk what to do with this
     public static final RegistryObject<Item> BOOKMARK = reg.register("bookmark", () -> new Item(SBItemProperties.Standard(Rarity.RARE, 1)));
     public static final RegistryObject<Item> TOTEM_OF_AVENGING = reg.register("totem_of_avenging", () -> new Item(SBItemProperties.Standard(Rarity.RARE, 1)));
@@ -74,7 +76,7 @@ public class SBItems {
     public static final RegistryObject<Item> XP_BOOK = reg.register("xp_book", () -> new XPBook());
 
     // register utility books
-    public static final RegistryObject<Item> TOME_OF_COORDINATION = reg.register("tome_of_coordination", () -> new Item(SBItemProperties.Standard(Rarity.RARE, 1))); //TODO: Used to coordinate teleporters?
+    public static final RegistryObject<Item> TOME_OF_COORDINATION = reg.register("tome_of_coordination", () -> new CoordinationTome());
     public static final RegistryObject<Item> DIMENSIONAL_CODEX = reg.register("dimensional_codex", () -> new Item(SBItemProperties.Standard(Rarity.UNCOMMON, 1))); //TODO: Used to store autocrafting recipies. Stores up to 16?
     public static final RegistryObject<Item> RESEARCH_BOOK = reg.register("research_book", () -> new ResearchBook(SBItemProperties.Standard(Rarity.UNCOMMON, 1))); //TODO: Create research point system
 
@@ -213,7 +215,6 @@ public class SBItems {
     public static final RegistryObject<Item> INSPIRATION_DEBUG = reg.register("inspiration_debug", () -> new SpellDebug(SBSpellRegistry.INSPIRATION));
     public static final RegistryObject<Item> LIFE_STEAL_DEBUG = reg.register("life_steal_debug", () -> new SpellDebug(SBSpellRegistry.LIFE_STEAL, 8));
     public static final RegistryObject<Item> SOULBIND_DEBUG = reg.register("soulbind_debug", () -> new SpellDebug(SBSpellRegistry.SOULBIND));
-    public static final RegistryObject<Item> ENDER_RIFT_DEBUG = reg.register("ender_rift_debug", () -> new SpellDebug(SBSpellRegistry.ENDER_RIFT));
     public static final RegistryObject<Item> RIFT_OF_DARKNESS_DEBUG = reg.register("dark_rift_debug", () -> new SpellDebug(SBSpellRegistry.RIFT_OF_DARKNESS));
     public static final RegistryObject<Item> TIME_DEBUG = reg.register("time_debug", () -> new SpellDebug(SBSpellRegistry.TIME_SPELL));
 

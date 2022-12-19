@@ -43,4 +43,9 @@ public class SBBlockEntities {
 
     public static final RegistryObject<BlockEntityType<TimerBE>> TIMER = reg.register("timer",
             () -> BlockEntityType.Builder.of(TimerBE::new, SBBlocks.TIMER.get()).build(null));
+
+    public static final RegistryObject<BlockEntityType<RiftGeneratorBE>> RIFT_GENERATOR = reg.register("teleporter",
+            () -> BlockEntityType.Builder.of(RiftGeneratorBE::new, SBBlocks.RIFT_GENERATOR.get()).build(null));
+    public static final RegistryObject<BlockEntityType<RiftBE>> RIFT = reg.register("rift",
+            () -> BlockEntityType.Builder.of(RiftBE::new, SBBlocks.RIFT.get()).build(null));
 }

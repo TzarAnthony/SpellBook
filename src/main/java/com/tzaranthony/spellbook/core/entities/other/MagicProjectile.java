@@ -142,8 +142,6 @@ public class MagicProjectile extends Projectile {
             return (ProjectileSpell) SBSpellRegistry.LIFE_STEAL;
         } else if (id == 26) {
             return (ProjectileSpell) SBSpellRegistry.SOULBIND;
-        } else if (id == 27) {
-            return (ProjectileSpell) SBSpellRegistry.ENDER_RIFT;
         } else if (id == 28) {
             return (ProjectileSpell) SBSpellRegistry.RIFT_OF_DARKNESS;
         } else if (id == 34) {

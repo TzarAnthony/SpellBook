@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "enabled=false,has_book=false": {
+      "model": "spellbook:block/rift_generator_off_empty"
+    },
+    "enabled=false,has_book=true": {
+      "model": "spellbook:block/rift_generator_off"
+    },
+    "enabled=true": {
+      "model": "spellbook:block/rift_generator_on"
+    }
+  }
+}

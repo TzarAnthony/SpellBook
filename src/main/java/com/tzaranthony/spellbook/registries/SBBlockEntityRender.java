@@ -16,5 +16,6 @@ public class SBBlockEntityRender {
         BlockEntityRenderers.register(SBBlockEntities.PEDESTAL_STILL_GLOW.get(), PedestalRenderStillGlow::new);
         BlockEntityRenderers.register(SBBlockEntities.DIMENSIONAL_BE.get(), DimensionalRender::new);
         BlockEntityRenderers.register(SBBlockEntities.ALTER.get(), AlterRender::new);
+        BlockEntityRenderers.register(SBBlockEntities.RIFT.get(), RiftRenderer::new);
     }
 }

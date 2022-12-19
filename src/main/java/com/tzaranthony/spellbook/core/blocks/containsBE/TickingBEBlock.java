@@ -14,8 +14,8 @@ import net.minecraft.world.level.block.state.BlockState;
 import javax.annotation.Nullable;
 
 public abstract class TickingBEBlock extends Block implements EntityBlock {
-    protected TickingBEBlock(BlockBehaviour.Properties p_49224_) {
-        super(p_49224_);
+    protected TickingBEBlock(BlockBehaviour.Properties properties) {
+        super(properties);
     }
 
     public RenderShape getRenderShape(BlockState p_49232_) {

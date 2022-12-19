@@ -5,7 +5,7 @@ import net.minecraft.world.effect.MobEffects;
 
 public class SBSpellRegistry {
     // summoning
-    public static final Spell GROWTH = new GrowthSpell(1, "growth", SpellTier.NOVICE); //TODO: might need to be improved?
+    public static final Spell GROWTH = new GrowthSpell(1, "growth", SpellTier.NOVICE);
     public static final Spell ANIMAL_SUMMONING = new AnimalSummoning(2, "animal_summoning", SpellTier.NOVICE);
     public static final Spell NECROMANCY_1 = new TamingSummoningSpell(3, "necromancy_1", SpellTier.NOVICE, SBEntities.SUMMONED_ZOMBIE);
     public static final Spell NECROMANCY_2 = new TamingSummoningSpell(4, "necromancy_2", SpellTier.PRACTITIONER, SBEntities.SUMMONED_SKELLY);
@@ -31,13 +31,12 @@ public class SBSpellRegistry {
     public static final Spell DARK_SNARE = new Snare(24, "dark_snare", SpellTier.MASTERY);
     public static final Spell LIFE_STEAL = new LifeSteal(25, "life_steal", SpellTier.MASTERY);
     public static final Spell SOULBIND = new Binding(26, "soulbind", SpellTier.MASTERY); //TODO: binds and entity with a magical lead. can be attached to a fence, wall or alter (for ritual purposes)
-    public static final Spell ENDER_RIFT = new EnderRift(27, "ender_rift", SpellTier.MASTERY, SBBlocks.ENDER_RIFT); //TODO: creates linked portals (portal gun), maybe can make more than one pair??
     public static final Spell RIFT_OF_DARKNESS = new DarkRift(28, "rift_of_darkness", SpellTier.MASTERY, SBBlocks.BLACK_HOLE); //TODO: sucks entities into a specific spot
     public static final Spell TIME_SPELL = new Time(29, "time_spell", SpellTier.MASTERY, SBBlocks.TIMER); //TODO: can permanently de-age mobs
     public static final Spell OBJECT_ENCHANTMENT = new Spell(30, "object_enchantment", SpellTier.PRACTITIONER); //TODO: enchants crafting table for auto-crafting, enchants hoppers to make super fast hoppers, enchants enchanting table for auto-enchanting
     //TODO: shapeshifting?
 
-    //TODO: change to be a block
+    //TODO: add block
     public static final Spell ACTION_SPELL = new Spell(31, "action_spell", SpellTier.PRACTITIONER); //TODO: performs a given spell (requires marked spell paper) as specified by a command spell
     public static final Spell DETECTOR_SPELL = new Spell(32, "detector_spell", SpellTier.PRACTITIONER); //TODO: detects when entities are in a region, or detects redstone state changes
     public static final Spell COMMAND_SPELL = new Spell(33, "command_spell", SpellTier.PRACTITIONER); //TODO: informs an action spell when to act

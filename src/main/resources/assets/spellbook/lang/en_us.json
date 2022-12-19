@@ -66,8 +66,8 @@
   "block.spellbook.gray_pedestal_still": "Stone Pedestal",
   "block.spellbook.gray_pedestal_glow_spin": "Spinning Glowing Stone Pedestal",
   "block.spellbook.gray_pedestal_glow_still": "Glowing Stone Pedestal",
+  "block.spellbook.rift_generator": "Rift Generator",
 
-  "block.spellbook.exchanger": "Exchanger",
   "block.spellbook.end_campfire": "End Campfire",
   "block.spellbook.end_lantern": "End Lantern",
   "block.spellbook.end_torch": "End Torch",
@@ -318,6 +318,8 @@
   "tooltip.spellbook.normal_mode": "Mines normally",
   "tooltip.spellbook.area_mode": "Mines ",
   "tooltip.spellbook.vein_mode": "Vine mines",
+  "tooltip.spellbook.coord_tome": "Dimension: ",
+  "tooltip.spellbook.coord_tome1": "Bound to: ",
 
   "container.spellbook.alchemical_furnace": "Alchemical Furnace",
   "container.spellbook.alchemical_foundry": "Alchemical Foundry",

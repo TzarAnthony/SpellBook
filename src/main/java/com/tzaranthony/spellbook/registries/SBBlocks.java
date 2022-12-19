@@ -8,9 +8,9 @@ import com.tzaranthony.spellbook.core.blocks.fire.EndFire;
 import com.tzaranthony.spellbook.core.blocks.fire.SBTorch;
 import com.tzaranthony.spellbook.core.blocks.fire.SBWallTorch;
 import com.tzaranthony.spellbook.core.blocks.plant.*;
-import com.tzaranthony.spellbook.core.blocks.spellBlocks.BlackHole;
-import com.tzaranthony.spellbook.core.blocks.spellBlocks.SnareBlock;
-import com.tzaranthony.spellbook.core.blocks.spellBlocks.TimerBlock;
+import com.tzaranthony.spellbook.core.blocks.containsBE.BlackHole;
+import com.tzaranthony.spellbook.core.blocks.containsBE.SnareBlock;
+import com.tzaranthony.spellbook.core.blocks.containsBE.TimerBlock;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
@@ -39,8 +39,6 @@ public class SBBlocks {
     public static final RegistryObject<Block> NETHER_BUSH = reg.register("nether_bush", () -> new LavaBerries(SBBlockProperties.TickingLavaPlant(Material.PLANT, SoundType.WEEPING_VINES))); //TODO: fix generation
     public static final RegistryObject<Block> TERRAN_BUSH = reg.register("terran_bush", () -> new StoneBerries(SBBlockProperties.TickingPlant(Material.PLANT, SoundType.SWEET_BERRY_BUSH)));
     public static final RegistryObject<Block> NUBIBUS_BUSH = reg.register("nubibus_bush", () -> new HeightBerries(SBBlockProperties.TickingPlant(Material.PLANT, SoundType.SWEET_BERRY_BUSH)));
-    //TODO: succulent poofball plants for the new dimension. The poofballs can explode and accelerate the player in a direction
-    //TODO: coral like plant with fruit
 
     // storage blocks
     public static final RegistryObject<Block> SILVER_BLOCK = registerBlockAndItem("silver_block", () -> new Block(SBBlockProperties.StandardMetal()));
@@ -95,12 +93,6 @@ public class SBBlocks {
     public static final RegistryObject<Block> POTION_SEPARATOR = registerBlockAndItem("potion_separator", () -> new Block(SBBlockProperties.StandardRock())); //TODO: separates a mix of potions into their components
     public static final RegistryObject<Block> ENCHANTED_CRAFTING_TABLES = registerBlockAndRareItem("enchanted_crafting_table", () -> new Block(SBBlockProperties.StandardRock()), Rarity.UNCOMMON); //TODO: Autocrafts items
     //TODO: Enchanted Hopper -- faster transfer rate -- bnlacklist whitelist?
-//    public static final RegistryObject<Block> DIMENSIONAL_DIRECTORY = registerBlockAndRareItem("dimensional_directory", () -> new Block(SBBlockProperties.StandardRock()), Rarity.RARE); //TODO: Created by placing a Tome of Coordination in a Lectern -- drops the book and a lectern when broken -- like an ME Controler + Monitor
-//    public static final RegistryObject<Block> NEOPHYTE_BOOKSHELF = registerBlockAndItem("neophyte_bookshelf", () -> new Block(SBBlockProperties.StandardRock())); //TODO: these store 4 Dimensional Codicies -- like an upgradable ME Drive
-//    public static final RegistryObject<Block> ENCHANTED_BOOKSHELF = registerBlockAndItem("enchanted_bookshelf", () -> new Block(SBBlockProperties.StandardRock())); //TODO: these store 8 Dimensional Codicies
-//    public static final RegistryObject<Block> CRYSTAL_BOOKSHELF = registerBlockAndItem("crystal_bookshelf", () -> new Block(SBBlockProperties.StandardRock())); //TODO: these store 16 Dimensional Codicies
-//    public static final RegistryObject<Block> ENDER_BOOKSHELF = registerBlockAndItem("ender_bookshelf", () -> new Block(SBBlockProperties.StandardRock())); //TODO: these store 32 Dimensional Codicies
-//    public static final RegistryObject<Block> EXCHANGER = registerBlockAndItem("exchanger", () -> new Block(SBBlockProperties.StandardRock())); //TODO: a RegistryObject<Block> where librarian Golems (or pipes) can collect and deposit items
 
     // pedestals
     public static final RegistryObject<Block> PEDESTAL_SPIN = registerBlockAndItem("pedestal_spin", () -> new Pedestal(true, false, SBBlockProperties.StandardRock().noOcclusion()));
@@ -118,15 +110,14 @@ public class SBBlocks {
 
     // movement blocks
     //TODO: sling that accelerates the user rapidly in a direction
-    public static final RegistryObject<Block> RIFT_GENERATOR = registerBlockAndItem("rift_generator", () -> new Teleporter(SBBlockProperties.StandardRock().noOcclusion()));
-    //TODO: buildable teleporters -- range increases with ender crystals around it?
+    public static final RegistryObject<Block> RIFT_GENERATOR = registerBlockAndItem("rift_generator", () -> new RiftGenerator(SBBlockProperties.StandardRock().noOcclusion()));
+    public static final RegistryObject<Block> RIFT = reg.register("rift", () -> new Rift());
     //TODO: buildable levatator elevator?? like in subnautica? -- keeps going until either the last powered or the end
-    //TODO: cursed painting.... idk what it does yet
+    //TODO: cursed painting.... idk what it does yet -- traps ghosts???
 
     // spell blocks
     public static final RegistryObject<Block> SNARE = reg.register("snare", () -> new SnareBlock());
     public static final RegistryObject<Block> BLACK_HOLE = reg.register("dark_rift", () -> new BlackHole());
-    public static final RegistryObject<Block> ENDER_RIFT = reg.register("ender_rift", () -> new Block(SBBlockProperties.StandardRock()));
     public static final RegistryObject<Block> TIMER = reg.register("timer", () -> new TimerBlock());
 
     // end fire stuff
@@ -136,7 +127,10 @@ public class SBBlocks {
     public static final RegistryObject<Block> END_WALL_TORCH = reg.register("end_wall_torch", () -> new SBWallTorch(SBBlockProperties.WallTorch(10, END_TORCH.get()), ParticleTypes.SOUL_FIRE_FLAME));
     public static final RegistryObject<Block> END_FIRE = reg.register("end_fire", () -> new EndFire(MaterialColor.EMERALD, 10));
 
+    // new dimension
     //TODO: portal to a new dimension. Trade first, tp later????
+    //TODO: succulent poofball plants for the new dimension. The poofballs can explode and accelerate the player in a direction
+    //TODO: coral like plant with fruit
 
     public static RegistryObject<Block> registerBlockAndUnburnableItem(String name, Supplier<Block> block) {
         RegistryObject<Block> blockObj = reg.register(name, block);

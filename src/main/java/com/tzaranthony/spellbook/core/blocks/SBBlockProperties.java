@@ -172,11 +172,11 @@ public class SBBlockProperties {
     }
 
     public static BlockBehaviour.Properties MagicBlock() {
-        return BlockBehaviour.Properties.of(Material.EXPLOSIVE)
+        return BlockBehaviour.Properties.of(Material.PORTAL)
                 .strength(-1.0F, 3600000.0F)
                 .noDrops()
-                .isValidSpawn(SBBlockProperties::never)
-                .randomTicks();
+                .noCollission()
+                .isValidSpawn(SBBlockProperties::never);
     }
 
     private static Boolean never(BlockState p_235427_0_, BlockGetter p_235427_1_, BlockPos p_235427_2_, EntityType<?> p_235427_3_) {
