@@ -7,12 +7,8 @@ import net.minecraft.core.NonNullList;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.Mth;
-import net.minecraft.world.effect.MobEffects;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
@@ -27,33 +23,17 @@ import net.minecraftforge.fml.common.Mod;
 
 @Mod.EventBusSubscriber(modid = SpellBook.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class SBToolUtils {
-    public static float getExtraAttackDmg(Player player, LivingEntity target) {
-        float f = (float)player.getAttributeValue(Attributes.ATTACK_DAMAGE);
-        float f1;
-        f1 = EnchantmentHelper.getDamageBonus(player.getMainHandItem(), target.getMobType());
-        float f2 = player.getAttackStrengthScale(0.5F);
-        f *= 0.2F + f2 * f2 * 0.8F;
-        f1 *= f2;
-
-        if (f > 0.0F || f1 > 0.0F) {
-            boolean flag = f2 > 0.9F;
-
-            boolean flag2 = flag && player.fallDistance > 0.0F && !player.isOnGround() && !player.onClimbable() && !player.isInWater() && !player.hasEffect(MobEffects.BLINDNESS) && !player.isPassenger() && !player.isSprinting();
-            net.minecraftforge.event.entity.player.CriticalHitEvent hitResult = net.minecraftforge.common.ForgeHooks.getCriticalHit(player, target, flag2, flag2 ? 1.5F : 1.0F);
-            flag2 = hitResult != null;
-            if (flag2) {
-                f *= hitResult.getDamageModifier();
-            }
-            f += f1;
-        }
-        return f;
-    }
-
     // Earth is vein mine, air is 3x3, water is 1, fire is auto smelt
-    //TODO: add changing for stacks (as an interface? {probs change the channeling to an interface too})
     @SubscribeEvent
-    static void onHarvest(BlockEvent.BreakEvent event) {
-        //TODO: move the modifiers to here instead of the items
+    //TODO: move the modifiers to here instead of the items
+    static void onBreakEvent(BlockEvent.BreakEvent event) {
+//        ItemStack stack = event.getPlayer().getMainHandItem();
+//        if (stack.getItem() instanceof MiningModeTool mmItem && !event.getPlayer().level.isClientSide()) {
+//            ServerPlayer player = (ServerPlayer) event.getPlayer();
+//            ServerLevel level = (ServerLevel) event.getPlayer().level;
+//            event.getPos();
+//            mmItem.mineBlocks(stack, level, player, event.getPos());
+//        }
     }
 
     public static void veinMine(ServerLevel level, ServerPlayer player, BlockPos pos, Block originBlock, int breakCount) {

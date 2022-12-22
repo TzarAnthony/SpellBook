@@ -23,10 +23,7 @@ public class LifeSteal extends ProjectileSpell {
 
     @Override
     public boolean perform_spell(Entity usr, Entity tgt) {
-        if (usr instanceof LivingEntity && tgt instanceof LivingEntity) {
-            LivingEntity target = ((LivingEntity) tgt);
-            LivingEntity user = ((LivingEntity) usr);
-
+        if (usr instanceof LivingEntity user && tgt instanceof LivingEntity target) {
             float thp = target.getHealth();
             float stealAmt = 2.0F;
             if (thp < stealAmt) {

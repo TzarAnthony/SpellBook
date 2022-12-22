@@ -7,6 +7,7 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.TamableAnimal;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
@@ -39,7 +40,7 @@ public class SnareBlock extends Block {
     }
 
     public void entityInside(BlockState state, Level level, BlockPos pos, Entity entity) {
-        if (entity instanceof LivingEntity && !((entity instanceof Player && ((Player) entity).isCreative()))) {
+        if (entity instanceof LivingEntity && !(entity instanceof Player || (entity instanceof TamableAnimal ta && !ta.isTame()))) {
             entity.setPos(new Vec3(pos.getX() + 0.5D, pos.getY(), pos.getZ() + 0.5D));
             entity.makeStuckInBlock(state, new Vec3((double) 0.005F, 0.005F, (double) 0.005F));
             if (!level.isClientSide && !state.getValue(POWERED)) {

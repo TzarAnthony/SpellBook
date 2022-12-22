@@ -35,9 +35,8 @@ public class LifeBottle extends ThickDrink {
     }
 
     @Override
-    public ItemStack finishUsingItem(ItemStack stack, Level level, LivingEntity entityLiving) {
-        entityLiving.getAttribute(Attributes.MAX_HEALTH).setBaseValue(Math.min(entityLiving.getAttributeValue(Attributes.MAX_HEALTH) + 4.0D, 100.0D));
-
-        return super.finishUsingItem(stack, level, entityLiving);
+    public ItemStack finishUsingItem(ItemStack stack, Level level, LivingEntity user) {
+        user.getAttribute(Attributes.MAX_HEALTH).setBaseValue(Math.min(user.getAttributeValue(Attributes.MAX_HEALTH) + 4.0D, 100.0D));
+        return super.finishUsingItem(stack, level, user);
     }
 }

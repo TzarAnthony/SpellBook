@@ -35,8 +35,7 @@ public class RiftGenerator extends TickingBEBlock {
         if (!level.isClientSide() && hand == InteractionHand.MAIN_HAND) {
             BlockEntity blockentity = level.getBlockEntity(pos);
             ItemStack stack = player.getItemInHand(hand);
-            if (blockentity instanceof RiftGeneratorBE) {
-                RiftGeneratorBE riftGen = (RiftGeneratorBE) blockentity;
+            if (blockentity instanceof RiftGeneratorBE riftGen) {
                 boolean changedItem = riftGen.changeItem(player, stack);
                 if (changedItem) {
                     handlePortals(level, pos, state, !changedItem, !riftGen.getItem().isEmpty(), riftGen);
@@ -52,8 +51,7 @@ public class RiftGenerator extends TickingBEBlock {
     public void neighborChanged(BlockState state, Level level, BlockPos thisPos, Block block, BlockPos otherPos, boolean changed) {
         if (!level.isClientSide()) {
             BlockEntity blockentity = level.getBlockEntity(thisPos);
-            if (blockentity instanceof RiftGeneratorBE) {
-                RiftGeneratorBE riftGen = (RiftGeneratorBE) blockentity;
+            if (blockentity instanceof RiftGeneratorBE riftGen) {
                 handlePortals(level, thisPos, state, false, !riftGen.getItem().isEmpty(), riftGen);
             }
         }
@@ -62,8 +60,7 @@ public class RiftGenerator extends TickingBEBlock {
     public void onRemove(BlockState state, Level level, BlockPos pos, BlockState state1, boolean opt) {
         if (!state.is(state1.getBlock())) {
             BlockEntity blockentity = level.getBlockEntity(pos);
-            if (blockentity instanceof RiftGeneratorBE) {
-                RiftGeneratorBE riftGen = (RiftGeneratorBE) blockentity;
+            if (blockentity instanceof RiftGeneratorBE riftGen) {
                 handlePortals(level, pos, state, false, false, riftGen);
                 Containers.dropContents(level, pos, riftGen.getItems());
             }
@@ -105,8 +102,7 @@ public class RiftGenerator extends TickingBEBlock {
 
         level.setBlock(pos, state.setValue(HAS_BOOK, Boolean.valueOf(book)).setValue(ENABLED, Boolean.valueOf(active)), 2);
         BlockEntity blockentity = level.getBlockEntity(pos);
-        if (blockentity instanceof RiftGeneratorBE) {
-            RiftGeneratorBE riftGen = (RiftGeneratorBE) blockentity;
+        if (blockentity instanceof RiftGeneratorBE riftGen) {
             riftGen.updatePortals(active);
             return true;
         }

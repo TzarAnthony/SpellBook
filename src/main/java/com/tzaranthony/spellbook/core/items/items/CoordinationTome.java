@@ -43,7 +43,7 @@ public class CoordinationTome extends Item {
         Player player = context.getPlayer();
         ItemStack bag = context.getItemInHand();
         CompoundTag tag = bag.getOrCreateTag();
-        if (player.isCrouching()) {
+        if (player.isShiftKeyDown()) {
             this.setTags(level, blockpos.above(), tag);
             return InteractionResult.sidedSuccess(level.isClientSide);
         } else {

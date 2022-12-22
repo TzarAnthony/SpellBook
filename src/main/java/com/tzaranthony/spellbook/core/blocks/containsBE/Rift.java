@@ -37,26 +37,21 @@ public class Rift extends TickingBEBlock {
 
     public void entityInside(BlockState state, Level level, BlockPos pos, Entity entity) {
         BlockEntity blockentity = level.getBlockEntity(pos);
-        if (level instanceof ServerLevel && blockentity instanceof RiftBE && !entity.isVehicle()) {
-            ServerLevel sLevel = (ServerLevel) level;
-            RiftBE rift = (RiftBE) blockentity;
-
-            if (!entity.isOnPortalCooldown()) {
-                entity.setPortalCooldown();
-                if (rift.getTpDim() != level.dimension() && entity.canChangeDimensions()) {
-                    entity.changeDimension(sLevel.getServer().getLevel(rift.getTpDim()));
-                }
-                Vec3 dir = entity.getDeltaMovement();
-                entity.teleportTo(rift.getTpPos().getX() + 0.5D, rift.getTpPos().getY(), rift.getTpPos().getZ() + 0.5D);
-                if (rift.getTpDim() == level.dimension()) {
-                    level.playSound((Player) null, pos.getX(), pos.getY(), pos.getZ(), SoundEvents.PORTAL_TRIGGER, SoundSource.PLAYERS, 1.0F, 0.25F);
-                    entity.playSound(SoundEvents.PORTAL_TRAVEL, 1.0F, 0.25F);
-                }
-//                entity.setPos(new Vec3(pos.getX() + 0.5D, pos.getY(), pos.getZ() + 0.5D));
-                entity.setDeltaMovement(dir);
-            } else {
-                entity.setPortalCooldown();
+        if (level instanceof ServerLevel sLevel && blockentity instanceof RiftBE rift && !entity.isVehicle() && !entity.isOnPortalCooldown()) {
+            entity.setPortalCooldown();
+            if (rift.getTpDim() != level.dimension() && entity.canChangeDimensions()) {
+                entity.changeDimension(sLevel.getServer().getLevel(rift.getTpDim()));
             }
+            Vec3 dir = entity.getDeltaMovement();
+            entity.teleportTo(rift.getTpPos().getX() + 0.5D, rift.getTpPos().getY(), rift.getTpPos().getZ() + 0.5D);
+            if (rift.getTpDim() == level.dimension()) {
+                level.playSound((Player) null, pos.getX(), pos.getY(), pos.getZ(), SoundEvents.PORTAL_TRIGGER, SoundSource.PLAYERS, 1.0F, 0.25F);
+                entity.playSound(SoundEvents.PORTAL_TRAVEL, 1.0F, 0.25F);
+            }
+//                entity.setPos(new Vec3(pos.getX() + 0.5D, pos.getY(), pos.getZ() + 0.5D));
+            entity.setDeltaMovement(dir);
+        } else {
+            entity.setPortalCooldown();
         }
     }
 

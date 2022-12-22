@@ -1,7 +1,7 @@
 package com.tzaranthony.spellbook.client.itemRender;
 
 import com.tzaranthony.spellbook.SpellBook;
-import com.tzaranthony.spellbook.core.items.otherEquipment.ResearchBook;
+import com.tzaranthony.spellbook.core.items.equipment.equipmentOther.ResearchBook;
 import com.tzaranthony.spellbook.registries.SBItems;
 import net.minecraft.client.color.item.ItemColors;
 import net.minecraftforge.api.distmarker.Dist;

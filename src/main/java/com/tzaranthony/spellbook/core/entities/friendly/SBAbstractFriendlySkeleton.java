@@ -103,8 +103,7 @@ public abstract class SBAbstractFriendlySkeleton extends SBSummonedEntity implem
 
     public void rideTick() {
         super.rideTick();
-        if (this.getVehicle() instanceof Animal) {
-            Animal vehicle = (Animal) this.getVehicle();
+        if (this.getVehicle() instanceof Animal vehicle) {
             this.yBodyRot = vehicle.yBodyRot;
         }
 

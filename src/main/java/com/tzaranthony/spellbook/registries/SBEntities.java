@@ -14,6 +14,10 @@ import com.tzaranthony.spellbook.core.entities.hostile.vampires.HigherVampirePer
 import com.tzaranthony.spellbook.core.entities.hostile.vampires.LesserVampire;
 import com.tzaranthony.spellbook.core.entities.neutral.GhostHorse;
 import com.tzaranthony.spellbook.core.entities.other.*;
+import com.tzaranthony.spellbook.core.entities.arrows.CrystalArrow;
+import com.tzaranthony.spellbook.core.entities.arrows.EffectCarryingArrow;
+import com.tzaranthony.spellbook.core.entities.arrows.GhostlyArrow;
+import com.tzaranthony.spellbook.core.entities.arrows.SilverArrow;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.level.block.Blocks;

@@ -14,6 +14,7 @@ public class SBDamageSource extends DamageSource {
     private boolean isSoulSource;
 
     // Magic Core
+    //TODO: fix magic damage system
     public static final SBDamageSource FIRE_MAGIC = (SBDamageSource) (new SBDamageSource("fire_magic").setIsFireSource()).setMagic();
     public static final SBDamageSource WATER_MAGIC = (SBDamageSource) (new SBDamageSource("water_magic").setIsWater()).setMagic();
     public static final SBDamageSource EARTH_MAGIC = (SBDamageSource) (new SBDamageSource("earth_magic").setIsEarth()).setMagic();
@@ -22,7 +23,6 @@ public class SBDamageSource extends DamageSource {
     public static final SBDamageSource PSYCHIC_MAGIC = (SBDamageSource) (new SBDamageSource("psychic_magic").setIsPsychic()).setMagic().bypassArmor().bypassMagic();
     public static final SBDamageSource SOUL_MAGIC = (SBDamageSource) (new SBDamageSource("psychic_magic").setIsSoul()).setMagic().bypassArmor().bypassMagic();
     // Inflicted
-    public static final SBDamageSource CURSE = (SBDamageSource) (new SBDamageSource("curse").setIsSoul()).setMagic().bypassArmor();
     public static final SBDamageSource LASER = (SBDamageSource) (new SBDamageSource("laser").setIsVoid()).setMagic().bypassArmor().bypassMagic();
     public static final SBDamageSource FRACTURING = (SBDamageSource) (new SBDamageSource("fracturing").setIsVoid()).setExplosion().bypassMagic();
     // Effects

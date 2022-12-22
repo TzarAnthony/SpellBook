@@ -54,7 +54,7 @@ public class ClumsyEffect extends SBEffect {
         }
 
         affected.setItemSlot(slot, ItemStack.EMPTY);
-        if (affected instanceof Player) {
+        if (affected instanceof ServerPlayer) {
             stack.onDroppedByPlayer((ServerPlayer) affected);
             ItemEntity itemEntity = ForgeHooks.onPlayerTossEvent((ServerPlayer) affected, stack, true);
             itemEntity.setPickUpDelay(20 + (10 * amplifier));

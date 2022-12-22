@@ -30,6 +30,7 @@ public class Pacify extends Spell{
         if (!entities.isEmpty()) {
             for (Mob mob : entities) {
                 if (mob instanceof Villager) {
+                    //TODO: create effect for cooldown?
                     if (player instanceof ServerPlayer && !level.isClientSide()) {
                         ((ServerLevel) level).onReputationEvent(ReputationEventType.ZOMBIE_VILLAGER_CURED, player, (Villager) mob);
                     }

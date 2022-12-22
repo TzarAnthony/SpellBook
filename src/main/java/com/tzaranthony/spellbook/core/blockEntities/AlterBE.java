@@ -8,10 +8,14 @@ import com.tzaranthony.spellbook.registries.SBPackets;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.ListTag;
+import net.minecraft.nbt.Tag;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
-import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -25,12 +29,13 @@ import java.util.List;
 public class AlterBE extends CraftingBE {
     protected String TIER = "AlterTier";
     public static int tier;
-    protected NonNullList<LivingEntity> boundEntitites; //TODO: add entity support
+    protected String LT_ID = "ListDataID";
+    protected String MOB_ID = "MobUUID";
+    protected NonNullList<Mob> boundEntitites;
     protected String CRAFTING = "CraftingStatus";
     protected boolean isCrafting;
     protected String TRANSFER = "TransferCooldown";
     protected int cooldownTime = -1;
-
     protected int filledSlots = 0;
     protected float activeRotation;
     protected float activeSpin;
@@ -55,6 +60,17 @@ public class AlterBE extends CraftingBE {
         this.isCrafting = tag.getBoolean(CRAFTING);
         this.cooldownTime = tag.getInt(TRANSFER);
         this.refreshFilledSlots();
+        if (!this.level.isClientSide() && tag.contains(MOB_ID)) {
+            ListTag lt = tag.getList(MOB_ID, tag.getInt(LT_ID));
+            for (Tag tag1 : lt) {
+                if (tag1 instanceof CompoundTag) {
+                    Entity e = ((ServerLevel) this.level).getEntity(((CompoundTag) tag1).getUUID(MOB_ID));
+                    if (e instanceof Mob) {
+                        this.boundEntitites.add((Mob) e);
+                    }
+                }
+            }
+        }
     }
 
     protected void saveAdditional(CompoundTag tag) {
@@ -62,6 +78,16 @@ public class AlterBE extends CraftingBE {
         tag.putInt(TIER, this.tier);
         tag.putBoolean(CRAFTING, this.isCrafting);
         tag.putInt(TRANSFER, this.cooldownTime);
+        if (!this.level.isClientSide() && !this.boundEntitites.isEmpty()) {
+            ListTag lt = new ListTag();
+            for (Mob mob : this.boundEntitites) {
+                CompoundTag tag1 = new CompoundTag();
+                tag1.putUUID(MOB_ID, mob.getUUID());
+                lt.add(tag1);
+            }
+            tag.putInt(LT_ID, lt.getElementType());
+            tag.put(MOB_ID, lt);
+        }
     }
 
     public void setTier() {
@@ -197,7 +223,7 @@ public class AlterBE extends CraftingBE {
     }
 
     public boolean takeOrAddItem(Player player, ItemStack stack) {
-        if (player.isCrouching()) {
+        if (player.isShiftKeyDown()) {
             for (int i = 0; i < itemHandler.getSlots(); ++i) {
                 ItemStack altStack = itemHandler.extractItem(i, itemHandler.getStackInSlot(i).getCount(), false);
                 if (!altStack.isEmpty()) {
@@ -278,5 +304,17 @@ public class AlterBE extends CraftingBE {
 
     private boolean hasTansferCooldown() {
         return this.cooldownTime > 0;
+    }
+
+    public void addMob(Mob mob) {
+        this.boundEntitites.add(mob);
+    }
+
+    public Mob getMob(int i) {
+        return this.boundEntitites.get(i);
+    }
+
+    public void clearMobs() {
+        this.boundEntitites.clear();
     }
 }

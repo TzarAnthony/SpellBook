@@ -1,7 +1,7 @@
 package com.tzaranthony.spellbook.core.spells;
 
 import com.tzaranthony.spellbook.core.entities.friendly.SBSummonedEntity;
-import com.tzaranthony.spellbook.core.items.SBArmorMaterial;
+import com.tzaranthony.spellbook.core.items.equipment.equipUtils.SBArmorMaterial;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.Mth;

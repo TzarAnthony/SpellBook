@@ -33,8 +33,7 @@ public class SBCampfire extends CampfireBlock {
     @Override
     public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult result) {
         BlockEntity blockentity = level.getBlockEntity(pos);
-        if (blockentity instanceof CampfireBlockEntity) {
-            CampfireBlockEntity campfireblockentity = (CampfireBlockEntity) blockentity;
+        if (blockentity instanceof CampfireBlockEntity campfireblockentity) {
             ItemStack itemstack = player.getItemInHand(hand);
             Optional<CampfireCookingRecipe> optional = campfireblockentity.getCookableRecipe(itemstack);
             if (optional.isPresent()) {

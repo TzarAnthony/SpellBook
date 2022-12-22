@@ -42,19 +42,19 @@ public class RiftRenderer implements BlockEntityRenderer<RiftBE> {
         return LayerDefinition.create(meshdefinition, 8, 20);
     }
 
-    public void render(RiftBE riftBE, float mod, PoseStack poseStack, MultiBufferSource buf, int lightVal, int overlayVal) {
-        poseStack.pushPose();
-        poseStack.translate(0.5D, 1.0D, 0.5D);
-        poseStack.mulPose(Vector3f.YP.rotationDegrees(-this.renderer.camera.getYRot()));
-        poseStack.mulPose(Vector3f.ZP.rotationDegrees(180.0F));
-        this.frame.render(poseStack, buf.getBuffer(RenderType.entityCutout(LOCATION)), 15728880, overlayVal);
-        poseStack.popPose();
+    public void render(RiftBE riftBE, float mod, PoseStack pose, MultiBufferSource buff, int lightVal, int overlayVal) {
+        pose.pushPose();
+        pose.translate(0.5D, 1.0D, 0.5D);
+        pose.mulPose(Vector3f.YP.rotationDegrees(-this.renderer.camera.getYRot()));
+        pose.mulPose(Vector3f.ZP.rotationDegrees(180.0F));
+        this.frame.render(pose, buff.getBuffer(RenderType.entityCutout(LOCATION)), 15728880, overlayVal);
+        pose.popPose();
 
-        poseStack.pushPose();
-        poseStack.translate(0.5D, 1.0D, 0.5D);
-        poseStack.mulPose(Vector3f.YP.rotationDegrees(-this.renderer.camera.getYRot()));
-        poseStack.mulPose(Vector3f.ZP.rotationDegrees(180.0F));
-        this.portal.render(poseStack, buf.getBuffer(RenderType.endGateway()), 15728880, overlayVal);
-        poseStack.popPose();
+        pose.pushPose();
+        pose.translate(0.5D, 1.0D, 0.5D);
+        pose.mulPose(Vector3f.YP.rotationDegrees(-this.renderer.camera.getYRot()));
+        pose.mulPose(Vector3f.ZP.rotationDegrees(180.0F));
+        this.portal.render(pose, buff.getBuffer(RenderType.endGateway()), 15728880, overlayVal);
+        pose.popPose();
     }
 }

@@ -3,12 +3,16 @@ package com.tzaranthony.spellbook.registries;
 import com.tzaranthony.spellbook.SpellBook;
 import com.tzaranthony.spellbook.core.network.FluidS2CPacket;
 import com.tzaranthony.spellbook.core.network.ItemS2CPacket;
+import com.tzaranthony.spellbook.core.network.SoulBindS2CPacket;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraftforge.network.NetworkDirection;
 import net.minecraftforge.network.NetworkRegistry;
 import net.minecraftforge.network.PacketDistributor;
 import net.minecraftforge.network.simple.SimpleChannel;
+import net.minecraftforge.server.ServerLifecycleHooks;
+
+import java.util.Iterator;
 
 public class SBPackets {
     private static SimpleChannel net;
@@ -33,14 +37,30 @@ public class SBPackets {
                 .encoder(ItemS2CPacket::write)
                 .consumer(ItemS2CPacket::handle)
                 .add();
+
+        net.messageBuilder(SoulBindS2CPacket.class, getId(), NetworkDirection.PLAY_TO_CLIENT)
+                .decoder(SoulBindS2CPacket::new)
+                .encoder(SoulBindS2CPacket::write)
+                .consumer(SoulBindS2CPacket::handle)
+                .add();
     }
 
     public static <MSG> void sendToServer(MSG message) {
         net.sendToServer(message);
     }
 
+    public static <MSG> void sendToAllPlayers(MSG message) {
+        Iterator players = ServerLifecycleHooks.getCurrentServer().getPlayerList().getPlayers().iterator();
+
+        while(players.hasNext()) {
+            ServerPlayer player = (ServerPlayer) players.next();
+            sendToPlayer(message, player);
+        }
+    }
+
     public static <MSG> void sendToPlayer(MSG message, ServerPlayer player) {
         net.send(PacketDistributor.PLAYER.with(() -> player), message);
+//        net.sendTo(message, player.connection.connection, NetworkDirection.PLAY_TO_CLIENT);
     }
 
     public static <MSG> void sendToClients(MSG message) {

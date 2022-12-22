@@ -48,8 +48,7 @@ public abstract class FurnaceLikeBE extends BaseEntityBlock {
     public void onRemove(BlockState state, Level level, BlockPos pos, BlockState state1, boolean huh) {
         if (!state.is(state1.getBlock())) {
             BlockEntity blockentity = level.getBlockEntity(pos);
-            if (blockentity instanceof CraftingBE) {
-                CraftingBE craftingBE = (CraftingBE) blockentity;
+            if (blockentity instanceof CraftingBE craftingBE) {
                 if (level instanceof ServerLevel) {
                     craftingBE.dropInventory();
                     craftingBE.dropFluid();

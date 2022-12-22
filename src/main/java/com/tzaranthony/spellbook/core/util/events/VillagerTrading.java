@@ -1,7 +1,7 @@
 package com.tzaranthony.spellbook.core.util.events;
 
 import com.tzaranthony.spellbook.SpellBook;
-import com.tzaranthony.spellbook.core.items.otherEquipment.ResearchBook;
+import com.tzaranthony.spellbook.core.items.equipment.equipmentOther.ResearchBook;
 import com.tzaranthony.spellbook.registries.SBBlocks;
 import com.tzaranthony.spellbook.registries.SBItems;
 import com.tzaranthony.spellbook.registries.SBVillagers;

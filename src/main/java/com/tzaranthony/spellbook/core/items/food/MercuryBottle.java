@@ -43,15 +43,15 @@ public class MercuryBottle extends ThickDrink {
     }
 
     @Override
-    public ItemStack finishUsingItem(ItemStack stack, Level level, LivingEntity entityLiving) {
-        if (entityLiving instanceof ServerPlayer) {
-            if (entityLiving.hasEffect(SBEffects.MERCURY_POISONING.get())) {
-                int amp = entityLiving.getEffect(SBEffects.MERCURY_POISONING.get()).getAmplifier();
-                entityLiving.addEffect(new MobEffectInstance(SBEffects.MERCURY_POISONING.get(), 1200, Math.min(amp + 1, 9)));
+    public ItemStack finishUsingItem(ItemStack stack, Level level, LivingEntity user) {
+        if (user instanceof ServerPlayer) {
+            if (user.hasEffect(SBEffects.MERCURY_POISONING.get())) {
+                int amp = user.getEffect(SBEffects.MERCURY_POISONING.get()).getAmplifier();
+                user.addEffect(new MobEffectInstance(SBEffects.MERCURY_POISONING.get(), 1200, Math.min(amp + 1, 9)));
             } else {
-                entityLiving.addEffect(new MobEffectInstance(SBEffects.MERCURY_POISONING.get(), 1200));
+                user.addEffect(new MobEffectInstance(SBEffects.MERCURY_POISONING.get(), 1200));
             }
         }
-        return super.finishUsingItem(stack, level, entityLiving);
+        return super.finishUsingItem(stack, level, user);
     }
 }

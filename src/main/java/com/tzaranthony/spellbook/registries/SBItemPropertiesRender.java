@@ -10,10 +10,12 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 @OnlyIn(Dist.CLIENT)
 public class SBItemPropertiesRender extends ItemProperties {
     public static void renderItemProperties() {
+        // Elemental tools
         registerGeneric(new ResourceLocation("magicelement"), (p_174625_, p_174626_, p_174627_, p_174628_) -> {
             return getIntTag(p_174625_, "ToolElement");
         });
 
+        // Bow
         registerGeneric(new ResourceLocation("pull"), (p_174635_, p_174636_, p_174637_, p_174638_) -> {
             if (p_174637_ == null) {
                 return 0.0F;
@@ -21,15 +23,16 @@ public class SBItemPropertiesRender extends ItemProperties {
                 return p_174637_.getUseItem() != p_174635_ ? 0.0F : (float)(p_174635_.getUseDuration() - p_174637_.getUseItemRemainingTicks()) / 20.0F;
             }
         });
-
         registerGeneric(new ResourceLocation("pulling"), (p_174630_, p_174631_, p_174632_, p_174633_) -> {
             return p_174632_ != null && p_174632_.isUsingItem() && p_174632_.getUseItem() == p_174630_ ? 1.0F : 0.0F;
         });
 
+        // Spellbook
         registerGeneric(new ResourceLocation("bookmarkedbook"), (p_174625_, p_174626_, p_174627_, p_174628_) -> {
             return getBooleanTag(p_174625_, "bookmarked");
         });
 
+        // Death Bouquet
         registerGeneric(new ResourceLocation("activatedbouquet"), (p_174625_, p_174626_, p_174627_, p_174628_) -> {
             return getBooleanTag(p_174625_, "UltraDeathActive");
         });

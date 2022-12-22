@@ -6,7 +6,6 @@ import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.player.Player;
 
 import javax.annotation.Nullable;
 
@@ -25,7 +24,7 @@ public class SBInstantEffect  extends MobEffect {
 
     @Override
     public void applyEffectTick(LivingEntity affected, int amplifier) {
-        if (affected instanceof Player) {
+        if (affected instanceof ServerPlayer) {
             ((ServerPlayer) affected).resetStat(Stats.CUSTOM.get(Stats.TIME_SINCE_REST));
         }
     }

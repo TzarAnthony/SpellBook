@@ -64,8 +64,7 @@ public class Pedestal extends TickingBEBlock {
 
     public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult result) {
         BlockEntity blockentity = level.getBlockEntity(pos);
-        if (blockentity instanceof PedestalBE) {
-            PedestalBE pedestal = (PedestalBE) blockentity;
+        if (blockentity instanceof PedestalBE pedestal) {
             ItemStack itemstack = player.getItemInHand(hand);
             if (!level.isClientSide) {
                 pedestal.changeItem(player, itemstack);

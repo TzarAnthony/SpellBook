@@ -25,6 +25,7 @@ import net.minecraftforge.registries.RegistryObject;
 import java.lang.reflect.Field;
 import java.util.List;
 
+//TODO: change potions fluids to use color operations. A single generic potion fluid that can change color and attributes.
 public class SBFluids {
     // bases
     public static final PotionFluidRegistry MUNDANE = new PotionFluidRegistry("mundane", Potions.MUNDANE, 500, 400, 0, 0);

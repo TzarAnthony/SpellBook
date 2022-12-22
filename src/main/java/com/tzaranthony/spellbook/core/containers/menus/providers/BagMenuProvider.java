@@ -2,7 +2,7 @@ package com.tzaranthony.spellbook.core.containers.menus.providers;
 
 import com.tzaranthony.spellbook.core.containers.menus.ArchitectBagMenu;
 import com.tzaranthony.spellbook.core.containers.menus.BuilderBagMenu;
-import com.tzaranthony.spellbook.core.items.otherEquipment.ArchitectBag;
+import com.tzaranthony.spellbook.core.items.equipment.equipmentOther.ArchitectBag;
 import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
@@ -155,6 +155,7 @@ public class BagMenuProvider implements MenuProvider, Container {
         this.items.clear();
     }
 
+    // TODO: upgrade stack limit to 1024. Maybe more?
 //    @Override
 //    public int getMaxStackSize() {
 //        return 1024;

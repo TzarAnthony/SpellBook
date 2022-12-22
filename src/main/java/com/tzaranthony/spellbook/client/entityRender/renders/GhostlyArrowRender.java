@@ -1,6 +1,6 @@
 package com.tzaranthony.spellbook.client.entityRender.renders;
 
-import com.tzaranthony.spellbook.core.entities.other.GhostlyArrow;
+import com.tzaranthony.spellbook.core.entities.arrows.GhostlyArrow;
 import net.minecraft.client.renderer.entity.ArrowRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.resources.ResourceLocation;

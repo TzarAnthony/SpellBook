@@ -33,11 +33,11 @@ public class Scream extends ProjectileSpell {
 
     @Override
     public boolean perform_spell(Entity user, Entity target) {
-        if (user instanceof LivingEntity && target instanceof LivingEntity) {
-            ((LivingEntity) target).hurt(SBDamageSource.scream(((LivingEntity) user)), 10.0F);
-            ((LivingEntity) target).addEffect(new MobEffectInstance(SBEffects.CONCUSSED.get(), 600, 0));
-            ((LivingEntity) target).addEffect(new MobEffectInstance(MobEffects.BLINDNESS, 90, 0));
-            ((LivingEntity) target).addEffect(new MobEffectInstance(MobEffects.CONFUSION, 30, 0));
+        if (user instanceof LivingEntity && target instanceof LivingEntity tgt) {
+            tgt.hurt(SBDamageSource.scream(((LivingEntity) user)), 10.0F);
+            tgt.addEffect(new MobEffectInstance(SBEffects.CONCUSSED.get(), 600, 0));
+            tgt.addEffect(new MobEffectInstance(MobEffects.BLINDNESS, 90, 0));
+            tgt.addEffect(new MobEffectInstance(MobEffects.CONFUSION, 30, 0));
             if (target instanceof Player) {
                 target.level.playSound((Player) target, target.getX(), target.getY(), target.getZ(), SoundEvents.CONDUIT_AMBIENT, SoundSource.NEUTRAL, 10.0F, 1.0F);
             }

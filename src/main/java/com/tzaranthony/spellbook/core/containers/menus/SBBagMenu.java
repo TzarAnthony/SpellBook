@@ -1,7 +1,7 @@
 package com.tzaranthony.spellbook.core.containers.menus;
 
 import com.tzaranthony.spellbook.core.containers.slots.SBBagSlot;
-import com.tzaranthony.spellbook.core.items.otherEquipment.BuilderBag;
+import com.tzaranthony.spellbook.core.items.equipment.equipmentOther.BuilderBag;
 import net.minecraft.world.Container;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;

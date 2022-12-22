@@ -5,6 +5,7 @@ import net.minecraft.world.entity.monster.piglin.AbstractPiglin;
 import net.minecraft.world.entity.monster.piglin.PiglinArmPose;
 import net.minecraft.world.level.Level;
 
+//TODO: create
 public class PiglinMage extends AbstractPiglin {
 //    private static final DataParameter<Boolean> DATA_IS_DANCING = EntityDataManager.defineId(PiglinEntity.class, DataSerializers.BOOLEAN);
 //    private final Inventory inventory = new Inventory(8);

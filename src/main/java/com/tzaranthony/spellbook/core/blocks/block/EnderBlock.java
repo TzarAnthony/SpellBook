@@ -18,6 +18,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 
+//TODO: remove? move to dimensional block?
 public class EnderBlock extends Block {
     public EnderBlock(float resistance) {
         super(SBBlockProperties.NetheriteBasedBlock(resistance));

@@ -4,6 +4,7 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.TamableAnimal;
 import net.minecraft.world.level.Level;
 
+// TODO create -- stage 2????
 public class PlayerIllusion extends SBSummonedEntity {
     public PlayerIllusion(EntityType<? extends TamableAnimal> entity, Level level) {
         super(entity, level);

@@ -31,8 +31,7 @@ public class PotionFluidBlock extends LiquidBlock {
     @Override
     public void entityInside(BlockState state, Level level, BlockPos pos, Entity entityIn) {
         if (!level.isClientSide) {
-            if (entityIn instanceof LivingEntity) {
-                LivingEntity livingentity = (LivingEntity) entityIn;
+            if (entityIn instanceof LivingEntity livingentity) {
                 if (state.getFluidState().isSource()) {
                     // Make fluid block give all effects of potion
                     for (MobEffectInstance effect : this.EFFECTS)

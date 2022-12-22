@@ -27,10 +27,10 @@ public class Drink extends Item {
         this.alwaysFoil = alwaysFoil;
     }
 
-    public ItemStack finishUsingItem(ItemStack stack, Level level, LivingEntity entityLiving) {
-        super.finishUsingItem(stack, level, entityLiving);
-        if (entityLiving instanceof ServerPlayer) {
-            ServerPlayer serverPlayer = (ServerPlayer) entityLiving;
+    public ItemStack finishUsingItem(ItemStack stack, Level level, LivingEntity user) {
+        super.finishUsingItem(stack, level, user);
+        if (user instanceof ServerPlayer) {
+            ServerPlayer serverPlayer = (ServerPlayer) user;
             CriteriaTriggers.CONSUME_ITEM.trigger(serverPlayer, stack);
             serverPlayer.awardStat(Stats.ITEM_USED.get(this));
         }
@@ -38,9 +38,8 @@ public class Drink extends Item {
         if (stack.isEmpty()) {
             return new ItemStack(Items.GLASS_BOTTLE);
         } else {
-            if (entityLiving instanceof Player && !((Player) entityLiving).getAbilities().invulnerable) {
+            if (user instanceof Player player && !player.getAbilities().invulnerable) {
                 ItemStack itemstack = new ItemStack(Items.GLASS_BOTTLE);
-                Player player = (Player) entityLiving;
                 if (!player.getInventory().add(itemstack)) {
                     player.drop(itemstack, false);
                 }
@@ -49,17 +48,17 @@ public class Drink extends Item {
         }
     }
 
-    public boolean isFoil(ItemStack p_77636_1_) {
+    public boolean isFoil(ItemStack stack) {
         return this.alwaysFoil;
     }
 
     @Override
-    public int getUseDuration(ItemStack p_41360_) {
+    public int getUseDuration(ItemStack stack) {
         return consumptionTime;
     }
 
     @Override
-    public UseAnim getUseAnimation(ItemStack p_41358_) {
+    public UseAnim getUseAnimation(ItemStack stack) {
         return UseAnim.DRINK;
     }
 

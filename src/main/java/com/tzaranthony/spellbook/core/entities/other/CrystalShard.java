@@ -1,6 +1,5 @@
 package com.tzaranthony.spellbook.core.entities.other;
 
-import com.mojang.logging.LogUtils;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
@@ -10,11 +9,8 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
-import org.slf4j.Logger;
 
 public class CrystalShard extends AbstractArrow {
-    private static final Logger LOGGER = LogUtils.getLogger();
-
     public CrystalShard(EntityType<? extends CrystalShard> entityType, Level level) {
         super(entityType, level);
     }

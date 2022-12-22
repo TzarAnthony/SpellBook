@@ -1,4 +1,4 @@
 package com.tzaranthony.spellbook.core.entities.hostile.voidArmy;
 
-public class VoidRider {
+public class VoidRider extends SBVoidEnemy {
 }

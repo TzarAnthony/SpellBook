@@ -74,7 +74,7 @@ public class RiftGeneratorBE extends SingleItemBE {
 
     @Override
     public boolean changeItem(Player player, ItemStack stack) {
-        if (stack.is(SBItems.TOME_OF_COORDINATION.get()) || (player.isCrouching() && stack.isEmpty())) {
+        if (stack.is(SBItems.TOME_OF_COORDINATION.get()) || (player.isShiftKeyDown() && stack.isEmpty())) {
             boolean changed = super.changeItem(player, stack);
             setData();
             return changed;
@@ -140,8 +140,7 @@ public class RiftGeneratorBE extends SingleItemBE {
 
     protected void setPortalData(ServerLevel beLevel, BlockPos bePos, ResourceKey<Level> tpDim, BlockPos tpPos) {
         BlockEntity blockentity = beLevel.getBlockEntity(bePos);
-        if (blockentity instanceof RiftBE) {
-            RiftBE rift = (RiftBE) blockentity;
+        if (blockentity instanceof RiftBE rift) {
             rift.setTpDim(tpDim);
             rift.setTpPos(tpPos);
         }

@@ -61,11 +61,9 @@ public class SBSummonedEntity extends TamableAnimal {
 
     public boolean wantsToAttack(LivingEntity target, LivingEntity owner) {
         if (!(target instanceof Creeper) && !(target instanceof Ghast)) {
-            if (target instanceof Wolf) {
-                Wolf wolfentity = (Wolf) target;
+            if (target instanceof Wolf wolfentity) {
                 return !wolfentity.isTame() || wolfentity.getOwner() != owner;
-            } else if (target instanceof SBSummonedEntity) {
-                SBSummonedEntity summoned = (SBSummonedEntity) target;
+            } else if (target instanceof SBSummonedEntity summoned) {
                 return !summoned.isTame() || summoned.getOwner() != owner;
             } else if (target instanceof Player && owner instanceof Player && !((Player) owner).canHarmPlayer((Player) target)) {
                 return false;

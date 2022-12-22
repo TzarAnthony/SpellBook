@@ -1,6 +1,8 @@
 package com.tzaranthony.spellbook;
 
 import com.tzaranthony.spellbook.core.crafting.SBBrewingRecipe;
+import com.tzaranthony.spellbook.core.util.events.SBClientEvents;
+import com.tzaranthony.spellbook.core.util.events.SBServerEvents;
 import com.tzaranthony.spellbook.core.world.features.SBFeatures;
 import com.tzaranthony.spellbook.registries.*;
 import net.minecraft.world.item.CreativeModeTab;
@@ -43,6 +45,7 @@ public class SpellBook {
         SBFluids.registerFluids();
         SBVillagers.register(bus);
         MinecraftForge.EVENT_BUS.register(this);
+        MinecraftForge.EVENT_BUS.register(new SBServerEvents()); //TODO: fix this so it works
     }
 
     private void CommonSetup(final FMLCommonSetupEvent event) {
@@ -50,11 +53,12 @@ public class SpellBook {
     }
 
     private void ClientSetup(final FMLClientSetupEvent event) {
-        SBBlockRender.renderBlocks();
+        SBBlocksRender.renderBlocks();
         SBBlockEntityRender.renderBlockEntities();
         SBEntityRender.renderEntities();
         SBItemPropertiesRender.renderItemProperties();
         SBScreenRender.renderScreens();
+        MinecraftForge.EVENT_BUS.register(new SBClientEvents()); //TODO: fix this so it works
     }
 
     private void CompleteSetup(final FMLLoadCompleteEvent event) {

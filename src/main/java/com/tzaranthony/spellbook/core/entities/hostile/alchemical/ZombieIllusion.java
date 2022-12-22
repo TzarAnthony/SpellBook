@@ -206,8 +206,7 @@ public class ZombieIllusion extends SBIllusionEntity {
             entityData = new GroupData(getSpawnAsBabyOdds(accessor.getRandom()), true);
         }
 
-        if (entityData instanceof GroupData) {
-            GroupData ZombieIllusion$groupdata = (GroupData) entityData;
+        if (entityData instanceof GroupData ZombieIllusion$groupdata) {
             if (ZombieIllusion$groupdata.isBaby) {
                 this.setBaby(true);
                 if (ZombieIllusion$groupdata.canSpawnJockey) {
