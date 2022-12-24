@@ -21,7 +21,6 @@ public class SBEffects {
     public static final RegistryObject<MobEffect> FREEZING = reg.register("freezing", ()-> new FreezingEffect(MobEffectCategory.HARMFUL, 9761279)
             .addAttributeModifier(Attributes.MOVEMENT_SPEED, "7b99b10e-aa3a-4b01-8191-780b0752b50c", (double) -0.25F, AttributeModifier.Operation.MULTIPLY_TOTAL));
     public static final RegistryObject<MobEffect> FREEZING_ANIMATION = reg.register("freezing_animation", ()-> new FreezingEffect(MobEffectCategory.NEUTRAL, 9761279));
-    public static final RegistryObject<MobEffect> ENDER_INFECTION = reg.register("ender_infection", ()-> new SBEffect(MobEffectCategory.HARMFUL, 1521706));
     public static final RegistryObject<MobEffect> CLUMSY = reg.register("clumsy", ()-> new ClumsyEffect(MobEffectCategory.NEUTRAL, 14008076));
     public static final RegistryObject<MobEffect> WAKEFUL_SLEEP = reg.register("wakeful_sleep", ()-> new SBInstantEffect(MobEffectCategory.BENEFICIAL, 3113910));
     public static final RegistryObject<MobEffect> MERCURY_POISONING = reg.register("mercury_poisoning", ()-> new MercuryEffect(MobEffectCategory.HARMFUL, 8557698));
@@ -40,4 +39,5 @@ public class SBEffects {
             .addAttributeModifier(Attributes.ARMOR_TOUGHNESS, "c1c0404e-c8ef-4129-9173-c5fdfa5f3c68", 0.5D, AttributeModifier.Operation.MULTIPLY_TOTAL));
     public static final RegistryObject<MobEffect> PACIFICATION = reg.register("pacification", ()-> new SBEffect(MobEffectCategory.BENEFICIAL, 14365343)
             .addAttributeModifier(Attributes.FOLLOW_RANGE, "df37222c-1a73-4593-8d0b-0760bf63ea7c", -0.99D, AttributeModifier.Operation.MULTIPLY_TOTAL));
+    public static final RegistryObject<MobEffect> VILLAGER_PACIFICATION = reg.register("villager_pacification", ()-> new SBEffect(MobEffectCategory.BENEFICIAL, 14365343));
 }

@@ -18,7 +18,7 @@ public class FreezingEffect extends SBEffect{
     public void applyEffectTick(LivingEntity affected, int amplifier) {
         if (this == SBEffects.FREEZING.get()) {
             affected.hurt(DamageSource.FREEZE, 4.0F * (float) (amplifier + 1));
-            affected.addEffect(new MobEffectInstance(SBEffects.FREEZING_ANIMATION.get(), 70, 0, false, false));
+            affected.addEffect(new MobEffectInstance(SBEffects.FREEZING_ANIMATION.get(), 70, 0, true, false, false));
         } else if (this == SBEffects.FREEZING_ANIMATION.get()) {
             affected.setIsInPowderSnow(true);
             affected.setTicksFrozen(affected.getTicksFrozen() + 4);

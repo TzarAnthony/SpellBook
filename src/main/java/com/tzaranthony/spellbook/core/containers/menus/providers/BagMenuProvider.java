@@ -155,7 +155,7 @@ public class BagMenuProvider implements MenuProvider, Container {
         this.items.clear();
     }
 
-    // TODO: upgrade stack limit to 1024. Maybe more?
+    //TODO: upgrade stack limit to 1024? Maybe more?
 //    @Override
 //    public int getMaxStackSize() {
 //        return 1024;

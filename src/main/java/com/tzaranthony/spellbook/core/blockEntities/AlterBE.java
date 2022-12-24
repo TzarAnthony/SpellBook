@@ -15,6 +15,7 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
@@ -24,6 +25,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
 import net.minecraftforge.items.ItemStackHandler;
 
+import java.util.Collections;
 import java.util.List;
 
 public class AlterBE extends CraftingBE {
@@ -78,7 +80,7 @@ public class AlterBE extends CraftingBE {
         tag.putInt(TIER, this.tier);
         tag.putBoolean(CRAFTING, this.isCrafting);
         tag.putInt(TRANSFER, this.cooldownTime);
-        if (!this.level.isClientSide() && !this.boundEntitites.isEmpty()) {
+        if (!this.level.isClientSide() && this.boundEntitites != null && !this.boundEntitites.isEmpty()) {
             ListTag lt = new ListTag();
             for (Mob mob : this.boundEntitites) {
                 CompoundTag tag1 = new CompoundTag();
@@ -116,8 +118,9 @@ public class AlterBE extends CraftingBE {
             case 1:
                 return MultiblockHelper.validateMultiBlockPattern(AlterTiers.tier2_fmt, AlterTiers.tier2_map, this.level, this.getBlockPos().above());
             case 2:
-                return MultiblockHelper.validateMultiBlockPattern(AlterTiers.tier3_fmt, AlterTiers.tier3_map, this.level, this.getBlockPos().above())
-                    || MultiblockHelper.validateMultiBlockPattern(AlterTiers.tier3_fmt_1, AlterTiers.tier3_map, this.level, this.getBlockPos().above());
+                return MultiblockHelper.validateMultiBlockPattern(AlterTiers.tier3_fmt, AlterTiers.tier3_map, this.level, this.getBlockPos().above());
+            case 3:
+                return MultiblockHelper.validateMultiBlockPattern(AlterTiers.tier4_fmt, AlterTiers.tier4_map, this.level, this.getBlockPos().above());
             default:
                 return MultiblockHelper.validateMultiBlockPattern(AlterTiers.tier1_fmt, AlterTiers.tier1_map, this.level, this.getBlockPos().above());
         }
@@ -134,20 +137,21 @@ public class AlterBE extends CraftingBE {
         }
     }
 
+    // Server Tick stuff
     public static void serverTick(Level level, BlockPos pos, BlockState state, AlterBE AltBe) {
         boolean flag1 = false;
         AltBe.setTier();
         if (AltBe.isCrafting) {
             RitualRecipe recipe = level.getRecipeManager().getRecipeFor(RitualRecipe.TYPE, AltBe.createContainer(), level).orElse(null);
 //            if (recipe != null && recipe.getAlterTier() <= AltBe.tier && recipe.getMobCount() == AltBe.boundEntitites.size() && AltBe.checkMultiBlock() && AltBe.canCraft(recipe)) {
-            if (recipe != null && recipe.getAlterTier() <= AltBe.tier && AltBe.checkMultiBlock() && AltBe.canCraft(recipe)) {
+            if (recipe != null && recipe.getAlterTier() <= AltBe.tier && AltBe.checkMultiBlock() && AltBe.canCraft(recipe, AltBe)) {
                 ++AltBe.progress;
                 if (level.getGameTime() % 80L == 0L) {
                     level.playSound((Player) null, pos.getX(), pos.getY(), pos.getZ(), SoundEvents.BEACON_AMBIENT, SoundSource.BLOCKS, 1.0F, 1.0F);
                 }
                 if (AltBe.progress >= AltBe.maxTime) {
                     AltBe.progress = 0;
-                    AltBe.craft(recipe);
+                    AltBe.craft(recipe, AltBe);
                     AltBe.refreshFilledSlots();
                     AltBe.stopCrafting();
                     level.playSound((Player) null, pos.getX(), pos.getY(), pos.getZ(), SoundEvents.BEACON_POWER_SELECT, SoundSource.BLOCKS, 1.0F, 1.0F);
@@ -196,32 +200,66 @@ public class AlterBE extends CraftingBE {
         }
     }
 
-    private boolean canCraft(RitualRecipe recipe) {
+    private boolean canCraft(RitualRecipe recipe, AlterBE AltBe) {
         boolean hasStuff = false;
-        for (int i = 1; i < itemHandler.getSlots() - 1; ++i) {
-            if (!itemHandler.getStackInSlot(i).isEmpty()) {
+        for (int i = 1; i < AltBe.itemHandler.getSlots() - 1; ++i) {
+            if (!AltBe.itemHandler.getStackInSlot(i).isEmpty()) {
                 hasStuff = hasStuff || true;
                 break;
             }
         }
 
-        return hasStuff && checkResult(recipe.assemble(this.createContainer()), itemHandler.getStackInSlot(0), this.itemHandler.getSlotLimit(0));
+        if (recipe.getMobCount() > 0) {
+            return AltBe.checkMobs(AltBe, recipe.getMobCount()) > 0 && hasStuff && checkResult(recipe.assemble(this.createContainer()), AltBe.itemHandler.getStackInSlot(0), AltBe.itemHandler.getSlotLimit(0));
+        }
+        return hasStuff && checkResult(recipe.assemble(this.createContainer()), AltBe.itemHandler.getStackInSlot(0), AltBe.itemHandler.getSlotLimit(0));
     }
 
-    private void craft(RitualRecipe recipe) {
+    private void craft(RitualRecipe recipe, AlterBE AltBe) {
         NonNullList<ItemStack> ings = recipe.getInputs();
-        for (int i = 1; i < itemHandler.getSlots(); ++i) {
-            ItemStack currItm = itemHandler.getStackInSlot(i);
+        for (int i = 1; i < AltBe.itemHandler.getSlots(); ++i) {
+            ItemStack currItm = AltBe.itemHandler.getStackInSlot(i);
             for (ItemStack ingStack : ings) {
                 if (currItm.is(ingStack.getItem()) && currItm.getCount() >= ingStack.getCount()) {
-                    itemHandler.extractItem(i, ingStack.getCount(), false);
+                    AltBe.itemHandler.extractItem(i, ingStack.getCount(), false);
                 }
             }
         }
-        int count = itemHandler.getStackInSlot(0).getCount() + recipe.getResultItem().getCount();
-        itemHandler.setStackInSlot(0, new ItemStack(recipe.getResultItem().getItem(), count));
+        int count = AltBe.itemHandler.getStackInSlot(0).getCount() + recipe.getResultItem().getCount();
+
+        ItemStack result = new ItemStack(recipe.getResultItem().getItem(), count);
+        if (recipe.getMobCount() > 0) {
+            int needs = recipe.getMobCount();
+            int j = AltBe.checkMobs(AltBe, needs);
+            if (j > 0) {
+                EntityType mobType = AltBe.getMob(j).getType();
+                for (int k = 0; k > AltBe.boundEntitites.size(); ++k) {
+                    if (mobType == AltBe.getMob(k).getType()) {
+                        AltBe.boundEntitites.remove(k);
+                        --needs;
+                    }
+                    if (needs <= 0) {
+                        break;
+                    }
+                }
+                CompoundTag tag = result.getOrCreateTag();
+                tag.putString("SBEntityIDTag", mobType.toString());
+            }
+        }
+        AltBe.itemHandler.setStackInSlot(0, result);
     }
 
+    private int checkMobs(AlterBE AltBe, int needs) {
+        for (int i = 0; i > AltBe.boundEntitites.size(); ++i) {
+            int mobCount = Collections.frequency(AltBe.boundEntitites, AltBe.getMob(i));
+            if (mobCount >= needs) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    // interactions
     public boolean takeOrAddItem(Player player, ItemStack stack) {
         if (player.isShiftKeyDown()) {
             for (int i = 0; i < itemHandler.getSlots(); ++i) {

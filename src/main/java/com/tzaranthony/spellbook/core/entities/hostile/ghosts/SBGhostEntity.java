@@ -1,7 +1,6 @@
 package com.tzaranthony.spellbook.core.entities.hostile.ghosts;
 
 import com.tzaranthony.spellbook.core.entities.hostile.SBMonsterEntity;
-import com.tzaranthony.spellbook.core.util.damage.SBDamageSource;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
@@ -31,30 +30,7 @@ public class SBGhostEntity extends SBMonsterEntity {
         return super.isInvulnerableTo(source) || source == DamageSource.FALL || source == DamageSource.IN_WALL
                 || source == DamageSource.CACTUS || source == DamageSource.LIGHTNING_BOLT || source == DamageSource.DROWN
                 || source == DamageSource.STARVE || source == DamageSource.FALLING_BLOCK || source == DamageSource.ANVIL
-                || source == DamageSource.SWEET_BERRY_BUSH || this.checkLEInvulnerableTo(source);
-    }
-
-    public boolean checkLEInvulnerableTo(DamageSource source) {
-        if (source instanceof SBDamageSource) {
-            return ((SBDamageSource) source).isVoidDmg() || ((SBDamageSource) source).isEarthDmg() || ((SBDamageSource) source).isAirDmg();
-        }
-        return false;
-    }
-
-    @Override
-    public boolean isVulnerableTo(DamageSource source) {
-        if (source instanceof SBDamageSource) {
-            return ((SBDamageSource) source).isPsychicDmg();
-        }
-        return false;
-    }
-
-    @Override
-    public boolean isResistantTo(DamageSource source) {
-        if (source instanceof SBDamageSource) {
-            return ((SBDamageSource) source).isWaterDmg() || source.isExplosion();
-        }
-        return source.isExplosion();
+                || source == DamageSource.SWEET_BERRY_BUSH;
     }
 
     @Override

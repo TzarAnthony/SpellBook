@@ -103,6 +103,7 @@ public abstract class CraftingBE extends BlockEntity {
     }
 
     // capabilities
+    //TODO: fix capabilities
     @Override
     public <T> LazyOptional<T> getCapability(Capability<T> capability, @Nullable Direction side) {
         if (capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY && this.itemHandler.getSlots() > 0) {

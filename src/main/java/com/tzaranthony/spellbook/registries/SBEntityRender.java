@@ -3,6 +3,7 @@ package com.tzaranthony.spellbook.registries;
 import com.tzaranthony.spellbook.client.entityRender.renders.*;
 import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.client.renderer.entity.ItemEntityRenderer;
+import net.minecraft.client.renderer.entity.NoopRenderer;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
@@ -43,6 +44,7 @@ public class SBEntityRender {
         EntityRenderers.register(SBEntities.LARGE_MAGIC_PROJECTILE.get(), MagicProjectileRender::new);
         EntityRenderers.register(SBEntities.FROST_WAVE_PROJECTILE.get(), FrostWaveRender::new);
         // Other
+        EntityRenderers.register(SBEntities.FIRE_WALL.get(), NoopRenderer::new);
         EntityRenderers.register(SBEntities.PHOENIX_ASHES.get(), ItemEntityRenderer::new);
     }
 }

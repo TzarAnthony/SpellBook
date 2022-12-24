@@ -21,6 +21,7 @@ import net.minecraft.world.phys.BlockHitResult;
 import javax.annotation.Nullable;
 import java.util.Optional;
 
+//TODO: fix campfire
 public class SBCampfire extends CampfireBlock {
     public SBCampfire(int dmg, Properties properties) {
         super(false, dmg, properties);

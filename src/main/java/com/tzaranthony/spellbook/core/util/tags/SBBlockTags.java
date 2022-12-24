@@ -11,6 +11,7 @@ public class SBBlockTags {
     public static final TagKey<Block> ALTER_SLABS_1 = registerBlockTag("alter_1_slabs");
     public static final TagKey<Block> ALTER_VALUABLES_2 = registerBlockTag("alter_2_valuables");
     public static final TagKey<Block> ALTER_VALUABLES_3 = registerBlockTag("alter_3_valuables");
+    public static final TagKey<Block> ALTER_VALUABLES_4 = registerBlockTag("alter_4_valuables");
 
     public static final TagKey<Block> GROWTH_SPELL_GROWABLES = registerBlockTag("growth_spell_growables");
     public static final TagKey<Block> EARTH_BERRIES_BASE_BLOCKS = registerBlockTag("earth_berries_base_blocks");

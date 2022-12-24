@@ -6,6 +6,7 @@ import com.tzaranthony.spellbook.core.entities.other.MagicProjectile;
 import com.tzaranthony.spellbook.registries.SBEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionHand;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
@@ -38,6 +39,10 @@ public class ProjectileSpell extends Spell {
 
     public EntityType<MagicProjectile> getMagicProjectile() {
         return SBEntities.SMALL_MAGIC_PROJECTILE.get();
+    }
+
+    public void finishSpell(Entity user, Level level, BlockPos pos) {
+
     }
 
     public void addSpellDataToProjectile(MagicProjectile magic) {

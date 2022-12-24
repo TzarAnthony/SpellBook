@@ -3,31 +3,47 @@ package com.tzaranthony.spellbook.core.util.damage;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
+import com.mojang.datafixers.util.Pair;
+import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.TamableAnimal;
+import net.minecraft.world.entity.item.ItemEntity;
+import net.minecraft.world.entity.item.PrimedTnt;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.enchantment.ProtectionEnchantment;
+import net.minecraft.world.entity.projectile.Projectile;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.EntityBasedExplosionDamageCalculator;
 import net.minecraft.world.level.Explosion;
 import net.minecraft.world.level.ExplosionDamageCalculator;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.BaseFireBlock;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.level.material.FluidState;
+import net.minecraft.world.level.storage.loot.LootContext;
+import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 
 import javax.annotation.Nullable;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 
+//TODO: fix client sync issues
 public class MagicExplosion extends Explosion {
+    private static final ExplosionDamageCalculator EXPLOSION_DAMAGE_CALCULATOR = new ExplosionDamageCalculator();
+    private static final int MAX_DROPS_PER_COMBINED_STACK = 16;
+    private final boolean fire;
+    private final Explosion.BlockInteraction blockInteraction;
+    private final Random random = new Random();
     private final Level level;
     private final double x;
     private final double y;
@@ -41,23 +57,39 @@ public class MagicExplosion extends Explosion {
     private final Map<Player, Vec3> hitPlayers = Maps.newHashMap();
     private final Vec3 position;
 
-    public LivingEntity caster;
+    public MagicExplosion(Level p_46024_, @Nullable Entity p_46025_, double p_46026_, double p_46027_, double p_46028_, float p_46029_, List<BlockPos> p_46030_) {
+        this(p_46024_, p_46025_, p_46026_, p_46027_, p_46028_, p_46029_, false, Explosion.BlockInteraction.DESTROY, p_46030_);
+    }
 
-    public MagicExplosion(Level level, LivingEntity caster, @Nullable Entity entity, double x, double y, double z, float radius) {
-        super(level, entity, x, y, z, radius, false, BlockInteraction.BREAK);
-        this.level = level;
-        this.caster = caster;
-        this.source = entity;
-        this.radius = radius;
-        this.x = x;
-        this.y = y;
-        this.z = z;
-        this.damageSource = DamageSource.explosion(this);
-        this.damageCalculator = (entity == null ? new ExplosionDamageCalculator() : new EntityBasedExplosionDamageCalculator(entity));
+    public MagicExplosion(Level p_46041_, @Nullable Entity p_46042_, double p_46043_, double p_46044_, double p_46045_, float p_46046_, boolean p_46047_, Explosion.BlockInteraction p_46048_, List<BlockPos> p_46049_) {
+        this(p_46041_, p_46042_, (DamageSource)null, (ExplosionDamageCalculator) null, p_46043_, p_46044_, p_46045_, p_46046_, p_46047_, p_46048_);
+        this.toBlow.addAll(p_46049_);
+    }
+
+    public MagicExplosion(Entity p_46033_, @Nullable ExplosionDamageCalculator p_46054_, double p_46034_, double p_46035_, double p_46036_, float p_46037_, Explosion.BlockInteraction p_46039_) {
+        this(p_46033_.level, p_46033_, (DamageSource)null, p_46054_, p_46034_, p_46035_, p_46036_, p_46037_, false, p_46039_);
+    }
+
+    public MagicExplosion(Level p_46051_, @Nullable Entity p_46052_, @Nullable DamageSource p_46053_, @Nullable ExplosionDamageCalculator p_46054_, double p_46055_, double p_46056_, double p_46057_, float p_46058_, boolean p_46059_, Explosion.BlockInteraction p_46060_) {
+        super(p_46051_, p_46052_, p_46053_, p_46054_, p_46055_, p_46056_, p_46057_, p_46058_, p_46059_, p_46060_);
+        this.level = p_46051_;
+        this.source = p_46052_;
+        this.radius = p_46058_;
+        this.x = p_46055_;
+        this.y = p_46056_;
+        this.z = p_46057_;
+        this.fire = p_46059_;
+        this.blockInteraction = p_46060_;
+        this.damageSource = p_46053_ == null ? DamageSource.explosion(this) : p_46053_;
+        this.damageCalculator = p_46054_ == null ? this.makeDamageCalculator(p_46052_) : p_46054_;
         this.position = new Vec3(this.x, this.y, this.z);
     }
 
-    @Override
+    //TODO: create new explosion damage calculator for spell levels
+    private ExplosionDamageCalculator makeDamageCalculator(@Nullable Entity p_46063_) {
+        return (ExplosionDamageCalculator)(p_46063_ == null ? EXPLOSION_DAMAGE_CALCULATOR : new EntityBasedExplosionDamageCalculator(p_46063_));
+    }
+
     public void explode() {
         this.level.gameEvent(this.source, GameEvent.EXPLODE, new BlockPos(this.x, this.y, this.z));
         Set<BlockPos> set = Sets.newHashSet();
@@ -113,44 +145,130 @@ public class MagicExplosion extends Explosion {
         int i1 = Mth.floor(this.y + (double)f2 + 1.0D);
         int j2 = Mth.floor(this.z - (double)f2 - 1.0D);
         int j1 = Mth.floor(this.z + (double)f2 + 1.0D);
-        List<LivingEntity> list = this.level.getEntitiesOfClass(LivingEntity.class, new AABB((double)k1, (double)i2, (double)j2, (double)l1, (double)i1, (double)j1));
-        net.minecraftforge.event.ForgeEventFactory.onExplosionDetonate(this.level, this, (List<Entity>)(List<?>) list, f2);
-        Vec3 vec3 = new Vec3(this.x, this.y, this.z);
+        List<Entity> list = this.level.getEntities(this.source, new AABB((double)k1, (double)i2, (double)j2, (double)l1, (double)i1, (double)j1));
+        net.minecraftforge.event.ForgeEventFactory.onExplosionDetonate(this.level, this, list, f2);
+    }
 
-        for(int k2 = 0; k2 < list.size(); ++k2) {
-            LivingEntity entity = list.get(k2);
-            Boolean ownedByCaster = false;
-            if (entity instanceof TamableAnimal) {
-                if (((TamableAnimal) entity).isOwnedBy(this.caster)) {
-                    ownedByCaster = true;
+    public void finalizeExplosion(boolean p_46076_) {
+        if (this.level.isClientSide) {
+            this.level.playLocalSound(this.x, this.y, this.z, SoundEvents.GENERIC_EXPLODE, SoundSource.BLOCKS, 4.0F, (1.0F + (this.level.random.nextFloat() - this.level.random.nextFloat()) * 0.2F) * 0.7F, false);
+        }
+
+        boolean flag = this.blockInteraction != Explosion.BlockInteraction.NONE;
+        if (p_46076_) {
+            if (!(this.radius < 2.0F) && flag) {
+                this.level.addParticle(ParticleTypes.EXPLOSION_EMITTER, this.x, this.y, this.z, 1.0D, 0.0D, 0.0D);
+            } else {
+                this.level.addParticle(ParticleTypes.EXPLOSION, this.x, this.y, this.z, 1.0D, 0.0D, 0.0D);
+            }
+        }
+
+        if (flag) {
+            ObjectArrayList<Pair<ItemStack, BlockPos>> objectarraylist = new ObjectArrayList<>();
+            Collections.shuffle(this.toBlow, this.level.random);
+
+            for(BlockPos blockpos : this.toBlow) {
+                BlockState blockstate = this.level.getBlockState(blockpos);
+                Block block = blockstate.getBlock();
+                if (!blockstate.isAir()) {
+                    BlockPos blockpos1 = blockpos.immutable();
+                    this.level.getProfiler().push("explosion_blocks");
+                    //TODO: Make able to silk touch, and fortune
+                    if (blockstate.canDropFromExplosion(this.level, blockpos, this) && this.level instanceof ServerLevel) {
+                        BlockEntity blockentity = blockstate.hasBlockEntity() ? this.level.getBlockEntity(blockpos) : null;
+                        LootContext.Builder lootcontext$builder = (new LootContext.Builder((ServerLevel)this.level)).withRandom(this.level.random).withParameter(LootContextParams.ORIGIN, Vec3.atCenterOf(blockpos)).withParameter(LootContextParams.TOOL, ItemStack.EMPTY).withOptionalParameter(LootContextParams.BLOCK_ENTITY, blockentity).withOptionalParameter(LootContextParams.THIS_ENTITY, this.source);
+                        if (this.blockInteraction == Explosion.BlockInteraction.DESTROY) {
+                            lootcontext$builder.withParameter(LootContextParams.EXPLOSION_RADIUS, this.radius);
+                        }
+
+                        blockstate.getDrops(lootcontext$builder).forEach((p_46074_) -> {
+                            addBlockDrops(objectarraylist, p_46074_, blockpos1);
+                        });
+                    }
+
+                    blockstate.onBlockExploded(this.level, blockpos, this);
+                    this.level.getProfiler().pop();
                 }
             }
-            if (!entity.ignoreExplosion() && entity != this.caster && !ownedByCaster) {
-                double d12 = Math.sqrt(entity.distanceToSqr(vec3)) / (double)f2;
-                if (d12 <= 1.0D) {
-                    double d5 = entity.getX() - this.x;
-                    double d7 = entity.getEyeY() - this.y;
-                    double d9 = entity.getZ() - this.z;
-                    double d13 = Math.sqrt(d5 * d5 + d7 * d7 + d9 * d9);
-                    if (d13 != 0.0D) {
-                        d5 /= d13;
-                        d7 /= d13;
-                        d9 /= d13;
-                        double d14 = (double) getSeenPercent(vec3, entity);
-                        double d10 = (1.0D - d12) * d14;
-                        entity.hurt(this.getDamageSource(), (float) (((int)((d10 * d10 + d10) / 2.0D * 7.0D * (double)f2 + 1.0D)) * 2));
-                        double d11 = ProtectionEnchantment.getExplosionKnockbackAfterDampener(entity, d10);
 
-                        entity.setDeltaMovement(entity.getDeltaMovement().add(d5 * d11, d7 * d11, d9 * d11));
-                        if (entity instanceof Player) {
-                            Player player = (Player)entity;
-                            if (!player.isSpectator() && (!player.isCreative() || !player.getAbilities().flying)) {
-                                this.hitPlayers.put(player, new Vec3(d5 * d10, d7 * d10, d9 * d10));
-                            }
-                        }
-                    }
+            for(Pair<ItemStack, BlockPos> pair : objectarraylist) {
+                Block.popResource(this.level, pair.getSecond(), pair.getFirst());
+            }
+        }
+
+        if (this.fire) {
+            for(BlockPos blockpos2 : this.toBlow) {
+                if (this.random.nextInt(3) == 0 && this.level.getBlockState(blockpos2).isAir() && this.level.getBlockState(blockpos2.below()).isSolidRender(this.level, blockpos2.below())) {
+                    this.level.setBlockAndUpdate(blockpos2, BaseFireBlock.getState(this.level, blockpos2));
                 }
             }
         }
+    }
+
+    private static void addBlockDrops(ObjectArrayList<Pair<ItemStack, BlockPos>> p_46068_, ItemStack p_46069_, BlockPos p_46070_) {
+        int i = p_46068_.size();
+
+        for(int j = 0; j < i; ++j) {
+            Pair<ItemStack, BlockPos> pair = p_46068_.get(j);
+            ItemStack itemstack = pair.getFirst();
+            if (ItemEntity.areMergable(itemstack, p_46069_)) {
+                ItemStack itemstack1 = ItemEntity.merge(itemstack, p_46069_, 16);
+                p_46068_.set(j, Pair.of(itemstack1, pair.getSecond()));
+                if (p_46069_.isEmpty()) {
+                    return;
+                }
+            }
+        }
+        p_46068_.add(Pair.of(p_46069_, p_46070_));
+    }
+
+    public DamageSource getDamageSource() {
+        return this.damageSource;
+    }
+
+    public Map<Player, Vec3> getHitPlayers() {
+        return this.hitPlayers;
+    }
+
+    @Nullable
+    public LivingEntity getSourceMob() {
+        if (this.source == null) {
+            return null;
+        } else if (this.source instanceof PrimedTnt) {
+            return ((PrimedTnt)this.source).getOwner();
+        } else if (this.source instanceof LivingEntity) {
+            return (LivingEntity)this.source;
+        } else {
+            if (this.source instanceof Projectile) {
+                Entity entity = ((Projectile)this.source).getOwner();
+                if (entity instanceof LivingEntity) {
+                    return (LivingEntity)entity;
+                }
+            }
+            return null;
+        }
+    }
+
+    public void clearToBlow() {
+        this.toBlow.clear();
+    }
+
+    public List<BlockPos> getToBlow() {
+        return this.toBlow;
+    }
+
+    public Vec3 getPosition() {
+        return this.position;
+    }
+
+    @Nullable
+    public Entity getExploder() {
+        return this.source;
+    }
+
+    public static enum BlockInteraction {
+        NONE,
+        BREAK,
+        DESTROY;
     }
 }

@@ -105,16 +105,16 @@ public class SBEntities {
             EntityType.Builder.of(CrystalShard::new, MobCategory.MISC).sized(0.5F, 0.5F).clientTrackingRange(4).updateInterval(20).build("crystal_shard")
     );
     public static final RegistryObject<EntityType<EffectCarryingArrow>> FIRE_ARROW = reg.register("fire_arrow", () ->
-            EntityType.Builder.of(EffectCarryingArrow::new, MobCategory.MISC).sized(0.5F, 0.5F).clientTrackingRange(4).updateInterval(20).build("fire_arrow")
+            EntityType.Builder.of(EffectCarryingArrow::new, MobCategory.MISC).fireImmune().sized(0.5F, 0.5F).clientTrackingRange(4).updateInterval(20).build("fire_arrow")
     );
     public static final RegistryObject<EntityType<EffectCarryingArrow>> EARTH_ARROW = reg.register("earth_arrow", () ->
-            EntityType.Builder.of(EffectCarryingArrow::new, MobCategory.MISC).sized(0.5F, 0.5F).clientTrackingRange(4).updateInterval(20).build("earth_arrow")
+            EntityType.Builder.of(EffectCarryingArrow::new, MobCategory.MISC).fireImmune().sized(0.5F, 0.5F).clientTrackingRange(4).updateInterval(20).build("earth_arrow")
     );
     public static final RegistryObject<EntityType<EffectCarryingArrow>> WATER_ARROW = reg.register("water_arrow", () ->
-            EntityType.Builder.of(EffectCarryingArrow::new, MobCategory.MISC).sized(0.5F, 0.5F).clientTrackingRange(4).updateInterval(20).build("water_arrow")
+            EntityType.Builder.of(EffectCarryingArrow::new, MobCategory.MISC).fireImmune().sized(0.5F, 0.5F).clientTrackingRange(4).updateInterval(20).build("water_arrow")
     );
     public static final RegistryObject<EntityType<EffectCarryingArrow>> AIR_ARROW = reg.register("air_arrow", () ->
-            EntityType.Builder.of(EffectCarryingArrow::new, MobCategory.MISC).sized(0.5F, 0.5F).clientTrackingRange(4).updateInterval(20).build("air_arrow")
+            EntityType.Builder.of(EffectCarryingArrow::new, MobCategory.MISC).fireImmune().sized(0.5F, 0.5F).clientTrackingRange(4).updateInterval(20).build("air_arrow")
     );
 
     // Magic
@@ -132,6 +132,9 @@ public class SBEntities {
     );
 
     // Other
+    public static final RegistryObject<EntityType<AreaFireCloud>> FIRE_WALL = reg.register("fire_wall", () ->
+            EntityType.Builder.of(AreaFireCloud::new, MobCategory.MISC).fireImmune().sized(0.5F, 6.0F).updateInterval(Integer.MAX_VALUE).build("phoenix_ashes")
+    );
     public static final RegistryObject<EntityType<PhoenixAshesEntity>> PHOENIX_ASHES = reg.register("phoenix_ashes", () ->
             EntityType.Builder.of(PhoenixAshesEntity::new, MobCategory.MISC).fireImmune().sized(0.25F, 0.25F).build("phoenix_ashes")
     );

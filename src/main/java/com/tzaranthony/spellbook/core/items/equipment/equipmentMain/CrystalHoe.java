@@ -1,12 +1,17 @@
 package com.tzaranthony.spellbook.core.items.equipment.equipmentMain;
 
+import com.mojang.datafixers.util.Pair;
 import com.tzaranthony.spellbook.core.items.equipment.equipUtils.MiningModeTool;
 import com.tzaranthony.spellbook.core.items.equipment.equipUtils.SBToolMaterial;
+import com.tzaranthony.spellbook.core.items.equipment.equipUtils.UOC;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
@@ -14,6 +19,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.HoeItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.api.distmarker.Dist;
@@ -21,10 +27,10 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 
 import javax.annotation.Nullable;
 import java.util.List;
+import java.util.function.Consumer;
+import java.util.function.Predicate;
 
 public class CrystalHoe extends HoeItem implements MiningModeTool {
-    protected static final String TOOL_MODE = "HarvestStyle";
-
     public CrystalHoe(SBToolMaterial tier, Properties properties) {
         super(tier, 10, -3.5F, properties);
     }
@@ -50,6 +56,40 @@ public class CrystalHoe extends HoeItem implements MiningModeTool {
             return InteractionResultHolder.sidedSuccess(itemstack, level.isClientSide());
         } else {
             return InteractionResultHolder.fail(itemstack);
+        }
+    }
+
+    @Override
+    public InteractionResult useOn(UseOnContext context) {
+        InteractionResult result = performUse(context.getLevel(), context.getClickedPos(), context);
+        if (result.consumesAction()) {
+            useOnBlocks(context.getItemInHand(), context.getLevel(), context, context.getClickedPos());
+        }
+        return result;
+    }
+    
+    @Override
+    public InteractionResult performUse(Level level, BlockPos pos, UseOnContext context) {
+        UOC context1 = new UOC(context, pos);
+        int hook = net.minecraftforge.event.ForgeEventFactory.onHoeUse(context1);
+        if (hook != 0) return hook > 0 ? InteractionResult.SUCCESS : InteractionResult.FAIL;
+        BlockState toolModifiedState = level.getBlockState(pos).getToolModifiedState(context1, net.minecraftforge.common.ToolActions.HOE_TILL, false);
+        Pair<Predicate<UseOnContext>, Consumer<UseOnContext>> pair = toolModifiedState == null ? null : Pair.of(ctx -> true, changeIntoState(toolModifiedState));
+        if (pair == null) {
+            return InteractionResult.PASS;
+        } else {
+            Predicate<UseOnContext> predicate = pair.getFirst();
+            Consumer<UseOnContext> consumer = pair.getSecond();
+            if (predicate.test(context1)) {
+                Player player = context1.getPlayer();
+                level.playSound(player, pos, SoundEvents.HOE_TILL, SoundSource.BLOCKS, 1.0F, 1.0F);
+                if (!level.isClientSide) {
+                    consumer.accept(context1);
+                }
+                return InteractionResult.sidedSuccess(level.isClientSide);
+            } else {
+                return InteractionResult.PASS;
+            }
         }
     }
 

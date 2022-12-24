@@ -12,7 +12,7 @@ import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.AgeableMob;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Shearable;
-import net.minecraft.world.entity.animal.Animal;
+import net.minecraft.world.entity.TamableAnimal;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -23,7 +23,7 @@ import net.minecraftforge.common.IForgeShearable;
 import org.jetbrains.annotations.Nullable;
 
 //TODO: create -- 3 to 5 blocks wingspawn
-public class Phoenix extends Animal implements Shearable, IForgeShearable {
+public class Phoenix extends TamableAnimal implements Shearable, IForgeShearable {
     private static final EntityDataAccessor<Integer> DATA_FEATHER_COUNT = SynchedEntityData.defineId(Phoenix.class, EntityDataSerializers.INT);
 
     protected Phoenix(EntityType<? extends Phoenix> phoenix, Level Level) {

@@ -1,7 +1,6 @@
 package com.tzaranthony.spellbook.core.entities.hostile.alchemical;
 
 import com.tzaranthony.spellbook.core.entities.hostile.SBMobType;
-import com.tzaranthony.spellbook.core.util.damage.SBDamageSource;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EntityType;
@@ -18,14 +17,7 @@ public class SBIllusionEntity extends Monster {
     public boolean isInvulnerableTo(DamageSource source) {
         return super.isInvulnerableTo(source) || source.isProjectile()
                 || source == DamageSource.FALL || source == DamageSource.IN_WALL || source == DamageSource.DROWN
-                || source == DamageSource.FALLING_BLOCK || source == DamageSource.ANVIL || this.checkLEInvulnerableTo(source);
-    }
-
-    public boolean checkLEInvulnerableTo(DamageSource source) {
-        if (source instanceof SBDamageSource) {
-            return ((SBDamageSource) source).isPsychicDmg();
-        }
-        return false;
+                || source == DamageSource.FALLING_BLOCK || source == DamageSource.ANVIL;
     }
 
     public boolean hurt(DamageSource source, float amount) {

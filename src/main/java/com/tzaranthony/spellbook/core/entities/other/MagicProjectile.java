@@ -30,7 +30,7 @@ public class MagicProjectile extends Projectile {
     private static final EntityDataAccessor<Integer> DATA_SPELL = SynchedEntityData.defineId(MagicProjectile.class, EntityDataSerializers.INT);
     private static final EntityDataAccessor<ParticleOptions> DATA_PARTICLE = SynchedEntityData.defineId(MagicProjectile.class, EntityDataSerializers.PARTICLE);
     private int life;
-    private int lifetime = 45 + this.random.nextInt(6) + this.random.nextInt(7);
+    private int lifetime = 50 + this.random.nextInt(7);
 
     public MagicProjectile(EntityType<? extends MagicProjectile> projectile, Level level) {
         super(projectile, level);
@@ -110,7 +110,8 @@ public class MagicProjectile extends Projectile {
         Entity user = this.getOwner();
         getSpellById(getSpell()).perform_spell(user, target);
         if (!this.noPhysics) {
-            this.fizzle();
+            this.level.broadcastEntityEvent(this, (byte)17);
+            this.discard();
         }
     }
 
@@ -119,12 +120,13 @@ public class MagicProjectile extends Projectile {
         super.onHitBlock(result);
         getSpellById(getSpell()).perform_spell(this.getOwner(), this.level, pos);
         if (!this.noPhysics) {
-            this.fizzle();
+            this.level.broadcastEntityEvent(this, (byte)17);
+            this.discard();
         }
     }
 
     protected ProjectileSpell getSpellById(int id) {
-        if (id == 11) {
+        if (id == 9) {
             return (ProjectileSpell) SBSpellRegistry.FIREWALL;
         } else if (id == 10) {
             return (ProjectileSpell) SBSpellRegistry.FROST_WAVE;
@@ -152,6 +154,7 @@ public class MagicProjectile extends Projectile {
     }
 
     private void fizzle() {
+        getSpellById(getSpell()).finishSpell(this.getOwner(), this.level, this.blockPosition());
         this.level.broadcastEntityEvent(this, (byte)17);
         this.discard();
     }
@@ -173,6 +176,10 @@ public class MagicProjectile extends Projectile {
         if (tag.hasUUID("Owner")) {
             this.setOwner(this.level.getPlayerByUUID(tag.getUUID("Owner")));
         }
+    }
+
+    public void setLifetime(int lifetime) {
+        this.lifetime = lifetime;
     }
 
     protected void addAdditionalSaveData(CompoundTag tag) {

@@ -31,11 +31,11 @@ public enum SBToolMaterial implements Tier {
         return Ingredient.of(SBItems.PHOENIX_METAL_INGOT.get());
     }),
     // Robes of Light
-    LIGHT(8, 356, 25.0F, 9.5F, 40, () -> {
+    LIGHT(8, 356, 25.0F, 9.0F, 40, () -> {
         return Ingredient.of(SBItems.ESSENCE_OF_LIGHT.get());
     }),
     // Crystal Sorcerer Robes
-    CRYSTALAN(6, 5863, 17.0F, 12.0F, 35, () -> {
+    CRYSTALAN(6, 5863, 17.0F, 10.0F, 35, () -> {
         return Ingredient.of(SBItems.CRYSTALAN_MATRIX.get());
     }),
 

@@ -34,6 +34,7 @@ public class BlackHoleBE extends BlockEntity {
             for (Entity e : entities) {
                 if ((e instanceof ItemEntity || e instanceof Mob) && e.position().distanceToSqr(bh.box.getCenter()) <= bh.rSq) {
                     e.setPos(bh.box.getCenter());
+                    e.resetFallDistance();
                 }
             }
         }

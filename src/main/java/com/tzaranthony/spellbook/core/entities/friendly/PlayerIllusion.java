@@ -4,13 +4,13 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.TamableAnimal;
 import net.minecraft.world.level.Level;
 
-// TODO create -- stage 2????
+//TODO create -- stage 2????
 public class PlayerIllusion extends SBSummonedEntity {
     public PlayerIllusion(EntityType<? extends TamableAnimal> entity, Level level) {
         super(entity, level);
     }
 
-    // gets bow or sword from off hand
-    // gets spell from main hand
+    // gets bow or sword in off hand
+    // gets spell in main hand
     // mp deducted from owner
 }

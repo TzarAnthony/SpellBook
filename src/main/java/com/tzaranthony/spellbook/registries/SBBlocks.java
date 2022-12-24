@@ -87,12 +87,15 @@ public class SBBlocks {
     public static final RegistryObject<Block> ALTER_2 = registerBlockAndRareItem("alter_2", () -> new Alter(SBBlockProperties.StandardRock(SoundType.ANCIENT_DEBRIS)), Rarity.UNCOMMON);
     public static final RegistryObject<Block> ALTER_3 = registerBlockAndRareItem("alter_3", () -> new Alter(SBBlockProperties.StandardRock(SoundType.SOUL_SAND)), Rarity.RARE);
     public static final RegistryObject<Block> ALTER_4 = registerBlockAndRareItem("alter_4", () -> new Alter(SBBlockProperties.StandardRock(SoundType.HONEY_BLOCK)), Rarity.EPIC);
-    public static final RegistryObject<Block> ALCHEMICAL_FURNACE = registerBlockAndItem("alchemical_furnace", () -> new AlchemicalFurnace(SBBlockProperties.StandardRock()));
-    public static final RegistryObject<Block> ALCHEMICAL_FOUNDRY = registerBlockAndItem("alchemical_forge", () -> new AlchemicalFoundry(SBBlockProperties.StandardRock()));
+    public static final RegistryObject<Block> RESEARCH_TABLE = registerBlockAndRareItem("research_table", () -> new Block(SBBlockProperties.StandardRock()), Rarity.RARE); //TODO: research books give research points that can be used to buy runes to make a sigils to unlock a spell
+    public static final RegistryObject<Block> ALCHEMICAL_FURNACE = registerBlockAndItem("alchemical_furnace", () -> new AlchemicalFurnace(SBBlockProperties.StandardRock())); //TODO: add other mod integration
+    public static final RegistryObject<Block> ALCHEMICAL_FOUNDRY = registerBlockAndItem("alchemical_forge", () -> new AlchemicalFoundry(SBBlockProperties.StandardRock())); //TODO: add other mod integration
     public static final RegistryObject<Block> POTION_MANUFACTORIUM = registerBlockAndItem("potion_manufactorium", () -> new Block(SBBlockProperties.StandardRock())); //TODO: cauldron that creates potions. needs a specific temperature for different tiers of potion
     public static final RegistryObject<Block> POTION_SEPARATOR = registerBlockAndItem("potion_separator", () -> new Block(SBBlockProperties.StandardRock())); //TODO: separates a mix of potions into their components
-    public static final RegistryObject<Block> ENCHANTED_CRAFTING_TABLES = registerBlockAndRareItem("enchanted_crafting_table", () -> new Block(SBBlockProperties.StandardRock()), Rarity.UNCOMMON); //TODO: Autocrafts items
-    //TODO: Enchanted Hopper -- faster transfer rate -- bnlacklist whitelist?
+    public static final RegistryObject<Block> ENCHANTED_CRAFTING_TABLES = registerBlockAndRareItem("enchanted_crafting_table", () -> new Block(SBBlockProperties.StandardRock()), Rarity.RARE); //TODO: Autocrafts items
+    public static final RegistryObject<Block> ENCHANTED_HOPPER = registerBlockAndRareItem("enchanted_hopper", () -> new Block(SBBlockProperties.StandardRock()), Rarity.RARE); //TODO: faster transfer rate -- blacklist whitelist?
+    public static final RegistryObject<Block> ENCHANTED_BOOKSHELF = registerBlockAndRareItem("enchanted_bookshelf", () -> new Block(SBBlockProperties.StandardRock()), Rarity.RARE); //TODO: automatically enchants if it has enough XP - takes XP from bottles of enchanting or XP books. Can stack enchanted books and scrolls
+    public static final RegistryObject<Block> ARTIFACT_VAULT = registerBlockAndRareItem("artifact_vault", () -> new Block(SBBlockProperties.StandardRock()), Rarity.RARE); //TODO: stores a near infinite amount of tools, armor or other single stack items. Automatically repairs items if it has enough XP
 
     // pedestals
     public static final RegistryObject<Block> PEDESTAL_SPIN = registerBlockAndItem("pedestal_spin", () -> new Pedestal(true, false, SBBlockProperties.StandardRock().noOcclusion()));
@@ -118,7 +121,7 @@ public class SBBlocks {
     // spell blocks
     public static final RegistryObject<Block> SNARE = reg.register("snare", () -> new SnareBlock());
     public static final RegistryObject<Block> BLACK_HOLE = reg.register("dark_rift", () -> new BlackHole());
-    public static final RegistryObject<Block> TIMER = reg.register("timer", () -> new TimerBlock());
+    public static final RegistryObject<Block> TIMER = reg.register("timer", () -> new TimerBlock()); //TODO: add way to get the dragon egg???
 
     // end fire stuff
     public static final RegistryObject<Block> END_CAMPFIRE = registerBlockAndItem("end_campfire", () -> new SBCampfire(3, SBBlockProperties.Campfire(10)));
@@ -131,6 +134,7 @@ public class SBBlocks {
     //TODO: portal to a new dimension. Trade first, tp later????
     //TODO: succulent poofball plants for the new dimension. The poofballs can explode and accelerate the player in a direction
     //TODO: coral like plant with fruit
+    //TODO: spore releasing plants that infect and transform things
 
     public static RegistryObject<Block> registerBlockAndUnburnableItem(String name, Supplier<Block> block) {
         RegistryObject<Block> blockObj = reg.register(name, block);

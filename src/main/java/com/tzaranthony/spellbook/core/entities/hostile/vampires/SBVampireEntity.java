@@ -40,14 +40,7 @@ public class SBVampireEntity extends SBMonsterEntity implements Enemy {
         return super.isInvulnerableTo(source)
                 || source == DamageSource.FALL || source == DamageSource.IN_WALL || source == DamageSource.DROWN
                 || source == DamageSource.FALLING_STALACTITE || source == DamageSource.STALAGMITE
-                || source == DamageSource.FALLING_BLOCK || source == DamageSource.ANVIL || this.checkSBInvulnerableTo(source);
-    }
-
-    public boolean checkSBInvulnerableTo(DamageSource source) {
-        if (source instanceof SBDamageSource) {
-            return ((SBDamageSource) source).isWaterDmg() || ((SBDamageSource) source).isAirDmg();
-        }
-        return false;
+                || source == DamageSource.FALLING_BLOCK || source == DamageSource.ANVIL;
     }
 
     public boolean isVulnerableTo(DamageSource source) {

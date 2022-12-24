@@ -14,6 +14,7 @@ import com.tzaranthony.spellbook.core.items.items.CoordinationTome;
 import com.tzaranthony.spellbook.core.items.items.PhoenixAshes;
 import com.tzaranthony.spellbook.core.items.equipment.equipmentMain.*;
 import com.tzaranthony.spellbook.core.items.equipment.equipmentOther.*;
+import com.tzaranthony.spellbook.core.items.items.SpawnerBI;
 import com.tzaranthony.spellbook.core.items.spellBooks.SpellBookAdv;
 import com.tzaranthony.spellbook.core.items.spellBooks.SpellBookExp;
 import com.tzaranthony.spellbook.core.items.spellBooks.SpellBookInter;
@@ -79,11 +80,12 @@ public class SBItems {
     public static final RegistryObject<Item> TOME_OF_COORDINATION = reg.register("tome_of_coordination", () -> new CoordinationTome());
     public static final RegistryObject<Item> DIMENSIONAL_CODEX = reg.register("dimensional_codex", () -> new Item(SBItemProperties.Standard(Rarity.UNCOMMON, 1))); //TODO: Used to store autocrafting recipies. Stores up to 16?
     public static final RegistryObject<Item> RESEARCH_BOOK = reg.register("research_book", () -> new ResearchBook(SBItemProperties.Standard(Rarity.UNCOMMON, 1))); //TODO: Create research point system
+    //TODO: add special books that unlock sigils to get advanced, op spells
 
     // spell books
-    public static final RegistryObject<Item> LIBER_EXPONENTIA = reg.register("liber_exponentia", () -> new SpellBookNovice(Rarity.UNCOMMON));
+    public static final RegistryObject<Item> LIBER_EXPONENTIA = reg.register("liber_exponentia", () -> new SpellBookNovice(Rarity.UNCOMMON)); //TODO: spell leveling system -- spells automatically level up with use
     public static final RegistryObject<Item> LIBER_EXPONENTIA_INTER = reg.register("liber_exponentia_int", () -> new SpellBookInter(Rarity.RARE));
-    public static final RegistryObject<Item> LIBER_EXPONENTIA_ADV = reg.register("liber_exponentia_adv", () -> new SpellBookAdv(Rarity.RARE));
+    public static final RegistryObject<Item> LIBER_EXPONENTIA_ADV = reg.register("liber_exponentia_adv", () -> new SpellBookAdv(Rarity.RARE)); //TODO: add combo spell support
     public static final RegistryObject<Item> LIBER_EXPONENTIA_EXP = reg.register("liber_exponentia_exp", () -> new SpellBookExp(Rarity.EPIC));
     public static final RegistryObject<Item> LIBER_EXPONENTIA_CREATIVE = reg.register("liber_exponentia_creative", () -> new SpellBookCreative());
 
@@ -160,6 +162,7 @@ public class SBItems {
     public static final RegistryObject<Item> CHANNELED_BOW = reg.register("channeled_bow", () -> new ChanneledBow(SBItemProperties.Unburnable(Rarity.RARE, 1)));
     public static final RegistryObject<Item> PHOENIX_ELYTRA = reg.register("phoenix_elytra", () -> new PhoenixElytra(SBItemProperties.Unburnable(Rarity.RARE, 1).durability(1728))); //TODO: fix rendering & slot input
 
+    //TODO: make getVisibilityPercent or getArmorCoverPercentage ignore these when has invisibility
     public static final RegistryObject<Item> LIGHT_HELMET = reg.register("light_helmet", () -> new ArmorItem(SBArmorMaterial.LIGHT, EquipmentSlot.HEAD, SBItemProperties.Unburnable(Rarity.RARE)));
     public static final RegistryObject<Item> LIGHT_CHESTPLATE = reg.register("light_chestplate", () -> new ArmorItem(SBArmorMaterial.LIGHT, EquipmentSlot.CHEST, SBItemProperties.Unburnable(Rarity.RARE)));
     public static final RegistryObject<Item> LIGHT_LEGGINGS = reg.register("light_leggings", () -> new ArmorItem(SBArmorMaterial.LIGHT, EquipmentSlot.LEGS, SBItemProperties.Unburnable(Rarity.RARE)));
@@ -170,6 +173,7 @@ public class SBItems {
     public static final RegistryObject<Item> CRYSTALAN_CHESTPLATE = reg.register("crystalan_chestplate", () -> new ArmorItem(SBArmorMaterial.CRYSTALAN, EquipmentSlot.HEAD, SBItemProperties.Unburnable(Rarity.RARE)));
     public static final RegistryObject<Item> CRYSTALAN_LEGGINGS = reg.register("crystalan_leggings", () -> new ArmorItem(SBArmorMaterial.CRYSTALAN, EquipmentSlot.HEAD, SBItemProperties.Unburnable(Rarity.RARE)));
     public static final RegistryObject<Item> CRYSTALAN_BOOTS = reg.register("crystalan_boots", () -> new ArmorItem(SBArmorMaterial.CRYSTALAN, EquipmentSlot.HEAD, SBItemProperties.Unburnable(Rarity.RARE)));
+    public static final RegistryObject<Item> CRYSTALAN_AXE = reg.register("crystalan_axe", () -> new CrystalAxe(SBToolMaterial.CRYSTALAN, SBItemProperties.Unburnable(Rarity.RARE)));
     public static final RegistryObject<Item> CRYSTALAN_HOE = reg.register("crystalan_hoe", () -> new CrystalHoe(SBToolMaterial.CRYSTALAN, SBItemProperties.Unburnable(Rarity.RARE)));
     public static final RegistryObject<Item> CRYSTALAN_PICKAXE = reg.register("crystalan_pickaxe", () -> new CrystalPickaxe(SBToolMaterial.CRYSTALAN, SBItemProperties.Unburnable(Rarity.RARE)));
     public static final RegistryObject<Item> CRYSTALAN_SHOVEL = reg.register("crystalan_shovel", () -> new CrystalShovel(SBToolMaterial.CRYSTALAN, SBItemProperties.Unburnable(Rarity.RARE)));
@@ -188,40 +192,41 @@ public class SBItems {
 
     // BlockItems
     public static final RegistryObject<Item> END_TORCH = reg.register("end_torch", () -> new StandingAndWallBlockItem(SBBlocks.END_TORCH.get(), SBBlocks.END_WALL_TORCH.get(), SBItemProperties.Standard()));
+    public static final RegistryObject<Item> SPAWNER = reg.register("spawner", () -> new SpawnerBI());
 
     // spell debug items
-    public static final RegistryObject<Item> GROWTH_DEBUG = reg.register("growth_debug", () -> new SpellDebug(SBSpellRegistry.GROWTH));
-    public static final RegistryObject<Item> SUMMONING_0_DEBUG = reg.register("animal_summoning_debug", () -> new SpellDebug(SBSpellRegistry.ANIMAL_SUMMONING));
-    public static final RegistryObject<Item> SUMMONING_1_DEBUG = reg.register("zombie_summoning_debug", () -> new SpellDebug(SBSpellRegistry.NECROMANCY_1));
-    public static final RegistryObject<Item> SUMMONING_2_DEBUG = reg.register("skeleton_summoning_debug", () -> new SpellDebug(SBSpellRegistry.NECROMANCY_2));
-    public static final RegistryObject<Item> SUMMONING_3_DEBUG = reg.register("wither_skeleton_summoning_debug", () -> new SpellDebug(SBSpellRegistry.NECROMANCY_3));
-    public static final RegistryObject<Item> SWINEONING_DEBUG = reg.register("swineoning_debug", () -> new SpellDebug(SBSpellRegistry.SWINEONING));
-    public static final RegistryObject<Item> NEKOMANCY_DEBUG = reg.register("nekomancy_debug", () -> new SpellDebug(SBSpellRegistry.NEKOMANCY));
+    public static final RegistryObject<Item> GROWTH_DEBUG = reg.register("debug_growth", () -> new SpellDebug(SBSpellRegistry.GROWTH));
+    public static final RegistryObject<Item> SUMMONING_0_DEBUG = reg.register("debug_animal_summoning", () -> new SpellDebug(SBSpellRegistry.ANIMAL_SUMMONING));
+    public static final RegistryObject<Item> SUMMONING_1_DEBUG = reg.register("debug_zombie_summoning", () -> new SpellDebug(SBSpellRegistry.NECROMANCY_1));
+    public static final RegistryObject<Item> SUMMONING_2_DEBUG = reg.register("debug_skeleton_summoning", () -> new SpellDebug(SBSpellRegistry.NECROMANCY_2));
+    public static final RegistryObject<Item> SUMMONING_3_DEBUG = reg.register("debug_wither_skeleton_summoning", () -> new SpellDebug(SBSpellRegistry.NECROMANCY_3));
+    public static final RegistryObject<Item> SWINEONING_DEBUG = reg.register("debug_swineoning", () -> new SpellDebug(SBSpellRegistry.SWINEONING));
+    public static final RegistryObject<Item> NEKOMANCY_DEBUG = reg.register("debug_nekomancy", () -> new SpellDebug(SBSpellRegistry.NEKOMANCY));
 
-    public static final RegistryObject<Item> FIREWALL_DEBUG = reg.register("firewall_debug", () -> new SpellDebug(SBSpellRegistry.FIREWALL));
-    public static final RegistryObject<Item> FROST_WAVE_DEBUG = reg.register("frost_wave_debug", () -> new SpellDebug(SBSpellRegistry.FROST_WAVE));
-    public static final RegistryObject<Item> STONE_ARMOR_DEBUG = reg.register("stone_armor_debug", () -> new SpellDebug(SBSpellRegistry.STONE_REINFORCEMENT));
-    public static final RegistryObject<Item> WIND_DEBUG = reg.register("wind_debug", () -> new SpellDebug(SBSpellRegistry.OUTWARD_WINDS));
-    public static final RegistryObject<Item> JUMP_DEBUG = reg.register("jump_debug", () -> new SpellDebug(SBSpellRegistry.LONG_JUMP));
-    public static final RegistryObject<Item> EXPLOSION_DEBUG = reg.register("explosion_debug", () -> new SpellDebug(SBSpellRegistry.EXPLOSION));
-    public static final RegistryObject<Item> CHAIN_LIGHTNING_DEBUG = reg.register("chain_lightning_debug", () -> new SpellDebug(SBSpellRegistry.CHAIN_LIGHTNING));
-    public static final RegistryObject<Item> BARRIER_DEBUG = reg.register("psychic_barrier_debug", () -> new SpellDebug(SBSpellRegistry.PSYCHIC_BARRIER));
-    public static final RegistryObject<Item> ILLUSION_DEBUG = reg.register("illusion_debug", () -> new SpellDebug(SBSpellRegistry.ILLUSIONS));
-    public static final RegistryObject<Item> PLACATE_DEBUG = reg.register("placate_debug", () -> new SpellDebug(SBSpellRegistry.PLACATE));
-    public static final RegistryObject<Item> REVELATION_DEBUG = reg.register("revelation_debug", () -> new SpellDebug(SBSpellRegistry.REVELATION));
-    public static final RegistryObject<Item> SNARE_DEBUG = reg.register("snare_debug", () -> new SpellDebug(SBSpellRegistry.DARK_SNARE));
-    public static final RegistryObject<Item> LETHARGY_DEBUG = reg.register("lethargy_debug", () -> new SpellDebug(SBSpellRegistry.INSATIABLE_LETHARGY));
-    public static final RegistryObject<Item> SCREAM_DEBUG = reg.register("scream_debug", () -> new SpellDebug(SBSpellRegistry.SCREAM));
-    public static final RegistryObject<Item> INSPIRATION_DEBUG = reg.register("inspiration_debug", () -> new SpellDebug(SBSpellRegistry.INSPIRATION));
-    public static final RegistryObject<Item> LIFE_STEAL_DEBUG = reg.register("life_steal_debug", () -> new SpellDebug(SBSpellRegistry.LIFE_STEAL, 8));
-    public static final RegistryObject<Item> SOULBIND_DEBUG = reg.register("soulbind_debug", () -> new SpellDebug(SBSpellRegistry.SOULBIND));
-    public static final RegistryObject<Item> RIFT_OF_DARKNESS_DEBUG = reg.register("dark_rift_debug", () -> new SpellDebug(SBSpellRegistry.RIFT_OF_DARKNESS));
-    public static final RegistryObject<Item> TIME_DEBUG = reg.register("time_debug", () -> new SpellDebug(SBSpellRegistry.TIME_SPELL));
+    public static final RegistryObject<Item> FIREWALL_DEBUG = reg.register("debug_firewall", () -> new SpellDebug(SBSpellRegistry.FIREWALL));
+    public static final RegistryObject<Item> FROST_WAVE_DEBUG = reg.register("debug_frost_wave", () -> new SpellDebug(SBSpellRegistry.FROST_WAVE));
+    public static final RegistryObject<Item> STONE_ARMOR_DEBUG = reg.register("debug_stone_armor", () -> new SpellDebug(SBSpellRegistry.STONE_REINFORCEMENT));
+    public static final RegistryObject<Item> WIND_DEBUG = reg.register("debug_wind", () -> new SpellDebug(SBSpellRegistry.OUTWARD_WINDS));
+    public static final RegistryObject<Item> JUMP_DEBUG = reg.register("debug_jump", () -> new SpellDebug(SBSpellRegistry.LONG_JUMP));
+    public static final RegistryObject<Item> EXPLOSION_DEBUG = reg.register("debug_explosion", () -> new SpellDebug(SBSpellRegistry.EXPLOSION));
+    public static final RegistryObject<Item> CHAIN_LIGHTNING_DEBUG = reg.register("debug_chain_lightning", () -> new SpellDebug(SBSpellRegistry.CHAIN_LIGHTNING));
+    public static final RegistryObject<Item> BARRIER_DEBUG = reg.register("debug_psychic_barrier", () -> new SpellDebug(SBSpellRegistry.PSYCHIC_BARRIER));
+    public static final RegistryObject<Item> ILLUSION_DEBUG = reg.register("debug_illusion", () -> new SpellDebug(SBSpellRegistry.ILLUSIONS));
+    public static final RegistryObject<Item> PLACATE_DEBUG = reg.register("debug_placate", () -> new SpellDebug(SBSpellRegistry.PLACATE));
+    public static final RegistryObject<Item> REVELATION_DEBUG = reg.register("debug_revelation", () -> new SpellDebug(SBSpellRegistry.REVELATION));
+    public static final RegistryObject<Item> SNARE_DEBUG = reg.register("debug_snare", () -> new SpellDebug(SBSpellRegistry.DARK_SNARE));
+    public static final RegistryObject<Item> LETHARGY_DEBUG = reg.register("debug_lethargy", () -> new SpellDebug(SBSpellRegistry.INSATIABLE_LETHARGY));
+    public static final RegistryObject<Item> SCREAM_DEBUG = reg.register("debug_scream", () -> new SpellDebug(SBSpellRegistry.SCREAM));
+    public static final RegistryObject<Item> INSPIRATION_DEBUG = reg.register("debug_inspiration", () -> new SpellDebug(SBSpellRegistry.INSPIRATION));
+    public static final RegistryObject<Item> LIFE_STEAL_DEBUG = reg.register("debug_life_steal", () -> new SpellDebug(SBSpellRegistry.LIFE_STEAL, 8));
+    public static final RegistryObject<Item> SOULBIND_DEBUG = reg.register("debug_soulbind", () -> new SpellDebug(SBSpellRegistry.SOULBIND));
+    public static final RegistryObject<Item> RIFT_OF_DARKNESS_DEBUG = reg.register("debug_dark_rift", () -> new SpellDebug(SBSpellRegistry.RIFT_OF_DARKNESS));
+    public static final RegistryObject<Item> TIME_DEBUG = reg.register("debug_time", () -> new SpellDebug(SBSpellRegistry.TIME_SPELL));
 
-    public static final RegistryObject<Item> MACHINE_ENCHANTMENT_DEBUG = reg.register("machine_enchantment_debug", () -> new SpellDebug(SBSpellRegistry.OBJECT_ENCHANTMENT));
-    public static final RegistryObject<Item> ACTION_DEBUG = reg.register("action_spell_debug", () -> new SpellDebug(SBSpellRegistry.ACTION_SPELL));
-    public static final RegistryObject<Item> DETECTOR_DEBUG = reg.register("detector_spell_debug", () -> new SpellDebug(SBSpellRegistry.DETECTOR_SPELL));
-    public static final RegistryObject<Item> COMMAND_DEBUG = reg.register("command_spell_debug", () -> new SpellDebug(SBSpellRegistry.COMMAND_SPELL));
+    public static final RegistryObject<Item> MACHINE_ENCHANTMENT_DEBUG = reg.register("debug_machine_enchantment", () -> new SpellDebug(SBSpellRegistry.OBJECT_ENCHANTMENT));
+    public static final RegistryObject<Item> ACTION_DEBUG = reg.register("debug_action_spell", () -> new SpellDebug(SBSpellRegistry.ACTION_SPELL));
+    public static final RegistryObject<Item> DETECTOR_DEBUG = reg.register("debug_detector_spell", () -> new SpellDebug(SBSpellRegistry.DETECTOR_SPELL));
+    public static final RegistryObject<Item> COMMAND_DEBUG = reg.register("debug_command_spell", () -> new SpellDebug(SBSpellRegistry.COMMAND_SPELL));
 
     static {
         initSpawnEggs();

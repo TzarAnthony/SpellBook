@@ -56,7 +56,7 @@ public class SpellBook {
         SBBlocksRender.renderBlocks();
         SBBlockEntityRender.renderBlockEntities();
         SBEntityRender.renderEntities();
-        SBItemPropertiesRender.renderItemProperties();
+        SBItemsRender.renderItemProperties();
         SBScreenRender.renderScreens();
         MinecraftForge.EVENT_BUS.register(new SBClientEvents()); //TODO: fix this so it works
     }

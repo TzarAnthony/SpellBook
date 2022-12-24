@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values": [
+    "spellbook:dimensional_alloy_block",
+    "spellbook:ender_infused_cloth_block",
+    "spellbook:crystallized_ender_cluster"
+  ]
+}

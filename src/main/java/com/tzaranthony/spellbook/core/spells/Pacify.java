@@ -29,10 +29,10 @@ public class Pacify extends Spell{
 
         if (!entities.isEmpty()) {
             for (Mob mob : entities) {
-                if (mob instanceof Villager) {
-                    //TODO: create effect for cooldown?
+                if (mob instanceof Villager villager && !villager.hasEffect(SBEffects.VILLAGER_PACIFICATION.get())) {
+                    villager.addEffect(new MobEffectInstance(SBEffects.VILLAGER_PACIFICATION.get(), 1000, 0));
                     if (player instanceof ServerPlayer && !level.isClientSide()) {
-                        ((ServerLevel) level).onReputationEvent(ReputationEventType.ZOMBIE_VILLAGER_CURED, player, (Villager) mob);
+                        ((ServerLevel) level).onReputationEvent(ReputationEventType.ZOMBIE_VILLAGER_CURED, player, villager);
                     }
                 }
                 if (mob.isAlive() && !mob.isRemoved() && mob instanceof Monster && !(mob.getType().is(SBEntityTags.PACIFY_IMMUNE))) {

@@ -47,13 +47,6 @@ public class SBEffect extends MobEffect {
             } else {
                 return true;
             }
-        } else if (this == SBEffects.ENDER_INFECTION.get()) {
-            int j = 60 >> amplifier;
-            if (j > 0) {
-                return duration % j == 0;
-            } else {
-                return true;
-            }
         } else {
             return false;
         }
