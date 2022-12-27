@@ -14,7 +14,7 @@ public class GrowthSpell extends Spell {
     public GrowthSpell(int id, String name, SpellTier tier) {
         super(id, name, tier);
     }
-
+    
     @Override
     public boolean perform_spell(Level level, Player player, InteractionHand hand, BlockPos pos) {
         BlockState state = level.getBlockState(pos);
@@ -36,21 +36,20 @@ public class GrowthSpell extends Spell {
         }
         return true;
     }
-
+    
     public boolean tryGrowPlant(Block block, BlockState state, Level level, BlockPos pos) {
-        boolean flag = false;
-        boolean flag1 = false;
+        boolean isGrownBlock = false;
         IntegerProperty integerproperty = null;
         if (state.is(SBBlockTags.GROWTH_SPELL_GROWABLES) && !level.isClientSide()) {
             if (block instanceof BonemealableBlock) {
-                flag1 = true;
+                isGrownBlock = true;
                 ((BonemealableBlock) block).performBonemeal((ServerLevel) level, level.random, pos, state);
             } else if (block instanceof SugarCaneBlock) {
                 if (net.minecraftforge.common.ForgeHooks.onCropsGrowPre(level, pos, state, true)) {
                     state = state.setValue(SugarCaneBlock.AGE, Integer.valueOf(0));
                     ((ServerLevel) level).setBlockAndUpdate(pos.above(), state);
                     ((ServerLevel) level).setBlock(pos, state, 4);
-                    flag1 = true;
+                    isGrownBlock = true;
                 }
             } else if (block instanceof CactusBlock) {
                 if(net.minecraftforge.common.ForgeHooks.onCropsGrowPre(level, pos, state, true)) {
@@ -58,17 +57,18 @@ public class GrowthSpell extends Spell {
                     ((ServerLevel) level).setBlockAndUpdate(pos.above(), state);
                     ((ServerLevel) level).setBlock(pos, state, 4);
                     state.neighborChanged(((ServerLevel) level), pos.above(), block, pos, false);
-                    flag1 = true;
+                    isGrownBlock = true;
                 }
             } else if (block instanceof ChorusFlowerBlock) {
-                flag = false;
+                isGrownBlock = false;
+                // TODO: what does a chorus flower block do?
             }
 
-            if (flag) {
-//                level.levelEvent(2005, pos, 0);
+            if (isGrownBlock) {
+                // level.levelEvent(2005, pos, 0);
                 level.setBlockAndUpdate(pos, state.setValue(integerproperty, Integer.valueOf(state.getValue(integerproperty) + 1)));
             }
         }
-        return flag1;
+        return isGrownBlock;
     }
 }
