@@ -3,7 +3,7 @@ package com.tzaranthony.spellbook.registries;
 public class SBAdvancementRegistary {
     //Mobs
     //TODO: Ghostbuster -- defeat the ghost commanders
-    //TODO: Jr. Achivement -- ride a ghost horse in a village
+    //TODO: Jr. Achievement -- ride a ghost horse in a village
     //TODO: A half-hearted attempt -- get down to half a heart as your max HP
     //TODO: You only have one hundred lives -- get up to 50 hearts as your max HP
     //TODO: BFFs OG FF -- tame a Phoenix (probs rename)
@@ -32,13 +32,15 @@ public class SBAdvancementRegistary {
     //TODO: Sleep is for the weak -- get the wakeful sleep status effect
     //TODO: Chronic Insomniac -- get the wakeful sleep status effect 60 times
     //TODO: Avengers assemble -- use a Totem of Avenging
+    //TODO: Emergency Food -- eat Phoenix food
+    //TODO: It’s the quenchiest! -- drink vampire blood
     //TODO: ????????? -- obtain a Cursed Silver Ingot
     //TODO: ????????? -- obtain a Mystical Silver Ingot
     //TODO: Better than Glintstone -- obtain a Crystalan Shard
     //TODO: ????????? -- obtain a Phoenix Metal Ingot
-    //TODO: Emergency Food -- eat Phoenix food
-    //TODO: It’s the quenchiest! -- drink vampire blood
+    //TODO: ????????? -- obtain Draconite
     //TODO: Empress of Light -- place every color of Light Essence block
+    //TODO: Double Face -- obtain a Bookmark
 
     //Biomes
     //TODO: in part 2

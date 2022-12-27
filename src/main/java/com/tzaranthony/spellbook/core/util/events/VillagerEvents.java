@@ -23,7 +23,7 @@ import java.util.List;
 import java.util.Random;
 
 @Mod.EventBusSubscriber(modid = SpellBook.MOD_ID)
-public class VillagerTrading {
+public class VillagerEvents {
     @SubscribeEvent
     public static void addTrades(VillagerTradesEvent event) {
         if(event.getType() == SBVillagers.MAGE.get()) {
