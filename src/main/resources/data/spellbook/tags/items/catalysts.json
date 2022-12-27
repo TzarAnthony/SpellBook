@@ -1,6 +1,8 @@
 {
   "replace": false,
   "values": [
+    "spellbook:vampire_blood",
+    "spellbook:ectoplasm_vial",
     "spellbook:bottle_of_mercury",
     "minecraft:glistering_melon_slice",
     "minecraft:ghast_tear"

@@ -1,19 +1,20 @@
 package com.tzaranthony.spellbook.registries;
 
 import com.tzaranthony.spellbook.SpellBook;
-import com.tzaranthony.spellbook.core.items.equipment.equipUtils.SBArmorMaterial;
 import com.tzaranthony.spellbook.core.items.SBItemProperties;
-import com.tzaranthony.spellbook.core.items.equipment.equipUtils.SBToolMaterial;
 import com.tzaranthony.spellbook.core.items.equipment.arrows.CrystalArrowItem;
 import com.tzaranthony.spellbook.core.items.equipment.arrows.GhostlyArrowItem;
 import com.tzaranthony.spellbook.core.items.equipment.arrows.SilverArrowItem;
 import com.tzaranthony.spellbook.core.items.equipment.creative.SpellBookCreative;
 import com.tzaranthony.spellbook.core.items.equipment.creative.SpellDebug;
-import com.tzaranthony.spellbook.core.items.food.*;
-import com.tzaranthony.spellbook.core.items.items.CoordinationTome;
-import com.tzaranthony.spellbook.core.items.items.PhoenixAshes;
+import com.tzaranthony.spellbook.core.items.equipment.equipUtils.SBArmorMaterial;
+import com.tzaranthony.spellbook.core.items.equipment.equipUtils.SBToolMaterial;
 import com.tzaranthony.spellbook.core.items.equipment.equipmentMain.*;
 import com.tzaranthony.spellbook.core.items.equipment.equipmentOther.*;
+import com.tzaranthony.spellbook.core.items.food.*;
+import com.tzaranthony.spellbook.core.items.items.CoordinationTome;
+import com.tzaranthony.spellbook.core.items.items.CursedPaintingItem;
+import com.tzaranthony.spellbook.core.items.items.PhoenixAshes;
 import com.tzaranthony.spellbook.core.items.items.SpawnerBI;
 import com.tzaranthony.spellbook.core.items.spellBooks.SpellBookAdv;
 import com.tzaranthony.spellbook.core.items.spellBooks.SpellBookExp;
@@ -40,6 +41,7 @@ public class SBItems {
     public static final RegistryObject<Item> VAMPIRE_BLOOD = reg.register("vampire_blood", () -> new Drink(SBItemProperties.VampireBlood(Rarity.COMMON, 10, 1, 0.25f, 1, 0.9f), false));
     public static final RegistryObject<Item> HIGHER_VAMPIRE_BLOOD = reg.register("higher_vampire_blood", () -> new Drink(SBItemProperties.VampireBlood(Rarity.RARE, 20, 3, 0.35f, 4, 0.75f), true));
     public static final RegistryObject<Item> BOTTLE_OF_MERCURY = reg.register("bottle_of_mercury", () -> new MercuryBottle());
+    public static final RegistryObject<Item> PHOENIX_FOOD = reg.register("phoenix_food", () -> new Item(SBItemProperties.Standard())); //TODO: a mixture of infernum berries, caelum berries and some meat?
     //TODO: maybe magic cookies or cake?
 
     // Materials
@@ -193,6 +195,7 @@ public class SBItems {
     // BlockItems
     public static final RegistryObject<Item> END_TORCH = reg.register("end_torch", () -> new StandingAndWallBlockItem(SBBlocks.END_TORCH.get(), SBBlocks.END_WALL_TORCH.get(), SBItemProperties.Standard()));
     public static final RegistryObject<Item> SPAWNER = reg.register("spawner", () -> new SpawnerBI());
+    public static final RegistryObject<Item> CURSED_PAINTING = reg.register("cursed_painting", () -> new CursedPaintingItem());
 
     // spell debug items
     public static final RegistryObject<Item> GROWTH_DEBUG = reg.register("debug_growth", () -> new SpellDebug(SBSpellRegistry.GROWTH));

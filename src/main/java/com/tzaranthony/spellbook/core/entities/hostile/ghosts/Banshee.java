@@ -1,6 +1,7 @@
 package com.tzaranthony.spellbook.core.entities.hostile.ghosts;
 
 import com.tzaranthony.spellbook.core.entities.ai.MagicAndMeleeAttackGoal;
+import com.tzaranthony.spellbook.core.entities.other.CursedPainting;
 import com.tzaranthony.spellbook.core.spells.ProjectileSpell;
 import com.tzaranthony.spellbook.registries.SBSpellRegistry;
 import net.minecraft.nbt.CompoundTag;
@@ -37,6 +38,7 @@ public class Banshee extends SBGhostEntity {
         this.goalSelector.addGoal(7, new RandomLookAroundGoal(this));
         this.targetSelector.addGoal(1, new HurtByTargetGoal(this));
         this.targetSelector.addGoal(2, new NearestAttackableTargetGoal(this, Player.class, false));
+        this.targetSelector.addGoal(3, new NearestAttackableTargetGoal(this, CursedPainting.class, false));
     }
 
     public static AttributeSupplier.Builder createAttributes() {

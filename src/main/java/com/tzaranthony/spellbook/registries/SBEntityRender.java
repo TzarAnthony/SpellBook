@@ -45,6 +45,7 @@ public class SBEntityRender {
         EntityRenderers.register(SBEntities.FROST_WAVE_PROJECTILE.get(), FrostWaveRender::new);
         // Other
         EntityRenderers.register(SBEntities.FIRE_WALL.get(), NoopRenderer::new);
+        EntityRenderers.register(SBEntities.CURSED_PAINTING.get(), CursedPaintingRender::new);
         EntityRenderers.register(SBEntities.PHOENIX_ASHES.get(), ItemEntityRenderer::new);
     }
 }

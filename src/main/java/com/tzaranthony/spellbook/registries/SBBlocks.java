@@ -8,9 +8,6 @@ import com.tzaranthony.spellbook.core.blocks.fire.EndFire;
 import com.tzaranthony.spellbook.core.blocks.fire.SBTorch;
 import com.tzaranthony.spellbook.core.blocks.fire.SBWallTorch;
 import com.tzaranthony.spellbook.core.blocks.plant.*;
-import com.tzaranthony.spellbook.core.blocks.containsBE.BlackHole;
-import com.tzaranthony.spellbook.core.blocks.containsBE.SnareBlock;
-import com.tzaranthony.spellbook.core.blocks.containsBE.TimerBlock;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
@@ -116,7 +113,6 @@ public class SBBlocks {
     public static final RegistryObject<Block> RIFT_GENERATOR = registerBlockAndItem("rift_generator", () -> new RiftGenerator(SBBlockProperties.StandardRock().noOcclusion()));
     public static final RegistryObject<Block> RIFT = reg.register("rift", () -> new Rift());
     //TODO: buildable levatator elevator?? like in subnautica? -- keeps going until either the last powered or the end
-    //TODO: cursed painting.... idk what it does yet -- traps ghosts???
 
     // spell blocks
     public static final RegistryObject<Block> SNARE = reg.register("snare", () -> new SnareBlock());

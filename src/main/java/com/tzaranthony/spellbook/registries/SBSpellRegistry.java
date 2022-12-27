@@ -21,7 +21,7 @@ public class SBSpellRegistry {
     public static final Spell LONG_JUMP = new SelfImprovementSpell(13, "long_jump", SpellTier.NOVICE, MobEffects.JUMP, null, 40, 20); //TODO: remove?? -- might need improvement
     public static final Spell EXPLOSION = new Explosion(15, "explosion", SpellTier.PRACTITIONER);
     public static final Spell CHAIN_LIGHTNING = new Spell(16, "chain_lightning", SpellTier.PRACTITIONER); //TODO: arching electricity spikes between entities
-    public static final Spell PSYCHIC_BARRIER = new Spell(17, "psychic_barrier", SpellTier.PRACTITIONER); //TODO: remove?? creates a temporary shield around the user
+    public static final Spell PSYCHIC_BARRIER = new Spell(17, "psychic_barrier", SpellTier.PRACTITIONER); //TODO: remove?? creates a temporary shield around the user??? Creates temporary blocks around the user????
     public static final Spell REVELATION = new Revelation(19, "revelation", SpellTier.PRACTITIONER);
     public static final Spell INSATIABLE_LETHARGY = new ProjectileSpell(20, "insatiable_lethargy", SpellTier.PRACTITIONER); //TODO: slows entities, the further they move from their original spot the more damage they take
     public static final Spell SCREAM = new Scream(21, "scream", SpellTier.PRACTITIONER);
@@ -36,7 +36,7 @@ public class SBSpellRegistry {
     //TODO: shapeshifting?
     public static final Spell ILLUSIONS = new Spell(18, "illusions", SpellTier.MASTERY); //TODO: in part 2 -- creates illusions of the user
 
-    //TODO: add block
+    //TODO: add block or something to hold the spells
     public static final Spell ACTION_SPELL = new Spell(31, "action_spell", SpellTier.PRACTITIONER); //TODO: performs a given spell (requires marked spell paper) as specified by a command spell
     public static final Spell DETECTOR_SPELL = new Spell(32, "detector_spell", SpellTier.PRACTITIONER); //TODO: detects when entities are in a region, or detects redstone state changes
     public static final Spell COMMAND_SPELL = new Spell(33, "command_spell", SpellTier.PRACTITIONER); //TODO: informs an action spell when to act

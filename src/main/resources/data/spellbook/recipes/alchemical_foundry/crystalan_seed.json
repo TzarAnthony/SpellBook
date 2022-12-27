@@ -32,8 +32,8 @@
     }
   },
   "catalyst": {
-    "item": "spellbook:bottle_of_mercury",
-    "count": 4
+    "item": "spellbook:vampire_blood",
+    "count": 2
   },
   "processingTime": 150,
   "result": {

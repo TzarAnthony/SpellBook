@@ -29,7 +29,7 @@
     }
   },
   "catalyst": {
-    "item": "spellbook:bottle_of_mercury",
+    "item": "spellbook:ectoplasm_vial",
     "count": 2
   },
   "processingTime": 150,

@@ -7,7 +7,6 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 
 public class SBItemTags {
-    //TODO: phoenix food
     public static final TagKey<Item> CATALYSTS = registerItemTag("catalysts");
 
     private static TagKey<Item> registerItemTag(String name) {

@@ -1,6 +1,10 @@
 package com.tzaranthony.spellbook.registries;
 
 import com.tzaranthony.spellbook.SpellBook;
+import com.tzaranthony.spellbook.core.entities.arrows.CrystalArrow;
+import com.tzaranthony.spellbook.core.entities.arrows.EffectCarryingArrow;
+import com.tzaranthony.spellbook.core.entities.arrows.GhostlyArrow;
+import com.tzaranthony.spellbook.core.entities.arrows.SilverArrow;
 import com.tzaranthony.spellbook.core.entities.friendly.SummonedSkeleton;
 import com.tzaranthony.spellbook.core.entities.friendly.SummonedVex;
 import com.tzaranthony.spellbook.core.entities.friendly.SummonedWitherSkeleton;
@@ -14,10 +18,6 @@ import com.tzaranthony.spellbook.core.entities.hostile.vampires.HigherVampirePer
 import com.tzaranthony.spellbook.core.entities.hostile.vampires.LesserVampire;
 import com.tzaranthony.spellbook.core.entities.neutral.GhostHorse;
 import com.tzaranthony.spellbook.core.entities.other.*;
-import com.tzaranthony.spellbook.core.entities.arrows.CrystalArrow;
-import com.tzaranthony.spellbook.core.entities.arrows.EffectCarryingArrow;
-import com.tzaranthony.spellbook.core.entities.arrows.GhostlyArrow;
-import com.tzaranthony.spellbook.core.entities.arrows.SilverArrow;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.level.block.Blocks;
@@ -133,7 +133,10 @@ public class SBEntities {
 
     // Other
     public static final RegistryObject<EntityType<AreaFireCloud>> FIRE_WALL = reg.register("fire_wall", () ->
-            EntityType.Builder.of(AreaFireCloud::new, MobCategory.MISC).fireImmune().sized(0.5F, 6.0F).updateInterval(Integer.MAX_VALUE).build("phoenix_ashes")
+            EntityType.Builder.of(AreaFireCloud::new, MobCategory.MISC).fireImmune().sized(0.5F, 6.0F).updateInterval(Integer.MAX_VALUE).build("fire_wall")
+    );
+    public static final RegistryObject<EntityType<CursedPainting>> CURSED_PAINTING = reg.register("cursed_painting", () ->
+            EntityType.Builder.of(CursedPainting::new, MobCategory.MISC).sized(0.5F, 0.5F).clientTrackingRange(10).updateInterval(Integer.MAX_VALUE).build("cursed_painting")
     );
     public static final RegistryObject<EntityType<PhoenixAshesEntity>> PHOENIX_ASHES = reg.register("phoenix_ashes", () ->
             EntityType.Builder.of(PhoenixAshesEntity::new, MobCategory.MISC).fireImmune().sized(0.25F, 0.25F).build("phoenix_ashes")

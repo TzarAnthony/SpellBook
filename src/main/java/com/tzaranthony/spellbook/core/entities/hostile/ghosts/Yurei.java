@@ -1,6 +1,7 @@
 package com.tzaranthony.spellbook.core.entities.hostile.ghosts;
 
 import com.tzaranthony.spellbook.core.entities.ai.NecromancedEntity;
+import com.tzaranthony.spellbook.core.entities.other.CursedPainting;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.InteractionHand;
@@ -38,6 +39,7 @@ public class Yurei extends SBGhostEntity {
         this.goalSelector.addGoal(7, new RandomLookAroundGoal(this));
         this.targetSelector.addGoal(1, new HurtByTargetGoal(this));
         this.targetSelector.addGoal(4, new NearestAttackableTargetGoal<>(this, Player.class, true));
+        this.targetSelector.addGoal(3, new NearestAttackableTargetGoal(this, CursedPainting.class, false));
     }
 
     public static AttributeSupplier.Builder createAttributes() {

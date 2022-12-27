@@ -2,8 +2,9 @@ package com.tzaranthony.spellbook.core.entities.hostile.ghosts;
 
 import com.tzaranthony.spellbook.core.entities.ai.FlyingEntity;
 import com.tzaranthony.spellbook.core.entities.ai.FlyingGhostMoveRandomGoal;
-import com.tzaranthony.spellbook.core.entities.ai.VexLikeMovementHelper;
 import com.tzaranthony.spellbook.core.entities.ai.FlyingMeleeAndMagicAttackGoal;
+import com.tzaranthony.spellbook.core.entities.ai.VexLikeMovementHelper;
+import com.tzaranthony.spellbook.core.entities.other.CursedPainting;
 import com.tzaranthony.spellbook.core.spells.ProjectileSpell;
 import com.tzaranthony.spellbook.registries.SBSpellRegistry;
 import net.minecraft.nbt.CompoundTag;
@@ -59,6 +60,7 @@ public class Wraith extends SBGhostEntity implements FlyingEntity {
         this.goalSelector.addGoal(9, new RandomLookAroundGoal(this));
         this.targetSelector.addGoal(1, new HurtByTargetGoal(this));
         this.targetSelector.addGoal(2, new NearestAttackableTargetGoal(this, Player.class, false));
+        this.targetSelector.addGoal(3, new NearestAttackableTargetGoal(this, CursedPainting.class, false));
     }
 
     public static AttributeSupplier.Builder createAttributes() {
