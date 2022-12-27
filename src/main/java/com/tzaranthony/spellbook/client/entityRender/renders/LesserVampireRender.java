@@ -11,8 +11,8 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
 public class LesserVampireRender extends HumanoidMobRenderer<LesserVampire, LesserVampireModel> {
-    private static final ResourceLocation VAMP_1 = new ResourceLocation("spellbook:textures/entity/vampire/lower/vampire1.png");
-    private static final ResourceLocation VAMP_2 = new ResourceLocation("spellbook:textures/entity/vampire/lower/vampire2.png");
+    private static final ResourceLocation VAMP_1 = new ResourceLocation("spellbook:textures/entity/vampire/lower/dettlaff.png");
+    private static final ResourceLocation VAMP_2 = new ResourceLocation("spellbook:textures/entity/vampire/lower/dio.png");
     private static final ResourceLocation VAMP_3 = new ResourceLocation("spellbook:textures/entity/vampire/lower/vampire3.png");
     private static final ResourceLocation VAMP_4 = new ResourceLocation("spellbook:textures/entity/vampire/lower/vampire4.png");
 

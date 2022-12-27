@@ -111,7 +111,7 @@ public class SBVampireEntity extends SBMonsterEntity implements Enemy {
         return SoundEvents.ILLUSIONER_AMBIENT;
     }
 
-    public SoundEvent getHurtSound(DamageSource p_184601_1_) {
+    public SoundEvent getHurtSound(DamageSource source) {
         return SoundEvents.ILLUSIONER_HURT;
     }
 

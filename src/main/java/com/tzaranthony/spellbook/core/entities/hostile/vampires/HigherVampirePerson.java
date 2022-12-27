@@ -103,14 +103,13 @@ public class HigherVampirePerson extends HigherVampirePhase1 {
         if (spawnData instanceof VampData) {
             this.setVariant(((VampData) spawnData).variant);
         } else {
-            this.setVariant(this.random.nextInt(4));
+            this.setVariant(this.random.nextInt(7));
         }
         return super.finalizeSpawn(accessor, difficulty, reason, spawnData, nbt);
     }
 
     public static class VampData implements SpawnGroupData {
         public final int variant;
-
         public VampData(int variant) {
             this.variant = variant;
         }
