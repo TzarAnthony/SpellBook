@@ -14,7 +14,7 @@ import net.minecraftforge.fml.common.Mod;
 public class SBServerEvents {
     @SubscribeEvent
     //TODO: move the modifiers to here instead of the items
-    static void onBreakEvent(BlockEvent.BreakEvent event) {
+    public static void onBreakEvent(BlockEvent.BreakEvent event) {
         System.out.println("Just broke a block...");
 //        ItemStack stack = event.getPlayer().getMainHandItem();
 //        if (stack.getItem() instanceof MiningModeTool mmItem && !event.getPlayer().level.isClientSide()) {
@@ -27,7 +27,7 @@ public class SBServerEvents {
 
 
     @SubscribeEvent
-    public void onInteractWithEntity(PlayerInteractEvent.EntityInteract event) {
+    public static void onInteractWithEntity(PlayerInteractEvent.EntityInteract event) {
         if (event.getTarget() instanceof LivingEntity le) {
             if (!event.getEntity().isShiftKeyDown() && Binding.isBound(le)) {
                 Binding.unbindEntity(le);
@@ -38,7 +38,7 @@ public class SBServerEvents {
     }
 
     @SubscribeEvent
-    public void onLivingUpdateEvent(LivingEvent.LivingUpdateEvent event) {
+    public static void onLivingUpdateEvent(LivingEvent.LivingUpdateEvent event) {
         LivingEntity le = event.getEntityLiving();
         if (Binding.isBound(le)) {
             Binding.tickSoulBind(le);

@@ -45,6 +45,7 @@ public class Binding extends ProjectileSpell {
     public void addSpellDataToProjectile(MagicProjectile magic) {
         magic.setSpell(this.getId());
         magic.setParticle(ParticleTypes.HEART);
+        magic.setLifetime(15);
     }
 
     @Override
@@ -112,7 +113,7 @@ public class Binding extends ProjectileSpell {
                     return;
                 }
 
-                if (f > 15.0F) {
+                if (f > 20.0F) {
                     unbindEntity(bound);
                     bound.goalSelector.disableControlFlag(Goal.Flag.MOVE);
                 } else if (f > 6.0F) {
@@ -122,8 +123,6 @@ public class Binding extends ProjectileSpell {
                     bound.setDeltaMovement(bound.getDeltaMovement().add(Math.copySign(d0 * d0 * 0.4D, d0), Math.copySign(d1 * d1 * 0.4D, d1), Math.copySign(d2 * d2 * 0.4D, d2)));
                 } else {
                     bound.goalSelector.enableControlFlag(Goal.Flag.MOVE);
-                    // TODO(TzarAnthony): Determine if the following line exists for a reason. I know some of the code here is half-finished. Please advise if this unused variable can be removed.
-//                    float f1 = 2.0F;
                     Vec3 vec3 = (new Vec3(binder.getX() - bound.getX(), binder.getY() - bound.getY(), binder.getZ() - bound.getZ())).normalize().scale(Math.max(f - 2.0F, 0.0F));
                     bound.getNavigation().moveTo(bound.getX() + vec3.x, bound.getY() + vec3.y, bound.getZ() + vec3.z, 1.0D);
                 }
@@ -191,6 +190,8 @@ public class Binding extends ProjectileSpell {
 
     /**
      * Binding storage for the {@link Binding} spell.
+     * <p>
+     * TODO(tim117): Store data somehow so that it persists.
      */
     private static class BindingStore {
         private static final Map<UUID, Set<UUID>> playerBindings = new HashMap<>();

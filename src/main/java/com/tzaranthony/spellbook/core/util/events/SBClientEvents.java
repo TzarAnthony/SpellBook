@@ -20,9 +20,10 @@ import java.util.Optional;
 public class SBClientEvents {
     @SubscribeEvent
     @OnlyIn(Dist.CLIENT)
-    public void onPostRenderEntity(RenderLivingEvent.Post event) {
+    public static void onPostRenderEntity(RenderLivingEvent.Post event) {
         LivingEntity le = event.getEntity();
         if (Binding.isBound(le) && le instanceof Mob bound) {
+            // TODO(TzarAnthony): Fix this rendering.
             Optional<Entity> owner = Binding.isBoundBy(le);
             if (owner.isPresent() && owner.get() instanceof LivingEntity leOwner) {
                 double d0 = Mth.lerp(event.getPartialTick(), le.xOld, le.getX());
