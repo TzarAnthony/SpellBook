@@ -12,6 +12,7 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -25,6 +26,7 @@ import net.minecraft.world.phys.BlockHitResult;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
+import java.util.Optional;
 
 public class Alter extends TickingBEBlock {
     public Alter(Properties properties) {
@@ -43,7 +45,7 @@ public class Alter extends TickingBEBlock {
             if (itemstack.getItem() instanceof SpellBookNovice && abe.checkMultiBlock()) {
                 level.playSound((Player) null, pos.getX(), pos.getY(), pos.getZ(), SoundEvents.ZOMBIE_VILLAGER_CURE, SoundSource.BLOCKS, 0.5F, 1.0F);
                 abe.startCrafting();
-                for(int i = 0; i < 8; ++i) {
+                for (int i = 0; i < 8; ++i) {
                     double d0 = (double) pos.getX() + level.random.nextDouble();
                     double d1 = (double) pos.above().getY() + level.random.nextDouble();
                     double d2 = (double) pos.getZ() + level.random.nextDouble();
@@ -54,7 +56,8 @@ public class Alter extends TickingBEBlock {
                         new AABB((double) (pos.getX() - 10), (double) (pos.getY() - 10), (double) (pos.getZ() - 10), (double) (pos.getX() + 10), (double) (pos.getY() + 10), (double) (pos.getZ() + 10)));
                 boolean addedMobs = false;
                 for (Mob mob : mobs) {
-                    if (Binding.isBound(mob) && Binding.isBoundBy(mob) == player) {
+                    Optional<Entity> boundedBy = Binding.isBoundBy(mob);
+                    if (Binding.isBound(mob) && boundedBy.isPresent() && boundedBy.get() == player) {
                         abe.addMob(mob);
                         addedMobs = true;
                     }

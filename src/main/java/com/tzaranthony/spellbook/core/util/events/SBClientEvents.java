@@ -12,6 +12,8 @@ import net.minecraftforge.client.event.RenderLivingEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
+import java.util.Optional;
+
 
 @OnlyIn(Dist.CLIENT)
 @Mod.EventBusSubscriber(modid = SpellBook.MOD_ID, value = Dist.CLIENT)
@@ -21,8 +23,8 @@ public class SBClientEvents {
     public void onPostRenderEntity(RenderLivingEvent.Post event) {
         LivingEntity le = event.getEntity();
         if (Binding.isBound(le) && le instanceof Mob bound) {
-            Entity owner = Binding.isBoundBy(le);
-            if (owner instanceof LivingEntity leOwner) {
+            Optional<Entity> owner = Binding.isBoundBy(le);
+            if (owner.isPresent() && owner.get() instanceof LivingEntity leOwner) {
                 double d0 = Mth.lerp(event.getPartialTick(), le.xOld, le.getX());
                 double d1 = Mth.lerp(event.getPartialTick(), le.yOld, le.getY());
                 double d2 = Mth.lerp(event.getPartialTick(), le.zOld, le.getZ());
