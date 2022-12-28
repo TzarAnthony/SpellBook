@@ -15,6 +15,7 @@ public class SBServerEvents {
     @SubscribeEvent
     //TODO: move the modifiers to here instead of the items
     static void onBreakEvent(BlockEvent.BreakEvent event) {
+        System.out.println("Just broke a block...");
 //        ItemStack stack = event.getPlayer().getMainHandItem();
 //        if (stack.getItem() instanceof MiningModeTool mmItem && !event.getPlayer().level.isClientSide()) {
 //            ServerPlayer player = (ServerPlayer) event.getPlayer();
