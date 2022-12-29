@@ -22,6 +22,6 @@ public class DarkRift extends BlockCreateSpell{
 
     @Override
     public void playCustomSound(Level level, double x, double y, double z) {
-        level.playSound((Player) null, x, y, z, SoundEvents.ZOMBIE_VILLAGER_CONVERTED, SoundSource.PLAYERS, 1.0F, 1.0F);
+        level.playSound((Player) null, x, y, z, SoundEvents.ZOMBIE_VILLAGER_CONVERTED, SoundSource.NEUTRAL, 1.0F, 1.0F);
     }
 }

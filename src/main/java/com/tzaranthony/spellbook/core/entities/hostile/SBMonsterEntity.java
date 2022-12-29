@@ -1,6 +1,7 @@
 package com.tzaranthony.spellbook.core.entities.hostile;
 
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.level.Level;
@@ -20,13 +21,8 @@ public class SBMonsterEntity extends Monster {
         return false;
     }
 
-
-    @Override
-    public void baseTick() {
-        if (this.isPassenger()) {
-            this.stopRiding();
-        }
-        super.baseTick();
+    protected boolean canRide(Entity vehicle) {
+        return false;
     }
 
     public boolean isCastingSpell() {

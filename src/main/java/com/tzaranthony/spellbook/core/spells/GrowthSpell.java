@@ -4,7 +4,7 @@ import com.tzaranthony.spellbook.core.util.tags.SBBlockTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockState;
@@ -16,7 +16,7 @@ public class GrowthSpell extends Spell {
     }
     
     @Override
-    public boolean perform_spell(Level level, Player player, InteractionHand hand, BlockPos pos) {
+    public boolean perform_spell(Level level, LivingEntity entity, InteractionHand hand, BlockPos pos) {
         BlockState state = level.getBlockState(pos);
         Block block = state.getBlock();
         int diameter = 9;

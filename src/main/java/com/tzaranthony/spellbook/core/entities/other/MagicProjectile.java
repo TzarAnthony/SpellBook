@@ -31,6 +31,7 @@ public class MagicProjectile extends Projectile {
     private static final EntityDataAccessor<ParticleOptions> DATA_PARTICLE = SynchedEntityData.defineId(MagicProjectile.class, EntityDataSerializers.PARTICLE);
     private int life;
     private int lifetime = 50 + this.random.nextInt(7);
+    private Class ignoreType = null;
 
     public MagicProjectile(EntityType<? extends MagicProjectile> projectile, Level level) {
         super(projectile, level);
@@ -50,6 +51,10 @@ public class MagicProjectile extends Projectile {
 
     public void setParticle(ParticleOptions particle) {
         this.getEntityData().set(DATA_PARTICLE, particle);
+    }
+
+    public void setIgnoreType(Class ignoreType) {
+        this.ignoreType = ignoreType;
     }
 
     protected void defineSynchedData() {
@@ -85,9 +90,7 @@ public class MagicProjectile extends Projectile {
         this.setDeltaMovement(vec33);
 
         HitResult hitresult = ProjectileUtil.getHitResult(this, this::canHitEntity);
-        if (!spell.spellIgnoresBlocksAndEntities()) {
-            this.onHit(hitresult);
-        }
+        this.onHit(hitresult);
 
         this.updateRotation();
         if (this.life == 0 && !this.isSilent()) {
@@ -108,10 +111,12 @@ public class MagicProjectile extends Projectile {
         super.onHitEntity(result);
         Entity target = result.getEntity();
         Entity user = this.getOwner();
-        getSpellById(getSpell()).perform_spell(user, target);
-        if (!this.noPhysics) {
-            this.level.broadcastEntityEvent(this, (byte)17);
-            this.discard();
+        if ((target.getClass() != this.ignoreType)) {
+            getSpellById(getSpell()).perform_spell(user, target);
+            if (!this.noPhysics) {
+                this.level.broadcastEntityEvent(this, (byte)17);
+                this.discard();
+            }
         }
     }
 

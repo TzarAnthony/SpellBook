@@ -1,6 +1,6 @@
 package com.tzaranthony.spellbook.client.entityRender.models;
 
-import com.tzaranthony.spellbook.core.entities.hostile.vampires.HigherVampireBat;
+import com.tzaranthony.spellbook.core.entities.hostile.vampires.boss.HigherVampireBat;
 import net.minecraft.client.model.HierarchicalModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;

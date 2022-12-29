@@ -22,11 +22,11 @@ public class FrostWave extends ProjectileSpell {
     }
 
     @Override
-    public boolean perform_spell(Level level, Player player, InteractionHand hand, BlockPos blockPos) {
-        boolean x = super.perform_spell(level, player, hand, blockPos);
+    public boolean perform_spell(Level level, LivingEntity entity, InteractionHand hand, BlockPos blockPos) {
+        boolean x = super.perform_spell(level, entity, hand, blockPos);
         if (x) {
-            boolean y = super.perform_spell(level, player, hand, blockPos, -12.0F);
-            boolean z = super.perform_spell(level, player, hand, blockPos, 12.0F);
+            boolean y = super.perform_spell(level, entity, hand, blockPos, -12.0F);
+            boolean z = super.perform_spell(level, entity, hand, blockPos, 12.0F);
             return x || y || z;
         }
         return x;
@@ -47,7 +47,7 @@ public class FrostWave extends ProjectileSpell {
     public boolean perform_spell(Entity user, Entity target) {
         if (user instanceof LivingEntity && target instanceof LivingEntity) {
             ((LivingEntity) target).hurt(DamageSource.indirectMagic(user, user), 4.0F);
-            ((LivingEntity) target).addEffect(new MobEffectInstance(SBEffects.FREEZING.get(), 600, 0));
+            ((LivingEntity) target).addEffect(new MobEffectInstance(SBEffects.FREEZING.get(), 200, 0));
             return true;
         }
         return false;
@@ -55,6 +55,6 @@ public class FrostWave extends ProjectileSpell {
 
     @Override
     public void playCustomSound(Level level, double x, double y, double z) {
-        level.playSound((Player) null, x, y, z, SoundEvents.POWDER_SNOW_FALL, SoundSource.PLAYERS, 10.0F, 1.0F);
+        level.playSound((Player) null, x, y, z, SoundEvents.POWDER_SNOW_FALL, SoundSource.NEUTRAL, 10.0F, 1.0F);
     }
 }

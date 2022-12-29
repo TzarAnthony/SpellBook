@@ -4,6 +4,7 @@ import com.tzaranthony.spellbook.core.entities.hostile.alchemical.NecroticSpider
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.FlyingMob;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.TamableAnimal;
 import net.minecraft.world.entity.ambient.AmbientCreature;
@@ -11,7 +12,6 @@ import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.animal.WaterAnimal;
 import net.minecraft.world.entity.animal.horse.AbstractHorse;
 import net.minecraft.world.entity.monster.*;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
 
@@ -23,7 +23,7 @@ public class EntityConversionSpell extends Spell{
     }
 
     @Override
-    public boolean perform_spell(Level level, Player player, InteractionHand hand, BlockPos pos) {
+    public boolean perform_spell(Level level, LivingEntity entity, InteractionHand hand, BlockPos pos) {
         List<Mob> entities = level.getEntitiesOfClass(Mob.class,
                 new AABB((double) (pos.getX() - 4), (double) (pos.getY() - 1), (double) (pos.getZ() - 4), (double) (pos.getX() + 4), (double) (pos.getY() + 3), (double) (pos.getZ() + 4)));
 

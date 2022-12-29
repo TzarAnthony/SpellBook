@@ -1,6 +1,6 @@
 package com.tzaranthony.spellbook.client.entityRender.models;
 
-import com.tzaranthony.spellbook.core.entities.hostile.vampires.HigherVampirePhase1;
+import com.tzaranthony.spellbook.core.entities.hostile.vampires.boss.HigherVampirePhase1;
 import net.minecraft.client.model.AbstractZombieModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraftforge.api.distmarker.Dist;

@@ -50,7 +50,7 @@ public class MoveToEntityGoal extends MoveToBlockGoal {
 
     @Override
     protected boolean findNearestBlock() {
-        if (this.mob.getTarget() != null) {
+        if (this.mob.getTarget() == null) {
             return false;
         } else if (this.blockPos != null && this.etarget != null && !this.etarget.isRemoved()) {
             return isValidTarget(this.mob.level, this.blockPos);

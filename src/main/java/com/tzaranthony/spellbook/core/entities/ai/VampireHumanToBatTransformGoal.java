@@ -1,6 +1,6 @@
 package com.tzaranthony.spellbook.core.entities.ai;
 
-import com.tzaranthony.spellbook.core.entities.hostile.vampires.HigherVampirePerson;
+import com.tzaranthony.spellbook.core.entities.hostile.vampires.boss.HigherVampirePerson;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.entity.player.Player;

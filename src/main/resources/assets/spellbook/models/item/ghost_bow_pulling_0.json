@@ -1,0 +1,6 @@
+{
+    "parent": "item/bow",
+    "textures": {
+        "layer0": "spellbook:item/ghost_bow_pulling_0"
+    }
+}

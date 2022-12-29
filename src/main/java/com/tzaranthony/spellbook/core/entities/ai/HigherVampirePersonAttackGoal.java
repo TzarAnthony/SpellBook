@@ -1,11 +1,9 @@
 package com.tzaranthony.spellbook.core.entities.ai;
 
-import com.tzaranthony.spellbook.core.entities.hostile.vampires.HigherVampirePhase1;
-import com.tzaranthony.spellbook.core.entities.other.MagicProjectile;
+import com.tzaranthony.spellbook.core.entities.hostile.vampires.boss.HigherVampirePhase1;
+import com.tzaranthony.spellbook.core.spells.ProjectileSpell;
 import com.tzaranthony.spellbook.core.util.damage.SBDamageSource;
 import com.tzaranthony.spellbook.registries.SBEffects;
-import com.tzaranthony.spellbook.registries.SBEntities;
-import com.tzaranthony.spellbook.registries.SBParticleTypes;
 import com.tzaranthony.spellbook.registries.SBSpellRegistry;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -17,20 +15,17 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.MobType;
 import net.minecraft.world.entity.Pose;
 import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.entity.ai.goal.MeleeAttackGoal;
 import net.minecraft.world.entity.animal.AbstractGolem;
 import net.minecraft.world.entity.player.Player;
 
-public class HigherVampirePersonAttackGoal extends MeleeAttackGoal {
+public class HigherVampirePersonAttackGoal extends MagicAndMeleeAttackGoal {
     protected final HigherVampirePhase1 mob;
     float damage;
     int cloudCooldown;
-    int sonicCooldown;
     int biteCooldown;
-    int animationTimer;
 
-    public HigherVampirePersonAttackGoal(HigherVampirePhase1 vampire, double boost, boolean whenNotSeen) {
-        super(vampire, boost, whenNotSeen);
+    public HigherVampirePersonAttackGoal(HigherVampirePhase1 vampire) {
+        super(vampire, (ProjectileSpell) SBSpellRegistry.SCREAM, 1.2D, true, 40, 4);
         this.mob = vampire;
         this.damage = (float) this.mob.getAttribute(Attributes.ATTACK_DAMAGE).getValue();
     }
@@ -38,75 +33,38 @@ public class HigherVampirePersonAttackGoal extends MeleeAttackGoal {
     @Override
     public void start() {
         this.biteCooldown = 0;
-        this.sonicCooldown = 0;
         this.cloudCooldown = 0;
-        this.animationTimer = 1;
         super.start();
     }
 
-    protected void checkAndPerformAttack(LivingEntity attacked, double distance) {
-        double d0 = this.getAttackReachSqr(attacked);
-        if (this.getTicksUntilNextAttack() <= 0) {
-            if (distance <= d0 && !this.mob.isCrouching()) {
-                if (Math.round(Math.random() * 100) <= 8 && this.cloudCooldown <= 0) {
-                    this.performCloudAttack();
-                    this.resetCloudCooldown();
-                } else {
-                    this.performMeleeAttack(attacked);
-                }
-            } else if (this.mob.hasEffect(MobEffects.LEVITATION) || (distance > 36.0D && distance <= 1600 && this.sonicCooldown <= 0)) {
-                this.performSonicAttack(attacked);
-                this.resetSonicCooldown();
-            }
-            // reduce second timers
-            this.resetAttackCooldown();
-            this.biteCooldown = Math.max(this.biteCooldown - 1, 0);
-            this.sonicCooldown = Math.max(this.sonicCooldown - 1, 0);
-            this.cloudCooldown = Math.max(this.cloudCooldown - 1, 0);
-            if (mob.isCrouching()) {
-                this.animationTimer = Math.max(this.animationTimer - 1, 0);
-                if (this.animationTimer <= 0) {
-                    mob.setPose(Pose.STANDING);
-                    this.resetAnimationTimer();
-                }
-            }
-        }
+    protected boolean checkRangeCriteria(double distance, double d0) {
+        return this.mob.hasEffect(MobEffects.LEVITATION) || (distance > 36.0D && distance <= 1600 && super.checkRangeCriteria(distance, d0));
     }
 
+    @Override
     protected void performMeleeAttack(LivingEntity attacked) {
-        if (attacked instanceof AbstractGolem) {
-            this.damage = this.damage * 3;
-        }
-
-        if (this.biteCooldown <= 0 && attacked.getMobType() != MobType.UNDEAD) {
-            this.resetBiteCooldown();
-            this.mob.swing(InteractionHand.MAIN_HAND);
-            attacked.hurt(SBDamageSource.bite(this.mob), this.damage * 0.75F);
-            attacked.addEffect(new MobEffectInstance(SBEffects.BLEEDING.get(), 400, 1));
-            this.mob.heal(this.damage * 0.75F);
+        if (Math.round(Math.random() * 100) <= 8 && this.cloudCooldown <= 0) {
+            this.performCloudAttack();
+            this.resetCloudCooldown();
         } else {
-            this.mob.swing(InteractionHand.MAIN_HAND);
-            this.mob.doHurtTarget(attacked);
-            if (Math.round(Math.random() * 10) % 3 == 0) {
-                attacked.addEffect(new MobEffectInstance(SBEffects.FRACTURED.get(), 100));
+            if (attacked instanceof AbstractGolem) {
+                this.damage = this.damage * 3;
+            }
+
+            if (this.biteCooldown <= 0 && attacked.getMobType() != MobType.UNDEAD) {
+                this.resetBiteCooldown();
+                this.mob.swing(InteractionHand.MAIN_HAND);
+                attacked.hurt(SBDamageSource.bite(this.mob), this.damage * 0.75F);
+                attacked.addEffect(new MobEffectInstance(SBEffects.BLEEDING.get(), 400, 1));
+                this.mob.heal(this.damage * 0.75F);
+            } else {
+                this.mob.swing(InteractionHand.MAIN_HAND);
+                this.mob.doHurtTarget(attacked);
+                if (Math.round(Math.random() * 10) % 3 == 0) {
+                    attacked.addEffect(new MobEffectInstance(SBEffects.FRACTURED.get(), 100));
+                }
             }
         }
-    }
-
-    protected void performSonicAttack(LivingEntity attacked) {
-        this.mob.getLookControl().setLookAt(attacked.position());
-
-        MagicProjectile magic = new MagicProjectile(SBEntities.LARGE_MAGIC_PROJECTILE.get(), this.mob.level);
-        magic.setOwner(this.mob);
-        magic.setPos(this.mob.getX(), this.mob.getEyeY() - (double)0.15F, this.mob.getZ());
-        magic.setSpell(SBSpellRegistry.SCREAM.getId());
-        magic.setParticle(SBParticleTypes.SCREAM.get());
-
-        double d0 = attacked.getX() - this.mob.getX();
-        double d1 = attacked.getEyeY() - magic.getY();
-        double d2 = attacked.getZ() - this.mob.getZ();
-        magic.shoot(d0, d1, d2, 1.6F, (float) (4 - this.mob.level.getDifficulty().getId()));
-        mob.level.addFreshEntity(magic);
     }
 
     protected void performCloudAttack() {
@@ -139,19 +97,18 @@ public class HigherVampirePersonAttackGoal extends MeleeAttackGoal {
         }
     }
 
+    @Override
+    protected void handleTimers() {
+        super.handleTimers();
+        this.biteCooldown = Math.max(this.biteCooldown - 1, 0);
+        this.cloudCooldown = Math.max(this.cloudCooldown - 1, 0);
+    }
+
     protected void resetBiteCooldown() {
         this.biteCooldown = 60;
     }
 
-    protected void resetSonicCooldown() {
-        this.sonicCooldown = 40;
-    }
-
     protected void resetCloudCooldown() {
         this.cloudCooldown = 25;
-    }
-
-    protected void resetAnimationTimer() {
-        this.animationTimer = 3;
     }
 }

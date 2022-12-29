@@ -48,7 +48,7 @@ public class Scream extends ProjectileSpell {
 
     @Override
     public void playCustomSound(Level level, double x, double y, double z) {
-        level.playSound((Player) null, x, y, z, SoundEvents.ENDER_DRAGON_GROWL, SoundSource.PLAYERS, 5.0F, (level.random.nextFloat() - level.random.nextFloat()) * 0.2F + 1.0F);
+        level.playSound((Player) null, x, y, z, SoundEvents.ENDER_DRAGON_GROWL, SoundSource.NEUTRAL, 5.0F, (level.random.nextFloat() - level.random.nextFloat()) * 0.2F + 1.0F);
     }
 
     @Override

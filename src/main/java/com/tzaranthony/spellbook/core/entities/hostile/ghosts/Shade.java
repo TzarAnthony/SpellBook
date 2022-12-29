@@ -27,7 +27,6 @@ public class Shade extends SBGhostEntity {
     public Shade(EntityType<? extends Shade> shade, Level level) {
         super(shade, level);
         this.xpReward = 8;
-        this.maxUpStep = 15.0F;
     }
 
     protected void registerGoals() {
@@ -38,7 +37,7 @@ public class Shade extends SBGhostEntity {
         this.goalSelector.addGoal(5, new RandomStrollGoal(this, 1.0D));
         this.goalSelector.addGoal(8, new LookAtPlayerGoal(this, Player.class, 8.0F));
         this.goalSelector.addGoal(8, new RandomLookAroundGoal(this));
-        this.targetSelector.addGoal(1, new HurtByTargetGoal(this));
+        this.targetSelector.addGoal(1, new HurtByTargetGoal(this, SBGhostEntity.class));
         this.targetSelector.addGoal(2, new ShadeTargetGoal<>(this, Player.class));
     }
 
@@ -49,11 +48,6 @@ public class Shade extends SBGhostEntity {
                 .add(Attributes.MOVEMENT_SPEED, 0.2D)
                 .add(Attributes.FOLLOW_RANGE, 48.0D)
                 .add(Attributes.KNOCKBACK_RESISTANCE, 1.0D);
-    }
-
-    protected void defineSynchedData() {
-        super.defineSynchedData();
-        this.entityData.define(VARIANT, 0);
     }
 
     public boolean isInvulnerableTo(DamageSource source) {

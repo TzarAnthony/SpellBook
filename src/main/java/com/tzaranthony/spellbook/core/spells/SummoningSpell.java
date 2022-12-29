@@ -22,17 +22,16 @@ public abstract class SummoningSpell extends Spell {
     public abstract EntityType getEntity(Level level);
 
     @Override
-    public boolean perform_spell(Level level, Player player, InteractionHand hand, BlockPos pos) {
-        ItemStack stack = player.getItemInHand(hand);
-        EntityType entityType = getEntity(level);
-        int countbonus = getSummonBonus(player);
+    public boolean perform_spell(Level level, LivingEntity summoner, InteractionHand hand, BlockPos pos) {
+        if (!level.isClientSide && summoner instanceof Player player) {
+            ItemStack stack = player.getItemInHand(hand);
+            EntityType entityType = getEntity(level);
+            int countbonus = getSummonBonus(player);
 
-        int timeBonus = 0;
-        if (countbonus == 4) {
-            timeBonus = 30;
-        }
-
-        if (!level.isClientSide) {
+            int timeBonus = 0;
+            if (countbonus == 4) {
+                timeBonus = 30;
+            }
             for (int i = 0; i < 3 + countbonus; ++i) {
                 Entity entity = entityType.spawn((ServerLevel) level, stack, player, getRandomEntitySpawnPos(player, level, entityType), MobSpawnType.MOB_SUMMONED, false, false);
                 if (entity instanceof TamableAnimal) {
@@ -59,11 +58,9 @@ public abstract class SummoningSpell extends Spell {
             int z1 = z + Mth.nextInt(player.getRandom(), 5, 15) * Mth.nextInt(player.getRandom(), -1, 1);
             if (x != x1 && z != z1) {
                 BlockPos spawnPoint = new BlockPos(x1, y1, z1);
-                SpawnPlacements.Type entityspawnplacementregistry$placementtype = SpawnPlacements.getPlacementType(entitytype);
-                if (NaturalSpawner.isSpawnPositionOk(entityspawnplacementregistry$placementtype, player.level, spawnPoint, entitytype)
-                        && SpawnPlacements.checkSpawnRules(entitytype, (ServerLevelAccessor) player.level, MobSpawnType.REINFORCEMENT, spawnPoint, level.random)
-                        && level.isUnobstructed(player) && level.noCollision(player) && !level.containsAnyLiquid(player.getBoundingBox())
-                ) {
+                SpawnPlacements.Type spawnplacements$type = SpawnPlacements.getPlacementType(entitytype);
+                if (NaturalSpawner.isSpawnPositionOk(spawnplacements$type, player.level, spawnPoint, entitytype)
+                        && SpawnPlacements.checkSpawnRules(entitytype, (ServerLevelAccessor) player.level, MobSpawnType.MOB_SUMMONED, spawnPoint, level.random)) {
                     return spawnPoint;
                 }
             }

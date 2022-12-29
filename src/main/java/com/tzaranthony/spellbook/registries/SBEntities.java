@@ -13,8 +13,11 @@ import com.tzaranthony.spellbook.core.entities.hostile.alchemical.NecroticSpider
 import com.tzaranthony.spellbook.core.entities.hostile.alchemical.SkeletonIllusion;
 import com.tzaranthony.spellbook.core.entities.hostile.alchemical.ZombieIllusion;
 import com.tzaranthony.spellbook.core.entities.hostile.ghosts.*;
-import com.tzaranthony.spellbook.core.entities.hostile.vampires.HigherVampireBat;
-import com.tzaranthony.spellbook.core.entities.hostile.vampires.HigherVampirePerson;
+import com.tzaranthony.spellbook.core.entities.hostile.ghosts.boss.GhostArcher;
+import com.tzaranthony.spellbook.core.entities.hostile.ghosts.boss.GhostKnight;
+import com.tzaranthony.spellbook.core.entities.hostile.ghosts.boss.GhostMage;
+import com.tzaranthony.spellbook.core.entities.hostile.vampires.boss.HigherVampireBat;
+import com.tzaranthony.spellbook.core.entities.hostile.vampires.boss.HigherVampirePerson;
 import com.tzaranthony.spellbook.core.entities.hostile.vampires.LesserVampire;
 import com.tzaranthony.spellbook.core.entities.neutral.GhostHorse;
 import com.tzaranthony.spellbook.core.entities.other.*;
@@ -65,8 +68,15 @@ public class SBEntities {
     public static final RegistryObject<EntityType<GhostHorse>> GHOST_HORSE = reg.register("ghost_horse", () ->
             EntityType.Builder.of(GhostHorse::new, MobCategory.CREATURE).fireImmune().sized(1.3964844F, 1.6F).clientTrackingRange(10).build("ghost_horse")
     );
-    //TODO: ghost knights
-    //TODO: ghost trader????
+    public static final RegistryObject<EntityType<GhostMage>> GHOST_MAGE = reg.register("ghost_mage", () ->
+            EntityType.Builder.of(GhostMage::new, MobCategory.CREATURE).sized(0.6F, 1.95F).clientTrackingRange(10).build("ghost_mage")
+    );
+    public static final RegistryObject<EntityType<GhostArcher>> GHOST_ARCHER = reg.register("ghost_archer", () ->
+            EntityType.Builder.of(GhostArcher::new, MobCategory.CREATURE).sized(0.6F, 1.95F).clientTrackingRange(10).build("ghost_archer")
+    );
+    public static final RegistryObject<EntityType<GhostKnight>> GHOST_KNIGHT = reg.register("ghost_knight", () ->
+            EntityType.Builder.of(GhostKnight::new, MobCategory.CREATURE).sized(0.6F, 1.95F).clientTrackingRange(10).build("ghost_knight")
+    );
 
     public static final RegistryObject<EntityType<HigherVampirePerson>> HIGHVAMP1 = reg.register("higher_vampire_human", () ->
             EntityType.Builder.of(HigherVampirePerson::new, MobCategory.MONSTER).immuneTo(Blocks.POWDER_SNOW).sized(0.6F, 1.95F).clientTrackingRange(8).build("higher_vampire_human")
@@ -155,6 +165,9 @@ public class SBEntities {
         creationEvent.put(BANSHEE.get(), Banshee.createAttributes().build());
         creationEvent.put(YUREI.get(), Yurei.createAttributes().build());
         creationEvent.put(GHOST_HORSE.get(), GhostHorse.createAttributes().build());
+        creationEvent.put(GHOST_MAGE.get(), GhostMage.createAttributes().build());
+        creationEvent.put(GHOST_ARCHER.get(), GhostArcher.createAttributes().build());
+        creationEvent.put(GHOST_KNIGHT.get(), GhostKnight.createAttributes().build());
         creationEvent.put(HIGHVAMP1.get(), HigherVampirePerson.createAttributes().build());
         creationEvent.put(HIGHVAMP1BAT.get(), HigherVampirePerson.createAttributes().build());
         creationEvent.put(LOWVAMP.get(), LesserVampire.createAttributes().build());

@@ -3,7 +3,7 @@ package com.tzaranthony.spellbook.core.spells;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.Level;
 
 public class Spell {
@@ -17,7 +17,7 @@ public class Spell {
         this.tier = tier;
     }
 
-    public boolean perform_spell(Level level, Player player, InteractionHand hand, BlockPos pos) {
+    public boolean perform_spell(Level level, LivingEntity entity, InteractionHand hand, BlockPos pos) {
         return false;
     }
 

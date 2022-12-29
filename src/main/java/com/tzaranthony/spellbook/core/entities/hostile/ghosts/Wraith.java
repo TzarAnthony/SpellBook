@@ -51,14 +51,13 @@ public class Wraith extends SBGhostEntity implements FlyingEntity {
 
     protected void registerGoals() {
         this.goalSelector.addGoal(0, new FloatGoal(this));
-        this.goalSelector.addGoal(1, new MoveToEntityGoal(this, CursedPainting.class, 1.0D));
+        this.goalSelector.addGoal(4, new MoveToEntityGoal(this, CursedPainting.class, 1.0D));
         this.goalSelector.addGoal(1, new FlyingMeleeAndMagicAttackGoal(this, (ProjectileSpell) SBSpellRegistry.IGNITE, 6));
         this.goalSelector.addGoal(5, new FlyingGhostMoveRandomGoal(this));
         this.goalSelector.addGoal(8, new LookAtPlayerGoal(this, Player.class, 8.0F));
         this.goalSelector.addGoal(8, new RandomLookAroundGoal(this));
-        this.targetSelector.addGoal(1, new HurtByTargetGoal(this));
+        this.targetSelector.addGoal(1, new HurtByTargetGoal(this, SBGhostEntity.class));
         this.targetSelector.addGoal(2, new NearestAttackableTargetGoal(this, Player.class, false));
-//        this.targetSelector.addGoal(3, new NearestAttackableTargetGoal(this, CursedPainting.class, false));
     }
 
     public static AttributeSupplier.Builder createAttributes() {
@@ -68,11 +67,6 @@ public class Wraith extends SBGhostEntity implements FlyingEntity {
                 .add(Attributes.MOVEMENT_SPEED, 0.2D)
                 .add(Attributes.FOLLOW_RANGE, 48.0D)
                 .add(Attributes.KNOCKBACK_RESISTANCE, 1.0D);
-    }
-
-    protected void defineSynchedData() {
-        super.defineSynchedData();
-        this.entityData.define(VARIANT, 0);
     }
 
     public SoundEvent getAmbientSound() {

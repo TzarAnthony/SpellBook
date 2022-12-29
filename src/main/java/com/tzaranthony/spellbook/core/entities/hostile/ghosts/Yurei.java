@@ -39,9 +39,8 @@ public class Yurei extends SBGhostEntity {
         this.goalSelector.addGoal(5, new RandomStrollGoal(this, 1.0D));
         this.goalSelector.addGoal(8, new LookAtPlayerGoal(this, Player.class, 8.0F));
         this.goalSelector.addGoal(8, new RandomLookAroundGoal(this));
-        this.targetSelector.addGoal(1, new HurtByTargetGoal(this));
+        this.targetSelector.addGoal(1, new HurtByTargetGoal(this, SBGhostEntity.class));
         this.targetSelector.addGoal(4, new NearestAttackableTargetGoal<>(this, Player.class, false));
-//        this.targetSelector.addGoal(3, new NearestAttackableTargetGoal(this, CursedPainting.class, false));
     }
 
     public static AttributeSupplier.Builder createAttributes() {
@@ -57,11 +56,6 @@ public class Yurei extends SBGhostEntity {
     @Override
     public boolean isInvulnerableTo(DamageSource source) {
         return !(source.getEntity() instanceof AbstractSkeleton || source.getEntity() instanceof NecromancedEntity || source.isCreativePlayer() || source == DamageSource.OUT_OF_WORLD || source == DamageSource.CRAMMING);
-    }
-
-    protected void defineSynchedData() {
-        super.defineSynchedData();
-        this.entityData.define(VARIANT, 0);
     }
 
     @Nullable

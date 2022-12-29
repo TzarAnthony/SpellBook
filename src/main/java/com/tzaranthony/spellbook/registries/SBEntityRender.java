@@ -1,6 +1,18 @@
 package com.tzaranthony.spellbook.registries;
 
-import com.tzaranthony.spellbook.client.entityRender.renders.*;
+import com.tzaranthony.spellbook.client.entityRender.renders.alchemical.*;
+import com.tzaranthony.spellbook.client.entityRender.renders.arrows.*;
+import com.tzaranthony.spellbook.client.entityRender.renders.ghosts.*;
+import com.tzaranthony.spellbook.client.entityRender.renders.ghosts.boss.GhostArcherRender;
+import com.tzaranthony.spellbook.client.entityRender.renders.ghosts.boss.GhostKnightRender;
+import com.tzaranthony.spellbook.client.entityRender.renders.ghosts.boss.GhostMageRender;
+import com.tzaranthony.spellbook.client.entityRender.renders.other.CursedPaintingRender;
+import com.tzaranthony.spellbook.client.entityRender.renders.other.FrostWaveRender;
+import com.tzaranthony.spellbook.client.entityRender.renders.other.MagicProjectileRender;
+import com.tzaranthony.spellbook.client.entityRender.renders.other.ShatteringCrystalRender;
+import com.tzaranthony.spellbook.client.entityRender.renders.vampire.boss.HigherVampireBatRender;
+import com.tzaranthony.spellbook.client.entityRender.renders.vampire.boss.HigherVampirePersonRender;
+import com.tzaranthony.spellbook.client.entityRender.renders.vampire.LesserVampireRender;
 import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.client.renderer.entity.ItemEntityRenderer;
 import net.minecraft.client.renderer.entity.NoopRenderer;
@@ -22,6 +34,10 @@ public class SBEntityRender {
         EntityRenderers.register(SBEntities.WRAITH.get(), WraithRender::new);
         EntityRenderers.register(SBEntities.YUREI.get(), YureiRender::new);
         EntityRenderers.register(SBEntities.GHOST_HORSE.get(), GhostHorseRender::new);
+        //TODO: create models for Ghost Commanders
+        EntityRenderers.register(SBEntities.GHOST_MAGE.get(), GhostMageRender::new);
+        EntityRenderers.register(SBEntities.GHOST_ARCHER.get(), GhostArcherRender::new);
+        EntityRenderers.register(SBEntities.GHOST_KNIGHT.get(), GhostKnightRender::new);
         EntityRenderers.register(SBEntities.HIGHVAMP1.get(), HigherVampirePersonRender::new);
         EntityRenderers.register(SBEntities.HIGHVAMP1BAT.get(), HigherVampireBatRender::new);
         EntityRenderers.register(SBEntities.LOWVAMP.get(), LesserVampireRender::new);

@@ -57,6 +57,6 @@ public class Snare extends AreaBlockSpell{
 
     @Override
     public void playCustomSound(Level level, double x, double y, double z) {
-        level.playSound((Player) null, x, y, z, SoundEvents.DYE_USE, SoundSource.PLAYERS, 1.0F, 0.6F);
+        level.playSound((Player) null, x, y, z, SoundEvents.DYE_USE, SoundSource.NEUTRAL, 1.0F, 0.6F);
     }
 }

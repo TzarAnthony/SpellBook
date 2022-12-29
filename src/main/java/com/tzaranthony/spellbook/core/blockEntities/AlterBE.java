@@ -33,7 +33,7 @@ public class AlterBE extends CraftingBE {
     public static int tier;
     protected String LT_ID = "ListDataID";
     protected String MOB_ID = "MobUUID";
-    protected NonNullList<Mob> boundEntitites;
+    protected NonNullList<Mob> boundEntitites = NonNullList.create();
     protected String CRAFTING = "CraftingStatus";
     protected boolean isCrafting;
     protected String TRANSFER = "TransferCooldown";

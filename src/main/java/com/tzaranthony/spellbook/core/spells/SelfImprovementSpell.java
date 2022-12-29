@@ -4,7 +4,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.Level;
 
 import javax.annotation.Nullable;
@@ -25,12 +25,12 @@ public class SelfImprovementSpell extends Spell{
     }
 
     @Override
-    public boolean perform_spell(Level level, Player player, InteractionHand hand, BlockPos pos) {
+    public boolean perform_spell(Level level, LivingEntity entity, InteractionHand hand, BlockPos pos) {
         if (this.effect != null) {
-            player.addEffect(new MobEffectInstance(this.effect, this.duration, this.amplifier));
+            entity.addEffect(new MobEffectInstance(this.effect, this.duration, this.amplifier));
             return true;
         } else if (this.effect1 != null) {
-            player.addEffect(new MobEffectInstance(this.effect1.get(), this.duration, this.amplifier));
+            entity.addEffect(new MobEffectInstance(this.effect1.get(), this.duration, this.amplifier));
             return true;
         }
         return false;

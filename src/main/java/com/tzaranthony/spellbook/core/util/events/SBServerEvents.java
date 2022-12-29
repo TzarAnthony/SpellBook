@@ -3,7 +3,10 @@ package com.tzaranthony.spellbook.core.util.events;
 import com.tzaranthony.spellbook.SpellBook;
 import com.tzaranthony.spellbook.core.spells.Binding;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraftforge.common.ForgeMod;
+import net.minecraftforge.event.entity.EntityAttributeModificationEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.world.BlockEvent;
@@ -25,6 +28,14 @@ public class SBServerEvents {
 //        }
     }
 
+    @SubscribeEvent
+    public static void onEntityAttributeModificationEvent(EntityAttributeModificationEvent event) {
+        //TODO: maybe increase the range for other entities?
+//        for (EntityType type : event.getTypes()) {
+//            event.add(type, ForgeMod.REACH_DISTANCE.get());
+//        }
+        event.add(EntityType.PLAYER, ForgeMod.REACH_DISTANCE.get());
+    }
 
     @SubscribeEvent
     public static void onInteractWithEntity(PlayerInteractEvent.EntityInteract event) {

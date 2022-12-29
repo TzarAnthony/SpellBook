@@ -18,7 +18,7 @@ public class Ignite extends AreaBlockSpell {
     @Override
     public void addSpellDataToProjectile(MagicProjectile magic) {
         magic.setSpell(this.getId());
-        magic.setParticle(ParticleTypes.SOUL_FIRE_FLAME);
+        magic.setParticle(ParticleTypes.FLAME);
     }
 
     @Override
@@ -38,6 +38,6 @@ public class Ignite extends AreaBlockSpell {
 
     @Override
     public void playCustomSound(Level level, double x, double y, double z) {
-        level.playSound((Player) null, x, y, z, SoundEvents.BLAZE_SHOOT, SoundSource.PLAYERS, 5.0F, (level.random.nextFloat() - level.random.nextFloat()) * 0.2F + 1.0F);
+        level.playSound((Player) null, x, y, z, SoundEvents.BLAZE_SHOOT, SoundSource.NEUTRAL, 5.0F, (level.random.nextFloat() - level.random.nextFloat()) * 0.2F + 1.0F);
     }
 }

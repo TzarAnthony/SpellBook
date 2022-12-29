@@ -25,7 +25,7 @@ public class LifeSteal extends ProjectileSpell {
     public boolean perform_spell(Entity usr, Entity tgt) {
         if (usr instanceof LivingEntity user && tgt instanceof LivingEntity target) {
             float thp = target.getHealth();
-            float stealAmt = 2.0F;
+            float stealAmt = 4.0F;
             if (thp < stealAmt) {
                 stealAmt = thp;
                 target.kill();
@@ -46,6 +46,6 @@ public class LifeSteal extends ProjectileSpell {
 
     @Override
     public void playCustomSound(Level level, double x, double y, double z) {
-        level.playSound((Player) null, x, y, z, SoundEvents.AMBIENT_SOUL_SAND_VALLEY_MOOD, SoundSource.PLAYERS, 1.0F, 1.0F);
+        level.playSound((Player) null, x, y, z, SoundEvents.AMBIENT_SOUL_SAND_VALLEY_MOOD, SoundSource.NEUTRAL, 1.0F, 1.0F);
     }
 }

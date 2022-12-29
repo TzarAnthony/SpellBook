@@ -22,10 +22,14 @@ public class SBGhostEntity extends SBMonsterEntity {
     public SBGhostEntity(EntityType<? extends SBGhostEntity> type, Level level) {
         super(type, level);
         this.xpReward = 8;
-        this.maxUpStep = 20.0F;
+        this.maxUpStep = 2.0F;
     }
 
-    // damage settings
+    protected void defineSynchedData() {
+        super.defineSynchedData();
+        this.entityData.define(VARIANT, 0);
+    }
+
     public boolean isInvulnerableTo(DamageSource source) {
         return super.isInvulnerableTo(source) || source == DamageSource.FALL || source == DamageSource.IN_WALL
                 || source == DamageSource.CACTUS || source == DamageSource.LIGHTNING_BOLT || source == DamageSource.DROWN
