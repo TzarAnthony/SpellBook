@@ -4,9 +4,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Matrix4f;
 import com.tzaranthony.spellbook.core.entities.other.MagicProjectile;
-import com.tzaranthony.spellbook.core.network.SoulBindS2CPacket;
 import com.tzaranthony.spellbook.core.util.tags.SBEntityTags;
-import com.tzaranthony.spellbook.registries.SBPackets;
 import net.minecraft.client.renderer.LightTexture;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
@@ -32,12 +30,7 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
 
-// TODO: Remove references to the tags in favor of the BindingUtil.
 public class Binding extends ProjectileSpell {
-    protected static String BOUND_TO_ID = "SBEIDSoulBoundTo:";
-    protected static String BOUND_TO_UUID = "SBUUIDSoulBoundTo:";
-    protected static String IS_BOUND = "SBIsSoulBound";
-
     public Binding(int id, String name, SpellTier tier) {
         super(id, name, tier);
     }
@@ -72,11 +65,6 @@ public class Binding extends ProjectileSpell {
             bound.stopRiding();
         }
 
-        if (!bound.level.isClientSide()) {
-            // TODO(TzarAnthony): Not sure what this does, but it probably needs to change now (maybe deleted).
-            SBPackets.sendToAllPlayers(new SoulBindS2CPacket(bound.getId(), IS_BOUND, BOUND_TO_UUID + binder.getStringUUID(), BOUND_TO_ID + binder.getId()));
-        }
-
         BindingUtils.addBinding(binder, bound);
     }
 
@@ -99,11 +87,6 @@ public class Binding extends ProjectileSpell {
                 return;
             }
             Entity binder = maybeBinder.get();
-
-            if (!bound.level.isClientSide()) {
-                // TODO(TzarAnthony): Not sure what this does, but it probably needs to change now.
-                SBPackets.sendToAllPlayers(new SoulBindS2CPacket(bound.getId(), IS_BOUND, BOUND_TO_UUID + binder.getStringUUID(), BOUND_TO_ID + binder.getId()));
-            }
 
             if (binder.level == bound.level) {
                 bound.restrictTo(binder.blockPosition(), 5);
