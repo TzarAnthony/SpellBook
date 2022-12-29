@@ -12,6 +12,7 @@ import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
@@ -20,16 +21,16 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.TamableAnimal;
 import net.minecraft.world.entity.ai.goal.Goal;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LightLayer;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
-import java.util.*;
-
-import static java.util.stream.Collectors.toSet;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Optional;
+import java.util.UUID;
 
 // TODO: Remove references to the tags in favor of the BindingUtil.
 public class Binding extends ProjectileSpell {
@@ -54,7 +55,7 @@ public class Binding extends ProjectileSpell {
             if (!isBound(target) && !target.isLeashed()) {
                 bindEntity(usr, target);
             }
-//            target.setLeashedTo(user, true);
+            // target.setLeashedTo(user, true);
             return true;
         }
         return false;
@@ -65,29 +66,30 @@ public class Binding extends ProjectileSpell {
         level.playSound(null, x, y, z, SoundEvents.GLOW_INK_SAC_USE, SoundSource.PLAYERS, 1.0F, 1.0F);
     }
 
-    //TODO: create a knot like entity to bind to an alter
+    // TODO: create a knot like entity to bind to an alter
     public static void bindEntity(Entity binder, Mob bound) {
         if (bound.isPassenger()) {
             bound.stopRiding();
         }
 
         if (!bound.level.isClientSide()) {
+            // TODO(TzarAnthony): Not sure what this does, but it probably needs to change now (maybe deleted).
             SBPackets.sendToAllPlayers(new SoulBindS2CPacket(bound.getId(), IS_BOUND, BOUND_TO_UUID + binder.getStringUUID(), BOUND_TO_ID + binder.getId()));
         }
 
-        BindingStore.addBinding(binder, bound);
+        BindingUtils.addBinding(binder, bound);
     }
 
     public static boolean isBound(LivingEntity bound) {
-        return !BindingStore.boundEntities(bound).isEmpty() || !BindingStore.playersBoundTo(bound).isEmpty();
+        return BindingUtils.playersBoundTo(bound).isPresent();
     }
 
     public static Optional<Entity> isBoundBy(LivingEntity bound) {
-        return BindingStore.playersBoundTo(bound).stream().findFirst();
+        return BindingUtils.playersBoundTo(bound).stream().findFirst();
     }
 
     public static void unbindEntity(LivingEntity bound) {
-        BindingStore.removeBinding(bound);
+        BindingUtils.removeBinding(bound);
     }
 
     public static void tickSoulBind(LivingEntity le) {
@@ -190,95 +192,66 @@ public class Binding extends ProjectileSpell {
 
     /**
      * Binding storage for the {@link Binding} spell.
-     * <p>
-     * TODO(tim117): Store data somehow so that it persists.
      */
-    private static class BindingStore {
-        private static final Map<UUID, Set<UUID>> playerBindings = new HashMap<>();
-        private static final Map<UUID, Set<UUID>> entityBindings = new HashMap<>();
+    private static class BindingUtils {
+        protected static final String BOUND_TAG_KEY = "SBUUIDSoulBoundTo";
+
         private static final Map<UUID, Entity> entities = new HashMap<>();
 
         /**
          * Adds a binding to the player {@link Entity} for the entity.
          *
-         * @param player the player to bind the entity.
-         * @param entity the entity to bind to the player.
+         * @param user   the player to bind the entity.
+         * @param target the entity to bind to the player.
          */
-        public static void addBinding(Entity player, Entity entity) {
-            if (isBindable(entity)) {
-                entities.put(player.getUUID(), player);
-                entities.put(entity.getUUID(), entity);
-                bindPlayerToEntity(player.getUUID(), entity.getUUID());
-                bindEntityToPlayer(player.getUUID(), entity.getUUID());
-            }
+        public static void addBinding(Entity user, Entity target) {
+            entities.put(user.getUUID(), user);
+            entities.put(target.getUUID(), target);
+            bindPlayerToEntity(user, target);
+            bindEntityToPlayer(user, target);
         }
 
-        private static boolean isBindable(Entity entity) {
-            // Players should probably not be bindable.
-            if (entity instanceof Player) {
-                return false;
-            }
-            return entity instanceof LivingEntity;
+        private static void bindEntityToPlayer(Entity player, Entity entity) {
+            CompoundTag tag = player.getPersistentData();
+            tag.putBoolean(createBindedTag(entity.getUUID()), true);
         }
 
-        private static void bindEntityToPlayer(UUID playerUUID, UUID entityUUID) {
-            if (playerBindings.containsKey(playerUUID)) {
-                playerBindings.get(playerUUID).add(entityUUID);
-                return;
-            }
-            playerBindings.put(playerUUID, new HashSet<>(List.of(new UUID[]{entityUUID})));
+        private static String createBindedTag(UUID uuid) {
+            return String.format("%s:%s", BOUND_TAG_KEY, uuid);
         }
 
-        private static void bindPlayerToEntity(UUID playerUUID, UUID entityUUID) {
-            if (entityBindings.containsKey(entityUUID)) {
-                entityBindings.get(entityUUID).add(playerUUID);
-                return;
-            }
-            entityBindings.put(entityUUID, new HashSet<>(List.of(new UUID[]{playerUUID})));
+        private static void bindPlayerToEntity(Entity player, Entity entity) {
+            CompoundTag tag = entity.getPersistentData();
+            tag.putUUID(BOUND_TAG_KEY, player.getUUID());
         }
 
         /**
          * Removes all bindings from all player {@link Entity Entities} for the specified entity.
          *
-         * @param entity the entity to remove the binding for.
+         * @param target the entity to remove the binding for.
          */
-        public static void removeBinding(Entity entity) {
-            UUID entityUUID = entity.getUUID();
-            Set<UUID> boundPlayers = entityBindings.get(entityUUID);
-            for (UUID playerUUID : boundPlayers) {
-                if (playerBindings.containsKey(playerUUID)) {
-                    playerBindings.get(playerUUID).remove(entityUUID);
-                }
-            }
-            entityBindings.remove(entityUUID);
+        public static void removeBinding(Entity target) {
+            CompoundTag tag = target.getPersistentData();
+            UUID userUUID = tag.getUUID(BOUND_TAG_KEY);
+            Entity user = entities.get(userUUID);
+            CompoundTag userData = user.getPersistentData();
+            userData.remove(createBindedTag(target.getUUID()));
+            tag.remove(BOUND_TAG_KEY);
         }
 
         /**
          * Gets all the players bound to an entity.
          *
-         * @param entity the {@link Entity} to get the bound players.
+         * @param target the {@link Entity} to get the bound players.
          * @return a set of all player {@link Entity Entities} bound to the entity.
          */
-        public static Set<Entity> playersBoundTo(Entity entity) {
-            UUID entityUUID = entity.getUUID();
-            if (entityBindings.containsKey(entityUUID)) {
-                return entityBindings.get(entityUUID).stream().map(entities::get).collect(toSet());
+        public static Optional<Entity> playersBoundTo(Entity target) {
+            CompoundTag targetData = target.getPersistentData();
+            if (!targetData.contains(BOUND_TAG_KEY)) {
+                return Optional.empty();
             }
-            return new HashSet<>();
-        }
-
-        /**
-         * Gets all the bound {@link Entity Entities} to the player.
-         *
-         * @param player the player {@link Entity} to get the entities that are bound to it.
-         * @return the set of all {@link Entity Entities} bound to the player
-         */
-        public static Set<Entity> boundEntities(Entity player) {
-            UUID playerUUID = player.getUUID();
-            if (playerBindings.containsKey(playerUUID)) {
-                return playerBindings.get(playerUUID).stream().map(entities::get).collect(toSet());
-            }
-            return new HashSet<>();
+            UUID playerUUID = targetData.getUUID(BOUND_TAG_KEY);
+            return Optional.ofNullable(entities.get(playerUUID));
         }
     }
 }
