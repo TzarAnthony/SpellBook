@@ -1,0 +1,37 @@
+{
+  "display": {
+    "icon": {
+      "item": "spellbook:liber_exponentia"
+    },
+    "title": {
+      "translate": "advancements.spellbook.root.title"
+    },
+    "description": {
+      "translate": "advancements.spellbook.root.description"
+    },
+    "frame": "task",
+    "show_toast": false,
+    "announce_to_chat": false,
+    "hidden": false,
+    "background": "minecraft:textures/gui/advancements/backgrounds/end.png"
+  },
+  "criteria": {
+    "spellbook": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "spellbook:liber_exponentia"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "spellbook"
+    ]
+  ]
+}
