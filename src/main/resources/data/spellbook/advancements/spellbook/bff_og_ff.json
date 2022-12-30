@@ -1,0 +1,42 @@
+{
+  "parent": "spellbook:spellbook/root",
+  "display": {
+    "icon": {
+      "item": "spellbook:phoenix_feather"
+    },
+    "title": {
+      "translate": "advancements.spellbook.bff_og_ff.title"
+    },
+    "description": {
+      "translate": "advancements.spellbook.bff_og_ff.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "rewards": {
+    "experience": 1000
+  },
+  "criteria": {
+    "tamed_animal": {
+      "trigger": "minecraft:tame_animal",
+      "conditions": {
+        "entity": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "type": "spellbook:phoenix"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "tamed_animal"
+    ]
+  ]
+}

@@ -350,5 +350,8 @@
   "container.spellbook.builder_bag": "Builder's Bag",
 
   "itemGroup.SpellBook": "Spell Book",
-  "itemGroup.SpellDebug": "Spell Debug Items"
+  "itemGroup.SpellDebug": "Spell Debug Items",
+
+  "advancements.spellbook.bff_og_ff.title": "BFF OG FF",
+  "advancements.spellbook.bff_og_ff.description": "Tame a phoenix"
 }
