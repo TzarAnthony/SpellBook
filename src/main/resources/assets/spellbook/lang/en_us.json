@@ -350,5 +350,7 @@
   "container.spellbook.builder_bag": "Builder's Bag",
 
   "itemGroup.SpellBook": "Spell Book",
-  "itemGroup.SpellDebug": "Spell Debug Items"
+  "itemGroup.SpellDebug": "Spell Debug Items",
+  "advancements.spellbook.pyromance.title": "Pyromance",
+  "advancements.spellbook.pyromance.description": "Breed a phoenix"
 }
