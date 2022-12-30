@@ -350,5 +350,10 @@
   "container.spellbook.builder_bag": "Builder's Bag",
 
   "itemGroup.SpellBook": "Spell Book",
-  "itemGroup.SpellDebug": "Spell Debug Items"
+  "itemGroup.SpellDebug": "Spell Debug Items",
+
+  "advancements.spellbook.root.description": "Spell book advancements",
+  "advancements.spellbook.root.title": "SpellBook",
+  "advancements.spellbook.ghost_buster.title": "Ghost Buster \uD83D\uDC7B",
+  "advancements.spellbook.ghost_buster.description": "Defeat the ghost commanders"
 }
