@@ -16,10 +16,11 @@ import com.tzaranthony.spellbook.core.entities.hostile.ghosts.*;
 import com.tzaranthony.spellbook.core.entities.hostile.ghosts.boss.GhostArcher;
 import com.tzaranthony.spellbook.core.entities.hostile.ghosts.boss.GhostKnight;
 import com.tzaranthony.spellbook.core.entities.hostile.ghosts.boss.GhostMage;
+import com.tzaranthony.spellbook.core.entities.hostile.vampires.LesserVampire;
 import com.tzaranthony.spellbook.core.entities.hostile.vampires.boss.HigherVampireBat;
 import com.tzaranthony.spellbook.core.entities.hostile.vampires.boss.HigherVampirePerson;
-import com.tzaranthony.spellbook.core.entities.hostile.vampires.LesserVampire;
 import com.tzaranthony.spellbook.core.entities.neutral.GhostHorse;
+import com.tzaranthony.spellbook.core.entities.neutral.Phoenix;
 import com.tzaranthony.spellbook.core.entities.other.*;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
@@ -151,6 +152,9 @@ public class SBEntities {
     public static final RegistryObject<EntityType<PhoenixAshesEntity>> PHOENIX_ASHES = reg.register("phoenix_ashes", () ->
             EntityType.Builder.of(PhoenixAshesEntity::new, MobCategory.MISC).fireImmune().sized(0.25F, 0.25F).build("phoenix_ashes")
     );
+    public static final RegistryObject<EntityType<Phoenix>> PHOENIX = reg.register("phoenix", () ->
+            EntityType.Builder.of(Phoenix::new, MobCategory.CREATURE).fireImmune().sized(0.25F, 0.25F).build("phoenix")
+    );
 
 
     @SubscribeEvent
@@ -174,5 +178,6 @@ public class SBEntities {
         creationEvent.put(FAKE_ZOMBIE.get(), ZombieIllusion.createAttributes().build());
         creationEvent.put(FAKE_SKELLY.get(), ZombieIllusion.createAttributes().build());
         creationEvent.put(NECROTIC_SPIDER.get(), NecroticSpider.createAttributes().build());
+        creationEvent.put(PHOENIX.get(), Phoenix.createLivingAttributes().build());
     }
 }
