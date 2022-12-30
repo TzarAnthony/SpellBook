@@ -189,6 +189,7 @@ public class SBItems {
     // Mob Equip
     public static final RegistryObject<Item> GHOST_GLAIVE = reg.register("ghost_glaive", () -> new SBGlaive(SBToolMaterial.ARCH, SBItemProperties.Unburnable(Rarity.UNCOMMON)));
     public static final RegistryObject<Item> GHOST_BOW = reg.register("ghost_bow", () -> new BowItem(SBItemProperties.Unburnable(Rarity.UNCOMMON).durability(SBToolMaterial.ARCH.getUses())));
+    //TODO: create ghost shield
     public static final RegistryObject<Item> GHOST_SCEPTER = reg.register("ghost_scepter", () -> new SBSilverAxe(SBToolMaterial.ARCH, SBItemProperties.Unburnable(Rarity.UNCOMMON)));
     public static final RegistryObject<Item> VOID_SWORD = reg.register("void_sword", () -> new SBSilverSword(SBToolMaterial.ARCH, SBItemProperties.Unburnable(Rarity.RARE)));
 

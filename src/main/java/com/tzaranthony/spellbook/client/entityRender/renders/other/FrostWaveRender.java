@@ -38,6 +38,7 @@ public class FrostWaveRender extends EntityRenderer<MagicProjectile> {
         PoseStack.Pose posestack$pose = pose.last();
         Matrix4f matrix4f = posestack$pose.pose();
         Matrix3f matrix3f = posestack$pose.normal();
+        //TODO: i might actually have to make this into a model to get it to render on both sides :(
         this.vertex(matrix4f, matrix3f, vertexconsumer, -1, 0, -1, 0, 0, 1, 0, 1, light);
         this.vertex(matrix4f, matrix3f, vertexconsumer, -1, 0, 1, 0, 1, 1, 0, 1, light);
         this.vertex(matrix4f, matrix3f, vertexconsumer, 1, 0, 1, 1, 1, 1, 0, 1, light);

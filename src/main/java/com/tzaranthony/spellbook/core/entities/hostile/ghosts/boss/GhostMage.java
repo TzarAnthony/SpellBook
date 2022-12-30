@@ -38,7 +38,7 @@ public class GhostMage extends SBGhostCommander {
     }
 
     protected void registerGoals() {
-        //TODO: replace scream with a new spell
+        //TODO: replace scream with a new spell?
         NonNullList<Spell> spells = NonNullList.of(SBSpellRegistry.LIFE_STEAL, SBSpellRegistry.STONE_REINFORCEMENT, SBSpellRegistry.SCREAM, SBSpellRegistry.IGNITE, SBSpellRegistry.FROST_WAVE);
         NonNullList<Integer> cooldowns = NonNullList.of(200, 140, 160, 120, 100);
         NonNullList<Integer> probabilities = NonNullList.of(100, 40, 50, 50, 80);

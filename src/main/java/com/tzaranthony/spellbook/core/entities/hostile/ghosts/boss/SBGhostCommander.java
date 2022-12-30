@@ -11,6 +11,8 @@ import net.minecraft.world.BossEvent;
 import net.minecraft.world.Difficulty;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
@@ -57,6 +59,10 @@ public class SBGhostCommander extends SBGhostEntity {
         this.bossEvent.setProgress(this.getHealth() / this.getMaxHealth());
     }
 
+    public boolean canChangeDimensions() {
+        return false;
+    }
+
     public void rideTick() {
         super.rideTick();
         if (this.getVehicle() instanceof PathfinderMob) {
@@ -81,10 +87,19 @@ public class SBGhostCommander extends SBGhostEntity {
         }
     }
 
+    @Override
+    public boolean canBeAffected(MobEffectInstance instance) {
+        if (instance.getEffect() == MobEffects.POISON) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
     @Nullable
     public SpawnGroupData finalizeSpawn(ServerLevelAccessor accessor, DifficultyInstance difficulty, MobSpawnType reason, @Nullable SpawnGroupData spawnData, @Nullable CompoundTag nbt) {
         this.setVariant(this.random.nextInt(2));
-        spawnData = super.finalizeSpawn(accessor, difficulty, reason, spawnData, nbt);
+//        spawnData = super.finalizeSpawn(accessor, difficulty, reason, spawnData, nbt);
 //        GhostHorse horse = SBEntities.GHOST_HORSE.get().create(this.level);
 //        horse.moveTo(this.getX(), this.getY(), this.getZ(), this.getYRot(), 0.0F);
 //        horse.finalizeSpawn(accessor, difficulty, reason, null, null);

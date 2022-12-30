@@ -15,9 +15,11 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.phys.AABB;
 
 import javax.annotation.Nullable;
 import java.util.EnumSet;
+import java.util.List;
 
 public class MagicMultiAttackGoal extends Goal {
     protected final Mob mob;
@@ -29,9 +31,12 @@ public class MagicMultiAttackGoal extends Goal {
     private final double speedModifier;
     private int seeTime;
     private final int attackIntervalMin;
-    private final int attackIntervalMax;
-    private final float attackRadius;
-    private final float attackRadiusSqr;
+//    private final int attackIntervalMax;
+//    private final float attackRadius;
+    private boolean strafingClockwise;
+    private boolean strafingBackwards;
+    private int strafingTime = -1;
+    private final double attackRadiusSqr;
     @Nullable
     private LivingEntity target;
 
@@ -46,9 +51,7 @@ public class MagicMultiAttackGoal extends Goal {
             this.useProbs = useProbs;
             this.speedModifier = 1.10D;
             this.attackIntervalMin = 40;
-            this.attackIntervalMax = 40;
-            this.attackRadius = 20.0F;
-            this.attackRadiusSqr = 20.0F * 20.0F;
+            this.attackRadiusSqr = 20.0D * 20.0D;
             this.setFlags(EnumSet.of(Goal.Flag.MOVE, Goal.Flag.LOOK));
         }
     }
@@ -78,51 +81,74 @@ public class MagicMultiAttackGoal extends Goal {
     }
 
     public void tick() {
-        double d0 = this.mob.distanceToSqr(this.target.getX(), this.target.getY(), this.target.getZ());
-        boolean flag = this.mob.getSensing().hasLineOfSight(this.target);
-        if (flag) {
-            ++this.seeTime;
-        } else {
-            this.seeTime = 0;
-        }
+        LivingEntity livingentity = this.mob.getTarget();
+        if (livingentity != null) {
+            double d0 = this.mob.distanceToSqr(livingentity.getX(), livingentity.getY(), livingentity.getZ());
+            boolean flag = this.mob.getSensing().hasLineOfSight(livingentity);
+            boolean flag1 = this.seeTime > 0;
+            if (flag != flag1) {
+                this.seeTime = 0;
+            }
 
-        if (!(d0 > (double)this.attackRadiusSqr) && this.seeTime >= 5) {
-            this.mob.getNavigation().stop();
-        } else {
-            this.mob.getNavigation().moveTo(this.target, this.speedModifier);
-        }
+            if (flag) {
+                ++this.seeTime;
+            } else {
+                --this.seeTime;
+            }
 
-        this.mob.getLookControl().setLookAt(this.target, 30.0F, 30.0F);
+            if (!(d0 > this.attackRadiusSqr) && this.seeTime >= 20) {
+                this.mob.getNavigation().stop();
+                ++this.strafingTime;
+            } else {
+                this.mob.getNavigation().moveTo(livingentity, this.speedModifier);
+                this.strafingTime = -1;
+            }
+
+            if (this.strafingTime >= 20) {
+                if ((double)this.mob.getRandom().nextFloat() < 0.3D) {
+                    this.strafingClockwise = !this.strafingClockwise;
+                }
+                if ((double)this.mob.getRandom().nextFloat() < 0.3D) {
+                    this.strafingBackwards = !this.strafingBackwards;
+                }
+                this.strafingTime = 0;
+            }
+
+            if (this.strafingTime > -1) {
+                if (d0 > (this.attackRadiusSqr * 0.75F)) {
+                    this.strafingBackwards = false;
+                } else if (d0 < (this.attackRadiusSqr * 0.25F)) {
+                    this.strafingBackwards = true;
+                }
+                this.mob.getMoveControl().strafe(this.strafingBackwards ? -0.5F : 0.5F, this.strafingClockwise ? 0.5F : -0.5F);
+                this.mob.lookAt(livingentity, 30.0F, 30.0F);
+            } else {
+                this.mob.getLookControl().setLookAt(livingentity, 30.0F, 30.0F);
+            }
+
         if (--this.attackTime == 0) {
             if (!flag) {
                 return;
             }
-
-            float f = (float)Math.sqrt(d0) / this.attackRadius;
             checkCooldownsAndAttack();
-            this.attackTime = Mth.floor(f * (float)(this.attackIntervalMax - this.attackIntervalMin) + (float)this.attackIntervalMin);
+            this.attackTime = this.attackIntervalMin;
         } else if (this.attackTime < 0) {
-            this.attackTime = Mth.floor(Mth.lerp(Math.sqrt(d0) / (double)this.attackRadius, (double)this.attackIntervalMin, (double)this.attackIntervalMax));
+            this.attackTime = Mth.floor(Mth.lerp(Math.sqrt(d0) / Math.sqrt(this.attackRadiusSqr), this.attackIntervalMin, this.attackIntervalMin));
         }
-
+        }
     }
 
     private void checkCooldownsAndAttack() {
         if (this.target instanceof SBGhostCommander) {
-            if ((this.target.getHealth() <= (this.target.getMaxHealth() * 0.75D))) {
-//            if ((this.target.getHealth() / this.target.getMaxHealth()) <= (this.mob.getHealth() / this.mob.getMaxHealth())) {
-//                this.target.heal(10.0F);
-//                this.target.addEffect(new MobEffectInstance(MobEffects.REGENERATION, 200, 1));
-//            } else {
-//                this.mob.heal(10.0F);
-//                this.mob.addEffect(new MobEffectInstance(MobEffects.REGENERATION, 200, 1));
-//            }
-                this.target.heal(10.0F);
-                this.target.addEffect(new MobEffectInstance(MobEffects.REGENERATION, 200, 1));
-                this.mob.setTarget(null);
-
-                this.mob.level.playSound((Player) null, this.mob.getX() , this.mob.getY() , this.mob.getZ(), SoundEvents.AMETHYST_BLOCK_CHIME, SoundSource.NEUTRAL, 1.0F, 1.0F);
+            List<SBGhostCommander> gcList = this.mob.level.getEntitiesOfClass(SBGhostCommander.class, new AABB(this.mob.blockPosition()).inflate(20));
+            for (SBGhostCommander gc : gcList) {
+                if ((gc.getHealth() <= (gc.getMaxHealth() * 0.75D))) {
+                    gc.heal(10.0F);
+                    gc.addEffect(new MobEffectInstance(MobEffects.REGENERATION, 200));
+                }
             }
+            this.mob.setTarget(null);
+            this.mob.level.playSound((Player) null, this.mob.getX() , this.mob.getY() , this.mob.getZ(), SoundEvents.AMETHYST_BLOCK_CHIME, SoundSource.NEUTRAL, 1.0F, 1.0F);
         } else {
             boolean performedSpell = false;
             int prob = this.mob.level.random.nextInt(100);

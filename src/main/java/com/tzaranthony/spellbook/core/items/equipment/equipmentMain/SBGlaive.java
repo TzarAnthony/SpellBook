@@ -11,6 +11,7 @@ import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.*;
+import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Material;
@@ -20,7 +21,6 @@ import java.util.UUID;
 
 public class SBGlaive extends TieredItem implements Vanishable {
     private final float attackDamage;
-//    private final Multimap<Attribute, AttributeModifier> defaultModifiers;
     protected static final UUID BASE_ATTACK_REACH_UUID = UUID.fromString("1ba8181e-10be-4c5b-8782-cb9458ff5af4");
 
     public SBGlaive(Tier tier, Item.Properties properties) {
@@ -42,10 +42,24 @@ public class SBGlaive extends TieredItem implements Vanishable {
     }
 
     public boolean hurtEnemy(ItemStack stack, LivingEntity user, LivingEntity target) {
+        if (target instanceof Player ptgt) {
+            maybeDisableShield(user, ptgt);
+        }
         stack.hurtAndBreak(1, target, (p_43296_) -> {
             p_43296_.broadcastBreakEvent(EquipmentSlot.MAINHAND);
         });
         return true;
+    }
+
+    public static void maybeDisableShield(LivingEntity user, Player ptgt) {
+        ItemStack stack1 = ptgt.getUseItem();
+        if (!stack1.isEmpty() && stack1.is(Items.SHIELD)) {
+            float f = 0.25F + (float) EnchantmentHelper.getBlockEfficiency(user) * 0.05F;
+            if (user.getRandom().nextFloat() < f) {
+                ptgt.getCooldowns().addCooldown(Items.SHIELD, 100);
+                user.level.broadcastEntityEvent(ptgt, (byte)30);
+            }
+        }
     }
 
     public boolean mineBlock(ItemStack p_43282_, Level p_43283_, BlockState p_43284_, BlockPos p_43285_, LivingEntity p_43286_) {
