@@ -1,0 +1,76 @@
+{
+  "parent": "spellbook:spellbook/root",
+  "display": {
+    "icon": {
+      "item": "spellbook:ghost_glaive"
+    },
+    "title": {
+      "translate": "advancements.spellbook.ghost_buster.title"
+    },
+    "description": {
+      "translate": "advancements.spellbook.ghost_buster.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "archer": {
+      "trigger": "minecraft:player_killed_entity",
+      "conditions": {
+        "entity": [
+          {
+            "condition": "minecraft:entity_properties",
+            "predicate": {
+              "type": "spellbook:ghost_archer"
+            },
+            "entity": "this"
+          }
+        ]
+      }
+    },
+    "knight": {
+      "trigger": "minecraft:player_killed_entity",
+      "conditions": {
+        "entity": [
+          {
+            "condition": "minecraft:entity_properties",
+            "predicate": {
+              "type": "spellbook:ghost_knight"
+            },
+            "entity": "this"
+          }
+        ]
+      }
+    },
+    "mage": {
+      "trigger": "minecraft:player_killed_entity",
+      "conditions": {
+        "entity": [
+          {
+            "condition": "minecraft:entity_properties",
+            "predicate": {
+              "type": "spellbook:ghost_mage"
+            },
+            "entity": "this"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "archer"
+    ],
+    [
+      "knight"
+    ],
+    [
+      "mage"
+    ]
+  ],
+  "rewards": {
+    "experience": 1000
+  }
+}
