@@ -31,8 +31,6 @@ public class MagicMultiAttackGoal extends Goal {
     private final double speedModifier;
     private int seeTime;
     private final int attackIntervalMin;
-//    private final int attackIntervalMax;
-//    private final float attackRadius;
     private boolean strafingClockwise;
     private boolean strafingBackwards;
     private int strafingTime = -1;
@@ -139,7 +137,7 @@ public class MagicMultiAttackGoal extends Goal {
     }
 
     private void checkCooldownsAndAttack() {
-        if (this.mob.isAlliedTo(this.target)) {
+        if (this.mob.getRandom().nextInt(10) <= 0) {
             List<LivingEntity> gcList = this.mob.level.getEntitiesOfClass(LivingEntity.class, new AABB(this.mob.blockPosition()).inflate(20));
             for (LivingEntity le : gcList) {
                 if (this.mob.isAlliedTo(le) && (le.getHealth() <= (le.getMaxHealth() * 0.75D))) {

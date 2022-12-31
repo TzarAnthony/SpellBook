@@ -30,7 +30,7 @@ public enum SBArmorMaterial implements ArmorMaterial {
             5.0F, 0.2F, () -> {return Ingredient.of(SBItems.CURSED_SILVER_STEEL_INGOT.get());
     }),
     MYSTICAL(SpellBook.MOD_ID + ":witch", 30, new int[]{6, 9, 11, 6}, 45, SoundEvents.ARMOR_EQUIP_LEATHER,
-            5.0F, 0.2F, () -> {return Ingredient.of(SBItems.ENCHANTED_SILVER_STEEL_INGOT.get());
+            5.0F, 0.2F, () -> {return Ingredient.of(SBItems.MYSTICAL_SILVER_STEEL_INGOT.get());
     }),
 
     // Master

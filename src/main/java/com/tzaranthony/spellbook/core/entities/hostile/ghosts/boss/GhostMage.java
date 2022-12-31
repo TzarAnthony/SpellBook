@@ -1,8 +1,6 @@
 package com.tzaranthony.spellbook.core.entities.hostile.ghosts.boss;
 
 import com.tzaranthony.spellbook.core.entities.ai.MagicMultiAttackGoal;
-import com.tzaranthony.spellbook.core.entities.ai.NearestAttackSwitchToGoal;
-import com.tzaranthony.spellbook.core.entities.ai.NearestHealableTargetGoal;
 import com.tzaranthony.spellbook.core.spells.Spell;
 import com.tzaranthony.spellbook.registries.SBSpellRegistry;
 import net.minecraft.core.NonNullList;
@@ -20,6 +18,7 @@ import net.minecraft.world.entity.ai.goal.FloatGoal;
 import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal;
 import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal;
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
+import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.raid.Raider;
@@ -29,9 +28,6 @@ import net.minecraft.world.level.ServerLevelAccessor;
 import javax.annotation.Nullable;
 
 public class GhostMage extends SBGhostCommander {
-    private NearestHealableTargetGoal<SBGhostCommander> healRaidersGoal;
-    private NearestAttackSwitchToGoal<Player> attackPlayersGoal;
-
     public GhostMage(EntityType<? extends SBGhostCommander> type, Level level) {
         super(type, level);
         this.xpReward = 50;
@@ -43,15 +39,12 @@ public class GhostMage extends SBGhostCommander {
         NonNullList<Integer> cooldowns = NonNullList.of(200, 140, 160, 120, 100);
         NonNullList<Integer> probabilities = NonNullList.of(100, 40, 50, 50, 80);
 
-        this.healRaidersGoal = new NearestHealableTargetGoal<>(this, SBGhostCommander.class, false, (entity) -> {return entity != null;});
-        this.attackPlayersGoal = new NearestAttackSwitchToGoal<>(this, Player.class, 10, false, false, null);
         this.goalSelector.addGoal(1, new FloatGoal(this));
         this.goalSelector.addGoal(2, new MagicMultiAttackGoal(this, spells, cooldowns, probabilities));
         this.goalSelector.addGoal(8, new LookAtPlayerGoal(this, Player.class, 8.0F));
         this.goalSelector.addGoal(8, new RandomLookAroundGoal(this));
         this.targetSelector.addGoal(1, new HurtByTargetGoal(this, Raider.class));
-        this.targetSelector.addGoal(2, this.healRaidersGoal);
-        this.targetSelector.addGoal(3, this.attackPlayersGoal);
+        this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, Player.class, true));
     }
 
     public static AttributeSupplier.Builder createAttributes() {
@@ -61,23 +54,6 @@ public class GhostMage extends SBGhostCommander {
                 .add(Attributes.MOVEMENT_SPEED, 0.3D)
                 .add(Attributes.FOLLOW_RANGE, 50.0D)
                 .add(Attributes.KNOCKBACK_RESISTANCE, 1.0D);
-    }
-
-    public void aiStep() {
-        if (!this.level.isClientSide && this.isAlive()) {
-            this.healRaidersGoal.decrementCooldown();
-            if (this.healRaidersGoal.getCooldown() <= 0) {
-                this.attackPlayersGoal.setCanAttack(true);
-            } else {
-                this.attackPlayersGoal.setCanAttack(false);
-            }
-
-            if (this.random.nextFloat() < 7.5E-4F) {
-                this.level.broadcastEntityEvent(this, (byte)15);
-            }
-        }
-
-        super.aiStep();
     }
 
     protected void populateDefaultEquipmentSlots(DifficultyInstance difficulty) {

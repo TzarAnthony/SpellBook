@@ -10,6 +10,8 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
@@ -94,8 +96,9 @@ public class GhostKnight extends SBGhostCommander {
         } else {
             this.aroundArcher = true;
             if (!this.isUsingItem()) {
+                this.addEffect(new MobEffectInstance(MobEffects.REGENERATION, 20, 50));
                 this.startUsingItem(InteractionHand.OFF_HAND);
-                this.useItemRemaining = 400;
+                this.useItemRemaining = 20;
             }
         }
         this.cannotUseItemRemaining = Math.max(this.cannotUseItemRemaining - 1, 0);
@@ -104,7 +107,7 @@ public class GhostKnight extends SBGhostCommander {
 
     @Override
     public boolean hurt(DamageSource source, float amount) {
-        if (!this.aroundArcher) {
+        if (!this.aroundArcher || source != DamageSource.OUT_OF_WORLD) {
             if (this.isUsingItem() && this.getUseItem().is(Items.SHIELD) && source.getEntity() instanceof  LivingEntity attacker
                     && (attacker.getMainHandItem().getItem() instanceof AxeItem || attacker.getMainHandItem().getItem() instanceof SBGlaive)) {
                 this.level.playSound((Player) null, this.getX(), this.getY(), this.getZ(), SoundEvents.SHIELD_BREAK, SoundSource.HOSTILE, 1.0F, 1.0F);
@@ -140,7 +143,6 @@ public class GhostKnight extends SBGhostCommander {
     public SpawnGroupData finalizeSpawn(ServerLevelAccessor accessor, DifficultyInstance difficulty, MobSpawnType reason, @Nullable SpawnGroupData spawnData, @Nullable CompoundTag nbt) {
         spawnData = super.finalizeSpawn(accessor, difficulty, reason, spawnData, nbt);
         this.populateDefaultEquipmentSlots(difficulty);
-        this.startUsingItem(InteractionHand.OFF_HAND);
         return spawnData;
     }
 

@@ -52,7 +52,7 @@ public class SBItems {
     public static final RegistryObject<Item> PHOENIX_FEATHER = reg.register("phoenix_feather", () -> new Item(SBItemProperties.Unburnable(Rarity.RARE)));
     public static final RegistryObject<Item> PHOENIX_ASHES = reg.register("phoenix_ashes", () -> new PhoenixAshes(SBItemProperties.Unburnable(Rarity.EPIC, 1)));
     public static final RegistryObject<Item> CURSED_SILK = reg.register("cursed_silk", () -> new Item(SBItemProperties.Standard()));
-    public static final RegistryObject<Item> ENCHANTED_SILK = reg.register("enchanted_silk", () -> new Item(SBItemProperties.Standard()));
+    public static final RegistryObject<Item> MYSTICAL_SILK = reg.register("mystical_silk", () -> new Item(SBItemProperties.Standard()));
     public static final RegistryObject<Item> DYE_BASE = reg.register("dye_base", () -> new Item(SBItemProperties.Standard()));
     public static final RegistryObject<Item> ECTOPLASM = reg.register("ectoplasm_vial", () -> new Item(SBItemProperties.Standard()));
     public static final RegistryObject<Item> ALCHEMICAL_RESIDUE =reg.register("alchemical_residue", () -> new Item(SBItemProperties.Standard()));
@@ -99,8 +99,8 @@ public class SBItems {
     public static final RegistryObject<Item> IMBUED_CLOTH = reg.register("imbued_cloth", () -> new Item(SBItemProperties.Standard()));
     public static final RegistryObject<Item> CURSED_SILVER_STEEL_INGOT = reg.register("cursed_silver_ingot", () -> new Item(SBItemProperties.Unburnable(Rarity.UNCOMMON)));
     public static final RegistryObject<Item> CURSED_SILVER_STEEL_NUGGET = reg.register("cursed_silver_nugget", () -> new Item(SBItemProperties.Unburnable(Rarity.UNCOMMON)));
-    public static final RegistryObject<Item> ENCHANTED_SILVER_STEEL_INGOT = reg.register("enchanted_steel_ingot", () -> new Item(SBItemProperties.Unburnable(Rarity.UNCOMMON)));
-    public static final RegistryObject<Item> ENCHANTED_SILVER_STEEL_NUGGET = reg.register("enchanted_steel_nugget", () -> new Item(SBItemProperties.Unburnable(Rarity.UNCOMMON)));
+    public static final RegistryObject<Item> MYSTICAL_SILVER_STEEL_INGOT = reg.register("mystical_steel_ingot", () -> new Item(SBItemProperties.Unburnable(Rarity.UNCOMMON)));
+    public static final RegistryObject<Item> MYSTICAL_SILVER_STEEL_NUGGET = reg.register("mystical_steel_nugget", () -> new Item(SBItemProperties.Unburnable(Rarity.UNCOMMON)));
     public static final RegistryObject<Item> PHOENIX_METAL_INGOT = reg.register("phoenix_metal_ingot", () -> new Item(SBItemProperties.Unburnable(Rarity.RARE)));
     public static final RegistryObject<Item> PHOENIX_METAL_NUGGET = reg.register("phoenix_metal_nugget", () -> new Item(SBItemProperties.Unburnable(Rarity.RARE)));
     public static final RegistryObject<Item> CRYSTALAN_MATRIX = reg.register("crystalan_matrix", () -> new Item(SBItemProperties.Unburnable(Rarity.RARE)));
@@ -148,11 +148,11 @@ public class SBItems {
     public static final RegistryObject<Item> WITCH_CHESTPLATE = reg.register("witch_chestplate", () -> new ArmorItem(SBArmorMaterial.MYSTICAL, EquipmentSlot.CHEST, SBItemProperties.Unburnable(Rarity.UNCOMMON)));
     public static final RegistryObject<Item> WITCH_LEGGINGS = reg.register("witch_leggings", () -> new ArmorItem(SBArmorMaterial.MYSTICAL, EquipmentSlot.LEGS, SBItemProperties.Unburnable(Rarity.UNCOMMON)));
     public static final RegistryObject<Item> WITCH_BOOTS = reg.register("witch_boots", () -> new ArmorItem(SBArmorMaterial.MYSTICAL, EquipmentSlot.FEET, SBItemProperties.Unburnable(Rarity.UNCOMMON)));
-    public static final RegistryObject<Item> ENCHANTED_AXE = reg.register("enchanted_axe", () -> new SBSilverAxe(SBToolMaterial.MYSTICAL, SBItemProperties.Unburnable(Rarity.UNCOMMON)));
-    public static final RegistryObject<Item> ENCHANTED_HOE = reg.register("enchanted_hoe", () -> new SBSilverHoe(SBToolMaterial.MYSTICAL, SBItemProperties.Unburnable(Rarity.UNCOMMON)));
-    public static final RegistryObject<Item> ENCHANTED_PICKAXE = reg.register("enchanted_pickaxe", () -> new SBSilverPickaxe(SBToolMaterial.MYSTICAL, SBItemProperties.Unburnable(Rarity.UNCOMMON)));
-    public static final RegistryObject<Item> ENCHANTED_SHOVEL = reg.register("enchanted_shovel", () -> new SBSilverShovel(SBToolMaterial.MYSTICAL, SBItemProperties.Unburnable(Rarity.UNCOMMON)));
-    public static final RegistryObject<Item> ENCHANTED_SWORD = reg.register("enchanted_sword", () -> new SBSilverSword(SBToolMaterial.MYSTICAL, SBItemProperties.Unburnable(Rarity.UNCOMMON)));
+    public static final RegistryObject<Item> MYSTICAL_AXE = reg.register("mystical_axe", () -> new SBSilverAxe(SBToolMaterial.MYSTICAL, SBItemProperties.Unburnable(Rarity.UNCOMMON)));
+    public static final RegistryObject<Item> MYSTICAL_HOE = reg.register("mystical_hoe", () -> new SBSilverHoe(SBToolMaterial.MYSTICAL, SBItemProperties.Unburnable(Rarity.UNCOMMON)));
+    public static final RegistryObject<Item> MYSTICAL_PICKAXE = reg.register("mystical_pickaxe", () -> new SBSilverPickaxe(SBToolMaterial.MYSTICAL, SBItemProperties.Unburnable(Rarity.UNCOMMON)));
+    public static final RegistryObject<Item> MYSTICAL_SHOVEL = reg.register("mystical_shovel", () -> new SBSilverShovel(SBToolMaterial.MYSTICAL, SBItemProperties.Unburnable(Rarity.UNCOMMON)));
+    public static final RegistryObject<Item> MYSTICAL_SWORD = reg.register("mystical_sword", () -> new SBSilverSword(SBToolMaterial.MYSTICAL, SBItemProperties.Unburnable(Rarity.UNCOMMON)));
 
     // tier 3
     public static final RegistryObject<Item> BATTLEMASTER_HELMET = reg.register("battlemaster_helmet", () -> new SBDyeableArmorItem(SBArmorMaterial.PHOENIX, EquipmentSlot.HEAD, SBItemProperties.Unburnable(Rarity.RARE)));
@@ -237,15 +237,17 @@ public class SBItems {
     }
 
     public static void initSpawnEggs() {
-        reg.register("spawn_egg_shade", () -> new ForgeSpawnEggItem(SBEntities.SHADE, 8032420, 6989796, new Item.Properties().tab(SpellBook.TAB)));
+        reg.register("spawn_egg_shade", () -> new ForgeSpawnEggItem(SBEntities.SHADE, 8032420, 1320790, new Item.Properties().tab(SpellBook.TAB)));
         reg.register("spawn_egg_poltergeist", () -> new ForgeSpawnEggItem(SBEntities.POLTERGEIST, 8032420, 3127967, new Item.Properties().tab(SpellBook.TAB)));
         reg.register("spawn_egg_wraith", () -> new ForgeSpawnEggItem(SBEntities.WRAITH, 8032420, 5057091, new Item.Properties().tab(SpellBook.TAB)));
         reg.register("spawn_egg_banshee", () -> new ForgeSpawnEggItem(SBEntities.BANSHEE, 8032420, 12147289, new Item.Properties().tab(SpellBook.TAB)));
         reg.register("spawn_egg_yurei", () -> new ForgeSpawnEggItem(SBEntities.YUREI, 8032420, 3100319, new Item.Properties().tab(SpellBook.TAB)));
         reg.register("spawn_egg_ghost_horse", () -> new ForgeSpawnEggItem(SBEntities.GHOST_HORSE, 8032420, 8346182, new Item.Properties().tab(SpellBook.TAB)));
-
-        reg.register("spawn_egg_higher_vampire", () -> new ForgeSpawnEggItem(SBEntities.HIGHVAMP1, 7739154, 12751440, new Item.Properties().tab(SpellBook.TAB)));
+        reg.register("spawn_egg_ghost_mage", () -> new ForgeSpawnEggItem(SBEntities.GHOST_MAGE, 8032420, 12530335, new Item.Properties().tab(SpellBook.TAB)));
+        reg.register("spawn_egg_ghost_archer", () -> new ForgeSpawnEggItem(SBEntities.GHOST_ARCHER, 8032420, 6786395, new Item.Properties().tab(SpellBook.TAB)));
+        reg.register("spawn_egg_ghost_knight", () -> new ForgeSpawnEggItem(SBEntities.GHOST_KNIGHT, 8032420, 6599423, new Item.Properties().tab(SpellBook.TAB)));
         reg.register("spawn_egg_vampire", () -> new ForgeSpawnEggItem(SBEntities.LOWVAMP, 7739154, 15106100, new Item.Properties().tab(SpellBook.TAB)));
+        reg.register("spawn_egg_higher_vampire", () -> new ForgeSpawnEggItem(SBEntities.HIGHVAMP1, 7739154, 12751440, new Item.Properties().tab(SpellBook.TAB)));
 
         reg.register("spawn_egg_necrotic_spider", () -> new ForgeSpawnEggItem(SBEntities.NECROTIC_SPIDER, 2039583, 5382018, new Item.Properties().tab(SpellBook.TAB)));
     }

@@ -20,7 +20,7 @@ public enum SBToolMaterial implements Tier {
         return Ingredient.of(SBItems.CURSED_SILVER_STEEL_INGOT.get());
     }),
     MYSTICAL(5, 3524, 14.0F, 6.0F, 35, () -> {
-        return Ingredient.of(SBItems.ENCHANTED_SILVER_STEEL_INGOT.get());
+        return Ingredient.of(SBItems.MYSTICAL_SILVER_STEEL_INGOT.get());
     }),
 
     // Master

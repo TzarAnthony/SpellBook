@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "spellbook:item/enchanted_steel_ingot"
+    "layer0": "spellbook:item/mystical_steel_nugget"
   }
 }

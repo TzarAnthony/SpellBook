@@ -7,7 +7,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "spellbook:enchanted_steel_block"
+          "name": "spellbook:mystical_steel_block"
         }
       ],
       "conditions": [ { "condition": "minecraft:survives_explosion" } ]
