@@ -26,7 +26,7 @@ import org.jetbrains.annotations.Nullable;
 public class Phoenix extends TamableAnimal implements Shearable, IForgeShearable {
     private static final EntityDataAccessor<Integer> DATA_FEATHER_COUNT = SynchedEntityData.defineId(Phoenix.class, EntityDataSerializers.INT);
 
-    protected Phoenix(EntityType<? extends Phoenix> phoenix, Level Level) {
+    public Phoenix(EntityType<? extends Phoenix> phoenix, Level Level) {
         super(phoenix, Level);
     }
 
@@ -49,10 +49,10 @@ public class Phoenix extends TamableAnimal implements Shearable, IForgeShearable
     }
 
     public void shear(SoundSource source) {
-        this.level.playSound((Player)null, this, SoundEvents.SHEEP_SHEAR, source, 1.0F, 1.0F);
+        this.level.playSound((Player) null, this, SoundEvents.SHEEP_SHEAR, source, 1.0F, 1.0F);
         this.iterateFeatherCount();
         ItemEntity itementity = this.spawnAtLocation(SBItems.PHOENIX_FEATHER.get(), 1);
-        itementity.setDeltaMovement(itementity.getDeltaMovement().add((double)((this.random.nextFloat() - this.random.nextFloat()) * 0.1F), (double)(this.random.nextFloat() * 0.05F), (double)((this.random.nextFloat() - this.random.nextFloat()) * 0.1F)));
+        itementity.setDeltaMovement(itementity.getDeltaMovement().add((double) ((this.random.nextFloat() - this.random.nextFloat()) * 0.1F), (double) (this.random.nextFloat() * 0.05F), (double) ((this.random.nextFloat() - this.random.nextFloat()) * 0.1F)));
     }
 
     public void iterateFeatherCount() {

@@ -350,5 +350,14 @@
   "container.spellbook.builder_bag": "Builder's Bag",
 
   "itemGroup.SpellBook": "Spell Book",
-  "itemGroup.SpellDebug": "Spell Debug Items"
+  "itemGroup.SpellDebug": "Spell Debug Items",
+  
+   "advancements.spellbook.root.description": "Spell book advancements",
+  "advancements.spellbook.root.title": "SpellBook",
+  "advancements.spellbook.ghost_buster.title": "Ghost Buster \uD83D\uDC7B",
+  "advancements.spellbook.ghost_buster.description": "Defeat the ghost commanders"
+  "advancements.spellbook.bff_og_ff.title": "BFF OG FF",
+  "advancements.spellbook.bff_og_ff.description": "Tame a phoenix"
+  "advancements.spellbook.pyromance.title": "Pyromance",
+  "advancements.spellbook.pyromance.description": "Breed a phoenix"
 }
