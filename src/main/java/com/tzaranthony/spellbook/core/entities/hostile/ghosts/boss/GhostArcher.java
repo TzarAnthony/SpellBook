@@ -57,6 +57,7 @@ public class GhostArcher extends SBGhostCommander implements RangedAttackMob {
         ItemStack stack = new ItemStack(SBItems.GHOST_BOW.get());
         stack.enchant(Enchantments.PUNCH_ARROWS, 1);
         stack.enchant(Enchantments.POWER_ARROWS, 3);
+        this.setItemSlot(EquipmentSlot.MAINHAND, new ItemStack(SBItems.GHOST_GLAIVE.get()));
         this.setItemSlot(EquipmentSlot.MAINHAND, stack);
     }
 

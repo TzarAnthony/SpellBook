@@ -144,15 +144,15 @@ public class SBItems {
     public static final RegistryObject<Item> GHOSTLY_ARROW = reg.register("ghostly_arrow", () -> new GhostlyArrowItem(SBItemProperties.Standard()));
 
     // tier 2
-    public static final RegistryObject<Item> WITCH_HELMET = reg.register("witch_helmet", () -> new ArmorItem(SBArmorMaterial.ENCHANTED, EquipmentSlot.HEAD, SBItemProperties.Unburnable(Rarity.UNCOMMON)));
-    public static final RegistryObject<Item> WITCH_CHESTPLATE = reg.register("witch_chestplate", () -> new ArmorItem(SBArmorMaterial.ENCHANTED, EquipmentSlot.CHEST, SBItemProperties.Unburnable(Rarity.UNCOMMON)));
-    public static final RegistryObject<Item> WITCH_LEGGINGS = reg.register("witch_leggings", () -> new ArmorItem(SBArmorMaterial.ENCHANTED, EquipmentSlot.LEGS, SBItemProperties.Unburnable(Rarity.UNCOMMON)));
-    public static final RegistryObject<Item> WITCH_BOOTS = reg.register("witch_boots", () -> new ArmorItem(SBArmorMaterial.ENCHANTED, EquipmentSlot.FEET, SBItemProperties.Unburnable(Rarity.UNCOMMON)));
-    public static final RegistryObject<Item> ENCHANTED_AXE = reg.register("enchanted_axe", () -> new SBSilverAxe(SBToolMaterial.ENCHANTED, SBItemProperties.Unburnable(Rarity.UNCOMMON)));
-    public static final RegistryObject<Item> ENCHANTED_HOE = reg.register("enchanted_hoe", () -> new SBSilverHoe(SBToolMaterial.ENCHANTED, SBItemProperties.Unburnable(Rarity.UNCOMMON)));
-    public static final RegistryObject<Item> ENCHANTED_PICKAXE = reg.register("enchanted_pickaxe", () -> new SBSilverPickaxe(SBToolMaterial.ENCHANTED, SBItemProperties.Unburnable(Rarity.UNCOMMON)));
-    public static final RegistryObject<Item> ENCHANTED_SHOVEL = reg.register("enchanted_shovel", () -> new SBSilverShovel(SBToolMaterial.ENCHANTED, SBItemProperties.Unburnable(Rarity.UNCOMMON)));
-    public static final RegistryObject<Item> ENCHANTED_SWORD = reg.register("enchanted_sword", () -> new SBSilverSword(SBToolMaterial.ENCHANTED, SBItemProperties.Unburnable(Rarity.UNCOMMON)));
+    public static final RegistryObject<Item> WITCH_HELMET = reg.register("witch_helmet", () -> new ArmorItem(SBArmorMaterial.MYSTICAL, EquipmentSlot.HEAD, SBItemProperties.Unburnable(Rarity.UNCOMMON)));
+    public static final RegistryObject<Item> WITCH_CHESTPLATE = reg.register("witch_chestplate", () -> new ArmorItem(SBArmorMaterial.MYSTICAL, EquipmentSlot.CHEST, SBItemProperties.Unburnable(Rarity.UNCOMMON)));
+    public static final RegistryObject<Item> WITCH_LEGGINGS = reg.register("witch_leggings", () -> new ArmorItem(SBArmorMaterial.MYSTICAL, EquipmentSlot.LEGS, SBItemProperties.Unburnable(Rarity.UNCOMMON)));
+    public static final RegistryObject<Item> WITCH_BOOTS = reg.register("witch_boots", () -> new ArmorItem(SBArmorMaterial.MYSTICAL, EquipmentSlot.FEET, SBItemProperties.Unburnable(Rarity.UNCOMMON)));
+    public static final RegistryObject<Item> ENCHANTED_AXE = reg.register("enchanted_axe", () -> new SBSilverAxe(SBToolMaterial.MYSTICAL, SBItemProperties.Unburnable(Rarity.UNCOMMON)));
+    public static final RegistryObject<Item> ENCHANTED_HOE = reg.register("enchanted_hoe", () -> new SBSilverHoe(SBToolMaterial.MYSTICAL, SBItemProperties.Unburnable(Rarity.UNCOMMON)));
+    public static final RegistryObject<Item> ENCHANTED_PICKAXE = reg.register("enchanted_pickaxe", () -> new SBSilverPickaxe(SBToolMaterial.MYSTICAL, SBItemProperties.Unburnable(Rarity.UNCOMMON)));
+    public static final RegistryObject<Item> ENCHANTED_SHOVEL = reg.register("enchanted_shovel", () -> new SBSilverShovel(SBToolMaterial.MYSTICAL, SBItemProperties.Unburnable(Rarity.UNCOMMON)));
+    public static final RegistryObject<Item> ENCHANTED_SWORD = reg.register("enchanted_sword", () -> new SBSilverSword(SBToolMaterial.MYSTICAL, SBItemProperties.Unburnable(Rarity.UNCOMMON)));
 
     // tier 3
     public static final RegistryObject<Item> BATTLEMASTER_HELMET = reg.register("battlemaster_helmet", () -> new SBDyeableArmorItem(SBArmorMaterial.PHOENIX, EquipmentSlot.HEAD, SBItemProperties.Unburnable(Rarity.RARE)));
@@ -187,11 +187,11 @@ public class SBItems {
     public static final RegistryObject<Item> ARCHMAGE_BOOTS = reg.register("archmage_boots", () -> new ArmorItem(SBArmorMaterial.ARCH, EquipmentSlot.FEET, SBItemProperties.Unburnable(Rarity.EPIC)));
 
     // Mob Equip
-    public static final RegistryObject<Item> GHOST_GLAIVE = reg.register("ghost_glaive", () -> new SBGlaive(SBToolMaterial.ARCH, SBItemProperties.Unburnable(Rarity.UNCOMMON)));
-    public static final RegistryObject<Item> GHOST_BOW = reg.register("ghost_bow", () -> new BowItem(SBItemProperties.Unburnable(Rarity.UNCOMMON).durability(SBToolMaterial.ARCH.getUses())));
+    public static final RegistryObject<Item> GHOST_GLAIVE = reg.register("ghost_glaive", () -> new SBGlaive(SBToolMaterial.GHOST, SBItemProperties.Unburnable(Rarity.UNCOMMON)));
+    public static final RegistryObject<Item> GHOST_BOW = reg.register("ghost_bow", () -> new BowItem(SBItemProperties.Unburnable(Rarity.UNCOMMON).durability(SBToolMaterial.GHOST.getUses())));
     //TODO: create ghost shield
-    public static final RegistryObject<Item> GHOST_SCEPTER = reg.register("ghost_scepter", () -> new SBSilverAxe(SBToolMaterial.ARCH, SBItemProperties.Unburnable(Rarity.UNCOMMON)));
-    public static final RegistryObject<Item> VOID_SWORD = reg.register("void_sword", () -> new SBSilverSword(SBToolMaterial.ARCH, SBItemProperties.Unburnable(Rarity.RARE)));
+    public static final RegistryObject<Item> GHOST_SCEPTER = reg.register("ghost_scepter", () -> new SBSilverAxe(SBToolMaterial.GHOST, SBItemProperties.Unburnable(Rarity.UNCOMMON)));
+    public static final RegistryObject<Item> VOID_SWORD = reg.register("void_sword", () -> new SBSilverSword(SBToolMaterial.GHOST, SBItemProperties.Unburnable(Rarity.RARE)));
 
     // BlockItems
     public static final RegistryObject<Item> END_TORCH = reg.register("end_torch", () -> new StandingAndWallBlockItem(SBBlocks.END_TORCH.get(), SBBlocks.END_WALL_TORCH.get(), SBItemProperties.Standard()));

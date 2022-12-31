@@ -7,8 +7,6 @@ import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.level.Level;
 
 public class SBMonsterEntity extends Monster {
-    public int spellCastingTickCount;
-
     protected SBMonsterEntity(EntityType<? extends SBMonsterEntity> entityType, Level level) {
         super(entityType, level);
     }
@@ -23,14 +21,6 @@ public class SBMonsterEntity extends Monster {
 
     protected boolean canRide(Entity vehicle) {
         return false;
-    }
-
-    public boolean isCastingSpell() {
-        return false;
-    }
-
-    public void setIsCastingSpell() {
-        return;
     }
 
     @Override

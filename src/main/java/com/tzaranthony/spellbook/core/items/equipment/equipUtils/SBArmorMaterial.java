@@ -15,54 +15,44 @@ import java.util.function.Supplier;
 
 public enum SBArmorMaterial implements ArmorMaterial {
     // basic
-    //Silver
     SILVER(SpellBook.MOD_ID + ":silver", 10, new int[]{2, 5, 5, 2}, 20, SoundEvents.ARMOR_EQUIP_GOLD,
-            0.0F, 0.0F, () -> {
-        return Ingredient.of(SBItems.SILVER_INGOT.get());
+            0.0F, 0.0F, () -> {return Ingredient.of(SBItems.SILVER_INGOT.get());
     }),
-    // Watchman
     SILVER_STEEL(SpellBook.MOD_ID + ":watchman", 20, new int[]{2, 6, 7, 3}, 25, SoundEvents.ARMOR_EQUIP_CHAIN,
-            1.0F, 0.0F, () -> {
-        return Ingredient.of(SBItems.SILVER_STEEL_INGOT.get());
+            1.0F, 0.0F, () -> {return Ingredient.of(SBItems.SILVER_STEEL_INGOT.get());
     }),
-    // Neophyte Mage Robes -- enhances basic magic
     IMBUED(SpellBook.MOD_ID + ":neophyte", 20, new int[]{3, 6, 7, 3}, 30, SoundEvents.ARMOR_EQUIP_GENERIC,
-            1.0F, 0.0F, () -> {
-        return Ingredient.of(SBItems.IMBUED_CLOTH.get());
+            1.0F, 0.0F, () -> {return Ingredient.of(SBItems.IMBUED_CLOTH.get());
     }),
 
     // Intermediate
-    // Battlemaster Robes
+    CURSED(SpellBook.MOD_ID + ":necromancer", 30, new int[]{6, 9, 11, 6}, 45, SoundEvents.ARMOR_EQUIP_LEATHER,
+            5.0F, 0.2F, () -> {return Ingredient.of(SBItems.CURSED_SILVER_STEEL_INGOT.get());
+    }),
+    MYSTICAL(SpellBook.MOD_ID + ":witch", 30, new int[]{6, 9, 11, 6}, 45, SoundEvents.ARMOR_EQUIP_LEATHER,
+            5.0F, 0.2F, () -> {return Ingredient.of(SBItems.ENCHANTED_SILVER_STEEL_INGOT.get());
+    }),
+
+    // Master
     PHOENIX(SpellBook.MOD_ID + ":battlemaster", 60, new int[]{10, 15, 18, 9}, 35, SoundEvents.ARMOR_EQUIP_NETHERITE,
-            5.0F, 0.2F, () -> {
-        return Ingredient.of(SBItems.PHOENIX_METAL_INGOT.get());
+            5.0F, 0.2F, () -> {return Ingredient.of(SBItems.PHOENIX_METAL_INGOT.get());
     }),
-    // Robes of Light
     LIGHT(SpellBook.MOD_ID + ":light", 60, new int[]{2, 4, 5, 2}, 50, SoundEvents.ARMOR_EQUIP_NETHERITE,
-            3.0F, 0.3F, () -> {
-        return Ingredient.of(SBItems.ESSENCE_OF_LIGHT.get());
+            3.0F, 0.3F, () -> {return Ingredient.of(SBItems.ESSENCE_OF_LIGHT.get());
     }),
-    // Crystal Sorcerer Robes
     CRYSTALAN(SpellBook.MOD_ID + ":crystalan", 60, new int[]{8, 10, 13, 8}, 40, SoundEvents.ARMOR_EQUIP_DIAMOND,
-            5.0F, 0.3F, () -> {
-        return Ingredient.of(SBItems.CRYSTALAN_MATRIX.get());
-    }),
-    // Necromancer Robes
-    CURSED(SpellBook.MOD_ID + ":necromancer", 60, new int[]{6, 9, 11, 6}, 45, SoundEvents.ARMOR_EQUIP_LEATHER,
-            5.0F, 0.2F, () -> {
-        return Ingredient.of(SBItems.CURSED_SILVER_STEEL_INGOT.get());
-    }),
-    // Witch Robes
-    ENCHANTED(SpellBook.MOD_ID + ":witch", 60, new int[]{6, 9, 11, 6}, 45, SoundEvents.ARMOR_EQUIP_LEATHER,
-            5.0F, 0.2F, () -> {
-        return Ingredient.of(SBItems.ENCHANTED_SILVER_STEEL_INGOT.get());
+            5.0F, 0.3F, () -> {return Ingredient.of(SBItems.CRYSTALAN_MATRIX.get());
     }),
 
     // Advanced
-    // Archmage Robes
     ARCH(SpellBook.MOD_ID + ":archmage", 73, new int[]{10, 15, 18, 9}, 60, SoundEvents.ARMOR_EQUIP_NETHERITE,
-            5.0F, 0.2F, () -> {
-        return Ingredient.of(SBItems.DIMENSIONAL_ALLOY.get());
+            5.0F, 0.2F, () -> {return Ingredient.of(SBItems.DIMENSIONAL_ALLOY.get());
+    }),
+
+    // Other
+    // Elytra
+    ELYTRA(SpellBook.MOD_ID + ":elytra", 60, new int[]{3, 3, 3, 3}, 35, SoundEvents.ARMOR_EQUIP_ELYTRA,
+            5.0F, 0.2F, () -> {return Ingredient.of(SBItems.PHOENIX_FEATHER.get());
     });
 
     private static final int[] HEALTH_PER_SLOT = new int[]{13, 15, 16, 11};
@@ -75,8 +65,8 @@ public enum SBArmorMaterial implements ArmorMaterial {
     private final float knockbackResistance;
     private final LazyLoadedValue<Ingredient> repairMaterial;
 
-    private SBArmorMaterial(String name, int durability, int[] damageReductionAmountArray, int enchantability,
-                            SoundEvent sound, float toughness, float knockbackResistance, Supplier<Ingredient> p_i231593_10_) {
+    SBArmorMaterial(String name, int durability, int[] damageReductionAmountArray, int enchantability,
+                    SoundEvent sound, float toughness, float knockbackResistance, Supplier<Ingredient> p_i231593_10_) {
         this.name = name;
         this.durability = durability;
         this.damageReductionAmountArray = damageReductionAmountArray;

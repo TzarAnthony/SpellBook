@@ -1,6 +1,9 @@
 {
   "replace": false,
   "values": [
+    "spellbook:ghost_mage",
+    "spellbook:ghost_archer",
+    "spellbook:ghost_knight",
     "spellbook:higher_vampire_human"
   ]
 }

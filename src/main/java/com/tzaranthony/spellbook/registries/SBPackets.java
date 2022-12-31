@@ -38,11 +38,8 @@ public class SBPackets {
                 .consumer(ItemS2CPacket::handle)
                 .add();
 
-        net.messageBuilder(SoulBindS2CPacket.class, getId(), NetworkDirection.PLAY_TO_CLIENT)
-                .decoder(SoulBindS2CPacket::new)
-                .encoder(SoulBindS2CPacket::write)
-                .consumer(SoulBindS2CPacket::handle)
-                .add();
+
+        net.registerMessage(getId(), SoulBindS2CPacket.class, SoulBindS2CPacket::write, SoulBindS2CPacket::read, SoulBindS2CPacket::handle);
     }
 
     public static <MSG> void sendToServer(MSG message) {
@@ -59,8 +56,7 @@ public class SBPackets {
     }
 
     public static <MSG> void sendToPlayer(MSG message, ServerPlayer player) {
-        net.send(PacketDistributor.PLAYER.with(() -> player), message);
-//        net.sendTo(message, player.connection.connection, NetworkDirection.PLAY_TO_CLIENT);
+        net.sendTo(message, player.connection.connection, NetworkDirection.PLAY_TO_CLIENT);
     }
 
     public static <MSG> void sendToClients(MSG message) {

@@ -4,10 +4,12 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Matrix4f;
 import com.tzaranthony.spellbook.core.entities.other.MagicProjectile;
+import com.tzaranthony.spellbook.core.network.SoulBindS2CPacket;
 import com.tzaranthony.spellbook.core.util.tags.SBEntityTags;
+import com.tzaranthony.spellbook.registries.SBPackets;
+import com.tzaranthony.spellbook.registries.SBRenderTypeRegistry;
 import net.minecraft.client.renderer.LightTexture;
 import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
@@ -59,7 +61,7 @@ public class Binding extends ProjectileSpell {
         level.playSound(null, x, y, z, SoundEvents.GLOW_INK_SAC_USE, SoundSource.PLAYERS, 1.0F, 1.0F);
     }
 
-    // TODO: create a knot like entity to bind to an alter
+    // TODO: create a knot like entity to bind to an alter or something
     public static void bindEntity(Entity binder, Mob bound) {
         if (bound.isPassenger()) {
             bound.stopRiding();
@@ -87,30 +89,33 @@ public class Binding extends ProjectileSpell {
                 return;
             }
             Entity binder = maybeBinder.get();
-
-            if (binder.level == bound.level) {
-                bound.restrictTo(binder.blockPosition(), 5);
-                float f = bound.distanceTo(binder);
-                if (bound instanceof TamableAnimal && ((TamableAnimal) bound).isInSittingPose()) {
-                    if (f > 10.0F) {
-                        unbindEntity(bound);
-                    }
-                    return;
-                }
-
-                if (f > 20.0F) {
+//            if (!le.level.isClientSide()) {
+//                SBPackets.sendToAllPlayers(new SoulBindS2CPacket(le.getId(), binder.getUUID(), true));
+//            }
+            bound.restrictTo(binder.blockPosition(), 5);
+            float f = bound.distanceTo(binder);
+            if (bound instanceof TamableAnimal && ((TamableAnimal) bound).isInSittingPose()) {
+                if (f > 10.0F) {
                     unbindEntity(bound);
-                    bound.goalSelector.disableControlFlag(Goal.Flag.MOVE);
-                } else if (f > 6.0F) {
-                    double d0 = (binder.getX() - bound.getX()) / (double) f;
-                    double d1 = (binder.getY() - bound.getY()) / (double) f;
-                    double d2 = (binder.getZ() - bound.getZ()) / (double) f;
-                    bound.setDeltaMovement(bound.getDeltaMovement().add(Math.copySign(d0 * d0 * 0.4D, d0), Math.copySign(d1 * d1 * 0.4D, d1), Math.copySign(d2 * d2 * 0.4D, d2)));
-                } else {
-                    bound.goalSelector.enableControlFlag(Goal.Flag.MOVE);
-                    Vec3 vec3 = (new Vec3(binder.getX() - bound.getX(), binder.getY() - bound.getY(), binder.getZ() - bound.getZ())).normalize().scale(Math.max(f - 2.0F, 0.0F));
-                    bound.getNavigation().moveTo(bound.getX() + vec3.x, bound.getY() + vec3.y, bound.getZ() + vec3.z, 1.0D);
                 }
+                return;
+            }
+
+            if (f > 20.0F) {
+                unbindEntity(bound);
+                bound.goalSelector.disableControlFlag(Goal.Flag.MOVE);
+                if (!le.level.isClientSide()) {
+                    SBPackets.sendToAllPlayers(new SoulBindS2CPacket(le.getId(), binder.getUUID(), false));
+                }
+            } else if (f > 6.0F) {
+                double d0 = (binder.getX() - bound.getX()) / (double) f;
+                double d1 = (binder.getY() - bound.getY()) / (double) f;
+                double d2 = (binder.getZ() - bound.getZ()) / (double) f;
+                bound.setDeltaMovement(bound.getDeltaMovement().add(Math.copySign(d0 * d0 * 0.4D, d0), Math.copySign(d1 * d1 * 0.4D, d1), Math.copySign(d2 * d2 * 0.4D, d2)));
+            } else {
+                bound.goalSelector.enableControlFlag(Goal.Flag.MOVE);
+                Vec3 vec3 = (new Vec3(binder.getX() - bound.getX(), binder.getY() - bound.getY(), binder.getZ() - bound.getZ())).normalize().scale(Math.max(f - 2.0F, 0.0F));
+                bound.getNavigation().moveTo(bound.getX() + vec3.x, bound.getY() + vec3.y, bound.getZ() + vec3.z, 1.0D);
             }
         }
     }
@@ -126,12 +131,12 @@ public class Binding extends ProjectileSpell {
         double d3 = Mth.lerp(pTick, bound.xo, bound.getX()) + d1;
         double d4 = Mth.lerp(pTick, bound.yo, bound.getY()) + vec31.y;
         double d5 = Mth.lerp(pTick, bound.zo, bound.getZ()) + d2;
-        pose.translate(d1, vec31.y, d2);
+        pose.translate(d3, d4, d5);
         float f = (float) (vec3.x - d3);
         float f1 = (float) (vec3.y - d4);
         float f2 = (float) (vec3.z - d5);
         float f3 = 0.025F;
-        VertexConsumer vertexconsumer = buff.getBuffer(RenderType.leash());
+        VertexConsumer vertexconsumer = buff.getBuffer(SBRenderTypeRegistry.getTransparentLead());
         Matrix4f matrix4f = pose.last().pose();
         float f4 = Mth.fastInvSqrt(f * f + f2 * f2) * f3 / 2.0F;
         float f5 = f2 * f4;
@@ -157,7 +162,7 @@ public class Binding extends ProjectileSpell {
     }
 
     @OnlyIn(Dist.CLIENT)
-    private static void addVertexPair(VertexConsumer consumer, Matrix4f m4, float x, float y, float z, int light, int light1, int light2, int light3, float xthicc, float ythicc, float dz, float dx, int segment, boolean colorSelector) {
+    private static void addVertexPair(VertexConsumer consumer, Matrix4f m4, float x, float y, float z, int light, int light1, int light2, int light3, float xThicc, float yThicc, float dz, float dx, int segment, boolean colorSelector) {
         float f = (float) segment / 24.0F;
         int i = (int) Mth.lerp(f, (float) light, (float) light1);
         int j = (int) Mth.lerp(f, (float) light2, (float) light3);
@@ -169,8 +174,8 @@ public class Binding extends ProjectileSpell {
         float f5 = x * f;
         float f6 = y > 0.0F ? y * f * f : y - y * (1.0F - f) * (1.0F - f);
         float f7 = z * f;
-        consumer.vertex(m4, f5 - dz, f6 + ythicc, f7 + dx).color(f2, f3, f4, 1.0F).uv2(k).endVertex();
-        consumer.vertex(m4, f5 + dz, f6 + xthicc - ythicc, f7 - dx).color(f2, f3, f4, 1.0F).uv2(k).endVertex();
+        consumer.vertex(m4, f5 - dz, f6 + yThicc, f7 + dx).color(f2, f3, f4, 0.5F).uv2(k).endVertex();
+        consumer.vertex(m4, f5 + dz, f6 + xThicc - yThicc, f7 - dx).color(f2, f3, f4, 0.5F).uv2(k).endVertex();
     }
 
     /**
@@ -206,6 +211,9 @@ public class Binding extends ProjectileSpell {
         private static void bindPlayerToEntity(Entity player, Entity entity) {
             CompoundTag tag = entity.getPersistentData();
             tag.putUUID(BOUND_TAG_KEY, player.getUUID());
+            if (!player.level.isClientSide()) {
+                SBPackets.sendToAllPlayers(new SoulBindS2CPacket(entity.getId(), player.getUUID(), true));
+            }
         }
 
         /**
@@ -220,6 +228,9 @@ public class Binding extends ProjectileSpell {
             CompoundTag userData = user.getPersistentData();
             userData.remove(createBindedTag(target.getUUID()));
             tag.remove(BOUND_TAG_KEY);
+            if (!target.level.isClientSide()) {
+                SBPackets.sendToAllPlayers(new SoulBindS2CPacket(target.getId(), user.getUUID(), false));
+            }
         }
 
         /**

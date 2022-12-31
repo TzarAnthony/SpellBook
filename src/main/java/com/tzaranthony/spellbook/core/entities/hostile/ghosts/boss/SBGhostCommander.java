@@ -66,7 +66,7 @@ public class SBGhostCommander extends SBGhostEntity {
     public void rideTick() {
         super.rideTick();
         if (this.getVehicle() instanceof PathfinderMob) {
-            PathfinderMob pathfindermob = (PathfinderMob)this.getVehicle();
+            PathfinderMob pathfindermob = (PathfinderMob) this.getVehicle();
             this.yBodyRot = pathfindermob.yBodyRot;
         }
     }
@@ -79,11 +79,25 @@ public class SBGhostCommander extends SBGhostEntity {
         return false;
     }
 
+    public double getMyRidingOffset() {
+        return -0.5D;
+    }
+
     public void checkDespawn() {
         if (this.level.getDifficulty() == Difficulty.PEACEFUL && this.shouldDespawnInPeaceful()) {
             this.discard();
         } else {
             this.noActionTime = 0;
+        }
+    }
+
+    public boolean isAlliedTo(Entity entity) {
+        if (super.isAlliedTo(entity)) {
+            return true;
+        } else if (entity instanceof SBGhostCommander || entity instanceof GhostHorse) {
+            return this.getTeam() == null && entity.getTeam() == null;
+        } else {
+            return false;
         }
     }
 
@@ -99,11 +113,12 @@ public class SBGhostCommander extends SBGhostEntity {
     @Nullable
     public SpawnGroupData finalizeSpawn(ServerLevelAccessor accessor, DifficultyInstance difficulty, MobSpawnType reason, @Nullable SpawnGroupData spawnData, @Nullable CompoundTag nbt) {
         this.setVariant(this.random.nextInt(2));
-//        spawnData = super.finalizeSpawn(accessor, difficulty, reason, spawnData, nbt);
+        spawnData = super.finalizeSpawn(accessor, difficulty, reason, spawnData, nbt);
+        //TODO: move this to summoning ritual
 //        GhostHorse horse = SBEntities.GHOST_HORSE.get().create(this.level);
-//        horse.moveTo(this.getX(), this.getY(), this.getZ(), this.getYRot(), 0.0F);
-//        horse.finalizeSpawn(accessor, difficulty, reason, null, null);
-//        this.startRiding(horse);
+//        SBGhostCommander gc = SBEntities.GHOST_KNIGHT.get().create(this.level);
+//        gc.moveTo(horse.blockPosition(), 0.0F, 0.0F);
+//        gc.startRiding(horse);
         return spawnData;
     }
 }

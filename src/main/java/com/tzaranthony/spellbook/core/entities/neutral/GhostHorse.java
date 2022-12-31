@@ -39,7 +39,7 @@ public class GhostHorse extends AbstractHorse {
 
     public static AttributeSupplier.Builder createAttributes() {
         return createBaseHorseAttributes()
-                .add(Attributes.MAX_HEALTH, 15.0D)
+                .add(Attributes.MAX_HEALTH, 30.0D)
                 .add(Attributes.MOVEMENT_SPEED, (double)0.25F);
     }
 

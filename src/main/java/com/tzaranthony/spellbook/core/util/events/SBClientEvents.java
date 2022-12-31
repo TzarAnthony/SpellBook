@@ -23,9 +23,8 @@ public class SBClientEvents {
     public static void onPostRenderEntity(RenderLivingEvent.Post event) {
         LivingEntity le = event.getEntity();
         if (Binding.isBound(le) && le instanceof Mob bound) {
-            // TODO(TzarAnthony): Fix this rendering.
             Optional<Entity> owner = Binding.isBoundBy(le);
-            if (owner.isPresent() && owner.get() instanceof LivingEntity leOwner) {
+            if (owner.isPresent() && owner.get() instanceof LivingEntity leOwner && owner.get() != bound) {
                 double d0 = Mth.lerp(event.getPartialTick(), le.xOld, le.getX());
                 double d1 = Mth.lerp(event.getPartialTick(), le.yOld, le.getY());
                 double d2 = Mth.lerp(event.getPartialTick(), le.zOld, le.getZ());

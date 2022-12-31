@@ -3,7 +3,7 @@ package com.tzaranthony.spellbook.registries;
 public class SBAdvancementRegistry {
     //Mobs
     //TODO: Ghostbuster -- defeat the ghost commanders
-    //TODO: ????????? -- defeat the ghost commanders without killing a horse
+    //TODO: Night's calvary -- defeat the ghost commanders without killing a horse
     //TODO: ????????? -- defeat the ghost commanders but kill the mage last
     //TODO: Jr. Achievement -- ride a ghost horse in a village
     //TODO: A half-hearted attempt -- get down to half a heart as your max HP
@@ -19,7 +19,7 @@ public class SBAdvancementRegistry {
     //TODO: Team Jacob -- kill an Edward vampire
     //TODO: It's Morbin Time -- kill a Morbius vampire
     //TODO: You can tame these? -- kill a Alucard vampire
-    //TODO: ????????? -- defeat the a higher vampire having 10 hearts or less
+    //TODO: It's just like Dark Souls! -- defeat the a higher vampire having 10 hearts or less
     //TODO: Toppled Pillars -- kill 3 higher vampires within 30 seconds of each other -- grants a pillar men music disc???
     //TODO: Counted Draculas -- kill one of each type of higher vampire
     //TODO: in part 2
@@ -35,11 +35,11 @@ public class SBAdvancementRegistry {
     //TODO: Sleep is for the weak -- get the wakeful sleep status effect
     //TODO: Chronic Insomniac -- get the wakeful sleep status effect 60 times
     //TODO: Avengers assemble -- use a Totem of Avenging
-    //TODO: ????????? -- get a brain freeze from drinking a smoothie
+    //TODO: Bing Chillin -- get a brain freeze from drinking a smoothie
     //TODO: Emergency Food -- eat Phoenix food
     //TODO: It’s the quenchiest! -- drink vampire blood
     //TODO: ????????? -- obtain a Cursed Silver Ingot
-    //TODO: ????????? -- obtain a Mystical Silver Ingot
+    //TODO: mYtHerl -- obtain a Mystical Silver Ingot
     //TODO: Better than Glintstone -- obtain a Crystalan Shard
     //TODO: ????????? -- obtain a Phoenix Metal Ingot
     //TODO: ????????? -- obtain Draconite
@@ -66,12 +66,12 @@ public class SBAdvancementRegistry {
     //TODO: Digital Immunology -- max out the Firewall spell
     //TODO: Like a cold knife through butter -- max out the Frost Wave spell
     //TODO: ????????? -- max out the Stone Armor spell
-    //TODO: Bakuhatsu! EXPLOSION!!! -- max out the Explosion spell
+    //TODO: The ultimate magical attack! EXPLOSION!!! -- max out the Explosion spell
     //TODO: Power! Unlimited Power!!! -- max out the Chain Lightning spell
-    //TODO: ????????? -- max out the Psychic Barrier spell
+    //TODO: Mob Psychic 100 -- max out the Psychic Barrier spell
     //TODO: ????????? -- max out the Revelation spell
     //TODO: ????????? -- max out the Insatiable Lethargy spell
-    //TODO: ????????? -- max out the Scream spell
+    //TODO: Scream like a Death Rite Bird -- max out the Scream spell
     //TODO: ????????? -- max out the Inspiration spell
     //TODO: ????????? -- max out the Placate spell
     //TODO: It's not a phase, mom -- max out the Dark Snare spell

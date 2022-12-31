@@ -139,16 +139,16 @@ public class MagicMultiAttackGoal extends Goal {
     }
 
     private void checkCooldownsAndAttack() {
-        if (this.target instanceof SBGhostCommander) {
-            List<SBGhostCommander> gcList = this.mob.level.getEntitiesOfClass(SBGhostCommander.class, new AABB(this.mob.blockPosition()).inflate(20));
-            for (SBGhostCommander gc : gcList) {
-                if ((gc.getHealth() <= (gc.getMaxHealth() * 0.75D))) {
-                    gc.heal(10.0F);
-                    gc.addEffect(new MobEffectInstance(MobEffects.REGENERATION, 200));
+        if (this.mob.isAlliedTo(this.target)) {
+            List<LivingEntity> gcList = this.mob.level.getEntitiesOfClass(LivingEntity.class, new AABB(this.mob.blockPosition()).inflate(20));
+            for (LivingEntity le : gcList) {
+                if (this.mob.isAlliedTo(le) && (le.getHealth() <= (le.getMaxHealth() * 0.75D))) {
+                    le.heal(10.0F);
+                    le.addEffect(new MobEffectInstance(MobEffects.REGENERATION, 200));
                 }
             }
             this.mob.setTarget(null);
-            this.mob.level.playSound((Player) null, this.mob.getX() , this.mob.getY() , this.mob.getZ(), SoundEvents.AMETHYST_BLOCK_CHIME, SoundSource.NEUTRAL, 1.0F, 1.0F);
+            this.mob.level.playSound((Player) null, this.mob.getX(), this.mob.getY(), this.mob.getZ(), SoundEvents.AMETHYST_BLOCK_CHIME, SoundSource.HOSTILE, 1.0F, 1.0F);
         } else {
             boolean performedSpell = false;
             int prob = this.mob.level.random.nextInt(100);

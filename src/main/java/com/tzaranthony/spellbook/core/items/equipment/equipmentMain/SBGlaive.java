@@ -2,7 +2,6 @@ package com.tzaranthony.spellbook.core.items.equipment.equipmentMain;
 
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Multimap;
-import net.minecraft.core.BlockPos;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
@@ -12,43 +11,42 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Material;
 import net.minecraftforge.common.ForgeMod;
+import net.minecraftforge.common.ToolActions;
 
 import java.util.UUID;
 
-public class SBGlaive extends TieredItem implements Vanishable {
+public class SBGlaive extends SwordItem {
     private final float attackDamage;
     protected static final UUID BASE_ATTACK_REACH_UUID = UUID.fromString("1ba8181e-10be-4c5b-8782-cb9458ff5af4");
 
     public SBGlaive(Tier tier, Item.Properties properties) {
-        super(tier, properties);
+        super(tier, 0, 0.0F, properties);
         this.attackDamage = 6.0F + tier.getAttackDamageBonus();
     }
 
+    @Override
     public float getDamage() {
         return this.attackDamage;
     }
 
-    public boolean canAttackBlock(BlockState p_43291_, Level p_43292_, BlockPos p_43293_, Player p_43294_) {
-        return !p_43294_.isCreative();
+    @Override
+    public float getDestroySpeed(ItemStack stack, BlockState state) {
+        Material material = state.getMaterial();
+        return material != Material.PLANT && material != Material.REPLACEABLE_PLANT && !state.is(BlockTags.LEAVES) && material != Material.VEGETABLE ? 1.0F : 1.5F;
     }
 
-    public float getDestroySpeed(ItemStack p_43288_, BlockState p_43289_) {
-        Material material = p_43289_.getMaterial();
-        return material != Material.PLANT && material != Material.REPLACEABLE_PLANT && !p_43289_.is(BlockTags.LEAVES) && material != Material.VEGETABLE ? 1.0F : 1.5F;
+    public boolean isCorrectToolForDrops(BlockState state) {
+        return false;
     }
 
     public boolean hurtEnemy(ItemStack stack, LivingEntity user, LivingEntity target) {
         if (target instanceof Player ptgt) {
             maybeDisableShield(user, ptgt);
         }
-        stack.hurtAndBreak(1, target, (p_43296_) -> {
-            p_43296_.broadcastBreakEvent(EquipmentSlot.MAINHAND);
-        });
-        return true;
+        return super.hurtEnemy(stack, user, target);
     }
 
     public static void maybeDisableShield(LivingEntity user, Player ptgt) {
@@ -62,15 +60,7 @@ public class SBGlaive extends TieredItem implements Vanishable {
         }
     }
 
-    public boolean mineBlock(ItemStack p_43282_, Level p_43283_, BlockState p_43284_, BlockPos p_43285_, LivingEntity p_43286_) {
-        if (p_43284_.getDestroySpeed(p_43283_, p_43285_) != 0.0F) {
-            p_43282_.hurtAndBreak(2, p_43286_, (p_43276_) -> {
-                p_43276_.broadcastBreakEvent(EquipmentSlot.MAINHAND);
-            });
-        }
-        return true;
-    }
-
+    @Override
     public Multimap<Attribute, AttributeModifier> getAttributeModifiers(EquipmentSlot slot, ItemStack stack) {
         ImmutableMultimap.Builder<Attribute, AttributeModifier> builder = ImmutableMultimap.builder();
         builder.put(Attributes.ATTACK_DAMAGE, new AttributeModifier(BASE_ATTACK_DAMAGE_UUID, "Weapon modifier", this.attackDamage, AttributeModifier.Operation.ADDITION));
@@ -85,6 +75,6 @@ public class SBGlaive extends TieredItem implements Vanishable {
 
     @Override
     public boolean canPerformAction(ItemStack stack, net.minecraftforge.common.ToolAction toolAction) {
-        return net.minecraftforge.common.ToolActions.DEFAULT_SWORD_ACTIONS.contains(toolAction);
+        return ToolActions.SWORD_SWEEP == (toolAction);
     }
 }

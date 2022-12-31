@@ -16,34 +16,35 @@ public enum SBToolMaterial implements Tier {
     }),
 
     // Intermediate
-    // Necromancer Robes
     CURSED(5, 3524, 12.0F, 8.0F, 35, () -> {
         return Ingredient.of(SBItems.CURSED_SILVER_STEEL_INGOT.get());
     }),
-    // Witch Robes
-    ENCHANTED(5, 3524, 14.0F, 6.0F, 35, () -> {
+    MYSTICAL(5, 3524, 14.0F, 6.0F, 35, () -> {
         return Ingredient.of(SBItems.ENCHANTED_SILVER_STEEL_INGOT.get());
     }),
 
     // Master
-    // Battlemaster Robes
     PHOENIX(6, 5863, 17.0F, 12.0F, 35, () -> {
         return Ingredient.of(SBItems.PHOENIX_METAL_INGOT.get());
     }),
-    // Robes of Light
     LIGHT(8, 356, 25.0F, 9.0F, 40, () -> {
         return Ingredient.of(SBItems.ESSENCE_OF_LIGHT.get());
     }),
-    // Crystal Sorcerer Robes
     CRYSTALAN(6, 5863, 17.0F, 10.0F, 35, () -> {
         return Ingredient.of(SBItems.CRYSTALAN_MATRIX.get());
     }),
 
     // Advanced
-    // Archmage Robes
+    // Archmage
     ARCH(6, 50863, 20.0F, 20.0F, 50, () -> {
         return Ingredient.of(SBItems.DYE_BASE.get());
-            });
+    }),
+
+    // Other
+    // Ghost
+    GHOST(5, 3524, 14.0F, 8.0F, 30, () -> {
+        return Ingredient.of(SBItems.ECTOPLASM.get());
+    });
 
     private final int harvestLevel;
     private final int maxUses;
