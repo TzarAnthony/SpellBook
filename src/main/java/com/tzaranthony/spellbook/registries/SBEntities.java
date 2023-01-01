@@ -1,6 +1,7 @@
 package com.tzaranthony.spellbook.registries;
 
 import com.tzaranthony.spellbook.SpellBook;
+import com.tzaranthony.spellbook.core.entities.arrows.ThrownTool;
 import com.tzaranthony.spellbook.core.entities.arrows.CrystalArrow;
 import com.tzaranthony.spellbook.core.entities.arrows.EffectCarryingArrow;
 import com.tzaranthony.spellbook.core.entities.arrows.GhostlyArrow;
@@ -51,6 +52,10 @@ public class SBEntities {
     );
 
     //Hostile
+    public static final RegistryObject<EntityType<NecroticSpider>> NECROTIC_SPIDER = reg.register("necrotic_spider", () ->
+            EntityType.Builder.of(NecroticSpider::new, MobCategory.MONSTER).sized(2.0F, 1.3F).clientTrackingRange(8).build("necrotic_spider")
+    );
+
     public static final RegistryObject<EntityType<Shade>> SHADE = reg.register("shade", () ->
             EntityType.Builder.of(Shade::new, MobCategory.MONSTER).sized(0.6F, 1.95F).clientTrackingRange(8).build("shade")
     );
@@ -70,23 +75,23 @@ public class SBEntities {
             EntityType.Builder.of(GhostHorse::new, MobCategory.CREATURE).fireImmune().sized(1.3964844F, 1.6F).clientTrackingRange(10).build("ghost_horse")
     );
     public static final RegistryObject<EntityType<GhostMage>> GHOST_MAGE = reg.register("ghost_mage", () ->
-            EntityType.Builder.of(GhostMage::new, MobCategory.CREATURE).sized(0.6F, 1.95F).clientTrackingRange(10).build("ghost_mage")
+            EntityType.Builder.of(GhostMage::new, MobCategory.MONSTER).sized(0.6F, 1.95F).clientTrackingRange(10).build("ghost_mage")
     );
     public static final RegistryObject<EntityType<GhostArcher>> GHOST_ARCHER = reg.register("ghost_archer", () ->
-            EntityType.Builder.of(GhostArcher::new, MobCategory.CREATURE).sized(0.6F, 1.95F).clientTrackingRange(10).build("ghost_archer")
+            EntityType.Builder.of(GhostArcher::new, MobCategory.MONSTER).sized(0.6F, 1.95F).clientTrackingRange(10).build("ghost_archer")
     );
     public static final RegistryObject<EntityType<GhostKnight>> GHOST_KNIGHT = reg.register("ghost_knight", () ->
-            EntityType.Builder.of(GhostKnight::new, MobCategory.CREATURE).sized(0.6F, 1.95F).clientTrackingRange(10).build("ghost_knight")
+            EntityType.Builder.of(GhostKnight::new, MobCategory.MONSTER).sized(0.6F, 1.95F).clientTrackingRange(10).build("ghost_knight")
     );
 
-    public static final RegistryObject<EntityType<HigherVampirePerson>> HIGHVAMP1 = reg.register("higher_vampire_human", () ->
+    public static final RegistryObject<EntityType<LesserVampire>> LOW_VAMP = reg.register("lesser_vampire", () ->
+            EntityType.Builder.of(LesserVampire::new, MobCategory.MONSTER).sized(0.6F, 1.95F).clientTrackingRange(8).build("lesser_vampire")
+    );
+    public static final RegistryObject<EntityType<HigherVampirePerson>> HIGH_VAMP1 = reg.register("higher_vampire_human", () ->
             EntityType.Builder.of(HigherVampirePerson::new, MobCategory.MONSTER).immuneTo(Blocks.POWDER_SNOW).sized(0.6F, 1.95F).clientTrackingRange(8).build("higher_vampire_human")
     );
-    public static final RegistryObject<EntityType<HigherVampireBat>> HIGHVAMP1BAT = reg.register("higher_vampire_bat", () ->
+    public static final RegistryObject<EntityType<HigherVampireBat>> HIGH_VAMP1_BAT = reg.register("higher_vampire_bat", () ->
             EntityType.Builder.of(HigherVampireBat::new, MobCategory.MONSTER).immuneTo(Blocks.POWDER_SNOW).sized(0.5F, 0.9F).clientTrackingRange(8).build("higher_vampire_bat")
-    );
-    public static final RegistryObject<EntityType<LesserVampire>> LOWVAMP = reg.register("lesser_vampire", () ->
-            EntityType.Builder.of(LesserVampire::new, MobCategory.MONSTER).sized(0.6F, 1.95F).clientTrackingRange(8).build("lesser_vampire")
     );
 
     public static final RegistryObject<EntityType<ZombieIllusion>> FAKE_ZOMBIE = reg.register("fake_zombie", () ->
@@ -95,19 +100,16 @@ public class SBEntities {
     public static final RegistryObject<EntityType<SkeletonIllusion>> FAKE_SKELLY = reg.register("fake_skelly", () ->
             EntityType.Builder.of(SkeletonIllusion::new, MobCategory.MONSTER).fireImmune().immuneTo(Blocks.POWDER_SNOW).sized(0.6F, 1.95F).clientTrackingRange(8).build("fake_skelly")
     );
-    public static final RegistryObject<EntityType<NecroticSpider>> NECROTIC_SPIDER = reg.register("necrotic_spider", () ->
-            EntityType.Builder.of(NecroticSpider::new, MobCategory.MONSTER).sized(2.0F, 1.3F).clientTrackingRange(8).build("necrotic_spider")
-    );
 
     // Arrows
     public static final RegistryObject<EntityType<SilverArrow>> SILVER_ARROW = reg.register("silver_arrow", () ->
-            EntityType.Builder.of(SilverArrow::new, MobCategory.MISC).sized(0.5F, 0.5F).clientTrackingRange(4).updateInterval(20).build("silver_arrow")
+            EntityType.Builder.<SilverArrow>of(SilverArrow::new, MobCategory.MISC).sized(0.5F, 0.5F).clientTrackingRange(4).updateInterval(20).build("silver_arrow")
     );
     public static final RegistryObject<EntityType<GhostlyArrow>> GHOSTLY_ARROW = reg.register("ghostly_arrow", () ->
-            EntityType.Builder.of(GhostlyArrow::new, MobCategory.MISC).sized(0.5F, 0.5F).clientTrackingRange(4).updateInterval(20).build("ghostly_arrow")
+            EntityType.Builder.<GhostlyArrow>of(GhostlyArrow::new, MobCategory.MISC).sized(0.5F, 0.5F).clientTrackingRange(4).updateInterval(20).build("ghostly_arrow")
     );
     public static final RegistryObject<EntityType<CrystalArrow>> CRYSTAL_ARROW = reg.register("crystal_arrow", () ->
-            EntityType.Builder.of(CrystalArrow::new, MobCategory.MISC).sized(0.5F, 0.5F).clientTrackingRange(4).updateInterval(20).build("crystal_arrow")
+            EntityType.Builder.<CrystalArrow>of(CrystalArrow::new, MobCategory.MISC).sized(0.5F, 0.5F).clientTrackingRange(4).updateInterval(20).build("crystal_arrow")
     );
     public static final RegistryObject<EntityType<ShatteringCrystal>> SHATTER_CRYSTAL = reg.register("crystal_shatter", () ->
             EntityType.Builder.of(ShatteringCrystal::new, MobCategory.MISC).sized(0.8F, 1.6F).clientTrackingRange(6).updateInterval(2).build("crystal_shatter")
@@ -116,16 +118,19 @@ public class SBEntities {
             EntityType.Builder.of(CrystalShard::new, MobCategory.MISC).sized(0.5F, 0.5F).clientTrackingRange(4).updateInterval(20).build("crystal_shard")
     );
     public static final RegistryObject<EntityType<EffectCarryingArrow>> FIRE_ARROW = reg.register("fire_arrow", () ->
-            EntityType.Builder.of(EffectCarryingArrow::new, MobCategory.MISC).fireImmune().sized(0.5F, 0.5F).clientTrackingRange(4).updateInterval(20).build("fire_arrow")
+            EntityType.Builder.<EffectCarryingArrow>of(EffectCarryingArrow::new, MobCategory.MISC).fireImmune().sized(0.5F, 0.5F).clientTrackingRange(4).updateInterval(20).build("fire_arrow")
     );
     public static final RegistryObject<EntityType<EffectCarryingArrow>> EARTH_ARROW = reg.register("earth_arrow", () ->
-            EntityType.Builder.of(EffectCarryingArrow::new, MobCategory.MISC).fireImmune().sized(0.5F, 0.5F).clientTrackingRange(4).updateInterval(20).build("earth_arrow")
+            EntityType.Builder.<EffectCarryingArrow>of(EffectCarryingArrow::new, MobCategory.MISC).fireImmune().sized(0.5F, 0.5F).clientTrackingRange(4).updateInterval(20).build("earth_arrow")
     );
     public static final RegistryObject<EntityType<EffectCarryingArrow>> WATER_ARROW = reg.register("water_arrow", () ->
-            EntityType.Builder.of(EffectCarryingArrow::new, MobCategory.MISC).fireImmune().sized(0.5F, 0.5F).clientTrackingRange(4).updateInterval(20).build("water_arrow")
+            EntityType.Builder.<EffectCarryingArrow>of(EffectCarryingArrow::new, MobCategory.MISC).fireImmune().sized(0.5F, 0.5F).clientTrackingRange(4).updateInterval(20).build("water_arrow")
     );
     public static final RegistryObject<EntityType<EffectCarryingArrow>> AIR_ARROW = reg.register("air_arrow", () ->
-            EntityType.Builder.of(EffectCarryingArrow::new, MobCategory.MISC).fireImmune().sized(0.5F, 0.5F).clientTrackingRange(4).updateInterval(20).build("air_arrow")
+            EntityType.Builder.<EffectCarryingArrow>of(EffectCarryingArrow::new, MobCategory.MISC).fireImmune().sized(0.5F, 0.5F).clientTrackingRange(4).updateInterval(20).build("air_arrow")
+    );
+    public static final RegistryObject<EntityType<ThrownTool>> THROWN_TOOL = reg.register("thrown_tool", () ->
+            EntityType.Builder.<ThrownTool>of(ThrownTool::new, MobCategory.MISC).sized(0.5F, 0.5F).clientTrackingRange(4).updateInterval(20).build("thrown_tool")
     );
 
     // Magic
@@ -150,7 +155,7 @@ public class SBEntities {
             EntityType.Builder.of(CursedPainting::new, MobCategory.MISC).sized(0.5F, 0.5F).clientTrackingRange(10).updateInterval(Integer.MAX_VALUE).build("cursed_painting")
     );
     public static final RegistryObject<EntityType<PhoenixAshesEntity>> PHOENIX_ASHES = reg.register("phoenix_ashes", () ->
-            EntityType.Builder.of(PhoenixAshesEntity::new, MobCategory.MISC).fireImmune().sized(0.25F, 0.25F).build("phoenix_ashes")
+            EntityType.Builder.<PhoenixAshesEntity>of(PhoenixAshesEntity::new, MobCategory.MISC).fireImmune().sized(0.25F, 0.25F).build("phoenix_ashes")
     );
     public static final RegistryObject<EntityType<Phoenix>> PHOENIX = reg.register("phoenix", () ->
             EntityType.Builder.of(Phoenix::new, MobCategory.CREATURE).fireImmune().sized(0.25F, 0.25F).build("phoenix")
@@ -172,9 +177,9 @@ public class SBEntities {
         creationEvent.put(GHOST_MAGE.get(), GhostMage.createAttributes().build());
         creationEvent.put(GHOST_ARCHER.get(), GhostArcher.createAttributes().build());
         creationEvent.put(GHOST_KNIGHT.get(), GhostKnight.createAttributes().build());
-        creationEvent.put(HIGHVAMP1.get(), HigherVampirePerson.createAttributes().build());
-        creationEvent.put(HIGHVAMP1BAT.get(), HigherVampirePerson.createAttributes().build());
-        creationEvent.put(LOWVAMP.get(), LesserVampire.createAttributes().build());
+        creationEvent.put(LOW_VAMP.get(), LesserVampire.createAttributes().build());
+        creationEvent.put(HIGH_VAMP1.get(), HigherVampirePerson.createAttributes().build());
+        creationEvent.put(HIGH_VAMP1_BAT.get(), HigherVampirePerson.createAttributes().build());
         creationEvent.put(FAKE_ZOMBIE.get(), ZombieIllusion.createAttributes().build());
         creationEvent.put(FAKE_SKELLY.get(), ZombieIllusion.createAttributes().build());
         creationEvent.put(NECROTIC_SPIDER.get(), NecroticSpider.createAttributes().build());

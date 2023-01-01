@@ -44,7 +44,7 @@ public class SBBlocks {
     public static final RegistryObject<Block> SILVER_STEEL_BLOCK = registerBlockAndItem("silver_steel_block", () -> new Block(SBBlockProperties.StandardMetal()));
     public static final RegistryObject<Block> IMBUED_CLOTH_BLOCK = registerBlockAndItem("imbued_cloth_block", () -> new Block(SBBlockProperties.ClothBlock(MaterialColor.COLOR_PURPLE)));
     public static final RegistryObject<Block> CURSED_SILVER_BLOCK = registerBlockAndRareUnburnableItem("cursed_silver_block", () -> new Block(SBBlockProperties.NetheriteBasedBlock(30.0F)), Rarity.UNCOMMON);
-    public static final RegistryObject<Block> ENCHANTED_STEEL_BLOCK = registerBlockAndRareUnburnableItem("enchanted_steel_block", () -> new Block(SBBlockProperties.NetheriteBasedBlock(30.0F)), Rarity.UNCOMMON);
+    public static final RegistryObject<Block> MYSTICAL_STEEL_BLOCK = registerBlockAndRareUnburnableItem("mystical_steel_block", () -> new Block(SBBlockProperties.NetheriteBasedBlock(30.0F)), Rarity.UNCOMMON);
     public static final RegistryObject<Block> CRYSTALAN_BUD_SMALL = reg.register("crystalan_bud_small", () -> new GrowableCrystal(3, 4, SoundType.SMALL_AMETHYST_BUD, 2));
     public static final RegistryObject<Block> CRYSTALAN_BUD_MEDIUM = registerBlockAndRareItem("crystalan_bud_medium", () -> new GrowableCrystal(5, 3, SoundType.MEDIUM_AMETHYST_BUD, 4), Rarity.RARE);
     public static final RegistryObject<Block> CRYSTALAN_BUD_LARGE = registerBlockAndRareItem("crystalan_bud_large", () -> new GrowableCrystal(6, 3, SoundType.LARGE_AMETHYST_BUD, 5), Rarity.RARE);

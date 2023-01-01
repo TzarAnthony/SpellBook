@@ -1,7 +1,6 @@
 package com.tzaranthony.spellbook.core.items.equipment.arrows;
 
 import com.tzaranthony.spellbook.core.entities.arrows.SilverArrow;
-import com.tzaranthony.spellbook.registries.SBEntities;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.entity.LivingEntity;
@@ -24,10 +23,7 @@ public class SilverArrowItem extends ArrowItem {
 
     @Override
     public AbstractArrow createArrow(Level level, ItemStack stack, LivingEntity owner) {
-        SilverArrow arrow = new SilverArrow(SBEntities.SILVER_ARROW.get(), level);
-        arrow.setPos(owner.getX(), owner.getEyeY() - (double)0.1F, owner.getZ());
-        arrow.setOwner(owner);
-        return arrow;
+        return new SilverArrow(owner, level);
     }
 
     @Override

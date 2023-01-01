@@ -1,7 +1,6 @@
 package com.tzaranthony.spellbook.core.entities.arrows;
 
 import com.google.common.collect.Sets;
-import com.mojang.logging.LogUtils;
 import com.tzaranthony.spellbook.registries.SBEffects;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleOptions;
@@ -32,17 +31,19 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
-import org.slf4j.Logger;
 
 import java.util.Set;
 
 public class EffectCarryingArrow extends AbstractArrow {
-    private static final Logger LOGGER = LogUtils.getLogger();
     private final Set<MobEffectInstance> effects = Sets.newHashSet();
     private static final EntityDataAccessor<Byte> ELEMENT_TYPE = SynchedEntityData.defineId(AbstractArrow.class, EntityDataSerializers.BYTE);
 
     public EffectCarryingArrow(EntityType<? extends EffectCarryingArrow> entityType, Level level) {
         super(entityType, level);
+    }
+
+    public EffectCarryingArrow(EntityType<? extends EffectCarryingArrow> entityType, LivingEntity owner, Level level) {
+        super(entityType, owner, level);
     }
 
     public void addEffect(MobEffectInstance effectInstance) {

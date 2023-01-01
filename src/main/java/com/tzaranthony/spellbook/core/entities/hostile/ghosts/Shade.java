@@ -1,6 +1,7 @@
 package com.tzaranthony.spellbook.core.entities.hostile.ghosts;
 
 import com.tzaranthony.spellbook.core.entities.ai.MoveToEntityGoal;
+import com.tzaranthony.spellbook.core.entities.ai.NearestNightTimeTargetGoal;
 import com.tzaranthony.spellbook.core.entities.other.CursedPainting;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.Difficulty;
@@ -15,7 +16,6 @@ import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
-import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
@@ -33,20 +33,20 @@ public class Shade extends SBGhostEntity {
         this.goalSelector.addGoal(1, new RestrictSunGoal(this));
         this.goalSelector.addGoal(2, new FleeSunGoal(this, 1.0D));
         this.goalSelector.addGoal(4, new MoveToEntityGoal(this, CursedPainting.class, 1.0D));
-        this.goalSelector.addGoal(4, new PossesGoal(1.25D, false));
+        this.goalSelector.addGoal(4, new PossessGoal(1.25D, false));
         this.goalSelector.addGoal(5, new RandomStrollGoal(this, 1.0D));
         this.goalSelector.addGoal(8, new LookAtPlayerGoal(this, Player.class, 8.0F));
         this.goalSelector.addGoal(8, new RandomLookAroundGoal(this));
         this.targetSelector.addGoal(1, new HurtByTargetGoal(this, SBGhostEntity.class));
-        this.targetSelector.addGoal(2, new ShadeTargetGoal<>(this, Player.class));
+        this.targetSelector.addGoal(2, new NearestNightTimeTargetGoal<>(this, Player.class, true));
     }
 
     public static AttributeSupplier.Builder createAttributes() {
         return Monster.createMonsterAttributes()
                 .add(Attributes.MAX_HEALTH, 8.0D)
-                .add(Attributes.ATTACK_DAMAGE, 0.5D)
-                .add(Attributes.MOVEMENT_SPEED, 0.2D)
-                .add(Attributes.FOLLOW_RANGE, 48.0D)
+                .add(Attributes.ATTACK_DAMAGE, 0.1D)
+                .add(Attributes.MOVEMENT_SPEED, 0.3D)
+                .add(Attributes.FOLLOW_RANGE, 50.0D)
                 .add(Attributes.KNOCKBACK_RESISTANCE, 1.0D);
     }
 
@@ -60,8 +60,8 @@ public class Shade extends SBGhostEntity {
         return super.finalizeSpawn(accessor, difficulty, reason, spawnData, nbt);
     }
 
-    class PossesGoal extends MeleeAttackGoal {
-        public PossesGoal(double boost, boolean whenNotSeen) {
+    class PossessGoal extends MeleeAttackGoal {
+        public PossessGoal(double boost, boolean whenNotSeen) {
             super(Shade.this, boost, whenNotSeen);
         }
 
@@ -80,17 +80,6 @@ public class Shade extends SBGhostEntity {
                 }
                 this.mob.hurt(DamageSource.OUT_OF_WORLD, 100.0F);
             }
-        }
-    }
-
-    static class ShadeTargetGoal<T extends LivingEntity> extends NearestAttackableTargetGoal<T> {
-        public ShadeTargetGoal(Shade shade, Class<T> target) {
-            super(shade, target, false);
-        }
-
-        public boolean canUse() {
-            float f = this.mob.getBrightness();
-            return f >= 0.5F ? false : super.canUse();
         }
     }
 }

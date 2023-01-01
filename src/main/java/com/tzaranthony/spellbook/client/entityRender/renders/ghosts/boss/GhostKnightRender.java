@@ -11,8 +11,8 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
 public class GhostKnightRender extends HumanoidMobRenderer<GhostKnight, GhostKnightModel> {
-    private static final ResourceLocation GHOST_1 = new ResourceLocation("spellbook:textures/entity/ghost/ghost1.png");
-    private static final ResourceLocation GHOST_4 = new ResourceLocation("spellbook:textures/entity/ghost/ghost4.png");
+    private static final ResourceLocation GHOST_1 = new ResourceLocation("spellbook:textures/entity/ghost/ghost2.png");
+    private static final ResourceLocation GHOST_2 = new ResourceLocation("spellbook:textures/entity/ghost/ghost3.png");
 
     public GhostKnightRender(EntityRendererProvider.Context manager) {
         super(manager, new GhostKnightModel(manager.bakeLayer(ModelLayers.ZOMBIE)), 0.55F);
@@ -25,7 +25,7 @@ public class GhostKnightRender extends HumanoidMobRenderer<GhostKnight, GhostKni
             case 1:
                 return GHOST_1;
             default:
-                return GHOST_4;
+                return GHOST_2;
         }
     }
 }

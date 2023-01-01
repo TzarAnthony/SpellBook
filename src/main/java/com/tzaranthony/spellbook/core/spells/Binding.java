@@ -7,7 +7,7 @@ import com.tzaranthony.spellbook.core.entities.other.MagicProjectile;
 import com.tzaranthony.spellbook.core.network.SoulBindS2CPacket;
 import com.tzaranthony.spellbook.core.util.tags.SBEntityTags;
 import com.tzaranthony.spellbook.registries.SBPackets;
-import com.tzaranthony.spellbook.registries.SBRenderTypeRegistry;
+import com.tzaranthony.spellbook.client.SBRenderTypes;
 import net.minecraft.client.renderer.LightTexture;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.core.BlockPos;
@@ -136,7 +136,7 @@ public class Binding extends ProjectileSpell {
         float f1 = (float) (vec3.y - d4);
         float f2 = (float) (vec3.z - d5);
         float f3 = 0.025F;
-        VertexConsumer vertexconsumer = buff.getBuffer(SBRenderTypeRegistry.getTransparentLead());
+        VertexConsumer vertexconsumer = buff.getBuffer(SBRenderTypes.getTransparentLead());
         Matrix4f matrix4f = pose.last().pose();
         float f4 = Mth.fastInvSqrt(f * f + f2 * f2) * f3 / 2.0F;
         float f5 = f2 * f4;

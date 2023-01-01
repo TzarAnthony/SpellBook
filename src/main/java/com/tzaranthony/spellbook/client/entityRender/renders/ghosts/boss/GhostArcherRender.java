@@ -11,8 +11,8 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
 public class GhostArcherRender extends HumanoidMobRenderer<GhostArcher, GhostArcherModel> {
-    private static final ResourceLocation GHOST_1 = new ResourceLocation("spellbook:textures/entity/ghost/ghost1.png");
-    private static final ResourceLocation GHOST_4 = new ResourceLocation("spellbook:textures/entity/ghost/ghost4.png");
+    private static final ResourceLocation GHOST_1 = new ResourceLocation("spellbook:textures/entity/ghost/ghost2.png");
+    private static final ResourceLocation GHOST_2 = new ResourceLocation("spellbook:textures/entity/ghost/ghost4.png");
 
     public GhostArcherRender(EntityRendererProvider.Context manager) {
         super(manager, new GhostArcherModel(manager.bakeLayer(ModelLayers.ZOMBIE)), 0.55F);
@@ -25,7 +25,7 @@ public class GhostArcherRender extends HumanoidMobRenderer<GhostArcher, GhostArc
             case 1:
                 return GHOST_1;
             default:
-                return GHOST_4;
+                return GHOST_2;
         }
     }
 }

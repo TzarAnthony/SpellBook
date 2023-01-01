@@ -2,7 +2,7 @@
 	"type": "minecraft:block",
 	"pools": [
     {
-      "name": "enchanted_steel_block",
+      "name": "mystical_steel_block",
       "rolls": 1,
       "entries": [
         {

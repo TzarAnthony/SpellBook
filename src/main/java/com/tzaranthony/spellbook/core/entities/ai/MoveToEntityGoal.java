@@ -26,27 +26,9 @@ public class MoveToEntityGoal extends MoveToBlockGoal {
         this.verticalSearchRange = 6;
     }
 
-
     public boolean canContinueToUse() {
         return this.mob.getTarget() != null ? false : super.canContinueToUse();
     }
-
-//    public boolean canUse() {
-//        if (this.nextStartTick > 0) {
-//            --this.nextStartTick;
-//            return false;
-//        } else if (this.tryFindBlock()) {
-//            this.nextStartTick = reducedTickDelay(20);
-//            return true;
-//        } else {
-//            this.nextStartTick = this.nextStartTick(this.mob);
-//            return false;
-//        }
-//    }
-//
-//    private boolean tryFindBlock() {
-//        return this.mob.getTarget() == null && this.isValidTarget(this.mob.level, this.blockPos) ? true : this.findNearestBlock();
-//    }
 
     @Override
     protected boolean findNearestBlock() {
@@ -56,6 +38,9 @@ public class MoveToEntityGoal extends MoveToBlockGoal {
             return isValidTarget(this.mob.level, this.blockPos);
         } else {
             this.etarget = this.getNearestEntity(this.mob.level.getEntitiesOfClass(this.targetType, this.getTargetSearchArea()), this.mob.getX(), this.mob.getEyeY(), this.mob.getZ());
+            if (this.etarget == null) {
+                return false;
+            }
             this.blockPos = this.etarget.blockPosition();
             return true;
         }

@@ -46,9 +46,9 @@ public class GhostArcher extends SBGhostCommander implements RangedAttackMob {
     public static AttributeSupplier.Builder createAttributes() {
         return Monster.createMonsterAttributes()
                 .add(Attributes.MAX_HEALTH, 250.0D)
-                .add(Attributes.ATTACK_DAMAGE, 8.0D)
+                .add(Attributes.ATTACK_DAMAGE, 6.0D)
                 .add(Attributes.MOVEMENT_SPEED, 0.2D)
-                .add(Attributes.FOLLOW_RANGE, 50.0D)
+                .add(Attributes.FOLLOW_RANGE, 90.0D)
                 .add(Attributes.KNOCKBACK_RESISTANCE, 1.0D);
     }
 

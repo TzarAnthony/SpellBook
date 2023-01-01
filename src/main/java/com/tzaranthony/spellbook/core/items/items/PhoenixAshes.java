@@ -1,7 +1,6 @@
 package com.tzaranthony.spellbook.core.items.items;
 
 import com.tzaranthony.spellbook.core.entities.other.PhoenixAshesEntity;
-import com.tzaranthony.spellbook.registries.SBEntities;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.entity.Entity;
@@ -36,16 +35,7 @@ public class PhoenixAshes extends Item {
 
     @Override
     public Entity createEntity(Level level, Entity entity, ItemStack stack) {
-        final PhoenixAshesEntity ashesItemEntity = new PhoenixAshesEntity(SBEntities.PHOENIX_ASHES.get(), level);
-        ashesItemEntity.setPos(entity.getX(), entity.getY(), entity.getZ());
-        ashesItemEntity.setYRot(level.random.nextFloat() * 360.0F);
-        if (entity instanceof Player) {
-            ashesItemEntity.setOwner(entity.getUUID());
-        }
-        ashesItemEntity.setItem(stack);
-        ashesItemEntity.setExtendedLifetime();
-        ashesItemEntity.setDeltaMovement(entity.getDeltaMovement());
-        ashesItemEntity.setPickUpDelay(40);
+        final PhoenixAshesEntity ashesItemEntity = new PhoenixAshesEntity(entity, level, stack);
         return ashesItemEntity;
     }
 }

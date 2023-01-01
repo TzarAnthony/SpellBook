@@ -21,7 +21,6 @@ public class MercuryBottle extends ThickDrink {
     public MercuryBottle() {
         super((new Item.Properties())
                 .tab(SpellBook.TAB)
-                .rarity(Rarity.EPIC)
                 .craftRemainder(Items.GLASS_BOTTLE)
                 .food((new FoodProperties.Builder())
                         .nutrition(6)

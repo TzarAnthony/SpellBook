@@ -188,8 +188,8 @@ public class SBItems {
 
     // Mob Equip
     public static final RegistryObject<Item> GHOST_GLAIVE = reg.register("ghost_glaive", () -> new SBGlaive(SBToolMaterial.GHOST, SBItemProperties.Unburnable(Rarity.UNCOMMON)));
+    public static final RegistryObject<Item> GHOST_SHIELD = reg.register("ghost_shield", () -> new ShieldItem(SBItemProperties.Unburnable(Rarity.UNCOMMON).durability(SBToolMaterial.GHOST.getUses())));
     public static final RegistryObject<Item> GHOST_BOW = reg.register("ghost_bow", () -> new BowItem(SBItemProperties.Unburnable(Rarity.UNCOMMON).durability(SBToolMaterial.GHOST.getUses())));
-    //TODO: create ghost shield
     public static final RegistryObject<Item> GHOST_SCEPTER = reg.register("ghost_scepter", () -> new SBSilverAxe(SBToolMaterial.GHOST, SBItemProperties.Unburnable(Rarity.UNCOMMON)));
     public static final RegistryObject<Item> VOID_SWORD = reg.register("void_sword", () -> new SBSilverSword(SBToolMaterial.GHOST, SBItemProperties.Unburnable(Rarity.RARE)));
 
@@ -246,8 +246,8 @@ public class SBItems {
         reg.register("spawn_egg_ghost_mage", () -> new ForgeSpawnEggItem(SBEntities.GHOST_MAGE, 8032420, 12530335, new Item.Properties().tab(SpellBook.TAB)));
         reg.register("spawn_egg_ghost_archer", () -> new ForgeSpawnEggItem(SBEntities.GHOST_ARCHER, 8032420, 6786395, new Item.Properties().tab(SpellBook.TAB)));
         reg.register("spawn_egg_ghost_knight", () -> new ForgeSpawnEggItem(SBEntities.GHOST_KNIGHT, 8032420, 6599423, new Item.Properties().tab(SpellBook.TAB)));
-        reg.register("spawn_egg_vampire", () -> new ForgeSpawnEggItem(SBEntities.LOWVAMP, 7739154, 15106100, new Item.Properties().tab(SpellBook.TAB)));
-        reg.register("spawn_egg_higher_vampire", () -> new ForgeSpawnEggItem(SBEntities.HIGHVAMP1, 7739154, 12751440, new Item.Properties().tab(SpellBook.TAB)));
+        reg.register("spawn_egg_vampire", () -> new ForgeSpawnEggItem(SBEntities.LOW_VAMP, 7739154, 15106100, new Item.Properties().tab(SpellBook.TAB)));
+        reg.register("spawn_egg_higher_vampire", () -> new ForgeSpawnEggItem(SBEntities.HIGH_VAMP1, 7739154, 12751440, new Item.Properties().tab(SpellBook.TAB)));
 
         reg.register("spawn_egg_necrotic_spider", () -> new ForgeSpawnEggItem(SBEntities.NECROTIC_SPIDER, 2039583, 5382018, new Item.Properties().tab(SpellBook.TAB)));
     }

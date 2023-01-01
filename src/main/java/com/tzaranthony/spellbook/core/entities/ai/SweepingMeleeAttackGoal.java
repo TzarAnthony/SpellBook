@@ -37,7 +37,7 @@ public class SweepingMeleeAttackGoal extends MeleeAttackGoal {
 
     @Override
     protected double getAttackReachSqr(LivingEntity target) {
-        return 4.0D * super.getAttackReachSqr(target);
+        return 5.0D * super.getAttackReachSqr(target);
     }
 
     protected void performSweepAttack(LivingEntity target) {

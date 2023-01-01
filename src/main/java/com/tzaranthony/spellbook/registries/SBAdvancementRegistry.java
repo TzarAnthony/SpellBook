@@ -4,13 +4,13 @@ public class SBAdvancementRegistry {
     //Mobs
     //TODO: Ghostbuster -- defeat the ghost commanders
     //TODO: Night's calvary -- defeat the ghost commanders without killing a horse
-    //TODO: ????????? -- defeat the ghost commanders but kill the mage last
+    //TODO: A match mage in heaven -- defeat the ghost commanders but kill the mage last
     //TODO: Jr. Achievement -- ride a ghost horse in a village
     //TODO: A half-hearted attempt -- get down to half a heart as your max HP
     //TODO: You only have one hundred lives -- get up to 50 hearts as your max HP
     //TODO: BFFs OG FF -- tame a Phoenix (probs rename)
     //TODO: Pyromance -- breed a Phoenix
-    //TODO: The Order of Phoenix -- have a tamed Phoenix kill a boss
+    //TODO: Caw Caw MFer -- have a tamed Phoenix kill a boss
     //TODO: A taste of your own Anophelin -- hit a vampire with an activated death bouquet
     //TODO: Blood and Wine -- kill a Dettlaff vampire
     //TODO: It was me, Dio! -- kill a Dio vampire
@@ -38,15 +38,22 @@ public class SBAdvancementRegistry {
     //TODO: Bing Chillin -- get a brain freeze from drinking a smoothie
     //TODO: Emergency Food -- eat Phoenix food
     //TODO: It’s the quenchiest! -- drink vampire blood
-    //TODO: ????????? -- obtain a Cursed Silver Ingot
-    //TODO: mYtHerl -- obtain a Mystical Silver Ingot
+    //TODO: Silver Surfer -- obtain a Silver Steel Ingot
+    //TODO: At least it's nto a Tainted ingot -- obtain a Cursed Silver Steel Ingot
+    //TODO: Its mYtHerl -- obtain a Mystical Silver Steel Ingot
     //TODO: Better than Glintstone -- obtain a Crystalan Shard
-    //TODO: ????????? -- obtain a Phoenix Metal Ingot
-    //TODO: ????????? -- obtain Draconite
-    //TODO: Empress of Light -- place every color of Light Essence block
+    //TODO: The Order of Phoenix -- obtain a Phoenix Metal Ingot
+    //TODO: You can't see this -- obtain an Essence of Light
+    //TODO: House of Dragons -- obtain Draconite
     //TODO: Double Face -- obtain a Bookmark
     //TODO: Falling with style -- create a Phoenix Elytra
     //TODO: A soul for a soul -- create a Monster Spawner
+
+    //Blocks
+    //TODO: Empress of Light -- place every color of Light Essence block
+    //TODO: Tailored Rift -- create a place a Rift Generator
+    //TODO: Temporal Recycling -- obtain Netherite ore
+    //TODO: Now you need a Portrificationizer -- place a cursed painting
 
     //Biomes
     //TODO: in part 2
@@ -58,34 +65,34 @@ public class SBAdvancementRegistry {
     //Spells
     //TODO: A green... Hand? -- max out the growth spell
     //TODO: A Conjurer of Cheap Tricks -- max out the Animal Summoning spell
-    //TODO: ????????? -- max out the Zombie Necromancy spell (might be a better name for undead golems?)
+    //TODO: Trick or treat -- max out the Zombie Necromancy spell
     //TODO: These are my boos, my skeleton crew -- max out the Skeleton Necromancy spell
-    //TODO: Mortal Middle Management -- max out the Wither Skeleton Necromancy spell
+    //TODO: Mortal Middle Management -- max out the Wither Skeleton Necromancy spell (might be a better name for undead golems?)
     //TODO: Good Soup -- max out the Swineoning spell
     //TODO: Nekomaniac -- max out the Nekomancy spell
     //TODO: Digital Immunology -- max out the Firewall spell
     //TODO: Like a cold knife through butter -- max out the Frost Wave spell
-    //TODO: ????????? -- max out the Stone Armor spell
+    //TODO: Totally Toph -- max out the Stone Armor spell (Maybe call it "its clobbering time")
     //TODO: The ultimate magical attack! EXPLOSION!!! -- max out the Explosion spell
     //TODO: Power! Unlimited Power!!! -- max out the Chain Lightning spell
     //TODO: Mob Psychic 100 -- max out the Psychic Barrier spell
-    //TODO: ????????? -- max out the Revelation spell
-    //TODO: ????????? -- max out the Insatiable Lethargy spell
+    //TODO: Wall hacks -- max out the Revelation spell
+    //TODO: Give 'em the itis -- max out the Insatiable Lethargy spell
     //TODO: Scream like a Death Rite Bird -- max out the Scream spell
-    //TODO: ????????? -- max out the Inspiration spell
-    //TODO: ????????? -- max out the Placate spell
+    //TODO: One for all -- max out the Inspiration spell
+    //TODO: Why can't we be friends? -- max out the Placate spell
     //TODO: It's not a phase, mom -- max out the Dark Snare spell
-    //TODO: ????????? -- max out the Life Steal spell
-    //TODO: In the name of the moon I shall punish you -- max out the Soulbind spell
+    //TODO: All for one -- max out the Life Steal spell
+    //TODO: Gotta catch them all -- max out the Soulbind spell
     //TODO: Spaghettification -- max out the Rift of Darkness spell
     //TODO: Infinite Tsukuyomi -- max out the Illusion spell
     //TODO: Fantasia -- max out the Object Enchantment spell
     //TODO: ????????? -- max out the Action spell
-    //TODO: ????????? -- max out the Detector spell
+    //TODO: Only 1 ping -- max out the Detector spell
     //TODO: By my Command Spell, I order you... -- max out the Command spell
 
-    //TODO: ????????? -- max out every novice spell
+    //TODO: Gettin Good -- max out every novice spell
     //TODO: ????????? -- max out every intermediate spell
-    //TODO: ????????? -- max out every advanced spell
+    //TODO: In the name of the moon I shall punish you -- max out every advanced spell
     //TODO: ????????? -- max out every expert spell
 }

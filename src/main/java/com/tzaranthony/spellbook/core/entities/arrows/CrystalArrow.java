@@ -17,6 +17,11 @@ public class CrystalArrow extends AbstractArrow {
         super(entityType, level);
     }
 
+    public CrystalArrow(LivingEntity owner, Level level) {
+        super(SBEntities.CRYSTAL_ARROW.get(), owner, level);
+    }
+
+
     protected ItemStack getPickupItem() {
         return new ItemStack(SBItems.CRYSTALAN_ARROW.get());
     }

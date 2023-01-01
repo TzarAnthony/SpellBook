@@ -1,6 +1,7 @@
 package com.tzaranthony.spellbook.core.entities.arrows;
 
 import com.google.common.collect.Lists;
+import com.tzaranthony.spellbook.registries.SBEntities;
 import com.tzaranthony.spellbook.registries.SBItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
@@ -33,6 +34,11 @@ public class GhostlyArrow extends AbstractArrow {
 
     public GhostlyArrow(EntityType<? extends GhostlyArrow> entityType, Level level) {
         super(entityType, level);
+    }
+
+    public GhostlyArrow(LivingEntity owner, Level level, int pierceLevel) {
+        super(SBEntities.GHOSTLY_ARROW.get(), owner, level);
+        setPierceLevel((byte) pierceLevel);
     }
 
     protected ItemStack getPickupItem() {

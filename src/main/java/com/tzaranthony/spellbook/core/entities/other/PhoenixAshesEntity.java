@@ -6,6 +6,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.item.ItemEntity;
@@ -20,6 +21,18 @@ public class PhoenixAshesEntity extends ItemEntity {
 
     public PhoenixAshesEntity(EntityType<? extends PhoenixAshesEntity> type, Level level) {
         super(type, level);
+    }
+
+    public PhoenixAshesEntity(Entity owner, Level level, ItemStack stack) {
+        super(SBEntities.PHOENIX_ASHES.get(), level);
+        setPos(owner.getX(), owner.getY(), owner.getZ());
+        if (owner instanceof Player) {
+            setOwner(owner.getUUID());
+        }
+        setItem(stack);
+        setExtendedLifetime();
+        setDeltaMovement(owner.getDeltaMovement());
+        setPickUpDelay(40);
     }
 
     @Override

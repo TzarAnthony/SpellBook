@@ -1,8 +1,10 @@
 package com.tzaranthony.spellbook.core.entities.arrows;
 
 import com.tzaranthony.spellbook.core.util.tags.SBEntityTags;
+import com.tzaranthony.spellbook.registries.SBEntities;
 import com.tzaranthony.spellbook.registries.SBItems;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.item.ItemStack;
@@ -12,6 +14,10 @@ import net.minecraft.world.phys.EntityHitResult;
 public class SilverArrow extends AbstractArrow {
     public SilverArrow(EntityType<? extends SilverArrow> entityType, Level level) {
         super(entityType, level);
+    }
+
+    public SilverArrow(LivingEntity owner, Level level) {
+        super(SBEntities.SILVER_ARROW.get(), owner, level);
     }
 
     protected ItemStack getPickupItem() {

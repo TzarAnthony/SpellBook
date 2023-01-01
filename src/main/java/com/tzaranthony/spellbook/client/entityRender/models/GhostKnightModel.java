@@ -15,10 +15,6 @@ public class GhostKnightModel extends AbstractGhostModel<GhostKnight> {
         super(part);
     }
 
-    public boolean isAggressive(GhostKnight ghost) {
-        return ghost.isAggressive();
-    }
-
     public void prepareMobModel(GhostKnight knight, float p_102522_, float p_102523_, float p_102524_) {
         this.rightArmPose = HumanoidModel.ArmPose.EMPTY;
         this.leftArmPose = HumanoidModel.ArmPose.EMPTY;

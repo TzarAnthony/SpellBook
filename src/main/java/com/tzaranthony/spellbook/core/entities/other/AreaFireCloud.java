@@ -29,9 +29,9 @@ import java.util.UUID;
 public class AreaFireCloud extends Entity {
     private static final Logger LOGGER = LogUtils.getLogger();
     private static final int TIME_BETWEEN_APPLICATIONS = 5;
-    private static final EntityDataAccessor<Float> DATA_RADIUS = SynchedEntityData.defineId(AreaEffectCloud.class, EntityDataSerializers.FLOAT);
-    private static final EntityDataAccessor<Boolean> DATA_WAITING = SynchedEntityData.defineId(AreaEffectCloud.class, EntityDataSerializers.BOOLEAN);
-    private static final EntityDataAccessor<ParticleOptions> DATA_PARTICLE = SynchedEntityData.defineId(AreaEffectCloud.class, EntityDataSerializers.PARTICLE);
+    private static final EntityDataAccessor<Float> DATA_RADIUS = SynchedEntityData.defineId(AreaFireCloud.class, EntityDataSerializers.FLOAT);
+    private static final EntityDataAccessor<Boolean> DATA_WAITING = SynchedEntityData.defineId(AreaFireCloud.class, EntityDataSerializers.BOOLEAN);
+    private static final EntityDataAccessor<ParticleOptions> DATA_PARTICLE = SynchedEntityData.defineId(AreaFireCloud.class, EntityDataSerializers.PARTICLE);
     private static final float MAX_RADIUS = 32.0F;
     private final Map<Entity, Integer> victims = Maps.newHashMap();
     private int duration = 600;

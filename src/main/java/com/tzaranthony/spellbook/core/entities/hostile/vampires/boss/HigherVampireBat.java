@@ -75,10 +75,10 @@ public class HigherVampireBat extends HigherVampirePhase1 implements FlyingEntit
                 .add(Attributes.ARMOR, 8.0D)
                 .add(Attributes.ARMOR_TOUGHNESS, 2.0D)
                 .add(Attributes.JUMP_STRENGTH, 4.0D)
-                .add(Attributes.ATTACK_DAMAGE, 6.0F)
-                .add(Attributes.ATTACK_KNOCKBACK, 1.0D)
-                .add(Attributes.MOVEMENT_SPEED, 0.3D)
-                .add(Attributes.FOLLOW_RANGE, 70.0D)
+                .add(Attributes.ATTACK_DAMAGE, 8.0F)
+                .add(Attributes.ATTACK_KNOCKBACK, 0.8D)
+                .add(Attributes.MOVEMENT_SPEED, 0.4D)
+                .add(Attributes.FOLLOW_RANGE, 90.0D)
                 .add(Attributes.KNOCKBACK_RESISTANCE, 0.95D);
     }
 
@@ -237,7 +237,7 @@ public class HigherVampireBat extends HigherVampirePhase1 implements FlyingEntit
         }
         float health = this.getHealth();
         Collection<MobEffectInstance> effects = this.getActiveEffects();
-        HigherVampirePerson vampire = this.convertTo(SBEntities.HIGHVAMP1.get(), false);
+        HigherVampirePerson vampire = this.convertTo(SBEntities.HIGH_VAMP1.get(), false);
         vampire.setHealth(health);
         if (!effects.isEmpty()) {
             for(MobEffectInstance effect : effects) {

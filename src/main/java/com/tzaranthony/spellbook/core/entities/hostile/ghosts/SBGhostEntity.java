@@ -13,8 +13,6 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobType;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.material.PushReaction;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
 
 public class SBGhostEntity extends SBMonsterEntity {
     public static final EntityDataAccessor<Integer> VARIANT = SynchedEntityData.defineId(SBGhostEntity.class, EntityDataSerializers.INT);
@@ -90,13 +88,5 @@ public class SBGhostEntity extends SBMonsterEntity {
     public void addAdditionalSaveData(CompoundTag nbt) {
         nbt.putInt("Variant", this.getVariant());
         super.addAdditionalSaveData(nbt);
-    }
-
-    @OnlyIn(Dist.CLIENT)
-    public static enum ArmPose {
-        ATTACKING,
-        SUMMONING,
-        CASTING,
-        NEUTRAL;
     }
 }

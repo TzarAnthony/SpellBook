@@ -17,7 +17,7 @@ public class PoltergeistRender extends HumanoidMobRenderer<Poltergeist, Polterge
     private static final ResourceLocation GHOST_4 = new ResourceLocation("spellbook:textures/entity/ghost/ghost4.png");
 
     public PoltergeistRender(EntityRendererProvider.Context manager) {
-        super(manager, new PoltergeistModel(manager.bakeLayer(ModelLayers.ZOMBIE)), 0.55F);
+        super(manager, new PoltergeistModel(manager.bakeLayer(ModelLayers.DROWNED)), 0.55F);
         this.shadowRadius = 0;
     }
 

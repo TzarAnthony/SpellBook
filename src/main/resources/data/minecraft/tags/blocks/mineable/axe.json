@@ -2,12 +2,6 @@
   "replace": false,
   "values": [
     "spellbook:enchanted_crafting_table",
-    "spellbook:dimensional_directory",
-    "spellbook:neophyte_bookshelf",
-    "spellbook:enchanted_bookshelf",
-    "spellbook:crystal_bookshelf",
-    "spellbook:ender_bookshelf",
-    "spellbook:exchanger",
     "spellbook:end_campfire"
   ]
 }

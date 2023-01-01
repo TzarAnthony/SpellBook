@@ -10,8 +10,4 @@ public class BansheeModel extends AbstractGhostModel<Banshee> {
     public BansheeModel(ModelPart part) {
         super(part);
     }
-
-    public boolean isAggressive(Banshee p_104155_) {
-        return p_104155_.isAggressive();
-    }
 }

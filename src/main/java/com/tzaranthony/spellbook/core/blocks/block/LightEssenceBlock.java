@@ -1,7 +1,7 @@
 package com.tzaranthony.spellbook.core.blocks.block;
 
 import com.tzaranthony.spellbook.core.blocks.SBBlockProperties;
-import com.tzaranthony.spellbook.core.entities.hostile.ghosts.SBGhostEntity;
+import com.tzaranthony.spellbook.core.entities.hostile.ghosts.boss.SBGhostCommander;
 import com.tzaranthony.spellbook.core.entities.hostile.vampires.SBVampireEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -32,7 +32,7 @@ public class LightEssenceBlock extends Block {
                 } else {
                     return Shapes.empty();
                 }
-            } else if ((((EntityCollisionContext) context).getEntity() instanceof SBVampireEntity) || (((EntityCollisionContext) context).getEntity() instanceof SBGhostEntity)) {
+            } else if ((((EntityCollisionContext) context).getEntity() instanceof SBVampireEntity) || (((EntityCollisionContext) context).getEntity() instanceof SBGhostCommander)) {
                 return Shapes.empty();
             } else if (!(((EntityCollisionContext) context).getEntity() instanceof Player)
                     && ((EntityCollisionContext) context).getEntity() instanceof LivingEntity

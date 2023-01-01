@@ -44,9 +44,7 @@ public class ChanneledBow extends BowItem implements ElementalTool {
                 float f = getPowerForTime(i);
                 if (!((double) f < 0.1D)) {
                     if (!level.isClientSide) {
-                        EffectCarryingArrow arrow = getArrow(element, level);
-                        arrow.setPos(player.getX(), player.getEyeY() - (double)0.1F, player.getZ());
-                        arrow.setOwner(player);
+                        EffectCarryingArrow arrow = getArrow(element, player, level);
                         arrow.shootFromRotation(player, player.getXRot(), player.getYRot(), 0.0F, f * 3.0F, 1.0F);
                         if (f == 1.0F) {
                             arrow.setCritArrow(true);
@@ -109,19 +107,19 @@ public class ChanneledBow extends BowItem implements ElementalTool {
         }
     }
 
-    public EffectCarryingArrow getArrow(ChanneledElement element, Level level) {
+    public EffectCarryingArrow getArrow(ChanneledElement element, Player player, Level level) {
         EffectCarryingArrow arrow;
         if (element == ChanneledElement.FIRE) {
-            arrow = new EffectCarryingArrow(SBEntities.FIRE_ARROW.get(), level);
+            arrow = new EffectCarryingArrow(SBEntities.FIRE_ARROW.get(), player, level);
             arrow.setElement((byte) 1);
         } else if (element == ChanneledElement.WATER) {
-            arrow = new EffectCarryingArrow(SBEntities.WATER_ARROW.get(), level);
+            arrow = new EffectCarryingArrow(SBEntities.WATER_ARROW.get(), player, level);
             arrow.setElement((byte) 2);
         } else if (element == ChanneledElement.AIR) {
-            arrow = new EffectCarryingArrow(SBEntities.AIR_ARROW.get(), level);
+            arrow = new EffectCarryingArrow(SBEntities.AIR_ARROW.get(), player, level);
             arrow.setElement((byte) 3);
         } else {
-            arrow = new EffectCarryingArrow(SBEntities.EARTH_ARROW.get(), level);
+            arrow = new EffectCarryingArrow(SBEntities.EARTH_ARROW.get(), player, level);
             arrow.setElement((byte) 4);
         }
         arrow.addEffect(element.getMagicEffects());

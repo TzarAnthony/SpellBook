@@ -58,9 +58,9 @@ public class GhostKnight extends SBGhostCommander {
     public static AttributeSupplier.Builder createAttributes() {
         return Monster.createMonsterAttributes()
                 .add(Attributes.MAX_HEALTH, 300.0D)
-                .add(Attributes.ATTACK_DAMAGE, 10.0D)
+                .add(Attributes.ATTACK_DAMAGE, 7.0D)
                 .add(Attributes.MOVEMENT_SPEED, 0.2D)
-                .add(Attributes.FOLLOW_RANGE, 50.0D)
+                .add(Attributes.FOLLOW_RANGE, 90.0D)
                 .add(Attributes.KNOCKBACK_RESISTANCE, 1.0D)
                 .add(Attributes.ARMOR, 4.0D)
                 .add(Attributes.ARMOR_TOUGHNESS, 1.0D);

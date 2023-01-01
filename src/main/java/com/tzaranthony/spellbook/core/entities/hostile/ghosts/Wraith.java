@@ -51,7 +51,7 @@ public class Wraith extends SBGhostEntity implements FlyingEntity {
 
     protected void registerGoals() {
         this.goalSelector.addGoal(0, new FloatGoal(this));
-        this.goalSelector.addGoal(4, new MoveToEntityGoal(this, CursedPainting.class, 1.0D));
+        this.goalSelector.addGoal(1, new MoveToEntityGoal(this, CursedPainting.class, 1.0D));
         this.goalSelector.addGoal(1, new FlyingMeleeAndMagicAttackGoal(this, (ProjectileSpell) SBSpellRegistry.IGNITE, 6));
         this.goalSelector.addGoal(5, new FlyingGhostMoveRandomGoal(this));
         this.goalSelector.addGoal(8, new LookAtPlayerGoal(this, Player.class, 8.0F));
@@ -63,9 +63,9 @@ public class Wraith extends SBGhostEntity implements FlyingEntity {
     public static AttributeSupplier.Builder createAttributes() {
         return Monster.createMonsterAttributes()
                 .add(Attributes.MAX_HEALTH, 30.0D)
-                .add(Attributes.ATTACK_DAMAGE, 5.0D)
+                .add(Attributes.ATTACK_DAMAGE, 6.0D)
                 .add(Attributes.MOVEMENT_SPEED, 0.2D)
-                .add(Attributes.FOLLOW_RANGE, 48.0D)
+                .add(Attributes.FOLLOW_RANGE, 50.0D)
                 .add(Attributes.KNOCKBACK_RESISTANCE, 1.0D);
     }
 
@@ -82,7 +82,7 @@ public class Wraith extends SBGhostEntity implements FlyingEntity {
     }
 
     public SpawnGroupData finalizeSpawn(ServerLevelAccessor accessor, DifficultyInstance difficulty, MobSpawnType reason, @Nullable SpawnGroupData spawnData, @Nullable CompoundTag nbt) {
-        this.setVariant(this.random.nextInt(4));
+        this.setVariant(0);
         return super.finalizeSpawn(accessor, difficulty, reason, spawnData, nbt);
     }
 

@@ -50,14 +50,14 @@ public class GhostMage extends SBGhostCommander {
     public static AttributeSupplier.Builder createAttributes() {
         return Monster.createMonsterAttributes()
                 .add(Attributes.MAX_HEALTH, 200.0D)
-                .add(Attributes.ATTACK_DAMAGE, 8+.0D)
+                .add(Attributes.ATTACK_DAMAGE, 6.0D)
                 .add(Attributes.MOVEMENT_SPEED, 0.3D)
-                .add(Attributes.FOLLOW_RANGE, 50.0D)
+                .add(Attributes.FOLLOW_RANGE, 90.0D)
                 .add(Attributes.KNOCKBACK_RESISTANCE, 1.0D);
     }
 
     protected void populateDefaultEquipmentSlots(DifficultyInstance difficulty) {
-        //TODO: create texture
+        //TODO: create staff texture
 //        super.populateDefaultEquipmentSlots(difficulty);
 //        this.setItemSlot(EquipmentSlot.MAINHAND, new ItemStack(SBItems.GHOST_SCEPTER.get()));
     }

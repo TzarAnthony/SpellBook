@@ -28,19 +28,18 @@ public class Yurei extends SBGhostEntity {
     public Yurei(EntityType<? extends SBGhostEntity> shade, Level level) {
         super(shade, level);
         this.xpReward = 8;
-        this.maxUpStep = 5;
     }
 
     protected void registerGoals() {
         this.goalSelector.addGoal(2, new RestrictSunGoal(this));
         this.goalSelector.addGoal(3, new FleeSunGoal(this, 1.0D));
         this.goalSelector.addGoal(4, new MoveToEntityGoal(this, CursedPainting.class, 1.0D));
-        this.goalSelector.addGoal(4, new PossesGoal(1.25D, false));
+        this.goalSelector.addGoal(4, new AttackOrPossessGoal(1.25D, false));
         this.goalSelector.addGoal(5, new RandomStrollGoal(this, 1.0D));
         this.goalSelector.addGoal(8, new LookAtPlayerGoal(this, Player.class, 8.0F));
         this.goalSelector.addGoal(8, new RandomLookAroundGoal(this));
         this.targetSelector.addGoal(1, new HurtByTargetGoal(this, SBGhostEntity.class));
-        this.targetSelector.addGoal(4, new NearestAttackableTargetGoal<>(this, Player.class, false));
+        this.targetSelector.addGoal(4, new NearestAttackableTargetGoal<>(this, Player.class, true));
     }
 
     public static AttributeSupplier.Builder createAttributes() {
@@ -48,8 +47,7 @@ public class Yurei extends SBGhostEntity {
                 .add(Attributes.MAX_HEALTH, 50.0D)
                 .add(Attributes.ATTACK_DAMAGE, 5.0D)
                 .add(Attributes.MOVEMENT_SPEED, 0.2D)
-                .add(Attributes.FOLLOW_RANGE, 60.0D)
-                .add(Attributes.ARMOR, 2.0D)
+                .add(Attributes.FOLLOW_RANGE, 50.0D)
                 .add(Attributes.KNOCKBACK_RESISTANCE, 1.0D);
     }
 
@@ -64,8 +62,8 @@ public class Yurei extends SBGhostEntity {
         return super.finalizeSpawn(accessor, difficulty, reason, spawnData, nbt);
     }
 
-    class PossesGoal extends MeleeAttackGoal {
-        public PossesGoal(double boost, boolean whenNotSeen) {
+    class AttackOrPossessGoal extends MeleeAttackGoal {
+        public AttackOrPossessGoal(double boost, boolean whenNotSeen) {
             super(Yurei.this, boost, whenNotSeen);
         }
 

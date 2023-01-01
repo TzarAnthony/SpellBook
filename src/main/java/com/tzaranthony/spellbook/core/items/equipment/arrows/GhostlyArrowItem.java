@@ -1,7 +1,6 @@
 package com.tzaranthony.spellbook.core.items.equipment.arrows;
 
 import com.tzaranthony.spellbook.core.entities.arrows.GhostlyArrow;
-import com.tzaranthony.spellbook.registries.SBEntities;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.entity.LivingEntity;
@@ -23,11 +22,7 @@ public class GhostlyArrowItem extends ArrowItem {
 
     @Override
     public AbstractArrow createArrow(Level level, ItemStack stack, LivingEntity owner) {
-        GhostlyArrow arrow = new GhostlyArrow(SBEntities.GHOSTLY_ARROW.get(), level);
-        arrow.setPos(owner.getX(), owner.getEyeY() - (double)0.1F, owner.getZ());
-        arrow.setPierceLevel((byte) 0);
-        arrow.setOwner(owner);
-        return arrow;
+        return new GhostlyArrow(owner, level, 0);
     }
 
     @Override

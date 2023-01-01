@@ -1,4 +1,4 @@
-package com.tzaranthony.spellbook.registries;
+package com.tzaranthony.spellbook.client;
 
 import com.mojang.blaze3d.vertex.DefaultVertexFormat;
 import com.mojang.blaze3d.vertex.VertexFormat;
@@ -8,7 +8,7 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
-public class SBRenderTypeRegistry extends RenderStateShard {
+public class SBRenderTypes extends RenderStateShard {
     private static final RenderType TRANSPARENT_LEAD = RenderType.create("leash", DefaultVertexFormat.POSITION_COLOR_LIGHTMAP, VertexFormat.Mode.TRIANGLE_STRIP, 256, false, false,
             RenderType.CompositeState.builder()
                     .setShaderState(RenderType.RENDERTYPE_LEASH_SHADER)
@@ -23,7 +23,7 @@ public class SBRenderTypeRegistry extends RenderStateShard {
         return TRANSPARENT_LEAD;
     }
 
-    public SBRenderTypeRegistry(String p_110161_, Runnable p_110162_, Runnable p_110163_) {
+    public SBRenderTypes(String p_110161_, Runnable p_110162_, Runnable p_110163_) {
         super(p_110161_, p_110162_, p_110163_);
     }
 }
