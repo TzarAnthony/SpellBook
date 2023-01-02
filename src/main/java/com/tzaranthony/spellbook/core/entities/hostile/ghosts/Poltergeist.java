@@ -19,6 +19,7 @@ import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.monster.RangedAttackMob;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.entity.projectile.ThrownTrident;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -86,25 +87,21 @@ public class Poltergeist extends SBGhostEntity implements RangedAttackMob {
 
     @Override
     public void performRangedAttack(LivingEntity target, float distance) {
+        AbstractArrow thrown;
         if (this.getMainHandItem().is(Items.TRIDENT)) {
-            ThrownTrident thrown = new ThrownTrident(this.level, this, new ItemStack(Items.TRIDENT));
-            double d0 = target.getX() - this.getX();
-            double d1 = target.getY(0.3333333333333333D) - thrown.getY();
-            double d2 = target.getZ() - this.getZ();
-            double d3 = Math.sqrt(d0 * d0 + d2 * d2);
-            thrown.shoot(d0, d1 + d3 * (double)0.2F, d2, 1.6F, (float)(14 - this.level.getDifficulty().getId() * 4));
-            this.playSound(SoundEvents.DROWNED_SHOOT, 1.0F, 1.0F / (this.getRandom().nextFloat() * 0.4F + 0.8F));
-            this.level.addFreshEntity(thrown);
+            thrown = new ThrownTrident(this.level, this, new ItemStack(Items.TRIDENT));
+
         } else {
-            ThrownTool thrown = new ThrownTool(this.level, this, this.getMainHandItem());
-            double d0 = target.getX() - this.getX();
-            double d1 = target.getY(0.3333333333333333D) - thrown.getY();
-            double d2 = target.getZ() - this.getZ();
-            double d3 = Math.sqrt(d0 * d0 + d2 * d2);
-            thrown.shoot(d0, d1 + d3 * (double)0.2F, d2, 1.6F, (float)(14 - this.level.getDifficulty().getId() * 4));
-            this.playSound(SoundEvents.DROWNED_SHOOT, 1.0F, 1.0F / (this.getRandom().nextFloat() * 0.4F + 0.8F));
-            this.level.addFreshEntity(thrown);
+            thrown = new ThrownTool(this.level, this, this.getMainHandItem());
         }
+        double d0 = target.getX() - this.getX();
+        double d1 = target.getY(0.3333333333333333D) - thrown.getY();
+        double d2 = target.getZ() - this.getZ();
+        double d3 = Math.sqrt(d0 * d0 + d2 * d2);
+        thrown.shoot(d0, d1 + d3 * (double)0.2F, d2, 1.6F, (float)(14 - this.level.getDifficulty().getId() * 4));
+        this.level.addFreshEntity(thrown);
+
+        this.playSound(SoundEvents.DROWNED_SHOOT, 1.0F, 1.0F / (this.getRandom().nextFloat() * 0.4F + 0.8F));
         this.swing(InteractionHand.MAIN_HAND);
         this.selectRandomThrowableItem();
     }

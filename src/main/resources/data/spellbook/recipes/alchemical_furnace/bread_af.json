@@ -1,0 +1,17 @@
+{
+  "type": "spellbook:alchemical_furnace",
+  "fluid": {
+    "FluidName": "minecraft:water",
+    "Amount": 500
+  },
+  "ingredients": [
+    {
+      "item": "minecraft:wheat"
+    }
+  ],
+  "result": {
+    "item": "minecraft:breat"
+  },
+  "experience": 4.0,
+  "cookingtime": 200
+}

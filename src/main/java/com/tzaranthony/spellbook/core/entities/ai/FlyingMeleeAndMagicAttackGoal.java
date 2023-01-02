@@ -13,8 +13,8 @@ public class FlyingMeleeAndMagicAttackGoal extends Goal {
     protected final Mob mob;
     protected final ProjectileSpell spell;
     protected final int maxMagicCooldown;
-    private int ticksUntilNextAttack;
-    private int magicCooldown;
+    protected int ticksUntilNextAttack;
+    protected int magicCooldown;
 
     public FlyingMeleeAndMagicAttackGoal(Mob mob, ProjectileSpell spell) {
         this(mob, spell, 10);

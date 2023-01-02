@@ -1,12 +1,13 @@
 package com.tzaranthony.spellbook.core.entities.hostile.ghosts.boss;
 
+import com.tzaranthony.spellbook.core.entities.ai.DoNothingGoal;
 import com.tzaranthony.spellbook.core.entities.ai.SweepingMeleeAttackGoal;
+import com.tzaranthony.spellbook.core.entities.ai.WaitingEntity;
 import com.tzaranthony.spellbook.core.items.equipment.equipmentMain.SBGlaive;
 import com.tzaranthony.spellbook.registries.SBItems;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
-import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.damagesource.DamageSource;
@@ -16,7 +17,6 @@ import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.FloatGoal;
-import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal;
 import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal;
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
@@ -33,10 +33,9 @@ import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.phys.AABB;
 
 import javax.annotation.Nullable;
-import java.util.EnumSet;
 import java.util.List;
 
-public class GhostKnight extends SBGhostCommander {
+public class GhostKnight extends SBGhostCommander implements WaitingEntity {
     private boolean aroundArcher = true;
     protected int cannotUseItemRemaining;
 
@@ -46,7 +45,7 @@ public class GhostKnight extends SBGhostCommander {
     }
 
     protected void registerGoals() {
-        this.goalSelector.addGoal(0, new DoNothingGoal());
+        this.goalSelector.addGoal(0, new DoNothingGoal(this));
         this.goalSelector.addGoal(1, new FloatGoal(this));
         this.goalSelector.addGoal(2, new SweepingMeleeAttackGoal(this, 1.2D, true));
         this.goalSelector.addGoal(8, new LookAtPlayerGoal(this, Player.class, 8.0F));
@@ -110,7 +109,7 @@ public class GhostKnight extends SBGhostCommander {
         if (!this.aroundArcher || source != DamageSource.OUT_OF_WORLD) {
             if (this.isUsingItem() && this.getUseItem().is(Items.SHIELD) && source.getEntity() instanceof  LivingEntity attacker
                     && (attacker.getMainHandItem().getItem() instanceof AxeItem || attacker.getMainHandItem().getItem() instanceof SBGlaive)) {
-                this.level.playSound((Player) null, this.getX(), this.getY(), this.getZ(), SoundEvents.SHIELD_BREAK, SoundSource.HOSTILE, 1.0F, 1.0F);
+                this.playSound(SoundEvents.SHIELD_BREAK, 1.0F, 1.0F);
                 this.stopUsingItem();
                 this.cannotUseItemRemaining = 300;
             }
@@ -159,13 +158,8 @@ public class GhostKnight extends SBGhostCommander {
         return this.aroundArcher;
     }
 
-    class DoNothingGoal extends Goal {
-        public DoNothingGoal() {
-            this.setFlags(EnumSet.of(Goal.Flag.MOVE, Goal.Flag.JUMP, Goal.Flag.LOOK));
-        }
-
-        public boolean canUse() {
-            return GhostKnight.this.getAroundArcher();
-        }
+    @Override
+    public boolean shouldWait() {
+        return GhostKnight.this.getAroundArcher();
     }
 }

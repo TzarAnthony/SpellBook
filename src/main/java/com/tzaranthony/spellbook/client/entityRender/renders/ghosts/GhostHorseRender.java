@@ -2,7 +2,7 @@ package com.tzaranthony.spellbook.client.entityRender.renders.ghosts;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.tzaranthony.spellbook.client.entityRender.models.GhostHorseModel;
-import com.tzaranthony.spellbook.core.entities.neutral.GhostHorse;
+import com.tzaranthony.spellbook.core.entities.hostile.ghosts.boss.GhostHorse;
 import net.minecraft.client.model.geom.ModelLayers;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;

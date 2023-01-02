@@ -8,14 +8,10 @@ import com.tzaranthony.spellbook.core.util.damage.SBDamageSource;
 import com.tzaranthony.spellbook.registries.SBEffects;
 import com.tzaranthony.spellbook.registries.SBEntities;
 import com.tzaranthony.spellbook.registries.SBSpellRegistry;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.chat.Component;
-import net.minecraft.server.level.ServerBossEvent;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
-import net.minecraft.sounds.SoundSource;
-import net.minecraft.world.BossEvent;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -28,6 +24,7 @@ import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal;
 import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal;
 import net.minecraft.world.entity.ai.goal.WaterAvoidingRandomStrollGoal;
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
+import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.animal.AbstractGolem;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
@@ -40,12 +37,8 @@ import javax.annotation.Nullable;
 import java.util.Collection;
 
 public class HigherVampirePerson extends HigherVampirePhase1 {
-    private final ServerBossEvent bossEvent = (ServerBossEvent) (new ServerBossEvent(this.getDisplayName(), BossEvent.BossBarColor.RED, BossEvent.BossBarOverlay.PROGRESS)).setDarkenScreen(true);
-
     public HigherVampirePerson(EntityType<? extends HigherVampirePerson> highVamp, Level level) {
         super(highVamp, level);
-        this.xpReward = 50;
-        this.maxUpStep = 1.5F;
     }
 
     protected void registerGoals() {
@@ -56,6 +49,7 @@ public class HigherVampirePerson extends HigherVampirePhase1 {
         this.goalSelector.addGoal(8, new LookAtPlayerGoal(this, Player.class, 8.0F));
         this.goalSelector.addGoal(8, new RandomLookAroundGoal(this));
         this.targetSelector.addGoal(1, new HurtByTargetGoal(this, SBVampireEntity.class).setAlertOthers());
+        this.targetSelector.addGoal(2, new NearestAttackableTargetGoal(this, Player.class, false));
     }
 
     public static AttributeSupplier.Builder createAttributes() {
@@ -71,39 +65,6 @@ public class HigherVampirePerson extends HigherVampirePhase1 {
                 .add(Attributes.KNOCKBACK_RESISTANCE, 0.95D);
     }
 
-    protected void defineSynchedData() {
-        super.defineSynchedData();
-        this.entityData.define(SBVampireEntity.VARIANT, 0);
-    }
-
-    public void startSeenByPlayer(ServerPlayer player) {
-        super.startSeenByPlayer(player);
-        this.bossEvent.addPlayer(player);
-    }
-
-    public void stopSeenByPlayer(ServerPlayer player) {
-        super.stopSeenByPlayer(player);
-        this.bossEvent.removePlayer(player);
-    }
-
-    public void readAdditionalSaveData(CompoundTag tag) {
-        super.readAdditionalSaveData(tag);
-        if (this.hasCustomName()) {
-            this.bossEvent.setName(this.getDisplayName());
-        }
-    }
-
-    public void setCustomName(@Nullable Component tag) {
-        super.setCustomName(tag);
-        this.bossEvent.setName(this.getDisplayName());
-    }
-
-    @Override
-    protected void customServerAiStep() {
-        super.customServerAiStep();
-        this.bossEvent.setProgress(this.getHealth() / this.getMaxHealth());
-    }
-
     @Nullable
     public SpawnGroupData finalizeSpawn(ServerLevelAccessor accessor, DifficultyInstance difficulty, MobSpawnType reason, @Nullable SpawnGroupData spawnData, @Nullable CompoundTag nbt) {
         this.setVariant(this.random.nextInt(7));
@@ -111,7 +72,7 @@ public class HigherVampirePerson extends HigherVampirePhase1 {
     }
 
     public void transform() {
-        this.level.playSound((Player) null, this.getX(), this.getY(), this.getZ(), SoundEvents.HUSK_AMBIENT, SoundSource.HOSTILE, 1.0F, 1.0F);
+        this.playSound(SoundEvents.HUSK_AMBIENT, 1.0F, 1.0F);
         int i = PotionUtils.getColor(Potions.POISON);
         double d0 = (double)(i >> 16 & 255) / 255.0D;
         double d1 = (double)(i >> 8 & 255) / 255.0D;
@@ -137,6 +98,7 @@ public class HigherVampirePerson extends HigherVampirePhase1 {
         float damage;
         int cloudCooldown;
         int biteCooldown;
+        int freezeCooldown;
 
         public HigherVampirePersonAttackGoal(HigherVampirePhase1 vampire) {
             super(vampire, (ProjectileSpell) SBSpellRegistry.SCREAM, 1.2D, true, 40, 4);
@@ -146,8 +108,9 @@ public class HigherVampirePerson extends HigherVampirePhase1 {
 
         @Override
         public void start() {
-            this.biteCooldown = 0;
             this.cloudCooldown = 0;
+            this.biteCooldown = 0;
+            this.freezeCooldown = 0;
             super.start();
         }
 
@@ -166,12 +129,21 @@ public class HigherVampirePerson extends HigherVampirePhase1 {
                 }
                 if (this.biteCooldown <= 0 && attacked.getMobType() != MobType.UNDEAD) {
                     this.resetBiteCooldown();
-                    this.mob.swing(InteractionHand.MAIN_HAND);
+                    BlockPos pos = this.mob.blockPosition().relative(this.mob.getDirection());
+                    this.mob.getLookControl().setLookAt(pos.getX(), pos.getY(), pos.getZ());
                     attacked.hurt(SBDamageSource.bite(this.mob), this.damage * 0.75F);
                     attacked.addEffect(new MobEffectInstance(SBEffects.BLEEDING.get(), 400, 1));
                     this.mob.heal(this.damage * 0.75F);
+                    this.mob.playSound(SoundEvents.RAVAGER_ATTACK, 1.0F, 1.0F);
+                } else if (this.freezeCooldown <= 0) {
+                    this.resetFreezeCooldown();
+                    this.mob.swing(InteractionHand.MAIN_HAND);
+                    attacked.hurt(SBDamageSource.bite(this.mob), this.damage);
+                    attacked.addEffect(new MobEffectInstance(SBEffects.FREEZING.get(), 400, 1));
+                    this.mob.playSound(SoundEvents.SNOW_GOLEM_HURT, 1.0F, 1.0F);
                 } else {
                     this.mob.swing(InteractionHand.MAIN_HAND);
+                    this.mob.swing(InteractionHand.OFF_HAND);
                     this.mob.doHurtTarget(attacked);
                     if (Math.round(Math.random() * 10) % 3 == 0) {
                         attacked.addEffect(new MobEffectInstance(SBEffects.FRACTURED.get(), 100));
@@ -185,10 +157,9 @@ public class HigherVampirePerson extends HigherVampirePhase1 {
             this.mob.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 60, 99, false, false));
 
             if (mob.isCrouching()) {
-                this.mob.level.playSound((Player) null, this.mob.getX(), this.mob.getY(), this.mob.getZ(), SoundEvents.ZOMBIE_VILLAGER_CURE, SoundSource.AMBIENT, 0.5F, 1.0F);
-
+                this.mob.playSound(SoundEvents.ZOMBIE_VILLAGER_CURE, 0.5F, 1.0F);
                 int color;
-                MobEffectInstance effect = null;
+                MobEffectInstance effect;
 
                 if (Math.round(Math.random() * 100) <= Math.min(60, 15 + (80 * (1 - (mob.getHealth() / mob.getMaxHealth()))))) {
                     color = 3484199;
@@ -214,11 +185,16 @@ public class HigherVampirePerson extends HigherVampirePhase1 {
         protected void handleTimers() {
             super.handleTimers();
             this.biteCooldown = Math.max(this.biteCooldown - 1, 0);
+            this.freezeCooldown = Math.max(this.freezeCooldown - 1, 0);
             this.cloudCooldown = Math.max(this.cloudCooldown - 1, 0);
         }
 
         protected void resetBiteCooldown() {
             this.biteCooldown = 60;
+        }
+
+        protected void resetFreezeCooldown() {
+            this.freezeCooldown = 90;
         }
 
         protected void resetCloudCooldown() {

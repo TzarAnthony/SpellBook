@@ -13,7 +13,6 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 
@@ -122,8 +121,8 @@ public class ShatteringCrystal extends Entity {
     }
 
     protected void shatter() {
+        //TODO: replace with the shattering crystals
         this.level.broadcastEntityEvent(this, (byte)17);
-        this.gameEvent(GameEvent.EXPLODE, this.getOwner());
         this.dealExplosionDamage();
         for(int i = 0; i < 12; ++i) {
             double d0 = this.getX() + (this.random.nextDouble() * 2.0D - 1.0D) * 4.5D;
@@ -135,7 +134,6 @@ public class ShatteringCrystal extends Entity {
             this.level.addParticle(ParticleTypes.ELECTRIC_SPARK, d0, d1 + 1.0D, d2, d3, d4, d5);
         }
         this.discard();
-        //TODO: get this to work some day
 //        Entity owned;
 //        if (this.owner instanceof Player) {
 //            owned = this.owner;
@@ -165,7 +163,7 @@ public class ShatteringCrystal extends Entity {
         float f = 5.0F + (float)(5 * 2);
 
         if (f > 0.0F) {
-            double d0 = 5.0D;
+            double damage = 5.0D;
             Vec3 vec3 = this.position();
 
             for(LivingEntity livingentity : this.level.getEntitiesOfClass(LivingEntity.class, this.getBoundingBox().inflate(4.0D))) {
@@ -182,7 +180,7 @@ public class ShatteringCrystal extends Entity {
                     }
 
                     if (flag) {
-                        float f1 = f * (float)Math.sqrt((5.0D - (double)this.distanceTo(livingentity)) / 5.0D);
+                        float f1 = f * (float)Math.sqrt((damage - (double)this.distanceTo(livingentity)) / damage);
                         livingentity.hurt(DamageSource.explosion(this.getOwner()), f1);
                     }
                 }

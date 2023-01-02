@@ -5,11 +5,14 @@ import com.tzaranthony.spellbook.core.blocks.SBBlockProperties;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.server.level.TicketType;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.RenderShape;
@@ -21,6 +24,7 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Collections;
 import java.util.Random;
 
 public class Rift extends TickingBEBlock {
@@ -38,18 +42,31 @@ public class Rift extends TickingBEBlock {
     public void entityInside(BlockState state, Level level, BlockPos pos, Entity entity) {
         BlockEntity blockentity = level.getBlockEntity(pos);
         if (level instanceof ServerLevel sLevel && blockentity instanceof RiftBE rift && !entity.isVehicle() && !entity.isOnPortalCooldown()) {
-            entity.setPortalCooldown();
-            if (rift.getTpDim() != level.dimension() && entity.canChangeDimensions()) {
-                entity.changeDimension(sLevel.getServer().getLevel(rift.getTpDim()));
+            if (entity instanceof ServerPlayer sPlayer) {
+                if (sPlayer.getNoActionTime() > 10) {
+                    entity.setPortalCooldown();
+                    BlockPos pos1 = rift.getTpPos().relative(sPlayer.getDirection());
+                    Vec3 tgtVec = new Vec3(pos1.getX() + 0.5, pos1.getY(), pos1.getZ() + 0.5);
+                    sLevel.getChunkSource().addRegionTicket(TicketType.POST_TELEPORT, new ChunkPos(new BlockPos(tgtVec.x(), tgtVec.y(), tgtVec.z())), 1, sPlayer.getId());
+                    entity.stopRiding();
+                    if (rift.getTpDim() != level.dimension() && entity.canChangeDimensions()) {
+                        sPlayer.connection.teleport(tgtVec.x(), tgtVec.y(), tgtVec.z(), sPlayer.getDirection().toYRot(), entity.getXRot(), Collections.emptySet());
+                    } else {
+                        sPlayer.teleportTo(sLevel, tgtVec.x(), tgtVec.y(), tgtVec.z(), sPlayer.getDirection().toYRot(), entity.getXRot());
+                    }
+                    sPlayer.setYHeadRot(sPlayer.getDirection().toYRot());
+                    sPlayer.setNoActionTime(0);
+                } else {
+                    sPlayer.setNoActionTime(sPlayer.getNoActionTime() + 1);
+                }
+            } else {
+                entity.setPortalCooldown();
+                if (rift.getTpDim() != level.dimension() && entity.canChangeDimensions()) {
+                    entity.changeDimension(sLevel.getServer().getLevel(rift.getTpDim()));
+                }
+                entity.teleportTo(rift.getTpPos().getX() + 0.5, rift.getTpPos().getY() + 0.5, rift.getTpPos().getZ() + 0.5);
             }
-            Vec3 dir = entity.getDeltaMovement();
-            entity.teleportTo(rift.getTpPos().getX() + 0.5D, rift.getTpPos().getY(), rift.getTpPos().getZ() + 0.5D);
-            if (rift.getTpDim() == level.dimension()) {
-                level.playSound((Player) null, pos.getX(), pos.getY(), pos.getZ(), SoundEvents.PORTAL_TRIGGER, SoundSource.PLAYERS, 1.0F, 0.25F);
-                entity.playSound(SoundEvents.PORTAL_TRAVEL, 1.0F, 0.25F);
-            }
-//                entity.setPos(new Vec3(pos.getX() + 0.5D, pos.getY(), pos.getZ() + 0.5D));
-            entity.setDeltaMovement(dir);
+            entity.playSound(SoundEvents.PORTAL_TRAVEL, 0.5F, 1.0F);
         } else {
             entity.setPortalCooldown();
         }

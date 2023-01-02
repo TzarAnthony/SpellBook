@@ -1,7 +1,6 @@
 package com.tzaranthony.spellbook.core.entities.hostile.ghosts.boss;
 
 import com.tzaranthony.spellbook.core.entities.hostile.ghosts.SBGhostEntity;
-import com.tzaranthony.spellbook.core.entities.neutral.GhostHorse;
 import com.tzaranthony.spellbook.core.util.damage.SBDamageSource;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;

@@ -9,16 +9,10 @@ import com.tzaranthony.spellbook.registries.SBEntities;
 import com.tzaranthony.spellbook.registries.SBSpellRegistry;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.chat.Component;
-import net.minecraft.server.level.ServerBossEvent;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
-import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
-import net.minecraft.world.BossEvent;
-import net.minecraft.world.DifficultyInstance;
+import net.minecraft.world.InteractionHand;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.*;
@@ -34,7 +28,6 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.alchemy.PotionUtils;
 import net.minecraft.world.item.alchemy.Potions;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 
@@ -43,7 +36,6 @@ import java.util.Collection;
 
 public class HigherVampireBat extends HigherVampirePhase1 implements FlyingEntity {
     public static final int TICKS_PER_FLAP = Mth.ceil(2.4166098F);
-    private final ServerBossEvent bossEvent = (ServerBossEvent) (new ServerBossEvent(this.getDisplayName(), BossEvent.BossBarColor.RED, BossEvent.BossBarOverlay.PROGRESS)).setDarkenScreen(true);
 
     public HigherVampireBat(EntityType<? extends HigherVampireBat> highVamp, Level level) {
         super(highVamp, level);
@@ -61,7 +53,7 @@ public class HigherVampireBat extends HigherVampirePhase1 implements FlyingEntit
     protected void registerGoals() {
         this.goalSelector.addGoal(0, new VampireBatToHumanTransformGoal(this));
         this.goalSelector.addGoal(0, new FloatGoal(this));
-        this.goalSelector.addGoal(0, new FlyingMeleeAndMagicAttackGoal(this, (ProjectileSpell) SBSpellRegistry.SCREAM));
+        this.goalSelector.addGoal(0, new HigherVampireBatAttackGoal(this));
         this.goalSelector.addGoal(4, new FlyingGhostMoveRandomGoal(this));
         this.goalSelector.addGoal(8, new LookAtPlayerGoal(this, Player.class, 8.0F));
         this.goalSelector.addGoal(9, new RandomLookAroundGoal(this));
@@ -142,12 +134,6 @@ public class HigherVampireBat extends HigherVampirePhase1 implements FlyingEntit
         this.setDeltaMovement(this.getDeltaMovement().multiply(1.0D, 0.6D, 1.0D));
     }
 
-    protected void customServerAiStep() {
-        super.customServerAiStep();
-        this.bossEvent.setProgress(this.getHealth() / this.getMaxHealth());
-
-    }
-
     protected Entity.MovementEmission getMovementEmission() {
         return Entity.MovementEmission.EVENTS;
     }
@@ -163,54 +149,9 @@ public class HigherVampireBat extends HigherVampirePhase1 implements FlyingEntit
         return true;
     }
 
-    public boolean hurt(DamageSource source, float amount) {
-        if (this.getHealth() <= amount) {
-            this.transform();
-            return false;
-        } else {
-            return super.hurt(source, amount);
-        }
-    }
-
     protected void defineSynchedData() {
         super.defineSynchedData();
         this.entityData.define(SBVampireEntity.VARIANT, 0);
-    }
-
-    public void startSeenByPlayer(ServerPlayer player) {
-        super.startSeenByPlayer(player);
-        this.bossEvent.addPlayer(player);
-    }
-
-    public void stopSeenByPlayer(ServerPlayer player) {
-        super.stopSeenByPlayer(player);
-        this.bossEvent.removePlayer(player);
-    }
-
-    public void readAdditionalSaveData(CompoundTag tag) {
-        super.readAdditionalSaveData(tag);
-        if (this.hasCustomName()) {
-            this.bossEvent.setName(this.getDisplayName());
-        }
-    }
-
-    public void addAdditionalSaveData(CompoundTag tag) {
-        super.addAdditionalSaveData(tag);
-    }
-
-    public void setCustomName(@Nullable Component p_200203_1_) {
-        super.setCustomName(p_200203_1_);
-        this.bossEvent.setName(this.getDisplayName());
-    }
-
-    @Nullable
-    public SpawnGroupData finalizeSpawn(ServerLevelAccessor accessor, DifficultyInstance difficulty, MobSpawnType reason, @Nullable SpawnGroupData spawnData, @Nullable CompoundTag nbt) {
-        if (spawnData instanceof VampData) {
-            this.setVariant(((VampData) spawnData).variant);
-        } else {
-            this.setVariant(this.random.nextInt(4));
-        }
-        return super.finalizeSpawn(accessor, difficulty, reason, spawnData, nbt);
     }
 
     @Override
@@ -218,16 +159,8 @@ public class HigherVampireBat extends HigherVampirePhase1 implements FlyingEntit
         this.playSound(SoundEvents.BAT_LOOP, 1.0F, 1.0F);
     }
 
-    public static class VampData implements SpawnGroupData {
-        public final int variant;
-
-        public VampData(int variant) {
-            this.variant = variant;
-        }
-    }
-
     public void transform() {
-        this.level.playSound((Player) null, this.getX(), this.getY(), this.getZ(), this.getConversionSound(), SoundSource.HOSTILE, 1.0F, 1.0F);
+        this.playSound(this.getConversionSound(), 1.0F, 1.0F);
         int i = PotionUtils.getColor(Potions.POISON);
         double d0 = (double)(i >> 16 & 255) / 255.0D;
         double d1 = (double)(i >> 8 & 255) / 255.0D;
@@ -246,10 +179,43 @@ public class HigherVampireBat extends HigherVampirePhase1 implements FlyingEntit
         }
         vampire.setVariant(this.getVariant());
         vampire.setTarget(this.getTarget());
-//        this.alertMinions(this.getTarget());
     }
 
     protected float getStandingEyeHeight(Pose p_27440_, EntityDimensions p_27441_) {
         return p_27441_.height / 2.0F;
+    }
+
+    class HigherVampireBatAttackGoal extends FlyingMeleeAndMagicAttackGoal {
+        float damage;
+
+        public HigherVampireBatAttackGoal(HigherVampirePhase1 vampire) {
+            super(vampire, (ProjectileSpell) SBSpellRegistry.SCREAM);
+            this.damage = (float) this.mob.getAttribute(Attributes.ATTACK_DAMAGE).getValue();
+        }
+
+        @Override
+        protected void checkAndPerformAttack(LivingEntity attacked, double distance) {
+            if (this.ticksUntilNextAttack <= 0) {
+                if (distance > 9.0D && this.magicCooldown <= 0) {
+                    this.performMagicAttack(attacked);
+                    this.resetMagicCooldown();
+                } else if (this.mob.getBoundingBox().intersects(attacked.getBoundingBox())) {
+                    this.mob.swing(InteractionHand.MAIN_HAND);
+                    attacked.hurt(SBDamageSource.bite((HigherVampireBat) this.mob), this.damage * 0.75F);
+                    if (attacked.getMobType() != MobType.UNDEAD) {
+                        attacked.addEffect(new MobEffectInstance(SBEffects.BLEEDING.get(), 400, 1));
+                        this.mob.heal(this.damage * 0.75F);
+                    }
+                } else {
+                    if (distance < 9.0D) {
+                        Vec3 vec3 = attacked.getEyePosition();
+                        this.mob.getMoveControl().setWantedPosition(vec3.x, vec3.y, vec3.z, 1.0D);
+                    }
+                }
+                // reduce second timers
+                this.resetAttackCooldown();
+                this.magicCooldown = Math.max(this.magicCooldown - 1, 0);
+            }
+        }
     }
 }

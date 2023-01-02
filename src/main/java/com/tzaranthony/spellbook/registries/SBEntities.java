@@ -20,7 +20,8 @@ import com.tzaranthony.spellbook.core.entities.hostile.ghosts.boss.GhostMage;
 import com.tzaranthony.spellbook.core.entities.hostile.vampires.LesserVampire;
 import com.tzaranthony.spellbook.core.entities.hostile.vampires.boss.HigherVampireBat;
 import com.tzaranthony.spellbook.core.entities.hostile.vampires.boss.HigherVampirePerson;
-import com.tzaranthony.spellbook.core.entities.neutral.GhostHorse;
+import com.tzaranthony.spellbook.core.entities.hostile.ghosts.boss.GhostHorse;
+import com.tzaranthony.spellbook.core.entities.hostile.vampires.boss.HigherVampirePhase2;
 import com.tzaranthony.spellbook.core.entities.neutral.Phoenix;
 import com.tzaranthony.spellbook.core.entities.other.*;
 import net.minecraft.world.entity.EntityType;
@@ -92,6 +93,9 @@ public class SBEntities {
     );
     public static final RegistryObject<EntityType<HigherVampireBat>> HIGH_VAMP1_BAT = reg.register("higher_vampire_bat", () ->
             EntityType.Builder.of(HigherVampireBat::new, MobCategory.MONSTER).immuneTo(Blocks.POWDER_SNOW).sized(0.5F, 0.9F).clientTrackingRange(8).build("higher_vampire_bat")
+    );
+    public static final RegistryObject<EntityType<HigherVampirePhase2>> HIGH_VAMP2 = reg.register("higher_vampire_monster", () ->
+            EntityType.Builder.of(HigherVampirePhase2::new, MobCategory.MONSTER).immuneTo(Blocks.POWDER_SNOW).sized(1.4F, 2.7F).clientTrackingRange(8).build("higher_vampire_monster")
     );
 
     public static final RegistryObject<EntityType<ZombieIllusion>> FAKE_ZOMBIE = reg.register("fake_zombie", () ->
@@ -180,6 +184,7 @@ public class SBEntities {
         creationEvent.put(LOW_VAMP.get(), LesserVampire.createAttributes().build());
         creationEvent.put(HIGH_VAMP1.get(), HigherVampirePerson.createAttributes().build());
         creationEvent.put(HIGH_VAMP1_BAT.get(), HigherVampirePerson.createAttributes().build());
+        creationEvent.put(HIGH_VAMP2.get(), HigherVampirePhase2.createAttributes().build());
         creationEvent.put(FAKE_ZOMBIE.get(), ZombieIllusion.createAttributes().build());
         creationEvent.put(FAKE_SKELLY.get(), ZombieIllusion.createAttributes().build());
         creationEvent.put(NECROTIC_SPIDER.get(), NecroticSpider.createAttributes().build());

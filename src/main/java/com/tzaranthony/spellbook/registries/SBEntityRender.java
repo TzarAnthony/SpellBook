@@ -9,6 +9,7 @@ import com.tzaranthony.spellbook.client.entityRender.renders.ghosts.boss.GhostMa
 import com.tzaranthony.spellbook.client.entityRender.renders.other.*;
 import com.tzaranthony.spellbook.client.entityRender.renders.vampire.LesserVampireRender;
 import com.tzaranthony.spellbook.client.entityRender.renders.vampire.boss.HigherVampireBatRender;
+import com.tzaranthony.spellbook.client.entityRender.renders.vampire.boss.HigherVampireMonsterRender;
 import com.tzaranthony.spellbook.client.entityRender.renders.vampire.boss.HigherVampirePersonRender;
 import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.client.renderer.entity.ItemEntityRenderer;
@@ -37,6 +38,7 @@ public class SBEntityRender {
         EntityRenderers.register(SBEntities.LOW_VAMP.get(), LesserVampireRender::new);
         EntityRenderers.register(SBEntities.HIGH_VAMP1.get(), HigherVampirePersonRender::new);
         EntityRenderers.register(SBEntities.HIGH_VAMP1_BAT.get(), HigherVampireBatRender::new);
+        EntityRenderers.register(SBEntities.HIGH_VAMP2.get(), HigherVampireMonsterRender::new);
         EntityRenderers.register(SBEntities.FAKE_ZOMBIE.get(), ZombieIllusionRender::new);
         EntityRenderers.register(SBEntities.FAKE_SKELLY.get(), SkeletonIllusionRender::new);
         EntityRenderers.register(SBEntities.NECROTIC_SPIDER.get(), NecroticSpiderRender::new);

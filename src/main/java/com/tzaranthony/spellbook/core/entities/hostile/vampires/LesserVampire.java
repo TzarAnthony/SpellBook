@@ -4,6 +4,7 @@ import com.tzaranthony.spellbook.core.entities.ai.NearestNightTimeTargetGoal;
 import com.tzaranthony.spellbook.core.util.damage.SBDamageSource;
 import com.tzaranthony.spellbook.registries.SBEffects;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -53,11 +54,6 @@ public class LesserVampire extends SBVampireEntity {
                 .add(Attributes.KNOCKBACK_RESISTANCE, 0.2D);
     }
 
-    protected void defineSynchedData() {
-        super.defineSynchedData();
-        this.entityData.define(VARIANT, 0);
-    }
-
     @Override
     public float getVoicePitch() {
         switch (this.getVariant()) {
@@ -104,6 +100,7 @@ public class LesserVampire extends SBVampireEntity {
                     attacked.hurt(SBDamageSource.bite(this.mob), this.damage * 0.75F);
                     attacked.addEffect(new MobEffectInstance(SBEffects.BLEEDING.get(), 250));
                     this.mob.heal(this.damage * 0.75F);
+                    this.mob.playSound(SoundEvents.RAVAGER_ATTACK, 1.0F, 1.0F);
                 } else {
                     this.mob.swing(InteractionHand.MAIN_HAND);
                     this.mob.doHurtTarget(attacked);

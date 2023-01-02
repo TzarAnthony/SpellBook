@@ -116,6 +116,11 @@ public class SBVampireEntity extends SBMonsterEntity implements Enemy {
     }
 
     // spawning
+    protected void defineSynchedData() {
+        super.defineSynchedData();
+        this.entityData.define(SBVampireEntity.VARIANT, 0);
+    }
+
     public void setVariant(int variant) {
         this.getEntityData().set(VARIANT, variant);
     }
