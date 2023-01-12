@@ -13,7 +13,6 @@ import net.minecraftforge.registries.RegistryObject;
 public class SBEffects {
     public static final DeferredRegister<MobEffect> reg = DeferredRegister.create(ForgeRegistries.MOB_EFFECTS, SpellBook.MOD_ID);
 
-    // From Tools, Potions and Food
     public static final RegistryObject<MobEffect> INCINERATION = reg.register("incineration", ()-> new SBEffect(MobEffectCategory.HARMFUL, 15555367));
     public static final RegistryObject<MobEffect> FRACTURED = reg.register("fractured", ()-> new SBEffect(MobEffectCategory.HARMFUL, 6901550)
             .addAttributeModifier(Attributes.ARMOR, "31ae43ee-506e-11ec-bf63-0242ac130002", -0.8D, AttributeModifier.Operation.MULTIPLY_TOTAL)
@@ -24,9 +23,11 @@ public class SBEffects {
     public static final RegistryObject<MobEffect> CLUMSY = reg.register("clumsy", ()-> new ClumsyEffect(MobEffectCategory.NEUTRAL, 14008076));
     public static final RegistryObject<MobEffect> WAKEFUL_SLEEP = reg.register("wakeful_sleep", ()-> new SBInstantEffect(MobEffectCategory.BENEFICIAL, 3113910));
     public static final RegistryObject<MobEffect> MERCURY_POISONING = reg.register("mercury_poisoning", ()-> new MercuryEffect(MobEffectCategory.HARMFUL, 8557698));
-
-    // From Mobs
     public static final RegistryObject<MobEffect> BLEEDING = reg.register("bleeding", ()-> new SBEffect(MobEffectCategory.HARMFUL, 16736852));
+    public static final RegistryObject<MobEffect> SLEEP = reg.register("sleep", ()-> new SBEffect(MobEffectCategory.HARMFUL, 2099793)
+            .addAttributeModifier(Attributes.MOVEMENT_SPEED, "3257ea5a-cbde-425c-8693-478823a6d3f5", -0.15D, AttributeModifier.Operation.MULTIPLY_TOTAL)
+            .addAttributeModifier(Attributes.ATTACK_SPEED, "ecbc1ca1-161e-4e8b-9f20-44038dacc353", -0.1D, AttributeModifier.Operation.MULTIPLY_TOTAL)
+            .addAttributeModifier(Attributes.ATTACK_DAMAGE, "4f0c09b3-4979-42ad-8767-9667bc45203d", -0.1D, AttributeModifier.Operation.MULTIPLY_TOTAL));
 
     // From Spells
     public static final RegistryObject<MobEffect> CONCUSSED = reg.register("concussed", ()-> new SBEffect(MobEffectCategory.HARMFUL, 14600906)

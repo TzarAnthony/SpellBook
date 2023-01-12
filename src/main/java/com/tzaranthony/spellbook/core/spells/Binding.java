@@ -3,25 +3,22 @@ package com.tzaranthony.spellbook.core.spells;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Matrix4f;
+import com.tzaranthony.spellbook.client.SBRenderTypes;
 import com.tzaranthony.spellbook.core.entities.other.MagicProjectile;
 import com.tzaranthony.spellbook.core.network.SoulBindS2CPacket;
 import com.tzaranthony.spellbook.core.util.tags.SBEntityTags;
 import com.tzaranthony.spellbook.registries.SBPackets;
-import com.tzaranthony.spellbook.client.SBRenderTypes;
 import net.minecraft.client.renderer.LightTexture;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.sounds.SoundEvents;
-import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.TamableAnimal;
 import net.minecraft.world.entity.ai.goal.Goal;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LightLayer;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.api.distmarker.Dist;
@@ -50,15 +47,9 @@ public class Binding extends ProjectileSpell {
             if (!isBound(target) && !target.isLeashed()) {
                 bindEntity(usr, target);
             }
-            // target.setLeashedTo(user, true);
             return true;
         }
         return false;
-    }
-
-    @Override
-    public void playCustomSound(Level level, double x, double y, double z) {
-        level.playSound(null, x, y, z, SoundEvents.GLOW_INK_SAC_USE, SoundSource.PLAYERS, 1.0F, 1.0F);
     }
 
     // TODO: create a knot like entity to bind to an alter or something
@@ -89,9 +80,6 @@ public class Binding extends ProjectileSpell {
                 return;
             }
             Entity binder = maybeBinder.get();
-//            if (!le.level.isClientSide()) {
-//                SBPackets.sendToAllPlayers(new SoulBindS2CPacket(le.getId(), binder.getUUID(), true));
-//            }
             bound.restrictTo(binder.blockPosition(), 5);
             float f = bound.distanceTo(binder);
             if (bound instanceof TamableAnimal && ((TamableAnimal) bound).isInSittingPose()) {

@@ -43,7 +43,7 @@ public class Rift extends TickingBEBlock {
         BlockEntity blockentity = level.getBlockEntity(pos);
         if (level instanceof ServerLevel sLevel && blockentity instanceof RiftBE rift && !entity.isVehicle() && !entity.isOnPortalCooldown()) {
             if (entity instanceof ServerPlayer sPlayer) {
-                if (sPlayer.getNoActionTime() > 10) {
+                if (sPlayer.getNoActionTime() > 20) {
                     entity.setPortalCooldown();
                     BlockPos pos1 = rift.getTpPos().relative(sPlayer.getDirection());
                     Vec3 tgtVec = new Vec3(pos1.getX() + 0.5, pos1.getY(), pos1.getZ() + 0.5);
@@ -67,7 +67,7 @@ public class Rift extends TickingBEBlock {
                 entity.teleportTo(rift.getTpPos().getX() + 0.5, rift.getTpPos().getY() + 0.5, rift.getTpPos().getZ() + 0.5);
             }
             entity.playSound(SoundEvents.PORTAL_TRAVEL, 0.5F, 1.0F);
-        } else {
+        } else if (entity.isOnPortalCooldown()) {
             entity.setPortalCooldown();
         }
     }

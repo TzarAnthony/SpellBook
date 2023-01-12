@@ -60,6 +60,7 @@ public class SBGlaive extends SwordItem {
         }
     }
 
+    //TODO: still doesn't extend player attack reach? Only block place/break reach?
     @Override
     public Multimap<Attribute, AttributeModifier> getAttributeModifiers(EquipmentSlot slot, ItemStack stack) {
         ImmutableMultimap.Builder<Attribute, AttributeModifier> builder = ImmutableMultimap.builder();

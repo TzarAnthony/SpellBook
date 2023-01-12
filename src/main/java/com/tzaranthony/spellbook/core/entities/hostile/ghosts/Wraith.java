@@ -31,8 +31,7 @@ import javax.annotation.Nullable;
 public class Wraith extends SBGhostEntity implements FlyingEntity {
     public Wraith(EntityType<? extends SBGhostEntity> shade, Level level) {
         super(shade, level);
-        this.moveControl = new VexLikeMovementHelper(this);
-        this.maxUpStep = 15.0F;
+        this.moveControl = new VexLikeMoveControl(this);
     }
 
     @Override
@@ -53,7 +52,7 @@ public class Wraith extends SBGhostEntity implements FlyingEntity {
         this.goalSelector.addGoal(0, new FloatGoal(this));
         this.goalSelector.addGoal(1, new MoveToEntityGoal(this, CursedPainting.class, 1.0D));
         this.goalSelector.addGoal(1, new FlyingMeleeAndMagicAttackGoal(this, (ProjectileSpell) SBSpellRegistry.IGNITE, 6));
-        this.goalSelector.addGoal(5, new FlyingGhostMoveRandomGoal(this));
+        this.goalSelector.addGoal(5, new FlyingMoveRandomGoal(this));
         this.goalSelector.addGoal(8, new LookAtPlayerGoal(this, Player.class, 8.0F));
         this.goalSelector.addGoal(8, new RandomLookAroundGoal(this));
         this.targetSelector.addGoal(1, new HurtByTargetGoal(this, SBGhostEntity.class));

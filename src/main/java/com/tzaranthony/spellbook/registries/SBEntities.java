@@ -1,11 +1,7 @@
 package com.tzaranthony.spellbook.registries;
 
 import com.tzaranthony.spellbook.SpellBook;
-import com.tzaranthony.spellbook.core.entities.arrows.ThrownTool;
-import com.tzaranthony.spellbook.core.entities.arrows.CrystalArrow;
-import com.tzaranthony.spellbook.core.entities.arrows.EffectCarryingArrow;
-import com.tzaranthony.spellbook.core.entities.arrows.GhostlyArrow;
-import com.tzaranthony.spellbook.core.entities.arrows.SilverArrow;
+import com.tzaranthony.spellbook.core.entities.arrows.*;
 import com.tzaranthony.spellbook.core.entities.friendly.SummonedSkeleton;
 import com.tzaranthony.spellbook.core.entities.friendly.SummonedVex;
 import com.tzaranthony.spellbook.core.entities.friendly.SummonedWitherSkeleton;
@@ -15,13 +11,14 @@ import com.tzaranthony.spellbook.core.entities.hostile.alchemical.SkeletonIllusi
 import com.tzaranthony.spellbook.core.entities.hostile.alchemical.ZombieIllusion;
 import com.tzaranthony.spellbook.core.entities.hostile.ghosts.*;
 import com.tzaranthony.spellbook.core.entities.hostile.ghosts.boss.GhostArcher;
+import com.tzaranthony.spellbook.core.entities.hostile.ghosts.boss.GhostHorse;
 import com.tzaranthony.spellbook.core.entities.hostile.ghosts.boss.GhostKnight;
 import com.tzaranthony.spellbook.core.entities.hostile.ghosts.boss.GhostMage;
 import com.tzaranthony.spellbook.core.entities.hostile.vampires.LesserVampire;
 import com.tzaranthony.spellbook.core.entities.hostile.vampires.boss.HigherVampireBat;
 import com.tzaranthony.spellbook.core.entities.hostile.vampires.boss.HigherVampirePerson;
-import com.tzaranthony.spellbook.core.entities.hostile.ghosts.boss.GhostHorse;
 import com.tzaranthony.spellbook.core.entities.hostile.vampires.boss.HigherVampirePhase2;
+import com.tzaranthony.spellbook.core.entities.hostile.vampires.boss.HigherVampirePhase3;
 import com.tzaranthony.spellbook.core.entities.neutral.Phoenix;
 import com.tzaranthony.spellbook.core.entities.other.*;
 import net.minecraft.world.entity.EntityType;
@@ -96,6 +93,9 @@ public class SBEntities {
     );
     public static final RegistryObject<EntityType<HigherVampirePhase2>> HIGH_VAMP2 = reg.register("higher_vampire_monster", () ->
             EntityType.Builder.of(HigherVampirePhase2::new, MobCategory.MONSTER).immuneTo(Blocks.POWDER_SNOW).sized(1.4F, 2.7F).clientTrackingRange(8).build("higher_vampire_monster")
+    );
+    public static final RegistryObject<EntityType<HigherVampirePhase3>> HIGH_VAMP3 = reg.register("higher_vampire_mist", () ->
+            EntityType.Builder.of(HigherVampirePhase3::new, MobCategory.MONSTER).immuneTo(Blocks.POWDER_SNOW).sized(6.0F, 2.0F).clientTrackingRange(8).build("higher_vampire_mist")
     );
 
     public static final RegistryObject<EntityType<ZombieIllusion>> FAKE_ZOMBIE = reg.register("fake_zombie", () ->
@@ -183,8 +183,9 @@ public class SBEntities {
         creationEvent.put(GHOST_KNIGHT.get(), GhostKnight.createAttributes().build());
         creationEvent.put(LOW_VAMP.get(), LesserVampire.createAttributes().build());
         creationEvent.put(HIGH_VAMP1.get(), HigherVampirePerson.createAttributes().build());
-        creationEvent.put(HIGH_VAMP1_BAT.get(), HigherVampirePerson.createAttributes().build());
+        creationEvent.put(HIGH_VAMP1_BAT.get(), HigherVampireBat.createAttributes().build());
         creationEvent.put(HIGH_VAMP2.get(), HigherVampirePhase2.createAttributes().build());
+        creationEvent.put(HIGH_VAMP3.get(), HigherVampirePhase3.createAttributes().build());
         creationEvent.put(FAKE_ZOMBIE.get(), ZombieIllusion.createAttributes().build());
         creationEvent.put(FAKE_SKELLY.get(), ZombieIllusion.createAttributes().build());
         creationEvent.put(NECROTIC_SPIDER.get(), NecroticSpider.createAttributes().build());

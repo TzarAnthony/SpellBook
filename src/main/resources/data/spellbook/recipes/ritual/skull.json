@@ -1,0 +1,15 @@
+{
+  "type": "spellbook:ritual",
+  "tier": 1,
+  "mobs": 1,
+  "mp": 0,
+  "ingredients": [
+    {
+      "item": "minecraft:iron_sword",
+      "count": 1
+    }
+  ],
+  "result": {
+    "item": "minecraft:skull"
+  }
+}

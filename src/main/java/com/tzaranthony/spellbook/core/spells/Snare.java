@@ -5,10 +5,8 @@ import com.tzaranthony.spellbook.registries.SBBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.sounds.SoundEvents;
-import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
 
@@ -56,7 +54,7 @@ public class Snare extends AreaBlockSpell{
     }
 
     @Override
-    public void playCustomSound(Level level, double x, double y, double z) {
-        level.playSound((Player) null, x, y, z, SoundEvents.DYE_USE, SoundSource.NEUTRAL, 1.0F, 0.6F);
+    public void playCustomSound(Entity user) {
+        user.playSound(SoundEvents.ILLUSIONER_PREPARE_MIRROR, 1.0F, 1.0F);
     }
 }

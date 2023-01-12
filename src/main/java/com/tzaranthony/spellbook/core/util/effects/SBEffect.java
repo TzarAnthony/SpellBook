@@ -7,6 +7,7 @@ import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.MobType;
+import net.minecraft.world.entity.player.Player;
 
 import java.util.ArrayList;
 
@@ -26,7 +27,12 @@ public class SBEffect extends MobEffect {
             if (affected.getMobType() != MobType.UNDEAD) {
                 affected.hurt(SBDamageSource.BLEED, 2.0F * (float) (amplifier + 1));
             }
-        } else { // Ender Infection
+        } else if (this == SBEffects.CONCUSSED.get()) {
+            if (affected.isFallFlying() && affected instanceof Player player) {
+                player.stopFallFlying();
+            }
+            affected.setDeltaMovement(affected.getDeltaMovement().add(affected.getRandom().nextFloat() - 0.4F, affected.getRandom().nextFloat() - 0.6F, affected.getRandom().nextFloat() - 0.4F));
+        } else {
             affected.hurt(DamageSource.FALL, 2.0F * (float) (amplifier + 1));
         }
     }
@@ -42,6 +48,13 @@ public class SBEffect extends MobEffect {
             }
         } else if (this == SBEffects.BLEEDING.get()) {
             int i = 20 >> amplifier;
+            if (i > 0) {
+                return duration % i == 0;
+            } else {
+                return true;
+            }
+        } else if (this == SBEffects.CONCUSSED.get()) {
+            int i = 10 >> amplifier;
             if (i > 0) {
                 return duration % i == 0;
             } else {

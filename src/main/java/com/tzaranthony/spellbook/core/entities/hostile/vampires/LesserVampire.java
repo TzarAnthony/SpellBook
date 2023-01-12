@@ -100,7 +100,7 @@ public class LesserVampire extends SBVampireEntity {
                     attacked.hurt(SBDamageSource.bite(this.mob), this.damage * 0.75F);
                     attacked.addEffect(new MobEffectInstance(SBEffects.BLEEDING.get(), 250));
                     this.mob.heal(this.damage * 0.75F);
-                    this.mob.playSound(SoundEvents.RAVAGER_ATTACK, 1.0F, 1.0F);
+                    this.mob.playSound(SoundEvents.PHANTOM_BITE, 1.0F, 1.0F);
                 } else {
                     this.mob.swing(InteractionHand.MAIN_HAND);
                     this.mob.doHurtTarget(attacked);

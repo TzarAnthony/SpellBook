@@ -1,6 +1,8 @@
 package com.tzaranthony.spellbook.core.entities.hostile.vampires.boss;
 
-import com.tzaranthony.spellbook.core.entities.ai.*;
+import com.tzaranthony.spellbook.core.entities.ai.FlyingEntity;
+import com.tzaranthony.spellbook.core.entities.ai.FlyingMoveRandomGoal;
+import com.tzaranthony.spellbook.core.entities.ai.MagicAndMeleeAttackGoal;
 import com.tzaranthony.spellbook.core.entities.hostile.vampires.SBVampireEntity;
 import com.tzaranthony.spellbook.core.spells.ProjectileSpell;
 import com.tzaranthony.spellbook.core.util.damage.SBDamageSource;
@@ -12,27 +14,32 @@ import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.Mth;
-import net.minecraft.world.InteractionHand;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.entity.ai.goal.FloatGoal;
+import net.minecraft.world.entity.ai.control.FlyingMoveControl;
+import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal;
 import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal;
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
+import net.minecraft.world.entity.ai.navigation.FlyingPathNavigation;
+import net.minecraft.world.entity.ai.navigation.PathNavigation;
+import net.minecraft.world.entity.animal.AbstractGolem;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.alchemy.PotionUtils;
 import net.minecraft.world.item.alchemy.Potions;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.phys.Vec3;
 
 import javax.annotation.Nullable;
 import java.util.Collection;
+import java.util.EnumSet;
 
 public class HigherVampireBat extends HigherVampirePhase1 implements FlyingEntity {
     public static final int TICKS_PER_FLAP = Mth.ceil(2.4166098F);
@@ -41,20 +48,21 @@ public class HigherVampireBat extends HigherVampirePhase1 implements FlyingEntit
         super(highVamp, level);
         this.xpReward = 50;
         this.maxUpStep = 1.5F;
-        this.moveControl = new VexLikeMovementHelper(this);
+        this.moveControl = new FlyingMoveControl(this, 20, true);
     }
 
-    @Override
-    public void move(MoverType moverType, Vec3 vec3) {
-        super.move(moverType, vec3);
-        this.checkInsideBlocks();
+    protected PathNavigation createNavigation(Level p_186262_) {
+        FlyingPathNavigation flyingpathnavigation = new FlyingPathNavigation(this, p_186262_);
+        flyingpathnavigation.setCanOpenDoors(true);
+        flyingpathnavigation.setCanFloat(true);
+        flyingpathnavigation.setCanPassDoors(true);
+        return flyingpathnavigation;
     }
 
     protected void registerGoals() {
         this.goalSelector.addGoal(0, new VampireBatToHumanTransformGoal(this));
-        this.goalSelector.addGoal(0, new FloatGoal(this));
         this.goalSelector.addGoal(0, new HigherVampireBatAttackGoal(this));
-        this.goalSelector.addGoal(4, new FlyingGhostMoveRandomGoal(this));
+        this.goalSelector.addGoal(4, new FlyingMoveRandomGoal(this));
         this.goalSelector.addGoal(8, new LookAtPlayerGoal(this, Player.class, 8.0F));
         this.goalSelector.addGoal(9, new RandomLookAroundGoal(this));
         this.targetSelector.addGoal(1, new HurtByTargetGoal(this, SBVampireEntity.class).setAlertOthers());
@@ -66,10 +74,10 @@ public class HigherVampireBat extends HigherVampirePhase1 implements FlyingEntit
                 .add(Attributes.MAX_HEALTH, 1000.0D)
                 .add(Attributes.ARMOR, 8.0D)
                 .add(Attributes.ARMOR_TOUGHNESS, 2.0D)
-                .add(Attributes.JUMP_STRENGTH, 4.0D)
                 .add(Attributes.ATTACK_DAMAGE, 8.0F)
-                .add(Attributes.ATTACK_KNOCKBACK, 0.8D)
+                .add(Attributes.ATTACK_KNOCKBACK, 0.3D)
                 .add(Attributes.MOVEMENT_SPEED, 0.4D)
+                .add(Attributes.FLYING_SPEED, 0.8D)
                 .add(Attributes.FOLLOW_RANGE, 90.0D)
                 .add(Attributes.KNOCKBACK_RESISTANCE, 0.95D);
     }
@@ -129,11 +137,6 @@ public class HigherVampireBat extends HigherVampirePhase1 implements FlyingEntit
     protected void pushEntities() {
     }
 
-    public void tick() {
-        super.tick();
-        this.setDeltaMovement(this.getDeltaMovement().multiply(1.0D, 0.6D, 1.0D));
-    }
-
     protected Entity.MovementEmission getMovementEmission() {
         return Entity.MovementEmission.EVENTS;
     }
@@ -147,11 +150,6 @@ public class HigherVampireBat extends HigherVampirePhase1 implements FlyingEntit
 
     public boolean isIgnoringBlockTriggers() {
         return true;
-    }
-
-    protected void defineSynchedData() {
-        super.defineSynchedData();
-        this.entityData.define(SBVampireEntity.VARIANT, 0);
     }
 
     @Override
@@ -185,36 +183,73 @@ public class HigherVampireBat extends HigherVampirePhase1 implements FlyingEntit
         return p_27441_.height / 2.0F;
     }
 
-    class HigherVampireBatAttackGoal extends FlyingMeleeAndMagicAttackGoal {
+    class VampireBatToHumanTransformGoal extends Goal {
+        private final HigherVampireBat mob;
+        private int transformerCooldown;
+
+        public VampireBatToHumanTransformGoal(HigherVampireBat vampireBat) {
+            this.mob = vampireBat;
+            this.transformerCooldown = 400;
+            this.setFlags(EnumSet.of(Flag.JUMP));
+            vampireBat.getNavigation().setCanFloat(true);
+        }
+
+        public boolean canUse() {
+            return !isAboveWater() && !this.mob.hasEffect(MobEffects.LEVITATION) && !this.mob.isInWater();
+        }
+
+        public boolean isAboveWater() {
+            for (int y = 0; y <= 5; ++y) {
+                if (this.mob.level.getBlockState(this.mob.blockPosition().below(y)).getBlock() == Blocks.WATER) {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        public void resetTransformerCooldown() {
+            this.transformerCooldown = 400;
+        }
+
+        public boolean requiresUpdateEveryTick() {
+            return true;
+        }
+
+        public void tick() {
+            if (this.transformerCooldown <= 0) {
+                this.resetTransformerCooldown();
+                this.mob.transform();
+            }
+            --this.transformerCooldown;
+        }
+    }
+
+    class HigherVampireBatAttackGoal extends MagicAndMeleeAttackGoal {
+        protected final HigherVampirePhase1 mob;
         float damage;
 
         public HigherVampireBatAttackGoal(HigherVampirePhase1 vampire) {
-            super(vampire, (ProjectileSpell) SBSpellRegistry.SCREAM);
+            super(vampire, (ProjectileSpell) SBSpellRegistry.SCREAM, 1.35D, true, 40, 4);
+            this.mob = vampire;
             this.damage = (float) this.mob.getAttribute(Attributes.ATTACK_DAMAGE).getValue();
         }
 
+        protected boolean checkRangeCriteria(double distance, double d0) {
+            return distance > 36.0D && distance <= 1600 && super.checkRangeCriteria(distance, d0);
+        }
+
         @Override
-        protected void checkAndPerformAttack(LivingEntity attacked, double distance) {
-            if (this.ticksUntilNextAttack <= 0) {
-                if (distance > 9.0D && this.magicCooldown <= 0) {
-                    this.performMagicAttack(attacked);
-                    this.resetMagicCooldown();
-                } else if (this.mob.getBoundingBox().intersects(attacked.getBoundingBox())) {
-                    this.mob.swing(InteractionHand.MAIN_HAND);
-                    attacked.hurt(SBDamageSource.bite((HigherVampireBat) this.mob), this.damage * 0.75F);
-                    if (attacked.getMobType() != MobType.UNDEAD) {
-                        attacked.addEffect(new MobEffectInstance(SBEffects.BLEEDING.get(), 400, 1));
-                        this.mob.heal(this.damage * 0.75F);
-                    }
-                } else {
-                    if (distance < 9.0D) {
-                        Vec3 vec3 = attacked.getEyePosition();
-                        this.mob.getMoveControl().setWantedPosition(vec3.x, vec3.y, vec3.z, 1.0D);
-                    }
-                }
-                // reduce second timers
-                this.resetAttackCooldown();
-                this.magicCooldown = Math.max(this.magicCooldown - 1, 0);
+        protected void performMeleeAttack(LivingEntity attacked) {
+            if (attacked instanceof AbstractGolem) {
+                attacked.hurt(SBDamageSource.bite(this.mob), this.damage * 2.0F * this.mob.getDayTimeDamageModifier());
+            }
+            if (attacked.getMobType() != MobType.UNDEAD) {
+                attacked.hurt(SBDamageSource.bite(this.mob), this.damage * 0.75F * this.mob.getDayTimeDamageModifier());
+                attacked.addEffect(new MobEffectInstance(SBEffects.BLEEDING.get(), 400, 1));
+                this.mob.heal(this.damage * 0.75F * this.mob.getDayTimeDamageModifier());
+                this.mob.playSound(SoundEvents.PHANTOM_BITE, 1.0F, 1.0F);
+            } else {
+                this.mob.doHurtTarget(attacked);
             }
         }
     }

@@ -1,6 +1,8 @@
 package com.tzaranthony.spellbook.core.spells;
 
 import com.tzaranthony.spellbook.core.entities.friendly.SBSummonedEntity;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.level.Level;
 
@@ -17,5 +19,10 @@ public class TamingSummoningSpell extends SummoningSpell {
     @Override
     public EntityType getEntity(Level level) {
         return this.entity.get();
+    }
+
+    @Override
+    public void playCustomSound(Entity user) {
+        user.playSound(SoundEvents.EVOKER_PREPARE_ATTACK, 1.0F, 1.0F);
     }
 }

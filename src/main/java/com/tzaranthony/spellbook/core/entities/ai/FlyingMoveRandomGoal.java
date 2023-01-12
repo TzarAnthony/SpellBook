@@ -6,10 +6,10 @@ import net.minecraft.world.entity.ai.goal.Goal;
 
 import java.util.EnumSet;
 
-public class FlyingGhostMoveRandomGoal extends Goal {
+public class FlyingMoveRandomGoal extends Goal {
     Mob entity;
 
-    public FlyingGhostMoveRandomGoal(Mob entity) {
+    public FlyingMoveRandomGoal(Mob entity) {
         this.entity = entity;
         this.setFlags(EnumSet.of(Flag.MOVE));
     }

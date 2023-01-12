@@ -5,6 +5,7 @@ import com.tzaranthony.spellbook.core.entities.ai.WaitingEntity;
 import com.tzaranthony.spellbook.core.entities.hostile.vampires.SBVampireEntity;
 import com.tzaranthony.spellbook.core.util.damage.SBDamageSource;
 import com.tzaranthony.spellbook.registries.SBEffects;
+import com.tzaranthony.spellbook.registries.SBEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
@@ -19,6 +20,7 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntitySelector;
 import net.minecraft.world.entity.EntityType;
@@ -43,9 +45,6 @@ public class HigherVampirePhase2 extends HigherVampire implements WaitingEntity 
     private static final EntityDataAccessor<Integer> DATA_ID_INV = SynchedEntityData.defineId(HigherVampirePhase2.class, EntityDataSerializers.INT);
     private int attackAnimationTick;
     public boolean inWall;
-    public float oFlapTime;
-    public float flapTime;
-
     public HigherVampirePhase2(EntityType<? extends HigherVampirePhase2> entityType, Level level) {
         super(entityType, level);
     }
@@ -53,7 +52,7 @@ public class HigherVampirePhase2 extends HigherVampire implements WaitingEntity 
     protected void registerGoals() {
         this.goalSelector.addGoal(0, new DoNothingGoal(this));
         this.goalSelector.addGoal(1, new FloatGoal(this));
-        this.goalSelector.addGoal(2, new VampireMonsterAttackGoal(this));
+        this.goalSelector.addGoal(3, new VampireMonsterAttackGoal(this));
         this.goalSelector.addGoal(7, new WaterAvoidingRandomStrollGoal(this, 1.0D));
         this.goalSelector.addGoal(8, new LookAtPlayerGoal(this, Player.class, 8.0F));
         this.goalSelector.addGoal(8, new RandomLookAroundGoal(this));
@@ -122,27 +121,6 @@ public class HigherVampirePhase2 extends HigherVampire implements WaitingEntity 
             }
             this.bossEvent.setProgress(this.getHealth() / this.getMaxHealth());
 
-            //TODO: create flying option?
-//            this.processFlappingMovement();
-//            if (this.level.isClientSide) {
-//                this.setHealth(this.getHealth());
-//                if (!this.isSilent() && !this.phaseManager.getCurrentPhase().isSitting() && --this.growlTime < 0) {
-//                    this.level.playLocalSound(this.getX(), this.getY(), this.getZ(), SoundEvents.ENDER_DRAGON_GROWL, this.getSoundSource(), 2.5F, 0.8F + this.random.nextFloat() * 0.3F, false);
-//                    this.growlTime = 200 + this.random.nextInt(200);
-//                }
-//            }
-//            this.oFlapTime = this.flapTime;
-//            Vec3 vec3 = this.getDeltaMovement();
-//            float f = 0.2F / ((float)vec3.horizontalDistance() * 10.0F + 1.0F);
-//            f *= (float)Math.pow(2.0D, vec3.y);
-//            if (this.phaseManager.getCurrentPhase().isSitting()) {
-//                this.flapTime += 0.1F;
-//            } else if (this.inWall) {
-//                this.flapTime += f * 0.5F;
-//            } else {
-//                this.flapTime += f;
-//            }
-
             if (!this.level.isClientSide) {
                 this.inWall = this.checkWalls(this.getBoundingBox());
             }
@@ -153,6 +131,20 @@ public class HigherVampirePhase2 extends HigherVampire implements WaitingEntity 
                 }
             }
         }
+
+        if (this.isDeadOrDying()) {
+            this.playSound(SoundEvents.RAVAGER_CELEBRATE, 0.5F, 1.0F);
+            HigherVampirePhase3 phase3 = this.convertTo(SBEntities.HIGH_VAMP3.get(), false);
+            phase3.setVariant(this.getVariant());
+            phase3.setTarget(this.getTarget());
+            phase3.updateMist();
+            this.remove(RemovalReason.DISCARDED);
+        }
+    }
+
+    //TODO: create flying option instead of levitation immunity?
+    public boolean canBeAffected(MobEffectInstance p_31495_) {
+        return p_31495_.getEffect() == MobEffects.LEVITATION ? false : super.canBeAffected(p_31495_);
     }
 
     @Override
@@ -161,17 +153,6 @@ public class HigherVampirePhase2 extends HigherVampire implements WaitingEntity 
             return false;
         }
         return super.hurt(source, amount);
-    }
-
-    @Override
-    public void die(DamageSource source) {
-        this.level.playSound((Player) null, this.getX(), this.getY(), this.getZ(), SoundEvents.RAVAGER_CELEBRATE, SoundSource.HOSTILE, 1.0F, 1.0F);
-        double x = (this.random.nextFloat() - 0.5F) * 3.0F;
-        double y = (this.random.nextFloat() - 0.5F) * 4.0F;
-        double z = (this.random.nextFloat() - 0.5F) * 3.0F;
-        this.level.addParticle(ParticleTypes.EXPLOSION, this.getX() + x, this.getY() + 2.0D + y, this.getZ() + z, 0.0D, 0.0D, 0.0D);
-        //TODO: conversion to phase 3
-        super.die(source);
     }
 
     @Override
@@ -262,7 +243,9 @@ public class HigherVampirePhase2 extends HigherVampire implements WaitingEntity 
         return HigherVampirePhase2.this.getInvulnerableTicks() > 0;
     }
 
-
+    public double getPassengersRidingOffset() {
+        return (double)this.getType().getDimensions().height * 0.75D;
+    }
 
     class VampireMonsterAttackGoal extends Goal {
         protected final HigherVampirePhase2 mob;
@@ -349,30 +332,31 @@ public class HigherVampirePhase2 extends HigherVampire implements WaitingEntity 
         }
 
         public void tick() {
-            LivingEntity livingentity = this.mob.getTarget();
-            if (livingentity != null) {
-                this.mob.getLookControl().setLookAt(livingentity, 30.0F, 30.0F);
-                double d0 = this.mob.distanceToSqr(livingentity.getX(), livingentity.getY(), livingentity.getZ());
+            LivingEntity target = this.mob.getTarget();
+            if (target != null) {
+                this.mob.getLookControl().setLookAt(target, 30.0F, 30.0F);
+                double d0 = this.mob.distanceToSqr(target.getX(), target.getY(), target.getZ());
 
                 if (d0 < 5 * 5) {
                     this.speedModifier = 1.0D;
                 } else if (d0 > 15 * 15) {
-                    this.speedModifier = 1.75D;
+                    this.speedModifier = 1.8D;
                 } else {
-                    this.speedModifier = 1.2D;
+                    this.speedModifier = 1.35D;
+                    //TODO: add leap at target goal here??
                 }
 
                 this.ticksUntilNextPathRecalculation = Math.max(this.ticksUntilNextPathRecalculation - 1, 0);
-                if (this.ticksUntilNextPathRecalculation <= 0 && (this.pathedTargetX == 0.0D && this.pathedTargetY == 0.0D && this.pathedTargetZ == 0.0D || livingentity.distanceToSqr(this.pathedTargetX, this.pathedTargetY, this.pathedTargetZ) >= 1.0D || this.mob.getRandom().nextFloat() < 0.05F)) {
-                    this.pathedTargetX = livingentity.getX();
-                    this.pathedTargetY = livingentity.getY();
-                    this.pathedTargetZ = livingentity.getZ();
+                if (this.ticksUntilNextPathRecalculation <= 0 && (this.pathedTargetX == 0.0D && this.pathedTargetY == 0.0D && this.pathedTargetZ == 0.0D || target.distanceToSqr(this.pathedTargetX, this.pathedTargetY, this.pathedTargetZ) >= 1.0D || this.mob.getRandom().nextFloat() < 0.05F)) {
+                    this.pathedTargetX = target.getX();
+                    this.pathedTargetY = target.getY();
+                    this.pathedTargetZ = target.getZ();
                     this.ticksUntilNextPathRecalculation = 4 + this.mob.getRandom().nextInt(7);
                     if (this.canPenalize) {
                         this.ticksUntilNextPathRecalculation += failedPathFindingPenalty;
                         if (this.mob.getNavigation().getPath() != null) {
                             net.minecraft.world.level.pathfinder.Node finalPathPoint = this.mob.getNavigation().getPath().getEndNode();
-                            if (finalPathPoint != null && livingentity.distanceToSqr(finalPathPoint.x, finalPathPoint.y, finalPathPoint.z) < 1)
+                            if (finalPathPoint != null && target.distanceToSqr(finalPathPoint.x, finalPathPoint.y, finalPathPoint.z) < 1)
                                 failedPathFindingPenalty = 0;
                             else
                                 failedPathFindingPenalty += 10;
@@ -386,7 +370,7 @@ public class HigherVampirePhase2 extends HigherVampire implements WaitingEntity 
                         this.ticksUntilNextPathRecalculation += 5;
                     }
 
-                    if (!this.mob.getNavigation().moveTo(livingentity, this.speedModifier)) {
+                    if (!this.mob.getNavigation().moveTo(target, this.speedModifier)) {
                         this.ticksUntilNextPathRecalculation += 15;
                     }
 
@@ -394,7 +378,7 @@ public class HigherVampirePhase2 extends HigherVampire implements WaitingEntity 
                 }
 
                 this.ticksUntilNextAttack = Math.max(this.ticksUntilNextAttack - 1, 0);
-                this.checkAndPerformAttack(livingentity, d0);
+                this.checkAndPerformAttack(target, d0);
             }
         }
 

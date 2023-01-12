@@ -6,14 +6,12 @@ import com.tzaranthony.spellbook.registries.SBEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.sounds.SoundEvents;
-import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 
 public class FrostWave extends ProjectileSpell {
@@ -54,7 +52,7 @@ public class FrostWave extends ProjectileSpell {
     }
 
     @Override
-    public void playCustomSound(Level level, double x, double y, double z) {
-        level.playSound((Player) null, x, y, z, SoundEvents.POWDER_SNOW_FALL, SoundSource.NEUTRAL, 10.0F, 1.0F);
+    public void playCustomSound(Entity user) {
+        user.playSound(SoundEvents.POWDER_SNOW_FALL, 10.0F, 1.0F);
     }
 }

@@ -6,10 +6,8 @@ import com.tzaranthony.spellbook.registries.SBEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.sounds.SoundEvents;
-import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 
 public class Firewall extends ProjectileSpell {
@@ -60,7 +58,7 @@ public class Firewall extends ProjectileSpell {
     }
 
     @Override
-    public void playCustomSound(Level level, double x, double y, double z) {
-        level.playSound((Player) null, x, y, z, SoundEvents.FIRECHARGE_USE, SoundSource.PLAYERS, 5.0F, (level.random.nextFloat() - level.random.nextFloat()) * 0.2F + 1.0F);
+    public void playCustomSound(Entity user) {
+        user.playSound(SoundEvents.BLAZE_SHOOT, 5.0F, (user.level.random.nextFloat() - user.level.random.nextFloat()) * 0.2F + 1.0F);
     }
 }

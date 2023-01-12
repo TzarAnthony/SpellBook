@@ -4,9 +4,7 @@ import com.tzaranthony.spellbook.core.entities.other.MagicProjectile;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.sounds.SoundEvents;
-import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.BaseFireBlock;
 
@@ -37,7 +35,7 @@ public class Ignite extends AreaBlockSpell {
     }
 
     @Override
-    public void playCustomSound(Level level, double x, double y, double z) {
-        level.playSound((Player) null, x, y, z, SoundEvents.BLAZE_SHOOT, SoundSource.NEUTRAL, 5.0F, (level.random.nextFloat() - level.random.nextFloat()) * 0.2F + 1.0F);
+    public void playCustomSound(Entity user) {
+        user.playSound(SoundEvents.BLAZE_SHOOT, 1.0F, 1.0F);
     }
 }

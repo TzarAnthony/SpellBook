@@ -45,7 +45,7 @@ public class SpellBook {
         SBFluids.registerFluids();
         SBVillagers.register(bus);
         MinecraftForge.EVENT_BUS.register(this);
-        MinecraftForge.EVENT_BUS.register(new SBServerEvents()); //TODO: fix this so it works
+        MinecraftForge.EVENT_BUS.register(new SBServerEvents());
     }
 
     private void CommonSetup(final FMLCommonSetupEvent event) {
@@ -58,7 +58,7 @@ public class SpellBook {
         SBEntityRender.renderEntities();
         SBItemsRender.renderItemProperties();
         SBScreenRender.renderScreens();
-        MinecraftForge.EVENT_BUS.register(new SBClientEvents()); //TODO: fix this so it works
+        MinecraftForge.EVENT_BUS.register(new SBClientEvents());
     }
 
     private void CompleteSetup(final FMLLoadCompleteEvent event) {

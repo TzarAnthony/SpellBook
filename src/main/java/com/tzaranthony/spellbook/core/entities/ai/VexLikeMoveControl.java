@@ -5,10 +5,10 @@ import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.control.MoveControl;
 import net.minecraft.world.phys.Vec3;
 
-public class VexLikeMovementHelper extends MoveControl {
+public class VexLikeMoveControl extends MoveControl {
     Mob entity;
 
-    public VexLikeMovementHelper(Mob entity) {
+    public VexLikeMoveControl(Mob entity) {
         super(entity);
         this.entity = entity;
     }

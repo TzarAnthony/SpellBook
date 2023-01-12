@@ -7,10 +7,11 @@ import net.minecraft.world.entity.LivingEntity;
 public class SBDamageSource extends DamageSource {
     // Effects
     public static final SBDamageSource INCINERATION = (SBDamageSource) (new SBDamageSource("incineration")).setMagic().setIsFire().bypassArmor();
+    public static final SBDamageSource BLEED = (SBDamageSource) (new SBDamageSource("bleed")).bypassArmor().bypassMagic();
 
     // Projectiles
     public static SBDamageSource scream(LivingEntity owner) {
-        return (SBDamageSource) (new SBEntityDamageSource("scream", owner).setMagic()).bypassArmor().bypassMagic().setMagic();
+        return (SBDamageSource) (new SBEntityDamageSource("scream", owner).setMagic()).bypassArmor().setMagic();
     }
     public static SBDamageSource lifesteal(LivingEntity owner) {
         return (SBDamageSource) (new SBEntityDamageSource("life_steal", owner)).bypassArmor().bypassMagic().setMagic();
@@ -21,9 +22,6 @@ public class SBDamageSource extends DamageSource {
     public static SBDamageSource bite(SBVampireEntity entity) {
         return (SBDamageSource) (new SBEntityDamageSource("bite", entity)).bypassArmor().bypassMagic();
     }
-
-    public static final SBDamageSource BLEED = (SBDamageSource) (new SBDamageSource("bleed")).bypassArmor().bypassMagic();
-
 
     // Util
     public SBDamageSource(String damageTypeIn) {

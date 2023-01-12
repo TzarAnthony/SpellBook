@@ -13,7 +13,6 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.level.Level;
 
 public class Scream extends ProjectileSpell {
     public Scream(int id, String name, SpellTier tier) {
@@ -47,8 +46,8 @@ public class Scream extends ProjectileSpell {
     }
 
     @Override
-    public void playCustomSound(Level level, double x, double y, double z) {
-        level.playSound((Player) null, x, y, z, SoundEvents.ENDER_DRAGON_GROWL, SoundSource.NEUTRAL, 5.0F, (level.random.nextFloat() - level.random.nextFloat()) * 0.2F + 1.0F);
+    public void playCustomSound(Entity user) {
+        user.playSound(SoundEvents.ENDER_DRAGON_GROWL, 5.0F, (user.level.random.nextFloat() - user.level.random.nextFloat()) * 0.2F + 1.0F);
     }
 
     @Override

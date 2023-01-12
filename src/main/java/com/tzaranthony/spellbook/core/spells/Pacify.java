@@ -34,11 +34,11 @@ public class Pacify extends Spell{
                     if (entity instanceof ServerPlayer player && !level.isClientSide()) {
                         ((ServerLevel) level).onReputationEvent(ReputationEventType.ZOMBIE_VILLAGER_CURED, player, villager);
                     }
-                }
-                if (mob.isAlive() && !mob.isRemoved() && mob instanceof Monster && !(mob.getType().is(SBEntityTags.PACIFY_IMMUNE))) {
+                } else if (mob.isAlive() && !mob.isRemoved() && mob instanceof Monster && !(mob.getType().is(SBEntityTags.PACIFY_IMMUNE))) {
                     mob.addEffect(new MobEffectInstance(SBEffects.PACIFICATION.get(), 500, 0));
                 }
             }
+            playCustomSound(entity);
             return true;
         } else {
             return false;

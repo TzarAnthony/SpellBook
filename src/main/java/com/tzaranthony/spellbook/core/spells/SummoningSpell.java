@@ -22,22 +22,26 @@ public abstract class SummoningSpell extends Spell {
 
     @Override
     public boolean perform_spell(Level level, LivingEntity summoner, InteractionHand hand, BlockPos pos) {
-        if (!level.isClientSide && summoner instanceof Player player) {
-            EntityType entityType = getEntity(level);
-            int countbonus = getSummonBonus(player);
+        if (summoner instanceof Player player) {
+            if (!level.isClientSide) {
+                EntityType entityType = getEntity(level);
+                int countbonus = getSummonBonus(player);
 
-            int timeBonus = 0;
-            if (countbonus == 4) {
-                timeBonus = 30;
-            }
-            for (int i = 0; i < 3 + countbonus; ++i) {
-                Entity entity = spawnEntityAtRandomPos(player, (ServerLevel) level, entityType);
-                if (entity instanceof TamableAnimal) {
-                    ((TamableAnimal) entity).tame(player);
+                int timeBonus = 0;
+                if (countbonus == 4) {
+                    timeBonus = 30;
                 }
-                if (entity instanceof SBSummonedEntity) {
-                    ((SBSummonedEntity) entity).setLimitedLife(40 * (timeBonus + 30 + player.getRandom().nextInt(90)));;
+                for (int i = 0; i < 3 + countbonus; ++i) {
+                    Entity entity = spawnEntityAtRandomPos(player, (ServerLevel) level, entityType);
+                    if (entity instanceof TamableAnimal) {
+                        ((TamableAnimal) entity).tame(player);
+                    }
+                    if (entity instanceof SBSummonedEntity) {
+                        ((SBSummonedEntity) entity).setLimitedLife(40 * (timeBonus + 30 + player.getRandom().nextInt(90)));;
+                    }
                 }
+            } else {
+                playCustomSound(summoner);
             }
             return true;
         } else {
@@ -45,21 +49,23 @@ public abstract class SummoningSpell extends Spell {
         }
     }
 
-    public Entity spawnEntityAtRandomPos(Player player, ServerLevel level, EntityType entitytype) {
-        int x = Mth.floor(player.getX());
-        int z = Mth.floor(player.getZ());
-        int y = Mth.floor(player.getY());
+    public static Entity spawnEntityAtRandomPos(Entity entity, ServerLevel level, EntityType entitytype) {
+        int x = Mth.floor(entity.getX());
+        int z = Mth.floor(entity.getZ());
+        int y = Mth.floor(entity.getY());
 
         for (int j = 0; j < 15; ++j) {
-            int x1 = x + Mth.nextInt(player.getRandom(), 3, 15) * Mth.nextInt(player.getRandom(), -1, 1);
-            int y1 = y + Mth.nextInt(player.getRandom(), 3, 15) * Mth.nextInt(player.getRandom(), -1, 1);
-            int z1 = z + Mth.nextInt(player.getRandom(), 3, 15) * Mth.nextInt(player.getRandom(), -1, 1);
+            int x1 = x + Mth.nextInt(level.getRandom(), 3, 15) * Mth.nextInt(level.getRandom(), -1, 1);
+            int y1 = y + Mth.nextInt(level.getRandom(), 3, 15) * Mth.nextInt(level.getRandom(), -1, 1);
+            int z1 = z + Mth.nextInt(level.getRandom(), 3, 15) * Mth.nextInt(level.getRandom(), -1, 1);
             if (x != x1 && z != z1) {
                 BlockPos spawnPoint = new BlockPos(x1, y1, z1);
                 Entity e = entitytype.create(level);
-                //TODO: fix when spawn placements are created
-//                SpawnPlacements.Type spawnplacements$type = SpawnPlacements.getPlacementType(entitytype);
-                SpawnPlacements.Type spawnplacements$type = SpawnPlacements.Type.ON_GROUND;
+                SpawnPlacements.Type spawnplacements$type = SpawnPlacements.getPlacementType(entitytype);
+                //TODO: remove when spawn placements are created
+                if (spawnplacements$type == SpawnPlacements.Type.NO_RESTRICTIONS) {
+                    spawnplacements$type = SpawnPlacements.Type.ON_GROUND;
+                }
                 if (NaturalSpawner.isSpawnPositionOk(spawnplacements$type, level, spawnPoint, entitytype)
                         && SpawnPlacements.checkSpawnRules(entitytype, level, MobSpawnType.MOB_SUMMONED, spawnPoint, level.random)) {
                     e.setPos(x1, y1, z1);

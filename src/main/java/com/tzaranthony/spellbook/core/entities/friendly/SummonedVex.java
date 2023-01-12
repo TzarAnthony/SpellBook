@@ -1,7 +1,7 @@
 package com.tzaranthony.spellbook.core.entities.friendly;
 
-import com.tzaranthony.spellbook.core.entities.ai.FlyingGhostMoveRandomGoal;
-import com.tzaranthony.spellbook.core.entities.ai.VexLikeMovementHelper;
+import com.tzaranthony.spellbook.core.entities.ai.FlyingMoveRandomGoal;
+import com.tzaranthony.spellbook.core.entities.ai.VexLikeMoveControl;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
@@ -38,7 +38,7 @@ public class SummonedVex extends SBSummonedEntity {
     public SummonedVex(EntityType<? extends SummonedVex> vex, Level level) {
         super(vex, level);
         this.setTame(false);
-        this.moveControl = new VexLikeMovementHelper(this);
+        this.moveControl = new VexLikeMoveControl(this);
         this.xpReward = 3;
     }
 
@@ -58,7 +58,7 @@ public class SummonedVex extends SBSummonedEntity {
         super.registerGoals();
         this.goalSelector.addGoal(4, new ChargeAttackGoal());
         this.goalSelector.addGoal(6, new FollowOwnerGoal(this, 1.0D, 25.0F, 5.0F, false));
-        this.goalSelector.addGoal(8, new FlyingGhostMoveRandomGoal(this));
+        this.goalSelector.addGoal(8, new FlyingMoveRandomGoal(this));
         this.goalSelector.addGoal(9, new LookAtPlayerGoal(this, Player.class, 3.0F, 1.0F));
         this.goalSelector.addGoal(10, new LookAtPlayerGoal(this, Mob.class, 8.0F));
         this.targetSelector.addGoal(1, new OwnerHurtByTargetGoal(this));

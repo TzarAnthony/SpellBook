@@ -49,10 +49,6 @@ public class ProjectileSpell extends Spell {
         return;
     }
 
-    public void playCustomSound(Level level, double x, double y, double z) {
-        return;
-    }
-
     public boolean spellIgnoresBlocks() {
         return false;
     }

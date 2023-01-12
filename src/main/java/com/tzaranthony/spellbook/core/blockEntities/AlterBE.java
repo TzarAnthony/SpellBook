@@ -215,6 +215,7 @@ public class AlterBE extends CraftingBE {
         return hasStuff && checkResult(recipe.assemble(this.createContainer()), AltBe.itemHandler.getStackInSlot(0), AltBe.itemHandler.getSlotLimit(0));
     }
 
+    //TODO: add skull crafting functionality in cases of wither, skeleton, zombie, and creeper
     private void craft(RitualRecipe recipe, AlterBE AltBe) {
         NonNullList<ItemStack> ings = recipe.getInputs();
         for (int i = 1; i < AltBe.itemHandler.getSlots(); ++i) {

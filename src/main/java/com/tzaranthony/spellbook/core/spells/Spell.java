@@ -1,6 +1,7 @@
 package com.tzaranthony.spellbook.core.spells;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
@@ -35,5 +36,9 @@ public class Spell {
 
     public String getName() {
         return this.name;
+    }
+
+    public void playCustomSound(Entity user) {
+        user.playSound(SoundEvents.EVOKER_CAST_SPELL, 1.0F, 1.0F);
     }
 }

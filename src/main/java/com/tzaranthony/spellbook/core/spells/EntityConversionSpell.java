@@ -2,11 +2,9 @@ package com.tzaranthony.spellbook.core.spells;
 
 import com.tzaranthony.spellbook.core.entities.hostile.alchemical.NecroticSpider;
 import net.minecraft.core.BlockPos;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.entity.FlyingMob;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.Mob;
-import net.minecraft.world.entity.TamableAnimal;
+import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ambient.AmbientCreature;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.animal.WaterAnimal;
@@ -33,6 +31,7 @@ public class EntityConversionSpell extends Spell{
                     ConvertEntity(mob);
                 }
             }
+            playCustomSound(entity);
             return true;
         } else {
             return false;
@@ -64,5 +63,10 @@ public class EntityConversionSpell extends Spell{
         } else {
             return false;
         }
+    }
+
+    @Override
+    public void playCustomSound(Entity user) {
+        user.playSound(SoundEvents.EVOKER_PREPARE_WOLOLO, 1.0F, 1.0F);
     }
 }

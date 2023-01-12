@@ -30,6 +30,7 @@ public class Inspiration extends Spell{
                     mob.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 500, 0));
                 }
             }
+            playCustomSound(entity);
             return true;
         } else {
             return false;

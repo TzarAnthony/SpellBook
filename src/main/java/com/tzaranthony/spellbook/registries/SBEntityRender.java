@@ -39,6 +39,7 @@ public class SBEntityRender {
         EntityRenderers.register(SBEntities.HIGH_VAMP1.get(), HigherVampirePersonRender::new);
         EntityRenderers.register(SBEntities.HIGH_VAMP1_BAT.get(), HigherVampireBatRender::new);
         EntityRenderers.register(SBEntities.HIGH_VAMP2.get(), HigherVampireMonsterRender::new);
+        EntityRenderers.register(SBEntities.HIGH_VAMP3.get(), NoopRenderer::new);
         EntityRenderers.register(SBEntities.FAKE_ZOMBIE.get(), ZombieIllusionRender::new);
         EntityRenderers.register(SBEntities.FAKE_SKELLY.get(), SkeletonIllusionRender::new);
         EntityRenderers.register(SBEntities.NECROTIC_SPIDER.get(), NecroticSpiderRender::new);
@@ -58,8 +59,8 @@ public class SBEntityRender {
         EntityRenderers.register(SBEntities.MEDIUM_MAGIC_PROJECTILE.get(), MagicProjectileRender::new);
         EntityRenderers.register(SBEntities.LARGE_MAGIC_PROJECTILE.get(), MagicProjectileRender::new);
         EntityRenderers.register(SBEntities.FROST_WAVE_PROJECTILE.get(), FrostWaveRender::new);
-        // Other
         EntityRenderers.register(SBEntities.FIRE_WALL.get(), NoopRenderer::new);
+        // Other
         EntityRenderers.register(SBEntities.CURSED_PAINTING.get(), CursedPaintingRender::new);
         EntityRenderers.register(SBEntities.PHOENIX_ASHES.get(), ItemEntityRenderer::new);
     }

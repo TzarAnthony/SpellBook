@@ -34,6 +34,7 @@ public class GrowthSpell extends Spell {
                 }
             }
         }
+        playCustomSound(entity);
         return true;
     }
     

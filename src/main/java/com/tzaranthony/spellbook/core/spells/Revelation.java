@@ -27,6 +27,7 @@ public class Revelation extends Spell{
                     mob.addEffect(new MobEffectInstance(MobEffects.GLOWING, 500, 0));
                 }
             }
+            playCustomSound(entity);
             return true;
         } else {
             return false;

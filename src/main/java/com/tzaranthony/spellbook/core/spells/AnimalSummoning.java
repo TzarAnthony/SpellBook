@@ -1,5 +1,7 @@
 package com.tzaranthony.spellbook.core.spells;
 
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.level.Level;
 
@@ -22,5 +24,10 @@ public class AnimalSummoning extends SummoningSpell {
         } else {
             return EntityType.CHICKEN;
         }
+    }
+
+    @Override
+    public void playCustomSound(Entity user) {
+        user.playSound(SoundEvents.EVOKER_PREPARE_SUMMON, 1.0F, 1.0F);
     }
 }

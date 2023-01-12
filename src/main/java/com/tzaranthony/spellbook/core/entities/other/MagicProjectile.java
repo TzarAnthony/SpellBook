@@ -93,8 +93,8 @@ public class MagicProjectile extends Projectile {
         this.onHit(hitresult);
 
         this.updateRotation();
-        if (this.life == 0 && !this.isSilent()) {
-            spell.playCustomSound(this.level, this.getX(), this.getY(), this.getZ());
+        if (this.life == 0 && !this.isSilent() && this.getOwner() != null) {
+            spell.playCustomSound(this.getOwner());
         }
 
         ++this.life;

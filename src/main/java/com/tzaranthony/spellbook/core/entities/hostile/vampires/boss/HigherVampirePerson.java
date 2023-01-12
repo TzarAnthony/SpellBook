@@ -1,7 +1,6 @@
 package com.tzaranthony.spellbook.core.entities.hostile.vampires.boss;
 
 import com.tzaranthony.spellbook.core.entities.ai.MagicAndMeleeAttackGoal;
-import com.tzaranthony.spellbook.core.entities.ai.VampireHumanToBatTransformGoal;
 import com.tzaranthony.spellbook.core.entities.hostile.vampires.SBVampireEntity;
 import com.tzaranthony.spellbook.core.spells.ProjectileSpell;
 import com.tzaranthony.spellbook.core.util.damage.SBDamageSource;
@@ -19,10 +18,7 @@ import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.entity.ai.goal.FloatGoal;
-import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal;
-import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal;
-import net.minecraft.world.entity.ai.goal.WaterAvoidingRandomStrollGoal;
+import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.animal.AbstractGolem;
@@ -35,6 +31,7 @@ import net.minecraft.world.level.ServerLevelAccessor;
 
 import javax.annotation.Nullable;
 import java.util.Collection;
+import java.util.EnumSet;
 
 public class HigherVampirePerson extends HigherVampirePhase1 {
     public HigherVampirePerson(EntityType<? extends HigherVampirePerson> highVamp, Level level) {
@@ -60,7 +57,7 @@ public class HigherVampirePerson extends HigherVampirePhase1 {
                 .add(Attributes.JUMP_STRENGTH, 4.0D)
                 .add(Attributes.ATTACK_DAMAGE, 8.0D)
                 .add(Attributes.ATTACK_KNOCKBACK, 0.8D)
-                .add(Attributes.MOVEMENT_SPEED, 0.4D)
+                .add(Attributes.MOVEMENT_SPEED, 0.5D)
                 .add(Attributes.FOLLOW_RANGE, 90.0D)
                 .add(Attributes.KNOCKBACK_RESISTANCE, 0.95D);
     }
@@ -93,6 +90,38 @@ public class HigherVampirePerson extends HigherVampirePhase1 {
         vampire.setTarget(this.getTarget());
     }
 
+    class VampireHumanToBatTransformGoal extends Goal {
+        private final HigherVampirePerson mob;
+        private int transformerCooldown;
+
+        public VampireHumanToBatTransformGoal(HigherVampirePerson vampireHuman) {
+            this.mob = vampireHuman;
+            this.transformerCooldown = 100;
+            this.setFlags(EnumSet.of(Goal.Flag.JUMP));
+            vampireHuman.getNavigation().setCanFloat(true);
+        }
+
+        public boolean canUse() {
+            return this.mob.hasEffect(MobEffects.LEVITATION) || this.mob.isInWater();
+        }
+
+        public void resetTransformerCooldown() {
+            this.transformerCooldown = 400;
+        }
+
+        public boolean requiresUpdateEveryTick() {
+            return true;
+        }
+
+        public void tick() {
+            if (this.transformerCooldown <= 0) {
+                this.resetTransformerCooldown();
+                this.mob.transform();
+            }
+            --this.transformerCooldown;
+        }
+    }
+
     class HigherVampirePersonAttackGoal extends MagicAndMeleeAttackGoal {
         protected final HigherVampirePhase1 mob;
         float damage;
@@ -101,7 +130,7 @@ public class HigherVampirePerson extends HigherVampirePhase1 {
         int freezeCooldown;
 
         public HigherVampirePersonAttackGoal(HigherVampirePhase1 vampire) {
-            super(vampire, (ProjectileSpell) SBSpellRegistry.SCREAM, 1.2D, true, 40, 4);
+            super(vampire, (ProjectileSpell) SBSpellRegistry.SCREAM, 1.35D, true, 40, 4);
             this.mob = vampire;
             this.damage = (float) this.mob.getAttribute(Attributes.ATTACK_DAMAGE).getValue();
         }
@@ -125,20 +154,20 @@ public class HigherVampirePerson extends HigherVampirePhase1 {
                 this.resetCloudCooldown();
             } else {
                 if (attacked instanceof AbstractGolem) {
-                    attacked.hurt(SBDamageSource.bite(this.mob), this.damage * 2.0F);
+                    attacked.hurt(SBDamageSource.bite(this.mob), this.damage * 2.0F * this.mob.getDayTimeDamageModifier());
                 }
                 if (this.biteCooldown <= 0 && attacked.getMobType() != MobType.UNDEAD) {
                     this.resetBiteCooldown();
                     BlockPos pos = this.mob.blockPosition().relative(this.mob.getDirection());
                     this.mob.getLookControl().setLookAt(pos.getX(), pos.getY(), pos.getZ());
-                    attacked.hurt(SBDamageSource.bite(this.mob), this.damage * 0.75F);
+                    attacked.hurt(SBDamageSource.bite(this.mob), this.damage * 0.75F * this.mob.getDayTimeDamageModifier());
                     attacked.addEffect(new MobEffectInstance(SBEffects.BLEEDING.get(), 400, 1));
-                    this.mob.heal(this.damage * 0.75F);
-                    this.mob.playSound(SoundEvents.RAVAGER_ATTACK, 1.0F, 1.0F);
+                    this.mob.heal(this.damage * 0.75F * this.mob.getDayTimeDamageModifier());
+                    this.mob.playSound(SoundEvents.PHANTOM_BITE, 1.0F, 1.0F);
                 } else if (this.freezeCooldown <= 0) {
                     this.resetFreezeCooldown();
                     this.mob.swing(InteractionHand.MAIN_HAND);
-                    attacked.hurt(SBDamageSource.bite(this.mob), this.damage);
+                    attacked.hurt(SBDamageSource.mobAttack(this.mob), this.damage * this.mob.getDayTimeDamageModifier());
                     attacked.addEffect(new MobEffectInstance(SBEffects.FREEZING.get(), 400, 1));
                     this.mob.playSound(SoundEvents.SNOW_GOLEM_HURT, 1.0F, 1.0F);
                 } else {
@@ -157,7 +186,7 @@ public class HigherVampirePerson extends HigherVampirePhase1 {
             this.mob.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 60, 99, false, false));
 
             if (mob.isCrouching()) {
-                this.mob.playSound(SoundEvents.ZOMBIE_VILLAGER_CURE, 0.5F, 1.0F);
+                this.mob.playSound(SoundEvents.ILLUSIONER_PREPARE_BLINDNESS, 0.5F, 1.0F);
                 int color;
                 MobEffectInstance effect;
 

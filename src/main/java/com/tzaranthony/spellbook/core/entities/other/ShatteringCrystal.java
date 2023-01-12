@@ -79,7 +79,7 @@ public class ShatteringCrystal extends Entity {
                         double d3 = (this.random.nextDouble() * 2.0D - 1.0D) * 0.3D;
                         double d4 = 0.3D + this.random.nextDouble() * 0.3D;
                         double d5 = (this.random.nextDouble() * 2.0D - 1.0D) * 0.3D;
-                        this.level.addParticle(ParticleTypes.CRIT, d0, d1 + 1.0D, d2, d3, d4, d5);
+                        this.level.addParticle(ParticleTypes.ELECTRIC_SPARK, d0, d1 + 1.0D, d2, d3, d4, d5);
                     }
                 }
             }
@@ -124,15 +124,15 @@ public class ShatteringCrystal extends Entity {
         //TODO: replace with the shattering crystals
         this.level.broadcastEntityEvent(this, (byte)17);
         this.dealExplosionDamage();
-        for(int i = 0; i < 12; ++i) {
-            double d0 = this.getX() + (this.random.nextDouble() * 2.0D - 1.0D) * 4.5D;
-            double d1 = this.getY() + (this.random.nextDouble() * 2.0D - 1.0D) * 4.5D;
-            double d2 = this.getZ() + (this.random.nextDouble() * 2.0D - 1.0D) * 4.5D;
-            double d3 = (this.random.nextDouble() * 2.0D - 1.0D) * 0.3D;
-            double d4 = (this.random.nextDouble() * 2.0D - 1.0D) * 0.3D;
-            double d5 = (this.random.nextDouble() * 2.0D - 1.0D) * 0.3D;
-            this.level.addParticle(ParticleTypes.ELECTRIC_SPARK, d0, d1 + 1.0D, d2, d3, d4, d5);
-        }
+//        for(int i = 0; i < 12; ++i) {
+//            double d0 = this.getX() + (this.random.nextDouble() * 2.0D - 1.0D) * 4.5D;
+//            double d1 = this.getY() + (this.random.nextDouble() * 2.0D - 1.0D) * 4.5D;
+//            double d2 = this.getZ() + (this.random.nextDouble() * 2.0D - 1.0D) * 4.5D;
+//            double d3 = (this.random.nextDouble() * 2.0D - 1.0D) * 0.3D;
+//            double d4 = (this.random.nextDouble() * 2.0D - 1.0D) * 0.3D;
+//            double d5 = (this.random.nextDouble() * 2.0D - 1.0D) * 0.3D;
+//            this.level.addParticle(ParticleTypes.ELECTRIC_SPARK, d0, d1 + 1.0D, d2, d3, d4, d5);
+//        }
         this.discard();
 //        Entity owned;
 //        if (this.owner instanceof Player) {

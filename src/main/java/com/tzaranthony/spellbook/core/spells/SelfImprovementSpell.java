@@ -28,9 +28,11 @@ public class SelfImprovementSpell extends Spell{
     public boolean perform_spell(Level level, LivingEntity entity, InteractionHand hand, BlockPos pos) {
         if (this.effect != null) {
             entity.addEffect(new MobEffectInstance(this.effect, this.duration, this.amplifier));
+            playCustomSound(entity);
             return true;
         } else if (this.effect1 != null) {
             entity.addEffect(new MobEffectInstance(this.effect1.get(), this.duration, this.amplifier));
+            playCustomSound(entity);
             return true;
         }
         return false;

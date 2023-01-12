@@ -4,11 +4,8 @@ import com.tzaranthony.spellbook.core.entities.other.MagicProjectile;
 import com.tzaranthony.spellbook.core.util.damage.SBDamageSource;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.sounds.SoundEvents;
-import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.level.Level;
 
 public class LifeSteal extends ProjectileSpell {
     public LifeSteal(int id, String name, SpellTier tier) {
@@ -45,7 +42,7 @@ public class LifeSteal extends ProjectileSpell {
     }
 
     @Override
-    public void playCustomSound(Level level, double x, double y, double z) {
-        level.playSound((Player) null, x, y, z, SoundEvents.AMBIENT_SOUL_SAND_VALLEY_MOOD, SoundSource.NEUTRAL, 1.0F, 1.0F);
+    public void playCustomSound(Entity user) {
+        user.playSound(SoundEvents.SOUL_ESCAPE, 30.0F, 0.6F + user.level.random.nextFloat() * 0.4F);
     }
 }
